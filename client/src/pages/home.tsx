@@ -1,0 +1,178 @@
+import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { Link } from "wouter";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { GraduationCap, Flag, ListChecks, TrendingUp, Play, Dumbbell, BarChart3, CheckCircle, AlertTriangle, Settings, HelpCircle } from "lucide-react";
+import { QuizSession } from "@shared/schema";
+import { SettingsModal } from "@/components/settings-modal";
+
+export default function Home() {
+  const [settingsOpen, setSettingsOpen] = useState(false);
+
+  // Fetch recent quiz sessions
+  const { data: recentSessions = [] } = useQuery<QuizSession[]>({
+    queryKey: ['/api/quiz-sessions/recent'],
+  });
+
+  // Fetch quiz statistics
+  const { data: stats } = useQuery({
+    queryKey: ['/api/quiz-sessions/stats'],
+  });
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      {/* Header */}
+      <header className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16">
+            <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+                  <GraduationCap className="text-white text-lg" />
+                </div>
+                <div>
+                  <h1 className="text-xl font-semibold text-gray-900">Einbürgerungstest</h1>
+                  <p className="text-sm text-gray-500">Übungs-App</p>
+                </div>
+              </div>
+            </div>
+            <div className="flex items-center space-x-4">
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setSettingsOpen(true)}
+              >
+                <Settings className="h-5 w-5" />
+              </Button>
+              <Button variant="ghost" size="icon">
+                <HelpCircle className="h-5 w-5" />
+              </Button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      {/* Main Content */}
+      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Welcome Card */}
+        <Card className="bg-white rounded-2xl shadow-lg p-8 mb-8">
+          <CardContent className="p-0">
+            <div className="text-center mb-8">
+              <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Flag className="text-primary text-2xl h-8 w-8" />
+              </div>
+              <h2 className="text-3xl font-bold text-gray-900 mb-2">
+                Willkommen zum Einbürgerungstest
+              </h2>
+              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                Bereiten Sie sich optimal auf den deutschen Einbürgerungstest vor. 
+                Üben Sie mit den offiziellen Fragen und erhalten Sie sofortiges Feedback.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-6 mb-8">
+              <div className="bg-primary/5 rounded-xl p-6">
+                <div className="flex items-center mb-3">
+                  <ListChecks className="text-primary text-xl mr-3 h-6 w-6" />
+                  <h3 className="text-lg font-semibold text-gray-900">310 Fragen</h3>
+                </div>
+                <p className="text-gray-600">
+                  Alle offiziellen Fragen des Bundesamts für Migration und Flüchtlinge
+                </p>
+              </div>
+              <div className="bg-green-50 rounded-xl p-6">
+                <div className="flex items-center mb-3">
+                  <TrendingUp className="text-green-500 text-xl mr-3 h-6 w-6" />
+                  <h3 className="text-lg font-semibold text-gray-900">Fortschritt verfolgen</h3>
+                </div>
+                <p className="text-gray-600">
+                  Behalten Sie Ihre Lernfortschritte und Ergebnisse im Blick
+                </p>
+              </div>
+            </div>
+
+            <div className="space-y-4">
+              <Link href="/quiz?type=full">
+                <Button className="w-full py-4 text-lg" size="lg">
+                  <Play className="mr-3 h-5 w-5" />
+                  Vollständigen Test starten (33 Fragen)
+                </Button>
+              </Link>
+              <div className="grid md:grid-cols-2 gap-4">
+                <Link href="/quiz?type=practice">
+                  <Button variant="outline" className="w-full py-3" size="lg">
+                    <Dumbbell className="mr-2 h-4 w-4" />
+                    Übungsmodus
+                  </Button>
+                </Link>
+                <Button variant="outline" className="w-full py-3" size="lg">
+                  <BarChart3 className="mr-2 h-4 w-4" />
+                  Statistiken
+                </Button>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Recent Progress */}
+        <Card className="bg-white rounded-2xl shadow-lg p-6">
+          <CardContent className="p-0">
+            <h3 className="text-xl font-semibold text-gray-900 mb-4">
+              Ihre letzten Ergebnisse
+            </h3>
+            {recentSessions.length === 0 ? (
+              <div className="text-center py-8 text-gray-500">
+                <p>Noch keine Tests absolviert.</p>
+                <p className="text-sm mt-1">
+                  Starten Sie Ihren ersten Test, um Ihre Fortschritte zu verfolgen.
+                </p>
+              </div>
+            ) : (
+              <div className="space-y-3">
+                {recentSessions.map((session) => (
+                  <div key={session.id} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                    <div className="flex items-center space-x-4">
+                      <div className={`w-12 h-12 rounded-lg flex items-center justify-center ${
+                        session.passed ? 'bg-green-100' : 'bg-orange-100'
+                      }`}>
+                        {session.passed ? (
+                          <CheckCircle className="text-green-500 h-6 w-6" />
+                        ) : (
+                          <AlertTriangle className="text-orange-500 h-6 w-6" />
+                        )}
+                      </div>
+                      <div>
+                        <p className="font-medium text-gray-900">
+                          {session.type === 'full' ? 'Vollständiger Test' : 'Übungsmodus'}
+                        </p>
+                        <p className="text-sm text-gray-500">
+                          {session.createdAt ? new Date(session.createdAt).toLocaleDateString('de-DE') : 'Heute'}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <p className={`text-lg font-semibold ${
+                        session.passed ? 'text-green-600' : 'text-orange-600'
+                      }`}>
+                        {session.correctAnswers}/{session.totalQuestions}
+                      </p>
+                      <p className="text-sm text-gray-500">
+                        {session.passed ? 'Bestanden' : `${session.percentage}%`}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </CardContent>
+        </Card>
+      </main>
+
+      <SettingsModal 
+        open={settingsOpen} 
+        onOpenChange={setSettingsOpen} 
+      />
+    </div>
+  );
+}
