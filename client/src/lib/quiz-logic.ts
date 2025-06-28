@@ -39,7 +39,9 @@ export function calculateResults(quizState: QuizState): QuizResults {
 
   const total = correct + incorrect;
   const percentage = total > 0 ? Math.round((correct / total) * 100) : 0;
-  const passed = correct >= Math.ceil(total * 0.51); // Need at least 51% to pass
+  
+  // German citizenship test: Need 17 out of 33 questions correct to pass
+  const passed = total === 33 ? correct >= 17 : correct >= Math.ceil(total * 0.51);
   const timeSpent = Math.floor((Date.now() - quizState.startTime) / 1000);
 
   return {

@@ -44,7 +44,8 @@ export default function Results() {
   }
 
   const passedTest = results.passed;
-  const requiredScore = Math.ceil(results.total * 0.51);
+  // German citizenship test requires 17 out of 33 questions correct
+  const requiredScore = results.total === 33 ? 17 : Math.ceil(results.total * 0.51);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -94,8 +95,8 @@ export default function Results() {
               </div>
               <p className={passedTest ? 'text-green-700' : 'text-red-700'}>
                 {passedTest 
-                  ? `Sie haben den Einbürgerungstest erfolgreich bestanden. Für das Bestehen sind mindestens ${requiredScore} von ${results.total} Fragen erforderlich.`
-                  : `Sie benötigen mindestens ${requiredScore} richtige Antworten. Üben Sie weiter und versuchen Sie es erneut.`
+                  ? `Sie haben den Einbürgerungstest erfolgreich bestanden! Für das Bestehen sind mindestens ${requiredScore} von ${results.total} Fragen richtig zu beantworten.`
+                  : `Sie haben den Test nicht bestanden. Sie benötigen mindestens ${requiredScore} richtige Antworten von ${results.total} Fragen. Üben Sie weiter und versuchen Sie es erneut.`
                 }
               </p>
               {results.timeSpent > 0 && (
