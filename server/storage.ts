@@ -49,7 +49,9 @@ export class MemStorage implements IStorage {
       timerEnabled: false,
       immediateFeedback: true,
       shuffleQuestions: true,
-      testMode: 'full'
+      testMode: 'full',
+      selectedState: null,
+      hasSelectedState: false
     };
   }
 

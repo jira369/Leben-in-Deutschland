@@ -95,6 +95,9 @@ Changelog:
 - June 28, 2025. Added PostgreSQL database integration with Drizzle ORM
 - June 28, 2025. Integrated 376 real German citizenship test questions from Excel
 - June 28, 2025. Added image support for 7 visual questions with static asset serving
+- June 28, 2025. Added German state (Bundesland) selection system for first-time users
+- June 28, 2025. Implemented state-specific quiz logic (30 federal + 3 state questions)
+- June 28, 2025. Enhanced user settings to include selected state and first-use tracking
 
 ## User Preferences
 

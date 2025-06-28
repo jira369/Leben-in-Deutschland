@@ -34,7 +34,7 @@ export default function StateSelection() {
 
   const saveStateMutation = useMutation({
     mutationFn: async (state: string) => {
-      const response = await apiRequest("/api/settings", "PATCH", {
+      const response = await apiRequest("PATCH", "/api/settings", {
         selectedState: state,
         hasSelectedState: true
       });
