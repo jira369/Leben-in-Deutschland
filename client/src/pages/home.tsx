@@ -106,10 +106,12 @@ export default function Home() {
                     Übungsmodus
                   </Button>
                 </Link>
-                <Button variant="outline" className="w-full py-3" size="lg">
-                  <BarChart3 className="mr-2 h-4 w-4" />
-                  Statistiken
-                </Button>
+                <Link href="/statistics">
+                  <Button variant="outline" className="w-full py-3" size="lg">
+                    <BarChart3 className="mr-2 h-4 w-4" />
+                    Statistiken
+                  </Button>
+                </Link>
               </div>
             </div>
           </CardContent>

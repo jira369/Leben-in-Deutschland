@@ -22,6 +22,16 @@ export interface IStorage {
   // User Settings
   getUserSettings(): Promise<UserSettings | undefined>;
   updateUserSettings(settings: Partial<InsertUserSettings>): Promise<UserSettings>;
+  
+  // Detailed Statistics
+  getDetailedStats(): Promise<{
+    totalQuestions: number;
+    correctAnswers: number;
+    incorrectAnswers: number;
+    totalTests: number;
+    testsPassedCount: number;
+    testsPassedPercentage: number;
+  }>;
 }
 
 export class MemStorage implements IStorage {
@@ -127,6 +137,37 @@ export class MemStorage implements IStorage {
       ...settings
     };
     return this.userSettings;
+  }
+
+  async getDetailedStats(): Promise<{
+    totalQuestions: number;
+    correctAnswers: number;
+    incorrectAnswers: number;
+    totalTests: number;
+    testsPassedCount: number;
+    testsPassedPercentage: number;
+  }> {
+    const totalQuestions = this.questions.size;
+    
+    // Calculate stats from quiz sessions
+    const sessions = Array.from(this.quizSessions.values());
+    const totalTests = sessions.length;
+    const testsPassedCount = sessions.filter(s => s.passed).length;
+    const testsPassedPercentage = totalTests > 0 
+      ? Math.round((testsPassedCount / totalTests) * 100) 
+      : 0;
+    
+    const correctAnswers = sessions.reduce((sum, s) => sum + s.correctAnswers, 0);
+    const incorrectAnswers = sessions.reduce((sum, s) => sum + s.incorrectAnswers, 0);
+
+    return {
+      totalQuestions,
+      correctAnswers,
+      incorrectAnswers,
+      totalTests,
+      testsPassedCount,
+      testsPassedPercentage
+    };
   }
 
   private shuffleArray<T>(array: T[]): T[] {
@@ -257,6 +298,47 @@ export class DatabaseStorage implements IStorage {
       .returning();
     
     return updatedSettings;
+  }
+
+  async getDetailedStats(): Promise<{
+    totalQuestions: number;
+    correctAnswers: number;
+    incorrectAnswers: number;
+    totalTests: number;
+    testsPassedCount: number;
+    testsPassedPercentage: number;
+  }> {
+    // Get total number of questions available
+    const totalQuestionsResult = await db
+      .select({ count: sql<number>`COUNT(*)` })
+      .from(questions);
+    const totalQuestions = totalQuestionsResult[0]?.count || 0;
+
+    // Get aggregated stats from all quiz sessions
+    const sessionStats = await db
+      .select({
+        totalTests: sql<number>`COUNT(*)`,
+        totalCorrectAnswers: sql<number>`COALESCE(SUM(${quizSessions.correctAnswers}), 0)`,
+        totalIncorrectAnswers: sql<number>`COALESCE(SUM(${quizSessions.incorrectAnswers}), 0)`,
+        testsPassedCount: sql<number>`COUNT(CASE WHEN ${quizSessions.passed} = true THEN 1 END)`
+      })
+      .from(quizSessions);
+
+    const stats = sessionStats[0];
+    const totalTests = stats?.totalTests || 0;
+    const testsPassedCount = stats?.testsPassedCount || 0;
+    const testsPassedPercentage = totalTests > 0 
+      ? Math.round((testsPassedCount / totalTests) * 100) 
+      : 0;
+
+    return {
+      totalQuestions,
+      correctAnswers: stats?.totalCorrectAnswers || 0,
+      incorrectAnswers: stats?.totalIncorrectAnswers || 0,
+      totalTests,
+      testsPassedCount,
+      testsPassedPercentage
+    };
   }
 }
 
