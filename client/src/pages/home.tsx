@@ -113,10 +113,10 @@ export default function Home() {
                 </Button>
               </Link>
               <div className="grid md:grid-cols-2 gap-4">
-                <Link href="/quiz?type=practice">
+                <Link href="/practice">
                   <Button variant="outline" className="w-full py-3" size="lg">
                     <Dumbbell className="mr-2 h-4 w-4" />
-                    Übungsmodus
+                    Alle Fragen üben
                   </Button>
                 </Link>
                 <Link href="/statistics">

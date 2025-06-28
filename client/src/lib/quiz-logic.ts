@@ -77,9 +77,14 @@ export function getQuizTypeQuestions(questions: Question[], type: 'full' | 'prac
   return selectedQuestions;
 }
 
-export async function fetchQuestionsForQuiz(count: number, selectedState?: string): Promise<Question[]> {
+export async function fetchQuestionsForQuiz(count: number, selectedState?: string, mode?: string, category?: string): Promise<Question[]> {
   const params = new URLSearchParams({ count: count.toString() });
-  if (selectedState && selectedState !== "Bundesweit") {
+  
+  if (mode === "all") {
+    params.append('mode', 'all');
+  } else if (category) {
+    params.append('category', category);
+  } else if (selectedState && selectedState !== "Bundesweit") {
     params.append('state', selectedState);
   }
   

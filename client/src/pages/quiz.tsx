@@ -34,6 +34,8 @@ export default function Quiz() {
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search);
     const type = searchParams.get('type') as 'full' | 'practice' | null;
+    const mode = searchParams.get('mode'); // 'all' for practice all questions
+    
     if (type && (type === 'full' || type === 'practice')) {
       setQuizType(type);
     }

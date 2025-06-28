@@ -78,12 +78,28 @@ export function useQuiz() {
   }, [allQuestions.length, questionsLoading]);
 
   const startQuiz = useCallback(async (type: 'full' | 'practice') => {
-    const questionCount = type === 'full' ? 33 : 10;
+    // Get URL params to determine practice mode and category
+    const searchParams = new URLSearchParams(window.location.search);
+    const mode = searchParams.get('mode');
+    const category = searchParams.get('category');
+    
+    let questionCount = type === 'full' ? 33 : 10;
+    
+    // For "all questions" practice mode, don't limit the count
+    if (mode === "all") {
+      questionCount = 1000; // Large number to get all questions
+    }
+    
     const selectedState = settings?.selectedState;
 
     try {
-      // Fetch questions with state-specific logic
-      const questions = await fetchQuestionsForQuiz(questionCount, selectedState || undefined);
+      // Fetch questions with proper mode/category parameters
+      const questions = await fetchQuestionsForQuiz(
+        questionCount, 
+        selectedState || undefined, 
+        mode || undefined, 
+        category || undefined
+      );
       
       const newQuizState: QuizState = {
         questions,

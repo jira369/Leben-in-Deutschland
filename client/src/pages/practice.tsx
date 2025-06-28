@@ -1,0 +1,272 @@
+import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { Link } from "wouter";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { BookOpen, Play, ArrowLeft, Users, Building, Flag, Globe, Scale, Heart } from "lucide-react";
+import { Question, UserSettings } from "@shared/schema";
+
+// Categories for German citizenship test questions
+const QUESTION_CATEGORIES = [
+  {
+    id: "geschichte",
+    name: "Geschichte und Verantwortung",
+    icon: BookOpen,
+    description: "Deutsche Geschichte, NS-Zeit, Demokratie",
+    color: "bg-blue-500"
+  },
+  {
+    id: "verfassung",
+    name: "Verfassungsprinzipien",
+    icon: Scale,
+    description: "Grundgesetz, Rechtsstaatlichkeit, Gewaltenteilung",
+    color: "bg-green-500"
+  },
+  {
+    id: "mensch-gesellschaft",
+    name: "Mensch und Gesellschaft",
+    icon: Users,
+    description: "Religionsfreiheit, Gleichberechtigung, Toleranz",
+    color: "bg-purple-500"
+  },
+  {
+    id: "staat-buerger",
+    name: "Staat und Bürger",
+    icon: Building,
+    description: "Wahlen, Parteien, Bürgerpflichten",
+    color: "bg-orange-500"
+  },
+  {
+    id: "bundesweit",
+    name: "Bundesweite Fragen",
+    icon: Globe,
+    description: "Allgemeine Fragen zu Deutschland",
+    color: "bg-indigo-500"
+  }
+];
+
+export default function Practice() {
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+
+  // Fetch user settings to get selected state
+  const { data: userSettings } = useQuery<UserSettings>({
+    queryKey: ['/api/settings'],
+  });
+
+  // Fetch all questions
+  const { data: allQuestions = [], isLoading } = useQuery<Question[]>({
+    queryKey: ['/api/questions'],
+  });
+
+  const getQuestionsByCategory = (category: string) => {
+    if (category === "bundesweit") {
+      return allQuestions.filter(q => q.category === "Bundesweit");
+    }
+    if (category === "bundesland" && userSettings?.selectedState) {
+      return allQuestions.filter(q => q.category === userSettings.selectedState);
+    }
+    // For other categories, we'll filter by keywords in question text
+    // This is a simplified approach - in a real app you'd have proper category fields
+    return allQuestions.filter(q => {
+      const text = q.text.toLowerCase();
+      switch (category) {
+        case "geschichte":
+          return text.includes("geschichte") || text.includes("krieg") || text.includes("nazi") || 
+                 text.includes("demokratie") || text.includes("ddr") || text.includes("brd");
+        case "verfassung":
+          return text.includes("grundgesetz") || text.includes("verfassung") || text.includes("recht") ||
+                 text.includes("gewaltenteilung") || text.includes("bundesrat") || text.includes("bundestag");
+        case "mensch-gesellschaft":
+          return text.includes("religion") || text.includes("gleichberechtigung") || text.includes("toleranz") ||
+                 text.includes("familie") || text.includes("frauen") || text.includes("kinder");
+        case "staat-buerger":
+          return text.includes("wahl") || text.includes("partei") || text.includes("bürger") ||
+                 text.includes("steuer") || text.includes("pflicht") || text.includes("amt");
+        default:
+          return false;
+      }
+    });
+  };
+
+  const federalQuestions = allQuestions.filter(q => q.category === "Bundesweit");
+  const stateQuestions = userSettings?.selectedState 
+    ? allQuestions.filter(q => q.category === userSettings.selectedState)
+    : [];
+
+
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">Lade Übungsfragen...</p>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      {/* Header */}
+      <header className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16">
+            <div className="flex items-center space-x-4">
+              <Link href="/">
+                <Button variant="ghost" size="sm">
+                  <ArrowLeft className="h-4 w-4 mr-2" />
+                  Zurück
+                </Button>
+              </Link>
+              <div className="flex items-center space-x-3">
+                <div className="bg-blue-100 p-2 rounded-lg">
+                  <BookOpen className="h-6 w-6 text-blue-600" />
+                </div>
+                <div>
+                  <h1 className="text-xl font-bold text-gray-900">Übungsmodus</h1>
+                  <p className="text-sm text-gray-600">Gezielt üben nach Kategorien</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* All Questions Practice */}
+        <Card className="mb-8 border-2 border-blue-200 bg-gradient-to-r from-blue-50 to-indigo-50">
+          <CardHeader>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-3">
+                <div className="bg-blue-500 p-3 rounded-lg">
+                  <Play className="h-6 w-6 text-white" />
+                </div>
+                <div>
+                  <CardTitle className="text-xl text-gray-900">Alle Fragen üben</CardTitle>
+                  <p className="text-gray-600 mt-1">
+                    Bundesweite Fragen ({federalQuestions.length}) + 
+                    {userSettings?.selectedState && stateQuestions.length > 0 
+                      ? ` ${userSettings.selectedState} (${stateQuestions.length})`
+                      : " Bundeslandspezifische Fragen"
+                    }
+                  </p>
+                </div>
+              </div>
+              <Link href="/quiz?type=practice&mode=all">
+                <Button size="lg" className="bg-blue-600 hover:bg-blue-700">
+                  <Play className="h-4 w-4 mr-2" />
+                  Starten
+                </Button>
+              </Link>
+            </div>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="text-center p-4 bg-white rounded-lg border">
+                <Globe className="h-8 w-8 text-blue-600 mx-auto mb-2" />
+                <div className="text-2xl font-bold text-gray-900">{federalQuestions.length}</div>
+                <div className="text-sm text-gray-600">Bundesweite Fragen</div>
+              </div>
+              {userSettings?.selectedState && stateQuestions.length > 0 && (
+                <div className="text-center p-4 bg-white rounded-lg border">
+                  <Flag className="h-8 w-8 text-green-600 mx-auto mb-2" />
+                  <div className="text-2xl font-bold text-gray-900">{stateQuestions.length}</div>
+                  <div className="text-sm text-gray-600">{userSettings.selectedState}</div>
+                </div>
+              )}
+              <div className="text-center p-4 bg-white rounded-lg border">
+                <Heart className="h-8 w-8 text-red-600 mx-auto mb-2" />
+                <div className="text-2xl font-bold text-gray-900">
+                  {federalQuestions.length + stateQuestions.length}
+                </div>
+                <div className="text-sm text-gray-600">Gesamt verfügbar</div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Category Practice */}
+        <div className="mb-6">
+          <h2 className="text-2xl font-bold text-gray-900 mb-2">Nach Kategorien üben</h2>
+          <p className="text-gray-600">Wählen Sie einen spezifischen Bereich zum gezielten Üben</p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {QUESTION_CATEGORIES.map((category) => {
+            const questions = getQuestionsByCategory(category.id);
+            const IconComponent = category.icon;
+            
+            return (
+              <Card key={category.id} className="hover:shadow-lg transition-shadow duration-200">
+                <CardHeader>
+                  <div className="flex items-center space-x-3">
+                    <div className={`${category.color} p-2 rounded-lg`}>
+                      <IconComponent className="h-5 w-5 text-white" />
+                    </div>
+                    <div className="flex-1">
+                      <CardTitle className="text-lg">{category.name}</CardTitle>
+                      <Badge variant="secondary" className="mt-1">
+                        {questions.length} Fragen
+                      </Badge>
+                    </div>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600 text-sm mb-4">{category.description}</p>
+                  <Link href={`/quiz?type=practice&category=${category.id}`}>
+                    <Button 
+                      className="w-full" 
+                      variant="outline"
+                      disabled={questions.length === 0}
+                    >
+                      <Play className="h-4 w-4 mr-2" />
+                      {questions.length > 0 ? "Üben starten" : "Keine Fragen verfügbar"}
+                    </Button>
+                  </Link>
+                </CardContent>
+              </Card>
+            );
+          })}
+        </div>
+
+        {/* Bundesland Specific */}
+        {userSettings?.selectedState && stateQuestions.length > 0 && (
+          <Card className="mt-8 border-green-200 bg-green-50">
+            <CardHeader>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-3">
+                  <div className="bg-green-500 p-2 rounded-lg">
+                    <Flag className="h-5 w-5 text-white" />
+                  </div>
+                  <div>
+                    <CardTitle className="text-lg">
+                      {userSettings.selectedState} - Spezielle Fragen
+                    </CardTitle>
+                    <Badge variant="secondary">{stateQuestions.length} Fragen</Badge>
+                  </div>
+                </div>
+                <Link href={`/quiz?type=practice&category=${userSettings?.selectedState || 'Bundesweit'}`}>
+                  <Button 
+                    variant="outline" 
+                    className="border-green-600 text-green-700 hover:bg-green-100"
+                  >
+                    <Play className="h-4 w-4 mr-2" />
+                    Üben starten
+                  </Button>
+                </Link>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <p className="text-gray-600 text-sm">
+                Spezielle Fragen für Ihr Bundesland {userSettings.selectedState}. 
+                Diese Fragen können im echten Test als Teil der 3 bundeslandspezifischen Fragen erscheinen.
+              </p>
+            </CardContent>
+          </Card>
+        )}
+      </div>
+    </div>
+  );
+}

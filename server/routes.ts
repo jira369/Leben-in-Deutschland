@@ -24,8 +24,21 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
 
       const state = req.query.state as string;
+      const mode = req.query.mode as string;
+      const category = req.query.category as string;
       
-      if (state && state !== "Bundesweit") {
+      if (mode === "all") {
+        // Practice mode with all questions (300 federal + 10 state-specific)
+        const allQuestions = await storage.getAllQuestions();
+        const shuffled = allQuestions.sort(() => Math.random() - 0.5);
+        res.json(shuffled);
+      } else if (category) {
+        // Category-specific practice
+        const allQuestions = await storage.getAllQuestions();
+        const categoryQuestions = allQuestions.filter(q => q.category === category);
+        const shuffled = categoryQuestions.sort(() => Math.random() - 0.5);
+        res.json(shuffled);
+      } else if (state && state !== "Bundesweit") {
         // Get state-specific quiz (30 federal + 3 state)
         const questions = await storage.getRandomQuestionsForState(30, state);
         res.json(questions);
