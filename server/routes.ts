@@ -89,7 +89,38 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Initialize with sample questions if none exist
+  // Load questions from Excel data
+  app.post("/api/questions/load-from-excel", async (req, res) => {
+    try {
+      const existingQuestions = await storage.getAllQuestions();
+      if (existingQuestions.length > 0) {
+        return res.json({ message: "Questions already exist", count: existingQuestions.length });
+      }
+
+      // Load questions from the processed Excel data
+      const fs = await import('fs');
+      const questionsData = JSON.parse(fs.readFileSync('questions-data.json', 'utf8'));
+      
+      const processedQuestions = questionsData.map((q: any) => ({
+        text: q.text,
+        answers: q.answers,
+        correctAnswer: q.correctAnswer,
+        explanation: q.explanation || '',
+        category: q.category,
+        difficulty: q.difficulty,
+        hasImage: q.hasImage,
+        imagePath: q.imagePath
+      }));
+
+      const questions = await storage.createManyQuestions(processedQuestions);
+      res.status(201).json({ message: "Excel questions loaded", count: questions.length });
+    } catch (error) {
+      console.error('Error loading Excel questions:', error);
+      res.status(500).json({ error: "Failed to load Excel questions" });
+    }
+  });
+
+  // Initialize with sample questions if none exist (fallback)
   app.post("/api/questions/initialize", async (req, res) => {
     try {
       const existingQuestions = await storage.getAllQuestions();
@@ -97,7 +128,29 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.json({ message: "Questions already exist", count: existingQuestions.length });
       }
 
-      // Sample questions for testing - in production this would load from Excel
+      // Try to load from Excel first
+      try {
+        const fs = await import('fs');
+        const questionsData = JSON.parse(fs.readFileSync('questions-data.json', 'utf8'));
+        
+        const processedQuestions = questionsData.map((q: any) => ({
+          text: q.text,
+          answers: q.answers,
+          correctAnswer: q.correctAnswer,
+          explanation: q.explanation || '',
+          category: q.category,
+          difficulty: q.difficulty,
+          hasImage: q.hasImage,
+          imagePath: q.imagePath
+        }));
+
+        const questions = await storage.createManyQuestions(processedQuestions);
+        return res.status(201).json({ message: "Excel questions loaded", count: questions.length });
+      } catch (excelError) {
+        console.log('Excel data not available, using sample questions');
+      }
+
+      // Fallback to sample questions
       const sampleQuestions = [
         {
           text: "Wie viele Bundesländer hat die Bundesrepublik Deutschland?",
@@ -105,7 +158,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
           correctAnswer: 2,
           explanation: "Deutschland hat 16 Bundesländer: Baden-Württemberg, Bayern, Berlin, Brandenburg, Bremen, Hamburg, Hessen, Mecklenburg-Vorpommern, Niedersachsen, Nordrhein-Westfalen, Rheinland-Pfalz, Saarland, Sachsen, Sachsen-Anhalt, Schleswig-Holstein und Thüringen.",
           category: "Geschichte und Verfassung",
-          difficulty: "mittel"
+          difficulty: "mittel",
+          hasImage: false,
+          imagePath: null
         },
         {
           text: "In welchem Jahr wurde das Grundgesetz der Bundesrepublik Deutschland verkündet?",
@@ -113,7 +168,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
           correctAnswer: 1,
           explanation: "Das Grundgesetz wurde am 23. Mai 1949 verkündet und trat am 24. Mai 1949 in Kraft.",
           category: "Geschichte und Verfassung",
-          difficulty: "mittel"
+          difficulty: "mittel",
+          hasImage: false,
+          imagePath: null
         },
         {
           text: "Welche Farben hat die deutsche Flagge?",
@@ -121,7 +178,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
           correctAnswer: 0,
           explanation: "Die deutsche Flagge zeigt die Farben Schwarz-Rot-Gold in horizontalen Streifen.",
           category: "Symbole",
-          difficulty: "leicht"
+          difficulty: "leicht",
+          hasImage: false,
+          imagePath: null
         }
       ];
 

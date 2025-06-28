@@ -38,6 +38,17 @@ export function QuestionCard({
               </h3>
             </div>
           </div>
+          
+          {question.hasImage && question.imagePath && (
+            <div className="mt-4 mb-6">
+              <img 
+                src={`/attached_assets/${question.imagePath}`}
+                alt={`Bild zu Frage ${questionNumber}`}
+                className="max-w-full h-auto rounded-lg border border-gray-200 shadow-sm"
+                style={{ maxHeight: '400px' }}
+              />
+            </div>
+          )}
         </div>
 
         <RadioGroup

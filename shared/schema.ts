@@ -10,6 +10,8 @@ export const questions = pgTable("questions", {
   explanation: text("explanation"),
   category: text("category"),
   difficulty: text("difficulty"),
+  hasImage: boolean("has_image").default(false),
+  imagePath: text("image_path"),
 });
 
 export const quizSessions = pgTable("quiz_sessions", {
