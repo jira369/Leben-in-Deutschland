@@ -23,8 +23,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({ error: "Invalid count parameter" });
       }
 
-      const questions = await storage.getRandomQuestions(count);
-      res.json(questions);
+      const state = req.query.state as string;
+      
+      if (state && state !== "Bundesweit") {
+        // Get state-specific quiz (30 federal + 3 state)
+        const questions = await storage.getRandomQuestionsForState(30, state);
+        res.json(questions);
+      } else {
+        // Get all federal questions
+        const questions = await storage.getRandomQuestions(count);
+        res.json(questions);
+      }
     } catch (error) {
       res.status(500).json({ error: "Failed to fetch random questions" });
     }

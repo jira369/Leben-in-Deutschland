@@ -7,6 +7,7 @@ import Home from "@/pages/home";
 import Quiz from "@/pages/quiz";
 import Results from "@/pages/results";
 import Statistics from "@/pages/statistics";
+import StateSelection from "@/pages/state-selection";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -16,6 +17,7 @@ function Router() {
       <Route path="/quiz" component={Quiz} />
       <Route path="/results" component={Results} />
       <Route path="/statistics" component={Statistics} />
+      <Route path="/state-selection" component={StateSelection} />
       <Route component={NotFound} />
     </Switch>
   );

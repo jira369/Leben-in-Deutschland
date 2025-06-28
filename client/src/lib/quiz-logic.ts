@@ -76,3 +76,17 @@ export function getQuizTypeQuestions(questions: Question[], type: 'full' | 'prac
   
   return selectedQuestions;
 }
+
+export async function fetchQuestionsForQuiz(count: number, selectedState?: string): Promise<Question[]> {
+  const params = new URLSearchParams({ count: count.toString() });
+  if (selectedState && selectedState !== "Bundesweit") {
+    params.append('state', selectedState);
+  }
+  
+  const response = await fetch(`/api/questions/random/${count}?${params}`);
+  if (!response.ok) {
+    throw new Error('Failed to fetch questions');
+  }
+  
+  return response.json();
+}

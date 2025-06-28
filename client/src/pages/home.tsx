@@ -1,14 +1,20 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { GraduationCap, Flag, ListChecks, TrendingUp, Play, Dumbbell, BarChart3, CheckCircle, AlertTriangle, Settings, HelpCircle } from "lucide-react";
-import { QuizSession } from "@shared/schema";
+import { QuizSession, UserSettings } from "@shared/schema";
 import { SettingsModal } from "@/components/settings-modal";
 
 export default function Home() {
   const [settingsOpen, setSettingsOpen] = useState(false);
+  const [, navigate] = useLocation();
+
+  // Fetch user settings
+  const { data: userSettings } = useQuery<UserSettings>({
+    queryKey: ['/api/settings'],
+  });
 
   // Fetch recent quiz sessions
   const { data: recentSessions = [] } = useQuery<QuizSession[]>({
@@ -19,6 +25,13 @@ export default function Home() {
   const { data: stats } = useQuery({
     queryKey: ['/api/quiz-sessions/stats'],
   });
+
+  // Check if user needs to select their bundesland
+  useEffect(() => {
+    if (userSettings && !userSettings.hasSelectedState) {
+      navigate('/state-selection');
+    }
+  }, [userSettings, navigate]);
 
   return (
     <div className="min-h-screen bg-gray-50">

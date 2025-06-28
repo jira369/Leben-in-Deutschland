@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Question, QuizState, QuizResults, UserSettings } from "@shared/schema";
-import { calculateResults, getQuizTypeQuestions } from "@/lib/quiz-logic";
+import { calculateResults, getQuizTypeQuestions, fetchQuestionsForQuiz } from "@/lib/quiz-logic";
 import { apiRequest } from "@/lib/queryClient";
 
 export function useQuiz() {
@@ -10,7 +10,7 @@ export function useQuiz() {
   const queryClient = useQueryClient();
 
   // Fetch all questions
-  const { data: allQuestions = [], isLoading: questionsLoading } = useQuery({
+  const { data: allQuestions = [], isLoading: questionsLoading } = useQuery<Question[]>({
     queryKey: ['/api/questions'],
   });
 
@@ -77,32 +77,37 @@ export function useQuiz() {
     }
   }, [allQuestions.length, questionsLoading]);
 
-  const startQuiz = useCallback((type: 'full' | 'practice') => {
-    if (allQuestions.length === 0) return;
+  const startQuiz = useCallback(async (type: 'full' | 'practice') => {
+    const questionCount = type === 'full' ? 33 : 10;
+    const selectedState = settings?.selectedState;
 
-    const shouldShuffle = settings?.shuffleQuestions ?? true;
-    const questions = getQuizTypeQuestions(allQuestions, type, shouldShuffle);
-    
-    const newQuizState: QuizState = {
-      questions,
-      currentQuestionIndex: 0,
-      selectedAnswers: {},
-      startTime: Date.now(),
-    };
+    try {
+      // Fetch questions with state-specific logic
+      const questions = await fetchQuestionsForQuiz(questionCount, selectedState || undefined);
+      
+      const newQuizState: QuizState = {
+        questions,
+        currentQuestionIndex: 0,
+        selectedAnswers: {},
+        startTime: Date.now(),
+      };
 
-    // Set timer if enabled
-    if (settings?.timerEnabled && type === 'full') {
-      setTimeRemaining(45 * 60); // 45 minutes for full test
-      newQuizState.timeRemaining = 45 * 60;
-    } else if (settings?.timerEnabled && type === 'practice') {
-      setTimeRemaining(15 * 60); // 15 minutes for practice
-      newQuizState.timeRemaining = 15 * 60;
-    } else {
-      setTimeRemaining(null);
+      // Set timer if enabled
+      if (settings?.timerEnabled && type === 'full') {
+        setTimeRemaining(45 * 60); // 45 minutes for full test
+        newQuizState.timeRemaining = 45 * 60;
+      } else if (settings?.timerEnabled && type === 'practice') {
+        setTimeRemaining(15 * 60); // 15 minutes for practice
+        newQuizState.timeRemaining = 15 * 60;
+      } else {
+        setTimeRemaining(null);
+      }
+
+      setQuizState(newQuizState);
+    } catch (error) {
+      console.error('Failed to start quiz:', error);
     }
-
-    setQuizState(newQuizState);
-  }, [allQuestions, settings]);
+  }, [settings]);
 
   const selectAnswer = useCallback((answerIndex: number) => {
     if (!quizState) return;

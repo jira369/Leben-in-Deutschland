@@ -6,6 +6,7 @@ export interface IStorage {
   // Questions
   getAllQuestions(): Promise<Question[]>;
   getRandomQuestions(count: number): Promise<Question[]>;
+  getRandomQuestionsForState(federalCount: number, stateCategory?: string): Promise<Question[]>;
   createQuestion(question: InsertQuestion): Promise<Question>;
   createManyQuestions(questions: InsertQuestion[]): Promise<Question[]>;
   
@@ -60,6 +61,24 @@ export class MemStorage implements IStorage {
     const allQuestions = Array.from(this.questions.values());
     const shuffled = this.shuffleArray([...allQuestions]);
     return shuffled.slice(0, Math.min(count, shuffled.length));
+  }
+
+  async getRandomQuestionsForState(federalCount: number, stateCategory?: string): Promise<Question[]> {
+    const allQuestions = Array.from(this.questions.values());
+    
+    // Get federal questions (category: "Bundesweit")
+    const federalQuestions = allQuestions.filter(q => q.category === "Bundesweit");
+    const shuffledFederal = this.shuffleArray([...federalQuestions]).slice(0, federalCount);
+    
+    let stateQuestions: Question[] = [];
+    if (stateCategory && federalCount < 33) {
+      // Get state-specific questions
+      const stateSpecificQuestions = allQuestions.filter(q => q.category === stateCategory);
+      const stateCount = 33 - federalCount; // Remaining questions for state
+      stateQuestions = this.shuffleArray([...stateSpecificQuestions]).slice(0, stateCount);
+    }
+    
+    return [...shuffledFederal, ...stateQuestions];
   }
 
   async createQuestion(insertQuestion: InsertQuestion): Promise<Question> {
@@ -193,6 +212,30 @@ export class DatabaseStorage implements IStorage {
       .orderBy(sql`RANDOM()`)
       .limit(count);
     return randomQuestions;
+  }
+
+  async getRandomQuestionsForState(federalCount: number, stateCategory?: string): Promise<Question[]> {
+    // Get federal questions (category: "Bundesweit")
+    const federalQuestions = await db
+      .select()
+      .from(questions)
+      .where(eq(questions.category, 'Bundesweit'))
+      .orderBy(sql`RANDOM()`)
+      .limit(federalCount);
+    
+    let stateQuestions: Question[] = [];
+    if (stateCategory && federalCount < 33) {
+      // Get state-specific questions
+      const stateCount = 33 - federalCount; // Remaining questions for state
+      stateQuestions = await db
+        .select()
+        .from(questions)
+        .where(eq(questions.category, stateCategory))
+        .orderBy(sql`RANDOM()`)
+        .limit(stateCount);
+    }
+    
+    return [...federalQuestions, ...stateQuestions];
   }
 
   async createQuestion(insertQuestion: InsertQuestion): Promise<Question> {
