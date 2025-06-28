@@ -19,8 +19,9 @@ This is a German citizenship test (Einbürgerungstest) practice application buil
 - **Language**: TypeScript (ESM modules)
 - **Database**: PostgreSQL with Drizzle ORM
 - **Database Provider**: Neon Database (@neondatabase/serverless)
-- **Session Storage**: In-memory storage with fallback to database persistence
+- **Storage**: DatabaseStorage implementation using PostgreSQL
 - **API**: RESTful API endpoints
+- **Static Assets**: Express static middleware for question images
 
 ### Key Components
 
@@ -38,8 +39,9 @@ This is a German citizenship test (Einbürgerungstest) practice application buil
 
 #### Storage System
 - **IStorage Interface**: Abstraction layer for data persistence
-- **MemStorage Implementation**: In-memory storage for development/testing
-- **Database Integration**: Drizzle ORM with PostgreSQL for production
+- **DatabaseStorage Implementation**: PostgreSQL storage using Drizzle ORM
+- **Real Question Data**: 376 official German citizenship test questions loaded from Excel
+- **Image Support**: 7 questions with visual content (images) properly integrated
 
 ## Data Flow
 
@@ -89,7 +91,10 @@ This is a German citizenship test (Einbürgerungstest) practice application buil
 ## Changelog
 
 Changelog:
-- June 28, 2025. Initial setup
+- June 28, 2025. Initial setup with complete quiz system
+- June 28, 2025. Added PostgreSQL database integration with Drizzle ORM
+- June 28, 2025. Integrated 376 real German citizenship test questions from Excel
+- June 28, 2025. Added image support for 7 visual questions with static asset serving
 
 ## User Preferences
 

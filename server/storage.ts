@@ -1,4 +1,6 @@
 import { questions, quizSessions, userSettings, type Question, type InsertQuestion, type QuizSession, type InsertQuizSession, type UserSettings, type InsertUserSettings } from "@shared/schema";
+import { db } from "./db";
+import { eq, desc, sql } from "drizzle-orm";
 
 export interface IStorage {
   // Questions
@@ -137,4 +139,125 @@ export class MemStorage implements IStorage {
   }
 }
 
-export const storage = new MemStorage();
+export class DatabaseStorage implements IStorage {
+  async getAllQuestions(): Promise<Question[]> {
+    const allQuestions = await db.select().from(questions);
+    return allQuestions;
+  }
+
+  async getRandomQuestions(count: number): Promise<Question[]> {
+    const randomQuestions = await db
+      .select()
+      .from(questions)
+      .orderBy(sql`RANDOM()`)
+      .limit(count);
+    return randomQuestions;
+  }
+
+  async createQuestion(insertQuestion: InsertQuestion): Promise<Question> {
+    const [question] = await db
+      .insert(questions)
+      .values(insertQuestion)
+      .returning();
+    return question;
+  }
+
+  async createManyQuestions(insertQuestions: InsertQuestion[]): Promise<Question[]> {
+    const createdQuestions = await db
+      .insert(questions)
+      .values(insertQuestions)
+      .returning();
+    return createdQuestions;
+  }
+
+  async createQuizSession(insertSession: InsertQuizSession): Promise<QuizSession> {
+    const [session] = await db
+      .insert(quizSessions)
+      .values(insertSession)
+      .returning();
+    return session;
+  }
+
+  async getRecentQuizSessions(limit = 10): Promise<QuizSession[]> {
+    const sessions = await db
+      .select()
+      .from(quizSessions)
+      .orderBy(desc(quizSessions.createdAt))
+      .limit(limit);
+    return sessions;
+  }
+
+  async getQuizSessionStats(): Promise<{
+    totalTests: number;
+    averageScore: number;
+    bestScore: number;
+    totalStudyTime: number;
+  }> {
+    const stats = await db
+      .select({
+        totalTests: sql<number>`COUNT(*)`,
+        averageScore: sql<number>`COALESCE(AVG(${quizSessions.percentage}), 0)`,
+        bestScore: sql<number>`COALESCE(MAX(${quizSessions.percentage}), 0)`,
+        totalStudyTime: sql<number>`COALESCE(SUM(${quizSessions.timeSpent}), 0)`
+      })
+      .from(quizSessions);
+
+    const result = stats[0];
+    return {
+      totalTests: result.totalTests,
+      averageScore: Math.round(result.averageScore),
+      bestScore: result.bestScore,
+      totalStudyTime: result.totalStudyTime
+    };
+  }
+
+  async getUserSettings(): Promise<UserSettings | undefined> {
+    const [settings] = await db
+      .select()
+      .from(userSettings)
+      .limit(1);
+    
+    if (!settings) {
+      // Create default settings if none exist
+      const [newSettings] = await db
+        .insert(userSettings)
+        .values({
+          timerEnabled: false,
+          immediateFeedback: true,
+          shuffleQuestions: true,
+          testMode: 'full'
+        })
+        .returning();
+      return newSettings;
+    }
+    
+    return settings;
+  }
+
+  async updateUserSettings(settings: Partial<InsertUserSettings>): Promise<UserSettings> {
+    const existingSettings = await this.getUserSettings();
+    
+    if (!existingSettings) {
+      const [newSettings] = await db
+        .insert(userSettings)
+        .values({
+          timerEnabled: settings.timerEnabled ?? false,
+          immediateFeedback: settings.immediateFeedback ?? true,
+          shuffleQuestions: settings.shuffleQuestions ?? true,
+          testMode: settings.testMode ?? 'full'
+        })
+        .returning();
+      return newSettings;
+    }
+
+    const [updatedSettings] = await db
+      .update(userSettings)
+      .set(settings)
+      .where(eq(userSettings.id, existingSettings.id))
+      .returning();
+    
+    return updatedSettings;
+  }
+}
+
+export const storage = new DatabaseStorage();
