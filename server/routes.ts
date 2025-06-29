@@ -270,6 +270,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Get unique questions answered count
+  app.get("/api/quiz-sessions/unique-questions", async (req, res) => {
+    try {
+      const count = await storage.getUniqueQuestionsAnswered();
+      res.json({ uniqueQuestionsAnswered: count });
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch unique questions count" });
+    }
+  });
+
   // Add incorrect answer
   app.post("/api/incorrect-answers", async (req, res) => {
     try {

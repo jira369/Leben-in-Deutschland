@@ -40,6 +40,9 @@ export interface IStorage {
     testsPassedPercentage: number;
   }>;
   
+  // Unique Questions Count
+  getUniqueQuestionsAnswered(): Promise<number>;
+  
   // Incorrect Answers Management
   addIncorrectAnswer(incorrectAnswer: InsertIncorrectAnswer): Promise<IncorrectAnswer>;
   getIncorrectQuestions(): Promise<Question[]>;
@@ -219,6 +222,21 @@ export class MemStorage implements IStorage {
 
   async clearIncorrectAnswers(): Promise<void> {
     // No-op for MemStorage
+  }
+
+  async getUniqueQuestionsAnswered(): Promise<number> {
+    const sessions = Array.from(this.quizSessions.values());
+    const uniqueQuestionIds = new Set<number>();
+    
+    sessions.forEach(session => {
+      if (session.questionResults) {
+        session.questionResults.forEach(result => {
+          uniqueQuestionIds.add(result.questionId);
+        });
+      }
+    });
+    
+    return uniqueQuestionIds.size;
   }
 
   private shuffleArray<T>(array: T[]): T[] {
@@ -455,6 +473,28 @@ export class DatabaseStorage implements IStorage {
 
   async clearIncorrectAnswers(): Promise<void> {
     await db.delete(incorrectAnswers);
+  }
+
+  async getUniqueQuestionsAnswered(): Promise<number> {
+    // Get all quiz sessions with their question results
+    const sessions = await db
+      .select({ questionResults: quizSessions.questionResults })
+      .from(quizSessions)
+      .where(sql`${quizSessions.questionResults} IS NOT NULL`);
+
+    const uniqueQuestionIds = new Set<number>();
+    
+    sessions.forEach(session => {
+      if (session.questionResults && Array.isArray(session.questionResults)) {
+        session.questionResults.forEach((result: any) => {
+          if (result && typeof result.questionId === 'number') {
+            uniqueQuestionIds.add(result.questionId);
+          }
+        });
+      }
+    });
+    
+    return uniqueQuestionIds.size;
   }
 }
 
