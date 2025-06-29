@@ -154,6 +154,8 @@ Changelog:
 - June 29, 2025. Bremen-Bilderfragen hinzugefügt: Wappen-Frage (ID 341) und Karten-Frage (ID 348) mit offiziellen Bildern verknüpft.
 - June 29, 2025. **KRITISCHER FIX: Kompletter Datenbank-Neuimport aller 460 Fragen** - Korrektur des fundamentalen Answer-Mapping-Problems. Ursprünglich waren correct_answer Indizes falsch zugeordnet, sodass falsche Antworten als richtig markiert wurden. Jetzt verwendet das System korrekte Excel-Spalten-Zuordnung (E-H für Antworten, I für korrekte Antwort) mit verbessertem Text-Matching-Algorithmus.
 - June 29, 2025. **KRITISCHER FRONTEND-FIX: Array-Index-Mismatch behoben** - Korrektur des fundamentalen Problems in der Frontend-Logik: selectedAnswer (0-basiert) wurde direkt mit correctAnswer (1-basiert) verglichen. Fix: selectedAnswer + 1 === correctAnswer sowohl in question-card.tsx als auch quiz-logic.ts. Betraf alle Quiz-Bewertungen und Statistiken.
+- June 29, 2025. **UI-ZUSTANDSFEHLER BEHOBEN: RadioGroup Reset-Problem** - Korrektur des Problems, dass RadioGroup bei neuen Fragen die vorherige Auswahl beibehielt. Fix: key={question.id} zur RadioGroup hinzugefügt für kompletten Component-Reset bei Fragewechsel.
+- June 29, 2025. Frage 70 Bildintegration: Bundespresident Gustav Heinemann Bild (Frage 70_1751224471375.png) zur historischen Frage über Bundespräsidenten-Aufgaben hinzugefügt.
 
 ## User Preferences
 
