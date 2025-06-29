@@ -59,16 +59,8 @@ export function QuestionCard({
                 </DialogTrigger>
                 <DialogContent className="max-w-4xl max-h-[90vh] overflow-hidden">
                   <DialogHeader>
-                    <DialogTitle className="flex items-center justify-between">
-                      <span>Frage {questionNumber} - Bild</span>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => setIsImageModalOpen(false)}
-                        className="h-6 w-6 p-0"
-                      >
-                        <X className="h-4 w-4" />
-                      </Button>
+                    <DialogTitle>
+                      Bild zu Frage {questionNumber}
                     </DialogTitle>
                   </DialogHeader>
                   <div className="mt-4 flex justify-center overflow-auto">
@@ -76,6 +68,10 @@ export function QuestionCard({
                       src={`/attached_assets/${question.imagePath}`}
                       alt={`Bild zu Frage ${questionNumber}`}
                       className="max-w-full max-h-[70vh] object-contain rounded-lg border border-gray-200 shadow-sm"
+                      onError={(e) => {
+                        console.error(`Failed to load image: /attached_assets/${question.imagePath}`);
+                        e.currentTarget.src = `data:image/svg+xml;base64,${btoa('<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300"><rect width="400" height="300" fill="#f3f4f6"/><text x="200" y="150" text-anchor="middle" font-family="Arial" font-size="16" fill="#6b7280">Bild nicht verfügbar</text></svg>')}`;
+                      }}
                     />
                   </div>
                 </DialogContent>

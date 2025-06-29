@@ -157,6 +157,9 @@ Changelog:
 - June 29, 2025. **UI-ZUSTANDSFEHLER BEHOBEN: RadioGroup Reset-Problem** - Korrektur des Problems, dass RadioGroup bei neuen Fragen die vorherige Auswahl beibehielt. Fix: key={question.id} zur RadioGroup hinzugefügt für kompletten Component-Reset bei Fragewechsel.
 - June 29, 2025. Frage 70 Bildintegration: Bundespresident Gustav Heinemann Bild (Frage 70_1751224471375.png) zur historischen Frage über Bundespräsidenten-Aufgaben hinzugefügt.
 - June 29, 2025. **BILDANZEIGE-VERBESSERUNG: Modal-System implementiert** - Ersetzte direkte Bildanzeige durch eleganten "Bild anzeigen" Button mit Modal-Dialog. Verhindert Bildschirm-Überladung, bietet bessere UX für alle Bilderfragen (bundesweite und Bundesländer-Fragen). Modal mit X-Button und Click-Outside schließbar.
+- June 29, 2025. **KATEGORIALES ÜBUNGSSYSTEM FIX:** Thematische Kategorienfilterung implementiert - Backend filtert jetzt korrekt nach Schlüsselwörtern (Geschichte, Verfassung, etc.) statt nicht-existierender Kategorie-IDs. Bundesland-spezifische Fragen laden korrekt.
+- June 29, 2025. **CHRONOLOGISCHE SORTIERUNG:** Alle Übungskategorien haben jetzt "Zufällig üben" und "Chronologisch üben" Optionen. Backend unterstützt chronological=true Parameter für ID-basierte Sortierung.
+- June 29, 2025. **BILDPFAD-KORREKTUR:** Alle Bilderfragen verwenden jetzt korrekte Dateinamen (mit Timestamps). Doppelte Schließen-Buttons im Modal entfernt. Bremen-, Bayern-, Berlin-, Brandenburg-, und Baden-Württemberg-Bilder funktionieren vollständig.
 
 ## User Preferences
 
