@@ -39,6 +39,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
         
         if (category === "bundesweit") {
           categoryQuestions = allQuestions.filter(q => q.category === "Bundesweit");
+        } else if (["Baden-Württemberg", "Bayern", "Berlin", "Brandenburg", "Bremen", "Hamburg", "Hessen", "Mecklenburg-Vorpommern", "Niedersachsen", "Nordrhein-Westfalen", "Rheinland-Pfalz", "Saarland", "Sachsen", "Sachsen-Anhalt", "Schleswig-Holstein", "Thüringen"].includes(category)) {
+          // State-specific questions
+          categoryQuestions = allQuestions.filter(q => q.category === category);
         } else {
           // Thematic categorization based on keywords
           const federalQuestions = allQuestions.filter(q => q.category === "Bundesweit");
@@ -70,8 +73,18 @@ export async function registerRoutes(app: Express): Promise<Server> {
           });
         }
         
-        const shuffled = categoryQuestions.sort(() => Math.random() - 0.5);
-        res.json(shuffled);
+        // Check if chronological order is requested
+        const chronological = req.query.chronological === 'true';
+        
+        if (chronological) {
+          // Sort by ID for chronological order
+          categoryQuestions.sort((a, b) => a.id - b.id);
+        } else {
+          // Shuffle for random order
+          categoryQuestions.sort(() => Math.random() - 0.5);
+        }
+        
+        res.json(categoryQuestions);
       } else if (state && state !== "Bundesweit") {
         // Get state-specific quiz (30 federal + 3 state)
         const questions = await storage.getRandomQuestionsForState(30, state);

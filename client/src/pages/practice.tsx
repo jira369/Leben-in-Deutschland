@@ -224,16 +224,29 @@ export default function Practice() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-gray-600 text-sm mb-4">{category.description}</p>
-                  <Link href={`/quiz?type=practice&category=${category.id}`}>
-                    <Button 
-                      className="w-full" 
-                      variant="outline"
-                      disabled={category.questionCount === 0}
-                    >
-                      <Play className="h-4 w-4 mr-2" />
-                      {category.questionCount > 0 ? "Üben starten" : "Keine Fragen verfügbar"}
-                    </Button>
-                  </Link>
+                  <div className="space-y-2">
+                    <Link href={`/quiz?type=practice&category=${category.id}`}>
+                      <Button 
+                        className="w-full" 
+                        variant="outline"
+                        disabled={category.questionCount === 0}
+                      >
+                        <Play className="h-4 w-4 mr-2" />
+                        {category.questionCount > 0 ? "Zufällig üben" : "Keine Fragen verfügbar"}
+                      </Button>
+                    </Link>
+                    {category.questionCount > 0 && (
+                      <Link href={`/quiz?type=practice&category=${category.id}&chronological=true`}>
+                        <Button 
+                          className="w-full" 
+                          variant="secondary"
+                          size="sm"
+                        >
+                          Chronologisch üben
+                        </Button>
+                      </Link>
+                    )}
+                  </div>
                 </CardContent>
               </Card>
             );
@@ -256,15 +269,26 @@ export default function Practice() {
                     <Badge variant="secondary">{stateQuestions.length} Fragen</Badge>
                   </div>
                 </div>
-                <Link href={`/quiz?type=practice&category=${userSettings?.selectedState || 'Bundesweit'}`}>
-                  <Button 
-                    variant="outline" 
-                    className="border-green-600 text-green-700 hover:bg-green-100"
-                  >
-                    <Play className="h-4 w-4 mr-2" />
-                    Üben starten
-                  </Button>
-                </Link>
+                <div className="space-y-2">
+                  <Link href={`/quiz?type=practice&category=${userSettings?.selectedState || 'Bundesweit'}`}>
+                    <Button 
+                      variant="outline" 
+                      className="border-green-600 text-green-700 hover:bg-green-100"
+                    >
+                      <Play className="h-4 w-4 mr-2" />
+                      Zufällig üben
+                    </Button>
+                  </Link>
+                  <Link href={`/quiz?type=practice&category=${userSettings?.selectedState || 'Bundesweit'}&chronological=true`}>
+                    <Button 
+                      variant="secondary" 
+                      size="sm"
+                      className="border-green-600 text-green-700 hover:bg-green-100"
+                    >
+                      Chronologisch üben
+                    </Button>
+                  </Link>
+                </div>
               </div>
             </CardHeader>
             <CardContent>

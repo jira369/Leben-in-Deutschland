@@ -93,12 +93,16 @@ export function useQuiz() {
     const selectedState = settings?.selectedState;
 
     try {
+      // Check for chronological ordering
+      const chronological = searchParams.get('chronological') === 'true';
+      
       // Fetch questions with proper mode/category parameters
       const questions = await fetchQuestionsForQuiz(
         questionCount, 
         selectedState || undefined, 
         mode || undefined, 
-        category || undefined
+        category || undefined,
+        chronological
       );
       
       const newQuizState: QuizState = {
