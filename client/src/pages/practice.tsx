@@ -240,7 +240,6 @@ export default function Practice() {
                         <Button 
                           className="w-full" 
                           variant="secondary"
-                          size="sm"
                         >
                           Chronologisch üben
                         </Button>
@@ -273,7 +272,7 @@ export default function Practice() {
                   <Link href={`/quiz?type=practice&category=${userSettings?.selectedState || 'Bundesweit'}`}>
                     <Button 
                       variant="outline" 
-                      className="border-green-600 text-green-700 hover:bg-green-100"
+                      className="w-40 border-green-600 text-green-700 hover:bg-green-100"
                     >
                       <Play className="h-4 w-4 mr-2" />
                       Zufällig üben
@@ -282,8 +281,7 @@ export default function Practice() {
                   <Link href={`/quiz?type=practice&category=${userSettings?.selectedState || 'Bundesweit'}&chronological=true`}>
                     <Button 
                       variant="secondary" 
-                      size="sm"
-                      className="border-green-600 text-green-700 hover:bg-green-100"
+                      className="w-40 border-green-600 text-green-700 hover:bg-green-100"
                     >
                       Chronologisch üben
                     </Button>
