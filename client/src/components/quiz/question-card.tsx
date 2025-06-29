@@ -81,7 +81,7 @@ export function QuestionCard({
         {showFeedback && hasSelectedAnswer && immediateFeedback && (
           <AnswerFeedback
             isCorrect={isCorrect}
-            correctAnswer={question.answers[question.correctAnswer]}
+            correctAnswer={question.answers[question.correctAnswer - 1]}
             explanation={question.explanation}
           />
         )}
