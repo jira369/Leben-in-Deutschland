@@ -22,7 +22,7 @@ export function QuestionCard({
   onAnswerSelect
 }: QuestionCardProps) {
   const hasSelectedAnswer = selectedAnswer !== undefined;
-  const isCorrect = selectedAnswer === question.correctAnswer;
+  const isCorrect = selectedAnswer !== undefined && selectedAnswer + 1 === question.correctAnswer;
 
   return (
     <Card className="bg-white rounded-2xl shadow-lg mb-6">
@@ -82,7 +82,7 @@ export function QuestionCard({
           <AnswerFeedback
             isCorrect={isCorrect}
             correctAnswer={question.answers[question.correctAnswer - 1]}
-            explanation={question.explanation}
+            explanation={question.explanation || undefined}
           />
         )}
       </CardContent>
