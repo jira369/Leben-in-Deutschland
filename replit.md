@@ -104,7 +104,7 @@ Basierend auf dem originalen Excel-Sheet (Zeilen 302-461):
 | Bundesland | Zeilen im Excel | Datenbank IDs | Anzahl Fragen | Bilderfragen | Status |
 |------------|-----------------|---------------|---------------|--------------|---------|
 | Baden-Württemberg | 302-311 | 301-310 | 10 | 2 (Frage 1+8) | ✅ Vollständig |
-| Bayern | 312-321 | 311-320 | 10 | 2 (Frage 1+8) | ✅ Vollständig |
+| Bayern | 312-321 | 311-320 | 10 | 2 (Frage 1+8) | ✅ Vollständig mit Bildern |
 | Berlin | 322-331 | 321-330 | 10 | 2 (Frage 1+8) | ✅ Vollständig |
 | Brandenburg | 332-341 | 331-340 | 10 | 2 (Frage 1+8) | ✅ Vollständig |
 | Bremen | 342-351 | 341-350 | 10 | 2 (Frage 1+8) | ✅ Vollständig |
@@ -148,6 +148,7 @@ Changelog:
 - June 29, 2025. Expanded Baden-Württemberg question set to 8 total questions for comprehensive state practice
 - June 29, 2025. **Vollständige Korrektur der Bundesländer-Fragen:** Implementierung aller 160 offiziellen Fragen (16 Bundesländer × 10 Fragen) basierend auf korrekter Excel-Zuordnung (Zeilen 302-461)
 - June 29, 2025. **Korrektur der bundesweiten Fragen:** Aktualisierung auf korrekte 300 bundesweite Fragen basierend auf Excel-Zeilen 2-301 (Spalte B = "Alle"). Gesamtsystem jetzt mit allen 460 offiziellen Fragen vollständig.
+- June 29, 2025. Bayern-Bilderfragen hinzugefügt: Wappen-Frage (ID 311) und Karten-Frage (ID 318) mit offiziellen Bildern verknüpft.
 
 ## User Preferences
 
