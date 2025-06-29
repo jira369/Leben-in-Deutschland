@@ -107,7 +107,7 @@ Basierend auf dem originalen Excel-Sheet (Zeilen 302-461):
 | Bayern | 312-321 | 311-320 | 10 | 2 (Frage 1+8) | ✅ Vollständig mit Bildern |
 | Berlin | 322-331 | 321-330 | 10 | 2 (Frage 1+8) | ✅ Vollständig mit Bildern |
 | Brandenburg | 332-341 | 331-340 | 10 | 2 (Frage 1+8) | ✅ Vollständig mit Bildern |
-| Bremen | 342-351 | 341-350 | 10 | 2 (Frage 1+8) | ✅ Vollständig |
+| Bremen | 342-351 | 341-350 | 10 | 2 (Frage 1+8) | ✅ Vollständig mit Bildern |
 | Hamburg | 352-361 | 351-360 | 10 | 2 (Frage 1+8) | ✅ Vollständig |
 | Hessen | 362-371 | 361-370 | 10 | 2 (Frage 1+8) | ✅ Vollständig |
 | Mecklenburg-Vorpommern | 372-381 | 371-380 | 10 | 2 (Frage 1+8) | ✅ Vollständig |
@@ -151,6 +151,7 @@ Changelog:
 - June 29, 2025. Bayern-Bilderfragen hinzugefügt: Wappen-Frage (ID 311) und Karten-Frage (ID 318) mit offiziellen Bildern verknüpft.
 - June 29, 2025. Berlin-Bilderfragen hinzugefügt: Wappen-Frage (ID 321) und Karten-Frage (ID 328) mit offiziellen Bildern verknüpft.
 - June 29, 2025. Brandenburg-Bilderfragen hinzugefügt: Wappen-Frage (ID 331) und Karten-Frage (ID 338) mit offiziellen Bildern verknüpft.
+- June 29, 2025. Bremen-Bilderfragen hinzugefügt: Wappen-Frage (ID 341) und Karten-Frage (ID 348) mit offiziellen Bildern verknüpft.
 
 ## User Preferences
 
