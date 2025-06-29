@@ -7,44 +7,72 @@ import { Badge } from "@/components/ui/badge";
 import { BookOpen, Play, ArrowLeft, Users, Building, Flag, Globe, Scale, Heart } from "lucide-react";
 import { Question, UserSettings } from "@shared/schema";
 
-// Categories for German citizenship test questions
-const QUESTION_CATEGORIES = [
-  {
-    id: "geschichte",
-    name: "Geschichte und Verantwortung",
-    icon: BookOpen,
-    description: "Deutsche Geschichte, NS-Zeit, Demokratie",
-    color: "bg-blue-500"
-  },
-  {
-    id: "verfassung",
-    name: "Verfassungsprinzipien",
-    icon: Scale,
-    description: "Grundgesetz, Rechtsstaatlichkeit, Gewaltenteilung",
-    color: "bg-green-500"
-  },
-  {
-    id: "mensch-gesellschaft",
-    name: "Mensch und Gesellschaft",
-    icon: Users,
-    description: "Religionsfreiheit, Gleichberechtigung, Toleranz",
-    color: "bg-purple-500"
-  },
-  {
-    id: "staat-buerger",
-    name: "Staat und Bürger",
-    icon: Building,
-    description: "Wahlen, Parteien, Bürgerpflichten",
-    color: "bg-orange-500"
-  },
-  {
-    id: "bundesweit",
-    name: "Bundesweite Fragen",
-    icon: Globe,
-    description: "Allgemeine Fragen zu Deutschland",
-    color: "bg-indigo-500"
-  }
-];
+// Thematic groupings of questions based on content analysis
+const getThematicCategories = (questions: Question[]) => {
+  // Keywords for categorizing questions thematically
+  const categories = [
+    {
+      id: "geschichte",
+      name: "Geschichte und Verantwortung", 
+      icon: BookOpen,
+      description: "Deutsche Geschichte, NS-Zeit, Demokratie",
+      color: "bg-blue-500",
+      keywords: ["Geschichte", "Nationalsozialismus", "NS-Zeit", "1933", "1945", "Krieg", "DDR", "demokratisch", "Demokratie", "Verfolgung", "Holocaust", "Widerstand"]
+    },
+    {
+      id: "verfassung",
+      name: "Verfassungsprinzipien",
+      icon: Scale, 
+      description: "Grundgesetz, Rechtsstaatlichkeit, Gewaltenteilung",
+      color: "bg-green-500",
+      keywords: ["Grundgesetz", "Verfassung", "Rechtsstaatlichkeit", "Gewaltenteilung", "Parlament", "Bundestag", "Bundesrat", "Verfassungsgericht", "Grundrechte", "Menschenrechte"]
+    },
+    {
+      id: "mensch-gesellschaft", 
+      name: "Mensch und Gesellschaft",
+      icon: Users,
+      description: "Religionsfreiheit, Gleichberechtigung, Toleranz", 
+      color: "bg-purple-500",
+      keywords: ["Religion", "Glaube", "Gleichberechtigung", "Toleranz", "Familie", "Ehe", "Frauen", "Männer", "Diskriminierung", "Integration", "Kultur"]
+    },
+    {
+      id: "staat-buerger",
+      name: "Staat und Bürger", 
+      icon: Building,
+      description: "Wahlen, Parteien, Bürgerpflichten",
+      color: "bg-orange-500", 
+      keywords: ["Wahl", "wählen", "Partei", "Bürger", "Bürgerpflicht", "Steuern", "Sozialversicherung", "Personalausweis", "Pass", "Meldepflicht"]
+    },
+    {
+      id: "bundesweit",
+      name: "Bundesweite Fragen",
+      icon: Globe,
+      description: "Allgemeine Fragen zu Deutschland", 
+      color: "bg-indigo-500",
+      keywords: [] // All federal questions
+    }
+  ];
+
+  return categories.map(cat => {
+    let matchingQuestions;
+    if (cat.id === "bundesweit") {
+      matchingQuestions = questions.filter(q => q.category === "Bundesweit");
+    } else {
+      matchingQuestions = questions.filter(q => 
+        q.category === "Bundesweit" && 
+        cat.keywords.some(keyword => 
+          q.text.toLowerCase().includes(keyword.toLowerCase())
+        )
+      );
+    }
+    
+    return {
+      ...cat,
+      questionCount: matchingQuestions.length,
+      questions: matchingQuestions
+    };
+  }).filter(cat => cat.questionCount > 0);
+};
 
 export default function Practice() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
@@ -59,34 +87,16 @@ export default function Practice() {
     queryKey: ['/api/questions'],
   });
 
-  const getQuestionsByCategory = (category: string) => {
-    if (category === "bundesweit") {
-      return allQuestions.filter(q => q.category === "Bundesweit");
+  // Calculate thematic categories based on all questions
+  const thematicCategories = getThematicCategories(allQuestions);
+
+  const startCategoryPractice = (categoryId: string) => {
+    const category = thematicCategories.find(cat => cat.id === categoryId);
+    if (!category || category.questions.length === 0) {
+      return;
     }
-    if (category === "bundesland" && userSettings?.selectedState) {
-      return allQuestions.filter(q => q.category === userSettings.selectedState);
-    }
-    // For other categories, we'll filter by keywords in question text
-    // This is a simplified approach - in a real app you'd have proper category fields
-    return allQuestions.filter(q => {
-      const text = q.text.toLowerCase();
-      switch (category) {
-        case "geschichte":
-          return text.includes("geschichte") || text.includes("krieg") || text.includes("nazi") || 
-                 text.includes("demokratie") || text.includes("ddr") || text.includes("brd");
-        case "verfassung":
-          return text.includes("grundgesetz") || text.includes("verfassung") || text.includes("recht") ||
-                 text.includes("gewaltenteilung") || text.includes("bundesrat") || text.includes("bundestag");
-        case "mensch-gesellschaft":
-          return text.includes("religion") || text.includes("gleichberechtigung") || text.includes("toleranz") ||
-                 text.includes("familie") || text.includes("frauen") || text.includes("kinder");
-        case "staat-buerger":
-          return text.includes("wahl") || text.includes("partei") || text.includes("bürger") ||
-                 text.includes("steuer") || text.includes("pflicht") || text.includes("amt");
-        default:
-          return false;
-      }
-    });
+    // Start a practice quiz with the category questions
+    window.location.href = `/quiz?type=practice&category=${categoryId}`;
   };
 
   const federalQuestions = allQuestions.filter(q => q.category === "Bundesweit");
@@ -194,8 +204,7 @@ export default function Practice() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {QUESTION_CATEGORIES.map((category) => {
-            const questions = getQuestionsByCategory(category.id);
+          {thematicCategories.map((category) => {
             const IconComponent = category.icon;
             
             return (
@@ -208,7 +217,7 @@ export default function Practice() {
                     <div className="flex-1">
                       <CardTitle className="text-lg">{category.name}</CardTitle>
                       <Badge variant="secondary" className="mt-1">
-                        {questions.length} Fragen
+                        {category.questionCount} Fragen
                       </Badge>
                     </div>
                   </div>
@@ -219,10 +228,10 @@ export default function Practice() {
                     <Button 
                       className="w-full" 
                       variant="outline"
-                      disabled={questions.length === 0}
+                      disabled={category.questionCount === 0}
                     >
                       <Play className="h-4 w-4 mr-2" />
-                      {questions.length > 0 ? "Üben starten" : "Keine Fragen verfügbar"}
+                      {category.questionCount > 0 ? "Üben starten" : "Keine Fragen verfügbar"}
                     </Button>
                   </Link>
                 </CardContent>

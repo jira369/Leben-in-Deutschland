@@ -33,9 +33,43 @@ export async function registerRoutes(app: Express): Promise<Server> {
         const shuffled = allQuestions.sort(() => Math.random() - 0.5);
         res.json(shuffled);
       } else if (category) {
-        // Category-specific practice
+        // Category-specific practice with thematic filtering
         const allQuestions = await storage.getAllQuestions();
-        const categoryQuestions = allQuestions.filter(q => q.category === category);
+        let categoryQuestions = [];
+        
+        if (category === "bundesweit") {
+          categoryQuestions = allQuestions.filter(q => q.category === "Bundesweit");
+        } else {
+          // Thematic categorization based on keywords
+          const federalQuestions = allQuestions.filter(q => q.category === "Bundesweit");
+          
+          categoryQuestions = federalQuestions.filter(q => {
+            const text = q.text.toLowerCase();
+            switch (category) {
+              case "geschichte":
+                return text.includes("geschichte") || text.includes("nationalsozialismus") || text.includes("ns-zeit") || 
+                       text.includes("1933") || text.includes("1945") || text.includes("krieg") || text.includes("ddr") || 
+                       text.includes("demokratisch") || text.includes("demokratie") || text.includes("verfolgung") || 
+                       text.includes("holocaust") || text.includes("widerstand");
+              case "verfassung":
+                return text.includes("grundgesetz") || text.includes("verfassung") || text.includes("rechtsstaatlichkeit") || 
+                       text.includes("gewaltenteilung") || text.includes("parlament") || text.includes("bundestag") || 
+                       text.includes("bundesrat") || text.includes("verfassungsgericht") || text.includes("grundrechte") || 
+                       text.includes("menschenrechte");
+              case "mensch-gesellschaft":
+                return text.includes("religion") || text.includes("glaube") || text.includes("gleichberechtigung") || 
+                       text.includes("toleranz") || text.includes("familie") || text.includes("ehe") || text.includes("frauen") || 
+                       text.includes("männer") || text.includes("diskriminierung") || text.includes("integration") || text.includes("kultur");
+              case "staat-buerger":
+                return text.includes("wahl") || text.includes("wählen") || text.includes("partei") || text.includes("bürger") || 
+                       text.includes("bürgerpflicht") || text.includes("steuern") || text.includes("sozialversicherung") || 
+                       text.includes("personalausweis") || text.includes("pass") || text.includes("meldepflicht");
+              default:
+                return false;
+            }
+          });
+        }
+        
         const shuffled = categoryQuestions.sort(() => Math.random() - 0.5);
         res.json(shuffled);
       } else if (state && state !== "Bundesweit") {
