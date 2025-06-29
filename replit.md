@@ -160,6 +160,8 @@ Changelog:
 - June 29, 2025. **KATEGORIALES ÜBUNGSSYSTEM FIX:** Thematische Kategorienfilterung implementiert - Backend filtert jetzt korrekt nach Schlüsselwörtern (Geschichte, Verfassung, etc.) statt nicht-existierender Kategorie-IDs. Bundesland-spezifische Fragen laden korrekt.
 - June 29, 2025. **CHRONOLOGISCHE SORTIERUNG:** Alle Übungskategorien haben jetzt "Zufällig üben" und "Chronologisch üben" Optionen. Backend unterstützt chronological=true Parameter für ID-basierte Sortierung.
 - June 29, 2025. **BILDPFAD-KORREKTUR:** Alle Bilderfragen verwenden jetzt korrekte Dateinamen (mit Timestamps). Doppelte Schließen-Buttons im Modal entfernt. Bremen-, Bayern-, Berlin-, Brandenburg-, und Baden-Württemberg-Bilder funktionieren vollständig.
+- June 29, 2025. **UI-KONSISTENZ FIX:** Alle Button-Paare auf Practice-Seite haben einheitliche Höhe (h-10) und responsive Verhalten. Bundesland-Karte optimiert für mobile Ansicht mit flex-column Layout.
+- June 29, 2025. **ERGEBNISANZEIGE-KORREKTUR:** Results-Seite zeigt jetzt korrekt Quiz-Ergebnisse an nach Abschluss oder vorzeitigem Beenden. Implementiert localStorage-Fallback für zuverlässige Datenübertragung zwischen Quiz- und Results-Seiten.
 
 ## User Preferences
 

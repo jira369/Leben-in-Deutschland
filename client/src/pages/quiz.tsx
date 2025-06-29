@@ -52,11 +52,23 @@ export default function Quiz() {
     const results = await finishQuiz(quizType);
     if (results) {
       setQuizResults(results);
-      setLocation('/results', { state: { results, type: quizType } });
+      // Store results in localStorage for reliable access
+      localStorage.setItem('quiz-results', JSON.stringify({ results, type: quizType }));
+      setLocation('/results');
     }
   };
 
-  const handleExitQuiz = () => {
+  const handleExitQuiz = async () => {
+    // If quiz is in progress, finish it first to get results
+    if (quizState && Object.keys(quizState.selectedAnswers).length > 0) {
+      const results = await finishQuiz(quizType);
+      if (results) {
+        setQuizResults(results);
+        localStorage.setItem('quiz-results', JSON.stringify({ results, type: quizType }));
+        setLocation('/results');
+        return;
+      }
+    }
     resetQuiz();
     setLocation('/');
   };

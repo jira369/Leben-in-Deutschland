@@ -20,11 +20,26 @@ export default function Results() {
   });
 
   useEffect(() => {
-    // Get results from location state or URL params
+    // Get results from location state, URL params, or localStorage
     const state = (window.history.state as any)?.state;
     if (state?.results) {
       setResults(state.results);
       setQuizType(state.type || 'full');
+      return;
+    }
+
+    // Fallback to localStorage
+    const storedResults = localStorage.getItem('quiz-results');
+    if (storedResults) {
+      try {
+        const parsed = JSON.parse(storedResults);
+        setResults(parsed.results);
+        setQuizType(parsed.type || 'full');
+        // Clear localStorage after reading
+        localStorage.removeItem('quiz-results');
+      } catch (error) {
+        console.error('Failed to parse stored quiz results:', error);
+      }
     }
   }, []);
 
