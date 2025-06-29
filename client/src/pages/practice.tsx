@@ -224,10 +224,10 @@ export default function Practice() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-gray-600 text-sm mb-4">{category.description}</p>
-                  <div className="space-y-2">
+                  <div className="flex flex-col gap-2">
                     <Link href={`/quiz?type=practice&category=${category.id}`}>
                       <Button 
-                        className="w-full" 
+                        className="w-full h-10" 
                         variant="outline"
                         disabled={category.questionCount === 0}
                       >
@@ -238,7 +238,7 @@ export default function Practice() {
                     {category.questionCount > 0 && (
                       <Link href={`/quiz?type=practice&category=${category.id}&chronological=true`}>
                         <Button 
-                          className="w-full" 
+                          className="w-full h-10" 
                           variant="secondary"
                         >
                           Chronologisch üben
@@ -256,7 +256,7 @@ export default function Practice() {
         {userSettings?.selectedState && stateQuestions.length > 0 && (
           <Card className="mt-8 border-green-200 bg-green-50">
             <CardHeader>
-              <div className="flex items-center justify-between">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div className="flex items-center space-x-3">
                   <div className="bg-green-500 p-2 rounded-lg">
                     <Flag className="h-5 w-5 text-white" />
@@ -268,11 +268,11 @@ export default function Practice() {
                     <Badge variant="secondary">{stateQuestions.length} Fragen</Badge>
                   </div>
                 </div>
-                <div className="space-y-2">
+                <div className="flex flex-col sm:flex-col gap-2 sm:min-w-[10rem]">
                   <Link href={`/quiz?type=practice&category=${userSettings?.selectedState || 'Bundesweit'}`}>
                     <Button 
                       variant="outline" 
-                      className="w-40 border-green-600 text-green-700 hover:bg-green-100"
+                      className="w-full h-10 border-green-600 text-green-700 hover:bg-green-100"
                     >
                       <Play className="h-4 w-4 mr-2" />
                       Zufällig üben
@@ -281,7 +281,7 @@ export default function Practice() {
                   <Link href={`/quiz?type=practice&category=${userSettings?.selectedState || 'Bundesweit'}&chronological=true`}>
                     <Button 
                       variant="secondary" 
-                      className="w-40 border-green-600 text-green-700 hover:bg-green-100"
+                      className="w-full h-10 border-green-600 text-green-700 hover:bg-green-100"
                     >
                       Chronologisch üben
                     </Button>
