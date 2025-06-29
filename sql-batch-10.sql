@@ -1,0 +1,10 @@
+UPDATE questions SET answers = '["1", "2", "3", "4"]'::jsonb, correct_answer = 4 WHERE id = 451;
+UPDATE questions SET answers = '["Ammerland", "Altötting", "Nordfriesland", "Wartburgkreis"]'::jsonb, correct_answer = 4 WHERE id = 452;
+UPDATE questions SET answers = '["3", "4", "5", "6"]'::jsonb, correct_answer = 3 WHERE id = 453;
+UPDATE questions SET answers = '["14", "18", "16", "20"]'::jsonb, correct_answer = 3 WHERE id = 454;
+UPDATE questions SET answers = '["blau-weiß-rot", "weiß-rot", "grün-weiß-rot", "schwarz-gold"]'::jsonb, correct_answer = 2 WHERE id = 455;
+UPDATE questions SET answers = '["bei den Kirchen", "bei der Verbraucherzentrale", "bei der Landeszentrale für politische Bildung", "beim Ordnungsamt der Gemeinde"]'::jsonb, correct_answer = 3 WHERE id = 456;
+UPDATE questions SET answers = '["Eisenach.", "Erfurt.", "Gera.", "Jena."]'::jsonb, correct_answer = 2 WHERE id = 457;
+UPDATE questions SET answers = '["1", "2", "3", "4"]'::jsonb, correct_answer = 2 WHERE id = 458;
+UPDATE questions SET answers = '["Erster Minister / Erste Ministerin", "Premierminister / Premierministerin", "Bürgermeister / Bürgermeisterin", "Ministerpräsident / Ministerpräsidentin"]'::jsonb, correct_answer = 4 WHERE id = 459;
+UPDATE questions SET answers = '["Justizminister / Justizministerin", "Außenminister / Außenministerin", "Finanzminister / Finanzministerin", "Innenminister / Innenministerin"]'::jsonb, correct_answer = 2 WHERE id = 460;
