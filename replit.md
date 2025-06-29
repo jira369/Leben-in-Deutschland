@@ -88,6 +88,38 @@ This is a German citizenship test (Einbürgerungstest) practice application buil
 - **TypeScript**: Strict mode enabled with path mapping
 - **Module System**: ESM modules throughout the application
 
+## Bundesländer-Fragen Übersicht
+
+Das System enthält jetzt alle 160 offiziellen Bundesländer-Fragen basierend auf dem originalen Excel-Sheet (Zeilen 302-461):
+
+| Bundesland | Zeilen im Excel | Datenbank IDs | Anzahl Fragen | Bilderfragen | Status |
+|------------|-----------------|---------------|---------------|--------------|---------|
+| Baden-Württemberg | 302-311 | 301-310 | 10 | 2 (Frage 1+8) | ✅ Vollständig |
+| Bayern | 312-321 | 311-320 | 10 | 2 (Frage 1+8) | ✅ Vollständig |
+| Berlin | 322-331 | 321-330 | 10 | 2 (Frage 1+8) | ✅ Vollständig |
+| Brandenburg | 332-341 | 331-340 | 10 | 2 (Frage 1+8) | ✅ Vollständig |
+| Bremen | 342-351 | 341-350 | 10 | 2 (Frage 1+8) | ✅ Vollständig |
+| Hamburg | 352-361 | 351-360 | 10 | 2 (Frage 1+8) | ✅ Vollständig |
+| Hessen | 362-371 | 361-370 | 10 | 2 (Frage 1+8) | ✅ Vollständig |
+| Mecklenburg-Vorpommern | 372-381 | 371-380 | 10 | 2 (Frage 1+8) | ✅ Vollständig |
+| Niedersachsen | 382-391 | 381-390 | 10 | 2 (Frage 1+8) | ✅ Vollständig |
+| Nordrhein-Westfalen | 392-401 | 391-400 | 10 | 2 (Frage 1+8) | ✅ Vollständig |
+| Rheinland-Pfalz | 402-411 | 401-410 | 10 | 2 (Frage 1+8) | ✅ Vollständig |
+| Saarland | 412-421 | 411-420 | 10 | 2 (Frage 1+8) | ✅ Vollständig |
+| Sachsen | 422-431 | 421-430 | 10 | 2 (Frage 1+8) | ✅ Vollständig |
+| Sachsen-Anhalt | 432-441 | 431-440 | 10 | 2 (Frage 1+8) | ✅ Vollständig |
+| Schleswig-Holstein | 442-451 | 441-450 | 10 | 2 (Frage 1+8) | ✅ Vollständig |
+| Thüringen | 452-461 | 451-460 | 10 | 2 (Frage 1+8) | ✅ Vollständig |
+
+**Gesamt:** 160 Bundesländer-Fragen (16 Bundesländer × 10 Fragen)
+
+### Bilderfragen-Schema
+- **Frage 1 jedes Bundeslandes:** Wappenfrage ("Welches Wappen gehört zu...")
+- **Frage 8 jedes Bundeslandes:** Kartenidentifikation ("Welches Bundesland ist...")
+
+### Hinweis zu Bildern
+Die Bilderfragen sind in der Datenbank markiert (`has_image: true`), aber die tatsächlichen Bilddateien müssen noch bereitgestellt werden. Die Pfade folgen dem Schema: `state_[bundesland]_[fragenummer].png`
+
 ## Changelog
 
 Changelog:
@@ -100,6 +132,7 @@ Changelog:
 - June 28, 2025. Enhanced user settings to include selected state and first-use tracking
 - June 29, 2025. Added two additional Baden-Württemberg questions (IDs 377-378) with visual content
 - June 29, 2025. Expanded Baden-Württemberg question set to 8 total questions for comprehensive state practice
+- June 29, 2025. **Vollständige Korrektur der Bundesländer-Fragen:** Implementierung aller 160 offiziellen Fragen (16 Bundesländer × 10 Fragen) basierend auf korrekter Excel-Zuordnung (Zeilen 302-461)
 
 ## User Preferences
 
