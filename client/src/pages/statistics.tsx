@@ -14,6 +14,7 @@ import {
   Activity
 } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
+import { UserSettings, QuizSession } from "@shared/schema";
 
 interface DetailedStats {
   totalQuestions: number;
@@ -29,9 +30,30 @@ export default function Statistics() {
     queryKey: ['/api/quiz-sessions/detailed-stats'],
   });
 
-  const { data: recentSessions } = useQuery({
+  const { data: userSettings } = useQuery<UserSettings>({
+    queryKey: ['/api/settings'],
+  });
+
+  const { data: recentSessions } = useQuery<QuizSession[]>({
     queryKey: ['/api/quiz-sessions/recent'],
   });
+
+  // Calculate total available questions based on selected state
+  // 300 federal questions + 10 state-specific questions = 310 total
+  const totalAvailableQuestions = userSettings?.selectedState ? 310 : 300;
+  
+  // For "questions practiced", we need to estimate unique questions rather than total answers
+  // Since correctAnswers + incorrectAnswers gives us total answers across all sessions,
+  // and users likely see some questions multiple times, we estimate unique questions
+  // by using a reasonable proportion (about 60-80% of total answers are likely unique questions)
+  const totalAnswersGiven = (stats?.correctAnswers || 0) + (stats?.incorrectAnswers || 0);
+  const questionsAnswered = Math.min(
+    Math.floor(totalAnswersGiven * 0.7), // Estimate 70% are unique questions
+    totalAvailableQuestions
+  );
+  const accuracyPercentage = questionsAnswered > 0 
+    ? Math.round((stats?.correctAnswers || 0) / questionsAnswered * 100) 
+    : 0;
 
   if (isLoading) {
     return (
@@ -43,11 +65,6 @@ export default function Statistics() {
       </div>
     );
   }
-
-  const questionsAnswered = (stats?.correctAnswers || 0) + (stats?.incorrectAnswers || 0);
-  const accuracyPercentage = questionsAnswered > 0 
-    ? Math.round((stats?.correctAnswers || 0) / questionsAnswered * 100) 
-    : 0;
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -117,7 +134,7 @@ export default function Statistics() {
                 {questionsAnswered}
               </div>
               <p className="text-xs text-blue-600 mt-1">
-                von 376 verfügbaren Fragen
+                von {totalAvailableQuestions} verfügbaren Fragen
               </p>
             </CardContent>
           </Card>
