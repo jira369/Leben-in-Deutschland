@@ -40,7 +40,7 @@ This is a German citizenship test (Einbürgerungstest) practice application buil
 #### Storage System
 - **IStorage Interface**: Abstraction layer for data persistence
 - **DatabaseStorage Implementation**: PostgreSQL storage using Drizzle ORM
-- **Real Question Data**: 376 official German citizenship test questions loaded from Excel
+- **Real Question Data**: 460 official German citizenship test questions loaded from Excel (300 federal + 160 state questions)
 - **Image Support**: 7 questions with visual content (images) properly integrated
 
 ## Data Flow
@@ -88,9 +88,18 @@ This is a German citizenship test (Einbürgerungstest) practice application buil
 - **TypeScript**: Strict mode enabled with path mapping
 - **Module System**: ESM modules throughout the application
 
-## Bundesländer-Fragen Übersicht
+## Fragensystem Übersicht
 
-Das System enthält jetzt alle 160 offiziellen Bundesländer-Fragen basierend auf dem originalen Excel-Sheet (Zeilen 302-461):
+Das System enthält jetzt alle 460 offiziellen Einbürgerungstest-Fragen basierend auf dem originalen Excel-Sheet:
+
+### Bundesweite Fragen (300 Fragen)
+- **Excel-Zeilen:** 2-301 (Spalte B = "Alle")
+- **Datenbank-IDs:** 1-300
+- **Anzahl:** 300 Fragen
+- **Bilderfragen:** 7 bekannte Bilderfragen (IDs: 21, 55, 70, 130, 176, 181, 187)
+
+### Bundesländer-Fragen (160 Fragen)
+Basierend auf dem originalen Excel-Sheet (Zeilen 302-461):
 
 | Bundesland | Zeilen im Excel | Datenbank IDs | Anzahl Fragen | Bilderfragen | Status |
 |------------|-----------------|---------------|---------------|--------------|---------|
@@ -113,6 +122,11 @@ Das System enthält jetzt alle 160 offiziellen Bundesländer-Fragen basierend au
 
 **Gesamt:** 160 Bundesländer-Fragen (16 Bundesländer × 10 Fragen)
 
+## Fragensystem Zusammenfassung
+- **Bundesweite Fragen:** 300 (IDs 1-300, Excel-Zeilen 2-301)
+- **Bundesländer-Fragen:** 160 (IDs 301-460, Excel-Zeilen 302-461)
+- **Gesamtfragen:** 460 offizielle Einbürgerungstest-Fragen
+
 ### Bilderfragen-Schema
 - **Frage 1 jedes Bundeslandes:** Wappenfrage ("Welches Wappen gehört zu...")
 - **Frage 8 jedes Bundeslandes:** Kartenidentifikation ("Welches Bundesland ist...")
@@ -133,6 +147,7 @@ Changelog:
 - June 29, 2025. Added two additional Baden-Württemberg questions (IDs 377-378) with visual content
 - June 29, 2025. Expanded Baden-Württemberg question set to 8 total questions for comprehensive state practice
 - June 29, 2025. **Vollständige Korrektur der Bundesländer-Fragen:** Implementierung aller 160 offiziellen Fragen (16 Bundesländer × 10 Fragen) basierend auf korrekter Excel-Zuordnung (Zeilen 302-461)
+- June 29, 2025. **Korrektur der bundesweiten Fragen:** Aktualisierung auf korrekte 300 bundesweite Fragen basierend auf Excel-Zeilen 2-301 (Spalte B = "Alle"). Gesamtsystem jetzt mit allen 460 offiziellen Fragen vollständig.
 
 ## User Preferences
 
