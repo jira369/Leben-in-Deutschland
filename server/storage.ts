@@ -1,6 +1,12 @@
-import { questions, quizSessions, userSettings, type Question, type InsertQuestion, type QuizSession, type InsertQuizSession, type UserSettings, type InsertUserSettings } from "@shared/schema";
+import { 
+  questions, quizSessions, userSettings, incorrectAnswers,
+  type Question, type InsertQuestion, 
+  type QuizSession, type InsertQuizSession,
+  type UserSettings, type InsertUserSettings,
+  type IncorrectAnswer, type InsertIncorrectAnswer
+} from "@shared/schema";
 import { db } from "./db";
-import { eq, desc, sql } from "drizzle-orm";
+import { eq, desc, sql, and, inArray } from "drizzle-orm";
 
 export interface IStorage {
   // Questions
@@ -33,6 +39,12 @@ export interface IStorage {
     testsPassedCount: number;
     testsPassedPercentage: number;
   }>;
+  
+  // Incorrect Answers Management
+  addIncorrectAnswer(incorrectAnswer: InsertIncorrectAnswer): Promise<IncorrectAnswer>;
+  getIncorrectQuestions(): Promise<Question[]>;
+  getIncorrectAnswersCount(): Promise<number>;
+  clearIncorrectAnswers(): Promise<void>;
 }
 
 export class MemStorage implements IStorage {
@@ -189,6 +201,24 @@ export class MemStorage implements IStorage {
       testsPassedCount,
       testsPassedPercentage
     };
+  }
+
+  // Placeholder implementations for MemStorage - would use a Map in real implementation
+  async addIncorrectAnswer(incorrectAnswer: InsertIncorrectAnswer): Promise<IncorrectAnswer> {
+    // In memory implementation would need a Map here
+    throw new Error("MemStorage doesn't support incorrect answers tracking");
+  }
+
+  async getIncorrectQuestions(): Promise<Question[]> {
+    return [];
+  }
+
+  async getIncorrectAnswersCount(): Promise<number> {
+    return 0;
+  }
+
+  async clearIncorrectAnswers(): Promise<void> {
+    // No-op for MemStorage
   }
 
   private shuffleArray<T>(array: T[]): T[] {
@@ -384,6 +414,47 @@ export class DatabaseStorage implements IStorage {
       testsPassedCount,
       testsPassedPercentage
     };
+  }
+
+  async addIncorrectAnswer(incorrectAnswer: InsertIncorrectAnswer): Promise<IncorrectAnswer> {
+    const [inserted] = await db
+      .insert(incorrectAnswers)
+      .values(incorrectAnswer)
+      .returning();
+    return inserted;
+  }
+
+  async getIncorrectQuestions(): Promise<Question[]> {
+    // Get unique question IDs from incorrect answers
+    const incorrectQuestionIds = await db
+      .selectDistinct({ questionId: incorrectAnswers.questionId })
+      .from(incorrectAnswers);
+    
+    if (incorrectQuestionIds.length === 0) {
+      return [];
+    }
+
+    const questionIds = incorrectQuestionIds.map(row => row.questionId);
+    
+    // Get the actual questions
+    const result = await db
+      .select()
+      .from(questions)
+      .where(inArray(questions.id, questionIds));
+    
+    return result;
+  }
+
+  async getIncorrectAnswersCount(): Promise<number> {
+    const result = await db
+      .select({ count: sql<number>`COUNT(DISTINCT ${incorrectAnswers.questionId})` })
+      .from(incorrectAnswers);
+    
+    return result[0]?.count || 0;
+  }
+
+  async clearIncorrectAnswers(): Promise<void> {
+    await db.delete(incorrectAnswers);
   }
 }
 

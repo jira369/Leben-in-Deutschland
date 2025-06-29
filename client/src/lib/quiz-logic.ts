@@ -1,4 +1,5 @@
 import { Question, QuizResults, QuizState } from "@shared/schema";
+import { apiRequest } from "./queryClient";
 
 export function shuffleArray<T>(array: T[]): T[] {
   const shuffled = [...array];
@@ -55,6 +56,22 @@ export function calculateResults(quizState: QuizState): QuizResults {
   };
 }
 
+export async function trackIncorrectAnswers(questionResults: QuizResults['questionResults']): Promise<void> {
+  const incorrectAnswers = questionResults.filter(result => !result.isCorrect);
+  
+  for (const result of incorrectAnswers) {
+    try {
+      await apiRequest("POST", "/api/incorrect-answers", {
+        questionId: result.questionId,
+        selectedAnswer: result.selectedAnswer,
+        correctAnswer: result.question.correctAnswer
+      });
+    } catch (error) {
+      console.error("Failed to track incorrect answer:", error);
+    }
+  }
+}
+
 export function formatTime(seconds: number): string {
   const minutes = Math.floor(seconds / 60);
   const remainingSeconds = seconds % 60;
@@ -78,6 +95,15 @@ export function getQuizTypeQuestions(questions: Question[], type: 'full' | 'prac
 }
 
 export async function fetchQuestionsForQuiz(count: number, selectedState?: string, mode?: string, category?: string, chronological?: boolean): Promise<Question[]> {
+  // Special case: fetch incorrect questions for mistakes practice
+  if (mode === "mistakes") {
+    const response = await fetch("/api/incorrect-questions");
+    if (!response.ok) {
+      throw new Error("Failed to fetch incorrect questions");
+    }
+    const incorrectQuestions: Question[] = await response.json();
+    return shuffleArray(incorrectQuestions);
+  }
   const params = new URLSearchParams({ count: count.toString() });
   
   if (mode === "all") {

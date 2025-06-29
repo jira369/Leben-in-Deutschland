@@ -4,7 +4,7 @@ import { Link } from "wouter";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { BookOpen, Play, ArrowLeft, Users, Building, Flag, Globe, Scale, Heart } from "lucide-react";
+import { BookOpen, Play, ArrowLeft, Users, Building, Flag, Globe, Scale, Heart, RotateCcw } from "lucide-react";
 import { Question, UserSettings } from "@shared/schema";
 
 // Thematic groupings of questions based on content analysis
@@ -145,6 +145,36 @@ export default function Practice() {
       </header>
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Mistakes Practice Section */}
+        <Card className="mb-8 border-2 border-red-200 bg-gradient-to-r from-red-50 to-pink-50">
+          <CardHeader>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-3">
+                <div className="bg-red-500 p-3 rounded-lg">
+                  <RotateCcw className="h-6 w-6 text-white" />
+                </div>
+                <div>
+                  <CardTitle className="text-xl text-gray-900">Fehler üben</CardTitle>
+                  <p className="text-gray-600 mt-1">
+                    Wiederhole Fragen, die du zuvor falsch beantwortet hast
+                  </p>
+                </div>
+              </div>
+              <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
+                <Link href="/practice-mistakes" className="w-full sm:w-40">
+                  <Button 
+                    variant="outline" 
+                    className="w-full h-10 border-red-600 text-red-700 hover:bg-red-100"
+                  >
+                    <RotateCcw className="h-4 w-4 mr-2" />
+                    Fehler ansehen
+                  </Button>
+                </Link>
+              </div>
+            </div>
+          </CardHeader>
+        </Card>
+
         {/* All Questions Practice */}
         <Card className="mb-8 border-2 border-blue-200 bg-gradient-to-r from-blue-50 to-indigo-50">
           <CardHeader>

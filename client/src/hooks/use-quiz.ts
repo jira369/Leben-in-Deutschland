@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Question, QuizState, QuizResults, UserSettings } from "@shared/schema";
-import { calculateResults, getQuizTypeQuestions, fetchQuestionsForQuiz } from "@/lib/quiz-logic";
+import { calculateResults, getQuizTypeQuestions, fetchQuestionsForQuiz, trackIncorrectAnswers } from "@/lib/quiz-logic";
 import { apiRequest } from "@/lib/queryClient";
 
 export function useQuiz() {
@@ -172,6 +172,13 @@ export function useQuiz() {
     if (!quizState) return null;
 
     const results = calculateResults(quizState);
+    
+    // Track incorrect answers for future practice
+    try {
+      await trackIncorrectAnswers(results.questionResults);
+    } catch (error) {
+      console.error('Failed to track incorrect answers:', error);
+    }
     
     // Save results to backend
     try {

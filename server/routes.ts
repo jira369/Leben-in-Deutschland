@@ -270,6 +270,51 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Add incorrect answer
+  app.post("/api/incorrect-answers", async (req, res) => {
+    try {
+      const { insertIncorrectAnswerSchema } = await import("@shared/schema");
+      const validatedData = insertIncorrectAnswerSchema.parse(req.body);
+      const incorrectAnswer = await storage.addIncorrectAnswer(validatedData);
+      res.status(201).json(incorrectAnswer);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ error: "Invalid data", details: error.errors });
+      }
+      res.status(500).json({ error: "Failed to add incorrect answer" });
+    }
+  });
+
+  // Get incorrect questions for practice
+  app.get("/api/incorrect-questions", async (req, res) => {
+    try {
+      const questions = await storage.getIncorrectQuestions();
+      res.json(questions);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch incorrect questions" });
+    }
+  });
+
+  // Get count of incorrect answers
+  app.get("/api/incorrect-answers/count", async (req, res) => {
+    try {
+      const count = await storage.getIncorrectAnswersCount();
+      res.json({ count });
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch incorrect answers count" });
+    }
+  });
+
+  // Clear all incorrect answers
+  app.delete("/api/incorrect-answers", async (req, res) => {
+    try {
+      await storage.clearIncorrectAnswers();
+      res.json({ message: "Incorrect answers cleared" });
+    } catch (error) {
+      res.status(500).json({ error: "Failed to clear incorrect answers" });
+    }
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }
