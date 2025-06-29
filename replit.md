@@ -156,6 +156,7 @@ Changelog:
 - June 29, 2025. **KRITISCHER FRONTEND-FIX: Array-Index-Mismatch behoben** - Korrektur des fundamentalen Problems in der Frontend-Logik: selectedAnswer (0-basiert) wurde direkt mit correctAnswer (1-basiert) verglichen. Fix: selectedAnswer + 1 === correctAnswer sowohl in question-card.tsx als auch quiz-logic.ts. Betraf alle Quiz-Bewertungen und Statistiken.
 - June 29, 2025. **UI-ZUSTANDSFEHLER BEHOBEN: RadioGroup Reset-Problem** - Korrektur des Problems, dass RadioGroup bei neuen Fragen die vorherige Auswahl beibehielt. Fix: key={question.id} zur RadioGroup hinzugefügt für kompletten Component-Reset bei Fragewechsel.
 - June 29, 2025. Frage 70 Bildintegration: Bundespresident Gustav Heinemann Bild (Frage 70_1751224471375.png) zur historischen Frage über Bundespräsidenten-Aufgaben hinzugefügt.
+- June 29, 2025. **BILDANZEIGE-VERBESSERUNG: Modal-System implementiert** - Ersetzte direkte Bildanzeige durch eleganten "Bild anzeigen" Button mit Modal-Dialog. Verhindert Bildschirm-Überladung, bietet bessere UX für alle Bilderfragen (bundesweite und Bundesländer-Fragen). Modal mit X-Button und Click-Outside schließbar.
 
 ## User Preferences
 

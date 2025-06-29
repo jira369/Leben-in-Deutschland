@@ -2,7 +2,11 @@ import { Question } from "@shared/schema";
 import { Card, CardContent } from "@/components/ui/card";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Image, X } from "lucide-react";
 import { AnswerFeedback } from "./answer-feedback";
+import { useState } from "react";
 
 interface QuestionCardProps {
   question: Question;
@@ -21,6 +25,7 @@ export function QuestionCard({
   immediateFeedback = true,
   onAnswerSelect
 }: QuestionCardProps) {
+  const [isImageModalOpen, setIsImageModalOpen] = useState(false);
   const hasSelectedAnswer = selectedAnswer !== undefined;
   const isCorrect = selectedAnswer !== undefined && selectedAnswer + 1 === question.correctAnswer;
 
@@ -41,12 +46,40 @@ export function QuestionCard({
           
           {question.hasImage && question.imagePath && (
             <div className="mt-4 mb-6">
-              <img 
-                src={`/attached_assets/${question.imagePath}`}
-                alt={`Bild zu Frage ${questionNumber}`}
-                className="max-w-full h-auto rounded-lg border border-gray-200 shadow-sm"
-                style={{ maxHeight: '400px' }}
-              />
+              <Dialog open={isImageModalOpen} onOpenChange={setIsImageModalOpen}>
+                <DialogTrigger asChild>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="flex items-center gap-2 text-primary border-primary hover:bg-primary/5"
+                  >
+                    <Image className="w-4 h-4" />
+                    Bild anzeigen
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="max-w-4xl max-h-[90vh] overflow-hidden">
+                  <DialogHeader>
+                    <DialogTitle className="flex items-center justify-between">
+                      <span>Frage {questionNumber} - Bild</span>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => setIsImageModalOpen(false)}
+                        className="h-6 w-6 p-0"
+                      >
+                        <X className="h-4 w-4" />
+                      </Button>
+                    </DialogTitle>
+                  </DialogHeader>
+                  <div className="mt-4 flex justify-center overflow-auto">
+                    <img 
+                      src={`/attached_assets/${question.imagePath}`}
+                      alt={`Bild zu Frage ${questionNumber}`}
+                      className="max-w-full max-h-[70vh] object-contain rounded-lg border border-gray-200 shadow-sm"
+                    />
+                  </div>
+                </DialogContent>
+              </Dialog>
             </div>
           )}
         </div>
