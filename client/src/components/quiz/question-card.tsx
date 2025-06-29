@@ -52,7 +52,8 @@ export function QuestionCard({
         </div>
 
         <RadioGroup
-          value={selectedAnswer?.toString()}
+          key={question.id}
+          value={selectedAnswer?.toString() || ""}
           onValueChange={(value) => onAnswerSelect(parseInt(value))}
           className="space-y-3"
         >
