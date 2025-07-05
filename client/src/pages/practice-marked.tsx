@@ -1,12 +1,15 @@
+import { useState } from "react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, Flag, Play, Trash2, Shuffle } from "lucide-react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { ArrowLeft, Flag, Play, Trash2, Shuffle, Image } from "lucide-react";
 import { useMarkedQuestions } from "@/hooks/use-marked-questions";
 
 export default function PracticeMarked() {
   const { markedQuestionsData, markedQuestionsCount } = useMarkedQuestions();
+  const [imageModalOpen, setImageModalOpen] = useState<{ [key: number]: boolean }>({});
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -158,6 +161,45 @@ export default function PracticeMarked() {
                         <p className="text-gray-900 mb-4 leading-relaxed">
                           {question.text}
                         </p>
+                        {question.hasImage && question.imagePath && (
+                          <div className="mb-4">
+                            <Dialog 
+                              open={imageModalOpen[question.id] || false} 
+                              onOpenChange={(open) => 
+                                setImageModalOpen(prev => ({ ...prev, [question.id]: open }))
+                              }
+                            >
+                              <DialogTrigger asChild>
+                                <Button
+                                  variant="outline"
+                                  size="sm"
+                                  className="flex items-center gap-2 text-primary border-primary hover:bg-primary/5"
+                                >
+                                  <Image className="w-4 h-4" />
+                                  Bild anzeigen
+                                </Button>
+                              </DialogTrigger>
+                              <DialogContent className="max-w-4xl max-h-[90vh] overflow-hidden">
+                                <DialogHeader>
+                                  <DialogTitle>
+                                    Bild zu Frage {question.id}
+                                  </DialogTitle>
+                                </DialogHeader>
+                                <div className="mt-4 flex justify-center overflow-auto">
+                                  <img 
+                                    src={`/attached_assets/${question.imagePath}`}
+                                    alt={`Bild zu Frage ${question.id}`}
+                                    className="max-w-full max-h-[70vh] object-contain rounded-lg border border-gray-200 shadow-sm"
+                                    onError={(e) => {
+                                      console.error(`Failed to load image: /attached_assets/${question.imagePath}`);
+                                      e.currentTarget.src = `data:image/svg+xml;base64,${btoa('<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300"><rect width="400" height="300" fill="#f3f4f6"/><text x="200" y="150" text-anchor="middle" font-family="Arial" font-size="16" fill="#6b7280">Bild nicht verfügbar</text></svg>')}`;
+                                    }}
+                                  />
+                                </div>
+                              </DialogContent>
+                            </Dialog>
+                          </div>
+                        )}
                         <div className="space-y-2">
                           {question.answers.map((answer, answerIndex) => (
                             <div
