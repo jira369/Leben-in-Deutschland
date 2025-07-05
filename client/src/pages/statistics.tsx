@@ -223,12 +223,12 @@ export default function Statistics() {
                 <div className="flex justify-between items-center">
                   <span className="text-sm text-gray-600">Richtige Antworten</span>
                   <span className="font-semibold text-green-600">
-                    {stats?.correctAnswers || 0}
+                    {stats?.correctAnswers || 0} ({accuracyPercentage}%)
                   </span>
                 </div>
                 <Progress 
-                  value={totalAnswersGiven > 0 ? (stats?.correctAnswers || 0) / totalAnswersGiven * 100 : 0} 
-                  className="h-2 bg-green-100"
+                  value={accuracyPercentage} 
+                  className="h-2"
                 />
               </div>
 
@@ -236,12 +236,12 @@ export default function Statistics() {
                 <div className="flex justify-between items-center">
                   <span className="text-sm text-gray-600">Falsche Antworten</span>
                   <span className="font-semibold text-red-600">
-                    {stats?.incorrectAnswers || 0}
+                    {stats?.incorrectAnswers || 0} ({100 - accuracyPercentage}%)
                   </span>
                 </div>
                 <Progress 
-                  value={totalAnswersGiven > 0 ? (stats?.incorrectAnswers || 0) / totalAnswersGiven * 100 : 0} 
-                  className="h-2 bg-red-100"
+                  value={100 - accuracyPercentage} 
+                  className="h-2"
                 />
               </div>
 
@@ -252,6 +252,9 @@ export default function Statistics() {
                     {accuracyPercentage}%
                   </span>
                 </div>
+                <p className="text-xs text-gray-500 mt-1">
+                  Basierend auf {totalAnswersGiven} beantworteten Fragen
+                </p>
               </div>
             </CardContent>
           </Card>
