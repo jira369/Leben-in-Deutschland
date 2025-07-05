@@ -22,8 +22,11 @@ export default function PracticeMarked() {
                 </Button>
               </Link>
               <div>
-                <h1 className="text-2xl font-bold text-gray-900">Markierte Fragen</h1>
-                <p className="text-gray-600 mt-1">
+                <h1 className="text-2xl font-bold text-gray-900">
+                  <span className="sm:hidden">Markierte Fragen</span>
+                  <span className="hidden sm:inline">Markierte Fragen</span>
+                </h1>
+                <p className="text-gray-600 mt-1 hidden sm:block">
                   Übe mit deinen markierten Fragen ({markedQuestionsCount} Fragen)
                 </p>
               </div>
@@ -56,7 +59,7 @@ export default function PracticeMarked() {
             {/* Practice Options */}
             <Card className="mb-8 border-2 border-yellow-200 bg-gradient-to-r from-yellow-50 to-amber-50">
               <CardHeader>
-                <div className="flex items-center justify-between">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                   <div className="flex items-center space-x-3">
                     <div className="bg-yellow-500 p-3 rounded-lg">
                       <Flag className="h-6 w-6 text-white" />
@@ -70,7 +73,7 @@ export default function PracticeMarked() {
                       </p>
                     </div>
                   </div>
-                  <div className="flex flex-col gap-2">
+                  <div className="flex flex-col gap-2 w-full sm:w-auto">
                     <Link href="/quiz?type=practice&mode=marked">
                       <Button size="lg" className="w-full bg-yellow-600 hover:bg-yellow-700">
                         <Shuffle className="h-4 w-4 mr-2" />
