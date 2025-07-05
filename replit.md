@@ -1,92 +1,92 @@
 # Einbürgerungstest Quiz App
 
-## Overview
+## Überblick
 
-This is a German citizenship test (Einbürgerungstest) practice application built with React and Express. The app allows users to practice for the German naturalization test with official questions, track their progress, and customize their learning experience.
+Dies ist eine Übungsanwendung für den deutschen Einbürgerungstest, die mit React und Express entwickelt wurde. Die App ermöglicht es Nutzern, mit offiziellen Fragen für den deutschen Einbürgerungstest zu üben, ihren Fortschritt zu verfolgen und ihre Lernerfahrung anzupassen.
 
-## System Architecture
+## Systemarchitektur
 
-### Frontend Architecture
-- **Framework**: React 18 with TypeScript
-- **Routing**: Wouter for client-side routing
-- **State Management**: TanStack Query (React Query) for server state management
-- **UI Components**: Radix UI primitives with custom shadcn/ui components
-- **Styling**: Tailwind CSS with CSS variables for theming
-- **Build Tool**: Vite with React plugin
+### Frontend-Architektur
+- **Framework**: React 18 mit TypeScript
+- **Routing**: Wouter für clientseitiges Routing
+- **Zustandsmanagement**: TanStack Query (React Query) für Server-Zustandsmanagement
+- **UI-Komponenten**: Radix UI-Primitive mit benutzerdefinierten shadcn/ui-Komponenten
+- **Styling**: Tailwind CSS mit CSS-Variablen für Theming
+- **Build-Tool**: Vite mit React-Plugin
 
-### Backend Architecture
-- **Runtime**: Node.js with Express.js
-- **Language**: TypeScript (ESM modules)
-- **Database**: PostgreSQL with Drizzle ORM
-- **Database Provider**: Neon Database (@neondatabase/serverless)
-- **Storage**: DatabaseStorage implementation using PostgreSQL
-- **API**: RESTful API endpoints
-- **Static Assets**: Express static middleware for question images
+### Backend-Architektur
+- **Laufzeit**: Node.js mit Express.js
+- **Sprache**: TypeScript (ESM-Module)
+- **Datenbank**: PostgreSQL mit Drizzle ORM
+- **Datenbank-Anbieter**: Neon Database (@neondatabase/serverless)
+- **Speicher**: DatabaseStorage-Implementierung mit PostgreSQL
+- **API**: RESTful API-Endpunkte
+- **Statische Assets**: Express Static Middleware für Fragenbilder
 
-### Key Components
+### Hauptkomponenten
 
-#### Database Schema
-- **Questions Table**: Stores quiz questions with multiple choice answers, correct answers, explanations, and categories
-- **Quiz Sessions Table**: Tracks completed quiz attempts with results and performance metrics
-- **User Settings Table**: Stores user preferences for quiz customization
+#### Datenbankschema
+- **Fragen-Tabelle**: Speichert Quizfragen mit Multiple-Choice-Antworten, korrekten Antworten, Erklärungen und Kategorien
+- **Quiz-Sitzungen-Tabelle**: Verfolgt abgeschlossene Quizversuche mit Ergebnissen und Leistungsmetriken
+- **Benutzereinstellungen-Tabelle**: Speichert Benutzerpräferenzen für Quiz-Anpassungen
 
-#### Core Features
-- **Quiz Modes**: Full test mode (33 questions) and practice mode
-- **Question Management**: Random question selection with shuffling options
-- **Progress Tracking**: Session history, statistics, and performance analytics
-- **Customizable Settings**: Timer, immediate feedback, question shuffling
-- **Responsive Design**: Mobile-first approach with adaptive UI
+#### Kernfunktionen
+- **Quiz-Modi**: Volltest-Modus (33 Fragen) und Übungsmodus
+- **Fragenverwaltung**: Zufällige Fragenauswahl mit Mischoptionen
+- **Fortschrittsverfolgung**: Sitzungshistorie, Statistiken und Leistungsanalysen
+- **Anpassbare Einstellungen**: Timer, sofortiges Feedback, Fragenmischung
+- **Responsives Design**: Mobile-First-Ansatz mit adaptiver Benutzeroberfläche
 
-#### Storage System
-- **IStorage Interface**: Abstraction layer for data persistence
-- **DatabaseStorage Implementation**: PostgreSQL storage using Drizzle ORM
-- **Real Question Data**: 460 official German citizenship test questions loaded from Excel (300 federal + 160 state questions)
-- **Image Support**: 7 questions with visual content (images) properly integrated
+#### Speichersystem
+- **IStorage-Interface**: Abstraktionsschicht für Datenpersistierung
+- **DatabaseStorage-Implementierung**: PostgreSQL-Speicher mit Drizzle ORM
+- **Echte Fragendaten**: 460 offizielle deutsche Einbürgerungstest-Fragen aus Excel geladen (300 Bundesfragen + 160 Landesfragen)
+- **Bildunterstützung**: 7 Fragen mit visuellem Inhalt (Bilder) ordnungsgemäß integriert
 
-## Data Flow
+## Datenfluss
 
-1. **Quiz Initialization**: User selects quiz type → Frontend requests random questions → Backend retrieves questions from database
-2. **Question Display**: Questions rendered with multiple choice options → User selections tracked in local state
-3. **Answer Submission**: User answers stored locally → Progress calculated in real-time
-4. **Quiz Completion**: Final results calculated → Session data sent to backend → Results stored in database
-5. **Statistics**: Historical data retrieved for progress tracking and analytics
+1. **Quiz-Initialisierung**: Benutzer wählt Quiz-Typ → Frontend fordert zufällige Fragen an → Backend ruft Fragen aus Datenbank ab
+2. **Fragenanzeige**: Fragen mit Multiple-Choice-Optionen gerendert → Benutzerauswahlen im lokalen Zustand verfolgt
+3. **Antwortübermittlung**: Benutzerantworten lokal gespeichert → Fortschritt in Echtzeit berechnet
+4. **Quiz-Abschluss**: Endergebnisse berechnet → Sitzungsdaten an Backend gesendet → Ergebnisse in Datenbank gespeichert
+5. **Statistiken**: Historische Daten für Fortschrittsverfolgung und Analysen abgerufen
 
-## External Dependencies
+## Externe Abhängigkeiten
 
-### Core Framework Dependencies
-- **@tanstack/react-query**: Server state management and caching
-- **drizzle-orm**: Type-safe database ORM
-- **@neondatabase/serverless**: PostgreSQL database connection
-- **wouter**: Lightweight client-side routing
+### Kern-Framework-Abhängigkeiten
+- **@tanstack/react-query**: Server-Zustandsmanagement und Caching
+- **drizzle-orm**: Typsichere Datenbank-ORM
+- **@neondatabase/serverless**: PostgreSQL-Datenbankverbindung
+- **wouter**: Leichtgewichtiges clientseitiges Routing
 
-### UI and Styling Dependencies
-- **@radix-ui/***: Headless UI components for accessibility
-- **tailwindcss**: Utility-first CSS framework
-- **class-variance-authority**: Component variant management
-- **clsx**: Conditional class name utility
+### UI- und Styling-Abhängigkeiten
+- **@radix-ui/***: Headless UI-Komponenten für Barrierefreiheit
+- **tailwindcss**: Utility-First CSS-Framework
+- **class-variance-authority**: Komponentenvarianten-Management
+- **clsx**: Bedingte Klassenname-Utility
 
-### Development Dependencies
-- **vite**: Build tool and development server
-- **typescript**: Type checking and compilation
-- **@replit/vite-plugin-***: Replit-specific development tools
+### Entwicklungsabhängigkeiten
+- **vite**: Build-Tool und Entwicklungsserver
+- **typescript**: Typprüfung und Kompilierung
+- **@replit/vite-plugin-***: Replit-spezifische Entwicklungstools
 
-## Deployment Strategy
+## Deployment-Strategie
 
-### Development Environment
-- **Local Development**: Vite dev server with hot module replacement
-- **Database**: Environment variable `DATABASE_URL` for connection
-- **Build Process**: Vite builds frontend, esbuild bundles backend
+### Entwicklungsumgebung
+- **Lokale Entwicklung**: Vite Dev-Server mit Hot Module Replacement
+- **Datenbank**: Umgebungsvariable `DATABASE_URL` für Verbindung
+- **Build-Prozess**: Vite baut Frontend, esbuild bündelt Backend
 
-### Production Build
-- **Frontend**: Static assets built to `dist/public`
-- **Backend**: Bundled Node.js application in `dist/index.js`
-- **Database Migrations**: Drizzle Kit handles schema migrations
-- **Environment**: Production mode with optimized builds
+### Produktions-Build
+- **Frontend**: Statische Assets in `dist/public` gebaut
+- **Backend**: Gebündelte Node.js-Anwendung in `dist/index.js`
+- **Datenbank-Migrationen**: Drizzle Kit behandelt Schema-Migrationen
+- **Umgebung**: Produktionsmodus mit optimierten Builds
 
-### Configuration
-- **Environment Variables**: `DATABASE_URL`, `NODE_ENV`
-- **TypeScript**: Strict mode enabled with path mapping
-- **Module System**: ESM modules throughout the application
+### Konfiguration
+- **Umgebungsvariablen**: `DATABASE_URL`, `NODE_ENV`
+- **TypeScript**: Strenger Modus aktiviert mit Pfad-Mapping
+- **Modulsystem**: ESM-Module in der gesamten Anwendung
 
 ## Fragensystem Übersicht
 
@@ -134,46 +134,47 @@ Basierend auf dem originalen Excel-Sheet (Zeilen 302-461):
 ### Hinweis zu Bildern
 Die Bilderfragen sind in der Datenbank markiert (`has_image: true`), aber die tatsächlichen Bilddateien müssen noch bereitgestellt werden. Die Pfade folgen dem Schema: `state_[bundesland]_[fragenummer].png`
 
-## Changelog
+## Änderungsprotokoll
 
-Changelog:
-- June 28, 2025. Initial setup with complete quiz system
-- June 28, 2025. Added PostgreSQL database integration with Drizzle ORM
-- June 28, 2025. Integrated 376 real German citizenship test questions from Excel
-- June 28, 2025. Added image support for 7 visual questions with static asset serving
-- June 28, 2025. Added German state (Bundesland) selection system for first-time users
-- June 28, 2025. Implemented state-specific quiz logic (30 federal + 3 state questions)
-- June 28, 2025. Enhanced user settings to include selected state and first-use tracking
-- June 29, 2025. Added two additional Baden-Württemberg questions (IDs 377-378) with visual content
-- June 29, 2025. Expanded Baden-Württemberg question set to 8 total questions for comprehensive state practice
-- June 29, 2025. **Vollständige Korrektur der Bundesländer-Fragen:** Implementierung aller 160 offiziellen Fragen (16 Bundesländer × 10 Fragen) basierend auf korrekter Excel-Zuordnung (Zeilen 302-461)
-- June 29, 2025. **Korrektur der bundesweiten Fragen:** Aktualisierung auf korrekte 300 bundesweite Fragen basierend auf Excel-Zeilen 2-301 (Spalte B = "Alle"). Gesamtsystem jetzt mit allen 460 offiziellen Fragen vollständig.
-- June 29, 2025. Bayern-Bilderfragen hinzugefügt: Wappen-Frage (ID 311) und Karten-Frage (ID 318) mit offiziellen Bildern verknüpft.
-- June 29, 2025. Berlin-Bilderfragen hinzugefügt: Wappen-Frage (ID 321) und Karten-Frage (ID 328) mit offiziellen Bildern verknüpft.
-- June 29, 2025. Brandenburg-Bilderfragen hinzugefügt: Wappen-Frage (ID 331) und Karten-Frage (ID 338) mit offiziellen Bildern verknüpft.
-- June 29, 2025. Bremen-Bilderfragen hinzugefügt: Wappen-Frage (ID 341) und Karten-Frage (ID 348) mit offiziellen Bildern verknüpft.
-- June 29, 2025. **KRITISCHER FIX: Kompletter Datenbank-Neuimport aller 460 Fragen** - Korrektur des fundamentalen Answer-Mapping-Problems. Ursprünglich waren correct_answer Indizes falsch zugeordnet, sodass falsche Antworten als richtig markiert wurden. Jetzt verwendet das System korrekte Excel-Spalten-Zuordnung (E-H für Antworten, I für korrekte Antwort) mit verbessertem Text-Matching-Algorithmus.
-- June 29, 2025. **KRITISCHER FRONTEND-FIX: Array-Index-Mismatch behoben** - Korrektur des fundamentalen Problems in der Frontend-Logik: selectedAnswer (0-basiert) wurde direkt mit correctAnswer (1-basiert) verglichen. Fix: selectedAnswer + 1 === correctAnswer sowohl in question-card.tsx als auch quiz-logic.ts. Betraf alle Quiz-Bewertungen und Statistiken.
-- June 29, 2025. **UI-ZUSTANDSFEHLER BEHOBEN: RadioGroup Reset-Problem** - Korrektur des Problems, dass RadioGroup bei neuen Fragen die vorherige Auswahl beibehielt. Fix: key={question.id} zur RadioGroup hinzugefügt für kompletten Component-Reset bei Fragewechsel.
-- June 29, 2025. Frage 70 Bildintegration: Bundespresident Gustav Heinemann Bild (Frage 70_1751224471375.png) zur historischen Frage über Bundespräsidenten-Aufgaben hinzugefügt.
-- June 29, 2025. **BILDANZEIGE-VERBESSERUNG: Modal-System implementiert** - Ersetzte direkte Bildanzeige durch eleganten "Bild anzeigen" Button mit Modal-Dialog. Verhindert Bildschirm-Überladung, bietet bessere UX für alle Bilderfragen (bundesweite und Bundesländer-Fragen). Modal mit X-Button und Click-Outside schließbar.
-- June 29, 2025. **KATEGORIALES ÜBUNGSSYSTEM FIX:** Thematische Kategorienfilterung implementiert - Backend filtert jetzt korrekt nach Schlüsselwörtern (Geschichte, Verfassung, etc.) statt nicht-existierender Kategorie-IDs. Bundesland-spezifische Fragen laden korrekt.
-- June 29, 2025. **CHRONOLOGISCHE SORTIERUNG:** Alle Übungskategorien haben jetzt "Zufällig üben" und "Chronologisch üben" Optionen. Backend unterstützt chronological=true Parameter für ID-basierte Sortierung.
-- June 29, 2025. **BILDPFAD-KORREKTUR:** Alle Bilderfragen verwenden jetzt korrekte Dateinamen (mit Timestamps). Doppelte Schließen-Buttons im Modal entfernt. Bremen-, Bayern-, Berlin-, Brandenburg-, und Baden-Württemberg-Bilder funktionieren vollständig.
-- June 29, 2025. **UI-KONSISTENZ FIX:** Alle Button-Paare auf Practice-Seite haben einheitliche Höhe (h-10) und responsive Verhalten. Bundesland-Karte optimiert für mobile Ansicht mit flex-column Layout.
-- June 29, 2025. **ERGEBNISANZEIGE-KORREKTUR:** Results-Seite zeigt jetzt korrekt Quiz-Ergebnisse an nach Abschluss oder vorzeitigem Beenden. Implementiert localStorage-Fallback für zuverlässige Datenübertragung zwischen Quiz- und Results-Seiten.
-- July 5, 2025. Hamburg-Bilderfragen hinzugefügt: Wappen-Frage (ID 351) und Karten-Frage (ID 358) mit offiziellen Bildern verknüpft.
-- July 5, 2025. Hessen-Bilderfragen hinzugefügt: Wappen-Frage (ID 361) und Karten-Frage (ID 368) mit offiziellen Bildern verknüpft.
-- July 5, 2025. Mecklenburg-Vorpommern-Bilderfragen hinzugefügt: Wappen-Frage (ID 371) und Karten-Frage (ID 378) mit offiziellen Bildern verknüpft.
-- July 5, 2025. Niedersachsen-Bilderfragen hinzugefügt: Wappen-Frage (ID 381) und Karten-Frage (ID 388) mit offiziellen Bildern verknüpft.
-- July 5, 2025. Nordrhein-Westfalen-Bilderfragen hinzugefügt: Wappen-Frage (ID 391) und Karten-Frage (ID 398) mit offiziellen Bildern verknüpft.
-- July 5, 2025. Rheinland-Pfalz-Bilderfragen hinzugefügt: Wappen-Frage (ID 401) und Karten-Frage (ID 408) mit offiziellen Bildern verknüpft.
-- July 5, 2025. Saarland-Bilderfragen hinzugefügt: Wappen-Frage (ID 411) und Karten-Frage (ID 418) mit offiziellen Bildern verknüpft.
-- July 5, 2025. Sachsen-Bilderfragen hinzugefügt: Wappen-Frage (ID 421) und Karten-Frage (ID 428) mit offiziellen Bildern verknüpft.
-- July 5, 2025. Sachsen-Anhalt-Bilderfragen hinzugefügt: Wappen-Frage (ID 431) und Karten-Frage (ID 438) mit offiziellen Bildern verknüpft.
-- July 5, 2025. Schleswig-Holstein-Bilderfragen hinzugefügt: Wappen-Frage (ID 441) und Karten-Frage (ID 448) mit offiziellen Bildern verknüpft.
-- July 5, 2025. Thüringen-Bilderfragen hinzugefügt: Wappen-Frage (ID 451) und Karten-Frage (ID 458) mit offiziellen Bildern verknüpft.
+Entwicklungshistorie:
+- 28. Juni 2025. Erstmalige Einrichtung mit vollständigem Quiz-System
+- 28. Juni 2025. PostgreSQL-Datenbankintegration mit Drizzle ORM hinzugefügt
+- 28. Juni 2025. 376 echte deutsche Einbürgerungstest-Fragen aus Excel integriert
+- 28. Juni 2025. Bildunterstützung für 7 visuelle Fragen mit statischer Asset-Bereitstellung hinzugefügt
+- 28. Juni 2025. Deutsches Bundesland-Auswahlsystem für Erstnutzer hinzugefügt
+- 28. Juni 2025. Bundesland-spezifische Quiz-Logik implementiert (30 Bundesfragen + 3 Landesfragen)
+- 28. Juni 2025. Benutzereinstellungen erweitert um ausgewähltes Bundesland und Erstnutzung-Tracking
+- 29. Juni 2025. Zwei zusätzliche Baden-Württemberg-Fragen (IDs 377-378) mit visuellem Inhalt hinzugefügt
+- 29. Juni 2025. Baden-Württemberg-Fragensatz auf 8 Gesamtfragen für umfassende Landesübung erweitert
+- 29. Juni 2025. **Vollständige Korrektur der Bundesländer-Fragen:** Implementierung aller 160 offiziellen Fragen (16 Bundesländer × 10 Fragen) basierend auf korrekter Excel-Zuordnung (Zeilen 302-461)
+- 29. Juni 2025. **Korrektur der bundesweiten Fragen:** Aktualisierung auf korrekte 300 bundesweite Fragen basierend auf Excel-Zeilen 2-301 (Spalte B = "Alle"). Gesamtsystem jetzt mit allen 460 offiziellen Fragen vollständig.
+- 29. Juni 2025. Bayern-Bilderfragen hinzugefügt: Wappen-Frage (ID 311) und Karten-Frage (ID 318) mit offiziellen Bildern verknüpft.
+- 29. Juni 2025. Berlin-Bilderfragen hinzugefügt: Wappen-Frage (ID 321) und Karten-Frage (ID 328) mit offiziellen Bildern verknüpft.
+- 29. Juni 2025. Brandenburg-Bilderfragen hinzugefügt: Wappen-Frage (ID 331) und Karten-Frage (ID 338) mit offiziellen Bildern verknüpft.
+- 29. Juni 2025. Bremen-Bilderfragen hinzugefügt: Wappen-Frage (ID 341) und Karten-Frage (ID 348) mit offiziellen Bildern verknüpft.
+- 29. Juni 2025. **KRITISCHER FIX: Kompletter Datenbank-Neuimport aller 460 Fragen** - Korrektur des fundamentalen Answer-Mapping-Problems. Ursprünglich waren correct_answer Indizes falsch zugeordnet, sodass falsche Antworten als richtig markiert wurden. Jetzt verwendet das System korrekte Excel-Spalten-Zuordnung (E-H für Antworten, I für korrekte Antwort) mit verbessertem Text-Matching-Algorithmus.
+- 29. Juni 2025. **KRITISCHER FRONTEND-FIX: Array-Index-Mismatch behoben** - Korrektur des fundamentalen Problems in der Frontend-Logik: selectedAnswer (0-basiert) wurde direkt mit correctAnswer (1-basiert) verglichen. Fix: selectedAnswer + 1 === correctAnswer sowohl in question-card.tsx als auch quiz-logic.ts. Betraf alle Quiz-Bewertungen und Statistiken.
+- 29. Juni 2025. **UI-ZUSTANDSFEHLER BEHOBEN: RadioGroup Reset-Problem** - Korrektur des Problems, dass RadioGroup bei neuen Fragen die vorherige Auswahl beibehielt. Fix: key={question.id} zur RadioGroup hinzugefügt für kompletten Component-Reset bei Fragewechsel.
+- 29. Juni 2025. Frage 70 Bildintegration: Bundespresident Gustav Heinemann Bild (Frage 70_1751224471375.png) zur historischen Frage über Bundespräsidenten-Aufgaben hinzugefügt.
+- 29. Juni 2025. **BILDANZEIGE-VERBESSERUNG: Modal-System implementiert** - Ersetzte direkte Bildanzeige durch eleganten "Bild anzeigen" Button mit Modal-Dialog. Verhindert Bildschirm-Überladung, bietet bessere UX für alle Bilderfragen (bundesweite und Bundesländer-Fragen). Modal mit X-Button und Click-Outside schließbar.
+- 29. Juni 2025. **KATEGORIALES ÜBUNGSSYSTEM FIX:** Thematische Kategorienfilterung implementiert - Backend filtert jetzt korrekt nach Schlüsselwörtern (Geschichte, Verfassung, etc.) statt nicht-existierender Kategorie-IDs. Bundesland-spezifische Fragen laden korrekt.
+- 29. Juni 2025. **CHRONOLOGISCHE SORTIERUNG:** Alle Übungskategorien haben jetzt "Zufällig üben" und "Chronologisch üben" Optionen. Backend unterstützt chronological=true Parameter für ID-basierte Sortierung.
+- 29. Juni 2025. **BILDPFAD-KORREKTUR:** Alle Bilderfragen verwenden jetzt korrekte Dateinamen (mit Timestamps). Doppelte Schließen-Buttons im Modal entfernt. Bremen-, Bayern-, Berlin-, Brandenburg-, und Baden-Württemberg-Bilder funktionieren vollständig.
+- 29. Juni 2025. **UI-KONSISTENZ FIX:** Alle Button-Paare auf Practice-Seite haben einheitliche Höhe (h-10) und responsive Verhalten. Bundesland-Karte optimiert für mobile Ansicht mit flex-column Layout.
+- 29. Juni 2025. **ERGEBNISANZEIGE-KORREKTUR:** Results-Seite zeigt jetzt korrekt Quiz-Ergebnisse an nach Abschluss oder vorzeitigem Beenden. Implementiert localStorage-Fallback für zuverlässige Datenübertragung zwischen Quiz- und Results-Seiten.
+- 5. Juli 2025. Hamburg-Bilderfragen hinzugefügt: Wappen-Frage (ID 351) und Karten-Frage (ID 358) mit offiziellen Bildern verknüpft.
+- 5. Juli 2025. Hessen-Bilderfragen hinzugefügt: Wappen-Frage (ID 361) und Karten-Frage (ID 368) mit offiziellen Bildern verknüpft.
+- 5. Juli 2025. Mecklenburg-Vorpommern-Bilderfragen hinzugefügt: Wappen-Frage (ID 371) und Karten-Frage (ID 378) mit offiziellen Bildern verknüpft.
+- 5. Juli 2025. Niedersachsen-Bilderfragen hinzugefügt: Wappen-Frage (ID 381) und Karten-Frage (ID 388) mit offiziellen Bildern verknüpft.
+- 5. Juli 2025. Nordrhein-Westfalen-Bilderfragen hinzugefügt: Wappen-Frage (ID 391) und Karten-Frage (ID 398) mit offiziellen Bildern verknüpft.
+- 5. Juli 2025. Rheinland-Pfalz-Bilderfragen hinzugefügt: Wappen-Frage (ID 401) und Karten-Frage (ID 408) mit offiziellen Bildern verknüpft.
+- 5. Juli 2025. Saarland-Bilderfragen hinzugefügt: Wappen-Frage (ID 411) und Karten-Frage (ID 418) mit offiziellen Bildern verknüpft.
+- 5. Juli 2025. Sachsen-Bilderfragen hinzugefügt: Wappen-Frage (ID 421) und Karten-Frage (ID 428) mit offiziellen Bildern verknüpft.
+- 5. Juli 2025. Sachsen-Anhalt-Bilderfragen hinzugefügt: Wappen-Frage (ID 431) und Karten-Frage (ID 438) mit offiziellen Bildern verknüpft.
+- 5. Juli 2025. Schleswig-Holstein-Bilderfragen hinzugefügt: Wappen-Frage (ID 441) und Karten-Frage (ID 448) mit offiziellen Bildern verknüpft.
+- 5. Juli 2025. Thüringen-Bilderfragen hinzugefügt: Wappen-Frage (ID 451) und Karten-Frage (ID 458) mit offiziellen Bildern verknüpft.
+- 5. Juli 2025. **DOKUMENTATION VOLLSTÄNDIG DEUTSCH:** Komplette Übersetzung der technischen Dokumentation ins Deutsche - alle Abschnitte von Systemarchitektur bis Deployment-Strategie jetzt auf Deutsch verfügbar.
 
-## User Preferences
+## Benutzerpräferenzen
 
-Preferred communication style: Simple, everyday language.
+Bevorzugter Kommunikationsstil: Einfache, alltägliche Sprache.
