@@ -152,7 +152,7 @@ export default function Practice() {
         {/* Mistakes Practice Section */}
         <Card className="mb-8 border-2 border-red-200 bg-gradient-to-r from-red-50 to-pink-50">
           <CardHeader>
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
               <div className="flex items-center space-x-3">
                 <div className="bg-red-500 p-3 rounded-lg">
                   <RotateCcw className="h-6 w-6 text-white" />
@@ -164,7 +164,7 @@ export default function Practice() {
                   </p>
                 </div>
               </div>
-              <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
+              <div className="flex flex-col gap-2 w-full sm:w-auto">
                 <Link href="/practice-mistakes" className="w-full sm:w-40">
                   <Button 
                     variant="outline" 
@@ -182,7 +182,7 @@ export default function Practice() {
         {/* Marked Questions Practice Section */}
         <Card className="mb-8 border-2 border-yellow-200 bg-gradient-to-r from-yellow-50 to-amber-50">
           <CardHeader>
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
               <div className="flex items-center space-x-3">
                 <div className="bg-yellow-500 p-3 rounded-lg">
                   <Flag className="h-6 w-6 text-white" />
@@ -194,7 +194,7 @@ export default function Practice() {
                   </p>
                 </div>
               </div>
-              <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
+              <div className="flex flex-col gap-2 w-full sm:w-auto">
                 <Link href="/practice-marked" className="w-full sm:w-40">
                   <Button 
                     variant="outline" 
@@ -212,7 +212,7 @@ export default function Practice() {
         {/* All Questions Practice */}
         <Card className="mb-8 border-2 border-blue-200 bg-gradient-to-r from-blue-50 to-indigo-50">
           <CardHeader>
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
               <div className="flex items-center space-x-3">
                 <div className="bg-blue-500 p-3 rounded-lg">
                   <Play className="h-6 w-6 text-white" />
