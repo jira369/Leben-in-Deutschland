@@ -194,12 +194,19 @@ export default function Practice() {
                   </p>
                 </div>
               </div>
-              <Link href="/quiz?type=practice&mode=all">
-                <Button size="lg" className="bg-blue-600 hover:bg-blue-700">
-                  <Play className="h-4 w-4 mr-2" />
-                  Starten
-                </Button>
-              </Link>
+              <div className="flex flex-col gap-2 w-full sm:w-auto">
+                <Link href="/quiz?type=practice&mode=all">
+                  <Button size="lg" className="w-full h-10 bg-blue-600 hover:bg-blue-700">
+                    <Play className="h-4 w-4 mr-2" />
+                    Zufällig üben
+                  </Button>
+                </Link>
+                <Link href="/quiz?type=practice&mode=all&chronological=true">
+                  <Button size="lg" variant="outline" className="w-full h-10 border-blue-600 text-blue-700 hover:bg-blue-100">
+                    Chronologisch üben
+                  </Button>
+                </Link>
+              </div>
             </div>
           </CardHeader>
           <CardContent>

@@ -122,13 +122,10 @@ export function useQuiz() {
 
       // Set timer if enabled
       if (settings?.timerEnabled && type === 'full') {
-        setTimeRemaining(45 * 60); // 45 minutes for full test
+        setTimeRemaining(45 * 60); // 45 minutes for full test (countdown)
         newQuizState.timeRemaining = 45 * 60;
-      } else if (settings?.timerEnabled && type === 'practice' && mode !== 'all') {
-        setTimeRemaining(15 * 60); // 15 minutes for practice
-        newQuizState.timeRemaining = 15 * 60;
-      } else if (type === 'practice' && mode === 'all') {
-        // Count up for "all questions" practice mode (use negative values to indicate count up)
+      } else if (settings?.timerEnabled && type === 'practice') {
+        // Count up for all practice modes (use negative values to indicate count up)
         setTimeRemaining(-1); // Start at 1 second (negative means count up)
         newQuizState.timeRemaining = -1;
       } else {

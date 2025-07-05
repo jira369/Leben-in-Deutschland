@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight, Flag, SkipForward } from "lucide-react";
+import { ChevronLeft, ChevronRight, Flag } from "lucide-react";
 import { useQuiz } from "@/hooks/use-quiz";
 import { ProgressBar } from "@/components/quiz/progress-bar";
 import { QuestionCard } from "@/components/quiz/question-card";
@@ -126,10 +126,6 @@ export default function Quiz() {
                   <Flag className="mr-2 h-4 w-4" />
                   Markieren
                 </Button>
-                <Button variant="ghost" className="px-4 py-2">
-                  <SkipForward className="mr-2 h-4 w-4" />
-                  Überspringen
-                </Button>
               </div>
 
               {isLastQuestion ? (
@@ -143,7 +139,7 @@ export default function Quiz() {
               ) : (
                 <Button
                   onClick={nextQuestion}
-                  disabled={!canGoNext}
+                  disabled={quizType === 'full' ? !hasSelectedCurrentAnswer : !canGoNext}
                   className="px-6 py-3"
                 >
                   Weiter
