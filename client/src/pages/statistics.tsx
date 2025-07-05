@@ -26,12 +26,22 @@ interface DetailedStats {
 }
 
 export default function Statistics() {
-  const { data: stats, isLoading } = useQuery<DetailedStats>({
-    queryKey: ['/api/quiz-sessions/detailed-stats'],
-  });
-
   const { data: userSettings } = useQuery<UserSettings>({
     queryKey: ['/api/settings'],
+  });
+
+  const { data: stats, isLoading } = useQuery<DetailedStats>({
+    queryKey: ['/api/quiz-sessions/detailed-stats', userSettings?.selectedState],
+    queryFn: async () => {
+      const params = new URLSearchParams();
+      if (userSettings?.selectedState) {
+        params.append('state', userSettings.selectedState);
+      }
+      const response = await fetch(`/api/quiz-sessions/detailed-stats?${params}`);
+      if (!response.ok) throw new Error('Failed to fetch detailed stats');
+      return response.json();
+    },
+    enabled: !!userSettings,
   });
 
   const { data: recentSessions } = useQuery<QuizSession[]>({
@@ -185,10 +195,10 @@ export default function Statistics() {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold text-indigo-700">
-                {Math.round((questionsAnswered / 376) * 100)}%
+                {Math.round((questionsAnswered / totalAvailableQuestions) * 100)}%
               </div>
               <Progress 
-                value={(questionsAnswered / 376) * 100} 
+                value={(questionsAnswered / totalAvailableQuestions) * 100} 
                 className="mt-2 h-2"
               />
               <p className="text-xs text-indigo-600 mt-1">
@@ -217,8 +227,8 @@ export default function Statistics() {
                   </span>
                 </div>
                 <Progress 
-                  value={questionsAnswered > 0 ? (stats?.correctAnswers || 0) / questionsAnswered * 100 : 0} 
-                  className="h-2"
+                  value={totalAnswersGiven > 0 ? (stats?.correctAnswers || 0) / totalAnswersGiven * 100 : 0} 
+                  className="h-2 bg-green-100"
                 />
               </div>
 
@@ -230,8 +240,8 @@ export default function Statistics() {
                   </span>
                 </div>
                 <Progress 
-                  value={questionsAnswered > 0 ? (stats?.incorrectAnswers || 0) / questionsAnswered * 100 : 0} 
-                  className="h-2"
+                  value={totalAnswersGiven > 0 ? (stats?.incorrectAnswers || 0) / totalAnswersGiven * 100 : 0} 
+                  className="h-2 bg-red-100"
                 />
               </div>
 

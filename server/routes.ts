@@ -296,7 +296,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Get detailed statistics
   app.get("/api/quiz-sessions/detailed-stats", async (req, res) => {
     try {
-      const stats = await storage.getDetailedStats();
+      const selectedState = req.query.state as string;
+      const stats = await storage.getDetailedStats(selectedState);
       res.json(stats);
     } catch (error) {
       res.status(500).json({ error: "Failed to fetch detailed statistics" });

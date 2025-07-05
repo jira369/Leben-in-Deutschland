@@ -7,7 +7,7 @@ import {
   type MarkedQuestion, type InsertMarkedQuestion
 } from "@shared/schema";
 import { db } from "./db";
-import { eq, desc, sql, and, inArray } from "drizzle-orm";
+import { eq, desc, sql, and, inArray, or } from "drizzle-orm";
 
 export interface IStorage {
   // Questions
@@ -32,7 +32,7 @@ export interface IStorage {
   updateUserSettings(settings: Partial<InsertUserSettings>): Promise<UserSettings>;
   
   // Detailed Statistics
-  getDetailedStats(): Promise<{
+  getDetailedStats(selectedState?: string): Promise<{
     totalQuestions: number;
     correctAnswers: number;
     incorrectAnswers: number;
@@ -183,7 +183,7 @@ export class MemStorage implements IStorage {
     return this.userSettings;
   }
 
-  async getDetailedStats(): Promise<{
+  async getDetailedStats(selectedState?: string): Promise<{
     totalQuestions: number;
     correctAnswers: number;
     incorrectAnswers: number;
@@ -422,7 +422,7 @@ export class DatabaseStorage implements IStorage {
     return updatedSettings;
   }
 
-  async getDetailedStats(): Promise<{
+  async getDetailedStats(selectedState?: string): Promise<{
     totalQuestions: number;
     correctAnswers: number;
     incorrectAnswers: number;
@@ -430,10 +430,24 @@ export class DatabaseStorage implements IStorage {
     testsPassedCount: number;
     testsPassedPercentage: number;
   }> {
-    // Get total number of questions available
-    const totalQuestionsResult = await db
+    // Get total number of questions available, filtered by state if specified
+    let totalQuestionsQuery = db
       .select({ count: sql<number>`COUNT(*)` })
       .from(questions);
+    
+    if (selectedState && selectedState !== "Bundesweit") {
+      totalQuestionsQuery = totalQuestionsQuery.where(
+        or(
+          eq(questions.category, 'Bundesweit'),
+          eq(questions.category, selectedState)
+        )
+      );
+    } else {
+      // Only federal questions if no state selected or "Bundesweit"
+      totalQuestionsQuery = totalQuestionsQuery.where(eq(questions.category, 'Bundesweit'));
+    }
+    
+    const totalQuestionsResult = await totalQuestionsQuery;
     const totalQuestions = totalQuestionsResult[0]?.count || 0;
 
     // Get aggregated stats from all quiz sessions
