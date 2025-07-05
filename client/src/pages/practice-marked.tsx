@@ -2,7 +2,7 @@ import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, Flag, Play, Trash2 } from "lucide-react";
+import { ArrowLeft, Flag, Play, Trash2, Shuffle } from "lucide-react";
 import { useMarkedQuestions } from "@/hooks/use-marked-questions";
 
 export default function PracticeMarked() {
@@ -73,7 +73,7 @@ export default function PracticeMarked() {
                   <div className="flex flex-col gap-2">
                     <Link href="/quiz?type=practice&mode=marked">
                       <Button size="lg" className="w-full bg-yellow-600 hover:bg-yellow-700">
-                        <span className="mr-2">🔀</span>
+                        <Shuffle className="h-4 w-4 mr-2" />
                         Zufällig üben
                       </Button>
                     </Link>

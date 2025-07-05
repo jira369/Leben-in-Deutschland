@@ -4,7 +4,7 @@ import { Link } from "wouter";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { BookOpen, Play, ArrowLeft, Users, Building, Flag, Globe, Scale, Heart, RotateCcw } from "lucide-react";
+import { BookOpen, Play, ArrowLeft, Users, Building, Flag, Globe, Scale, Heart, RotateCcw, Shuffle } from "lucide-react";
 import { Question, UserSettings } from "@shared/schema";
 import { useMarkedQuestions } from "@/hooks/use-marked-questions";
 
@@ -231,7 +231,7 @@ export default function Practice() {
               <div className="flex flex-col gap-2 w-full sm:w-auto">
                 <Link href="/quiz?type=practice&mode=all">
                   <Button size="lg" className="w-full h-10 bg-blue-600 hover:bg-blue-700">
-                    <span className="mr-2">🔀</span>
+                    <Shuffle className="h-4 w-4 mr-2" />
                     Zufällig üben
                   </Button>
                 </Link>
@@ -302,7 +302,7 @@ export default function Practice() {
                         variant="outline"
                         disabled={category.questionCount === 0}
                       >
-                        <span className="mr-2">{category.questionCount > 0 ? "🔀" : ""}</span>
+                        {category.questionCount > 0 && <Shuffle className="h-4 w-4 mr-2" />}
                         {category.questionCount > 0 ? "Zufällig üben" : "Keine Fragen verfügbar"}
                       </Button>
                     </Link>
@@ -345,7 +345,7 @@ export default function Practice() {
                       variant="outline" 
                       className="w-full h-10 border-green-600 text-green-700 hover:bg-green-100"
                     >
-                      <span className="mr-2">🔀</span>
+                      <Shuffle className="h-4 w-4 mr-2" />
                       Zufällig üben
                     </Button>
                   </Link>
