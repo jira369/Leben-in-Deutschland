@@ -167,7 +167,7 @@ export default function Results() {
                             Ihre Antwort: {result.question.answers[result.selectedAnswer]}
                           </p>
                           <p className="text-xs text-green-600">
-                            Richtig: {result.question.answers[result.question.correctAnswer]}
+                            Richtig: {result.question.answers[result.question.correctAnswer - 1]}
                           </p>
                         </>
                       )}

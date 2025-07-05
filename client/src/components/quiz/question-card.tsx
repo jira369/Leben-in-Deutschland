@@ -83,24 +83,33 @@ export function QuestionCard({
         <RadioGroup
           key={question.id}
           value={selectedAnswer?.toString() || ""}
-          onValueChange={(value) => onAnswerSelect(parseInt(value))}
+          onValueChange={hasSelectedAnswer ? undefined : (value) => onAnswerSelect(parseInt(value))}
           className="space-y-3"
         >
           {question.answers.map((answer, index) => (
             <Label
               key={index}
-              className={`flex items-center p-4 rounded-xl border-2 cursor-pointer transition-all duration-200 group ${
+              className={`flex items-center p-4 rounded-xl border-2 transition-all duration-200 group ${
+                hasSelectedAnswer ? 'cursor-default' : 'cursor-pointer'
+              } ${
                 selectedAnswer === index
                   ? 'border-primary bg-primary/5'
-                  : 'border-gray-200 hover:border-primary/30 hover:bg-primary/5'
+                  : hasSelectedAnswer 
+                    ? 'border-gray-200 bg-gray-50' 
+                    : 'border-gray-200 hover:border-primary/30 hover:bg-primary/5'
               }`}
             >
               <RadioGroupItem
                 value={index.toString()}
+                disabled={hasSelectedAnswer}
                 className="w-5 h-5 text-primary border-gray-300 focus:ring-primary focus:ring-2"
               />
               <span className={`ml-4 font-medium ${
-                selectedAnswer === index ? 'text-primary' : 'text-gray-900 group-hover:text-primary'
+                selectedAnswer === index 
+                  ? 'text-primary' 
+                  : hasSelectedAnswer 
+                    ? 'text-gray-500' 
+                    : 'text-gray-900 group-hover:text-primary'
               }`}>
                 {answer}
               </span>

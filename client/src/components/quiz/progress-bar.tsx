@@ -40,7 +40,7 @@ export function ProgressBar({
           {timeRemaining !== null && timeRemaining !== undefined && (
             <div className="text-sm text-gray-500 font-mono flex items-center">
               <Clock className="h-4 w-4 mr-1" />
-              {formatTime(timeRemaining)}
+              {timeRemaining < 0 ? formatTime(Math.abs(timeRemaining)) : formatTime(timeRemaining)}
             </div>
           )}
           {onExit && (

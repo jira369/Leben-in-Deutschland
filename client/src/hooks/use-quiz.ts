@@ -56,11 +56,19 @@ export function useQuiz() {
 
   // Timer effect
   useEffect(() => {
-    if (timeRemaining === null || timeRemaining <= 0) return;
+    if (timeRemaining === null) return;
 
     const interval = setInterval(() => {
       setTimeRemaining(prev => {
-        if (prev === null || prev <= 1) {
+        if (prev === null) return null;
+        
+        // For practice mode with "all questions", count up (negative values indicate count up)
+        if (prev < 0) {
+          return prev - 1; // Count up by going more negative
+        }
+        
+        // For timed quizzes, count down
+        if (prev <= 1) {
           return 0;
         }
         return prev - 1;
@@ -116,9 +124,13 @@ export function useQuiz() {
       if (settings?.timerEnabled && type === 'full') {
         setTimeRemaining(45 * 60); // 45 minutes for full test
         newQuizState.timeRemaining = 45 * 60;
-      } else if (settings?.timerEnabled && type === 'practice') {
+      } else if (settings?.timerEnabled && type === 'practice' && mode !== 'all') {
         setTimeRemaining(15 * 60); // 15 minutes for practice
         newQuizState.timeRemaining = 15 * 60;
+      } else if (type === 'practice' && mode === 'all') {
+        // Count up for "all questions" practice mode (use negative values to indicate count up)
+        setTimeRemaining(-1); // Start at 1 second (negative means count up)
+        newQuizState.timeRemaining = -1;
       } else {
         setTimeRemaining(null);
       }
