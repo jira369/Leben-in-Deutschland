@@ -231,7 +231,7 @@ export default function Practice() {
               <div className="flex flex-col gap-2 w-full sm:w-auto">
                 <Link href="/quiz?type=practice&mode=all">
                   <Button size="lg" className="w-full h-10 bg-blue-600 hover:bg-blue-700">
-                    <Play className="h-4 w-4 mr-2" />
+                    <span className="mr-2">🔀</span>
                     Zufällig üben
                   </Button>
                 </Link>
@@ -302,7 +302,7 @@ export default function Practice() {
                         variant="outline"
                         disabled={category.questionCount === 0}
                       >
-                        <Play className="h-4 w-4 mr-2" />
+                        <span className="mr-2">{category.questionCount > 0 ? "🔀" : ""}</span>
                         {category.questionCount > 0 ? "Zufällig üben" : "Keine Fragen verfügbar"}
                       </Button>
                     </Link>
@@ -345,7 +345,7 @@ export default function Practice() {
                       variant="outline" 
                       className="w-full h-10 border-green-600 text-green-700 hover:bg-green-100"
                     >
-                      <Play className="h-4 w-4 mr-2" />
+                      <span className="mr-2">🔀</span>
                       Zufällig üben
                     </Button>
                   </Link>

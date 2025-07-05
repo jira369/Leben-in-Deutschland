@@ -73,7 +73,7 @@ export default function PracticeMarked() {
                   <div className="flex flex-col gap-2">
                     <Link href="/quiz?type=practice&mode=marked">
                       <Button size="lg" className="w-full bg-yellow-600 hover:bg-yellow-700">
-                        <Play className="h-4 w-4 mr-2" />
+                        <span className="mr-2">🔀</span>
                         Zufällig üben
                       </Button>
                     </Link>
