@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { BookOpen, Play, ArrowLeft, Users, Building, Flag, Globe, Scale, Heart, RotateCcw } from "lucide-react";
 import { Question, UserSettings } from "@shared/schema";
+import { useMarkedQuestions } from "@/hooks/use-marked-questions";
 
 // Thematic groupings of questions based on content analysis
 const getThematicCategories = (questions: Question[]) => {
@@ -86,6 +87,9 @@ export default function Practice() {
   const { data: allQuestions = [], isLoading } = useQuery<Question[]>({
     queryKey: ['/api/questions'],
   });
+
+  // Get marked questions data
+  const { markedQuestionsCount } = useMarkedQuestions();
 
   // Calculate thematic categories based on all questions
   const thematicCategories = getThematicCategories(allQuestions);
@@ -168,6 +172,36 @@ export default function Practice() {
                   >
                     <RotateCcw className="h-4 w-4 mr-2" />
                     Fehler ansehen
+                  </Button>
+                </Link>
+              </div>
+            </div>
+          </CardHeader>
+        </Card>
+
+        {/* Marked Questions Practice Section */}
+        <Card className="mb-8 border-2 border-yellow-200 bg-gradient-to-r from-yellow-50 to-amber-50">
+          <CardHeader>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-3">
+                <div className="bg-yellow-500 p-3 rounded-lg">
+                  <Flag className="h-6 w-6 text-white" />
+                </div>
+                <div>
+                  <CardTitle className="text-xl text-gray-900">Markierte Fragen</CardTitle>
+                  <p className="text-gray-600 mt-1">
+                    Übe mit deinen {markedQuestionsCount} markierten Fragen
+                  </p>
+                </div>
+              </div>
+              <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
+                <Link href="/practice-marked" className="w-full sm:w-40">
+                  <Button 
+                    variant="outline" 
+                    className="w-full h-10 border-yellow-600 text-yellow-700 hover:bg-yellow-100"
+                  >
+                    <Flag className="h-4 w-4 mr-2" />
+                    Markierte ansehen
                   </Button>
                 </Link>
               </div>

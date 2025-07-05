@@ -30,8 +30,30 @@ export async function registerRoutes(app: Express): Promise<Server> {
       if (mode === "all") {
         // Practice mode with all questions (300 federal + 10 state-specific)
         const allQuestions = await storage.getAllQuestions();
-        const shuffled = allQuestions.sort(() => Math.random() - 0.5);
-        res.json(shuffled);
+        let questionsToReturn = [];
+        
+        // Get federal questions
+        const federalQuestions = allQuestions.filter(q => q.category === "Bundesweit");
+        questionsToReturn.push(...federalQuestions);
+        
+        // Add state-specific questions if state is selected
+        if (state && state !== "Bundesweit") {
+          const stateQuestions = allQuestions.filter(q => q.category === state);
+          questionsToReturn.push(...stateQuestions);
+        }
+        
+        // Check if chronological order is requested
+        const chronological = req.query.chronological === 'true';
+        
+        if (chronological) {
+          // Sort by ID for chronological order
+          questionsToReturn.sort((a, b) => a.id - b.id);
+        } else {
+          // Shuffle for random order
+          questionsToReturn.sort(() => Math.random() - 0.5);
+        }
+        
+        res.json(questionsToReturn);
       } else if (category) {
         // Category-specific practice with thematic filtering
         const allQuestions = await storage.getAllQuestions();
@@ -322,6 +344,63 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json({ message: "Incorrect answers cleared" });
     } catch (error) {
       res.status(500).json({ error: "Failed to clear incorrect answers" });
+    }
+  });
+
+  // Mark/unmark question
+  app.post("/api/marked-questions", async (req, res) => {
+    try {
+      const { questionId } = req.body;
+      if (!questionId || typeof questionId !== 'number') {
+        return res.status(400).json({ error: "Valid questionId is required" });
+      }
+
+      const isMarked = await storage.isQuestionMarked(questionId);
+      
+      if (isMarked) {
+        await storage.removeMarkedQuestion(questionId);
+        res.json({ marked: false });
+      } else {
+        await storage.addMarkedQuestion(questionId);
+        res.json({ marked: true });
+      }
+    } catch (error) {
+      res.status(500).json({ error: "Failed to toggle question mark" });
+    }
+  });
+
+  // Get marked questions for practice
+  app.get("/api/marked-questions", async (req, res) => {
+    try {
+      const questions = await storage.getMarkedQuestions();
+      res.json(questions);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch marked questions" });
+    }
+  });
+
+  // Get marked questions count
+  app.get("/api/marked-questions/count", async (req, res) => {
+    try {
+      const count = await storage.getMarkedQuestionsCount();
+      res.json({ count });
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch marked questions count" });
+    }
+  });
+
+  // Check if question is marked
+  app.get("/api/marked-questions/:questionId", async (req, res) => {
+    try {
+      const questionId = parseInt(req.params.questionId);
+      if (isNaN(questionId)) {
+        return res.status(400).json({ error: "Invalid questionId" });
+      }
+
+      const isMarked = await storage.isQuestionMarked(questionId);
+      res.json({ marked: isMarked });
+    } catch (error) {
+      res.status(500).json({ error: "Failed to check if question is marked" });
     }
   });
 

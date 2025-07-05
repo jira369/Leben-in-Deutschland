@@ -1,9 +1,10 @@
 import { 
-  questions, quizSessions, userSettings, incorrectAnswers,
+  questions, quizSessions, userSettings, incorrectAnswers, markedQuestions,
   type Question, type InsertQuestion, 
   type QuizSession, type InsertQuizSession,
   type UserSettings, type InsertUserSettings,
-  type IncorrectAnswer, type InsertIncorrectAnswer
+  type IncorrectAnswer, type InsertIncorrectAnswer,
+  type MarkedQuestion, type InsertMarkedQuestion
 } from "@shared/schema";
 import { db } from "./db";
 import { eq, desc, sql, and, inArray } from "drizzle-orm";
@@ -48,6 +49,13 @@ export interface IStorage {
   getIncorrectQuestions(): Promise<Question[]>;
   getIncorrectAnswersCount(): Promise<number>;
   clearIncorrectAnswers(): Promise<void>;
+  
+  // Marked Questions Management
+  addMarkedQuestion(questionId: number): Promise<MarkedQuestion>;
+  removeMarkedQuestion(questionId: number): Promise<void>;
+  getMarkedQuestions(): Promise<Question[]>;
+  getMarkedQuestionsCount(): Promise<number>;
+  isQuestionMarked(questionId: number): Promise<boolean>;
 }
 
 export class MemStorage implements IStorage {
@@ -237,6 +245,27 @@ export class MemStorage implements IStorage {
     });
     
     return uniqueQuestionIds.size;
+  }
+
+  // Marked questions methods - placeholder implementations for MemStorage
+  async addMarkedQuestion(questionId: number): Promise<MarkedQuestion> {
+    throw new Error("MemStorage doesn't support marked questions tracking");
+  }
+
+  async removeMarkedQuestion(questionId: number): Promise<void> {
+    // No-op for MemStorage
+  }
+
+  async getMarkedQuestions(): Promise<Question[]> {
+    return [];
+  }
+
+  async getMarkedQuestionsCount(): Promise<number> {
+    return 0;
+  }
+
+  async isQuestionMarked(questionId: number): Promise<boolean> {
+    return false;
   }
 
   private shuffleArray<T>(array: T[]): T[] {
@@ -495,6 +524,59 @@ export class DatabaseStorage implements IStorage {
     });
     
     return uniqueQuestionIds.size;
+  }
+
+  async addMarkedQuestion(questionId: number): Promise<MarkedQuestion> {
+    const inserted = await db
+      .insert(markedQuestions)
+      .values({ questionId })
+      .returning();
+    
+    return inserted[0];
+  }
+
+  async removeMarkedQuestion(questionId: number): Promise<void> {
+    await db
+      .delete(markedQuestions)
+      .where(eq(markedQuestions.questionId, questionId));
+  }
+
+  async getMarkedQuestions(): Promise<Question[]> {
+    // Get unique question IDs from marked questions
+    const markedQuestionIds = await db
+      .select({ questionId: markedQuestions.questionId })
+      .from(markedQuestions);
+    
+    if (markedQuestionIds.length === 0) {
+      return [];
+    }
+
+    const questionIds = markedQuestionIds.map(row => row.questionId);
+    
+    // Get the actual questions
+    const result = await db
+      .select()
+      .from(questions)
+      .where(inArray(questions.id, questionIds));
+    
+    return result;
+  }
+
+  async getMarkedQuestionsCount(): Promise<number> {
+    const result = await db
+      .select({ count: sql<number>`COUNT(*)` })
+      .from(markedQuestions);
+    
+    return result[0]?.count || 0;
+  }
+
+  async isQuestionMarked(questionId: number): Promise<boolean> {
+    const result = await db
+      .select({ count: sql<number>`COUNT(*)` })
+      .from(markedQuestions)
+      .where(eq(markedQuestions.questionId, questionId));
+    
+    return (result[0]?.count || 0) > 0;
   }
 }
 

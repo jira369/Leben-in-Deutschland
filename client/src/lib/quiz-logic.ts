@@ -104,10 +104,26 @@ export async function fetchQuestionsForQuiz(count: number, selectedState?: strin
     const incorrectQuestions: Question[] = await response.json();
     return shuffleArray(incorrectQuestions);
   }
+
+  // Special case: fetch marked questions for marked practice
+  if (mode === "marked") {
+    const response = await fetch("/api/marked-questions");
+    if (!response.ok) {
+      throw new Error("Failed to fetch marked questions");
+    }
+    const markedQuestions: Question[] = await response.json();
+    return chronological ? markedQuestions : shuffleArray(markedQuestions);
+  }
   const params = new URLSearchParams({ count: count.toString() });
   
   if (mode === "all") {
     params.append('mode', 'all');
+    if (selectedState && selectedState !== "Bundesweit") {
+      params.append('state', selectedState);
+    }
+    if (chronological) {
+      params.append('chronological', 'true');
+    }
   } else if (category) {
     params.append('category', category);
     if (chronological) {

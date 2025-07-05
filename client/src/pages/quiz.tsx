@@ -3,6 +3,7 @@ import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight, Flag } from "lucide-react";
 import { useQuiz } from "@/hooks/use-quiz";
+import { useMarkedQuestions } from "@/hooks/use-marked-questions";
 import { ProgressBar } from "@/components/quiz/progress-bar";
 import { QuestionCard } from "@/components/quiz/question-card";
 import { QuizResults } from "@shared/schema";
@@ -29,6 +30,8 @@ export default function Quiz() {
     canGoNext,
     canGoPrevious,
   } = useQuiz();
+
+  const { isQuestionMarked, toggleMark } = useMarkedQuestions();
 
   // Get quiz type from URL params
   useEffect(() => {
@@ -122,8 +125,16 @@ export default function Quiz() {
               </Button>
               
               <div className="flex items-center space-x-3">
-                <Button variant="ghost" className="px-4 py-2">
-                  <Flag className="mr-2 h-4 w-4" />
+                <Button 
+                  variant="ghost" 
+                  className="px-4 py-2"
+                  onClick={() => currentQuestion && toggleMark(currentQuestion.id)}
+                >
+                  <Flag className={`mr-2 h-4 w-4 ${
+                    currentQuestion && isQuestionMarked(currentQuestion.id) 
+                      ? 'fill-yellow-500 text-yellow-500' 
+                      : ''
+                  }`} />
                   Markieren
                 </Button>
               </div>

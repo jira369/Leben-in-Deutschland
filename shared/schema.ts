@@ -49,6 +49,12 @@ export const incorrectAnswers = pgTable("incorrect_answers", {
   createdAt: timestamp("created_at").defaultNow(),
 });
 
+export const markedQuestions = pgTable("marked_questions", {
+  id: serial("id").primaryKey(),
+  questionId: integer("question_id").notNull().unique(),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
 export const insertQuestionSchema = createInsertSchema(questions).omit({
   id: true,
 });
@@ -67,6 +73,11 @@ export const insertIncorrectAnswerSchema = createInsertSchema(incorrectAnswers).
   createdAt: true,
 });
 
+export const insertMarkedQuestionSchema = createInsertSchema(markedQuestions).omit({
+  id: true,
+  createdAt: true,
+});
+
 export type Question = typeof questions.$inferSelect;
 export type InsertQuestion = z.infer<typeof insertQuestionSchema>;
 export type QuizSession = typeof quizSessions.$inferSelect;
@@ -75,6 +86,8 @@ export type UserSettings = typeof userSettings.$inferSelect;
 export type InsertUserSettings = z.infer<typeof insertUserSettingsSchema>;
 export type IncorrectAnswer = typeof incorrectAnswers.$inferSelect;
 export type InsertIncorrectAnswer = z.infer<typeof insertIncorrectAnswerSchema>;
+export type MarkedQuestion = typeof markedQuestions.$inferSelect;
+export type InsertMarkedQuestion = z.infer<typeof insertMarkedQuestionSchema>;
 
 // Quiz state types
 export type QuizState = {

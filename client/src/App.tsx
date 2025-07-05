@@ -10,6 +10,7 @@ import Statistics from "@/pages/statistics";
 import StateSelection from "@/pages/state-selection";
 import Practice from "@/pages/practice";
 import PracticeMistakes from "@/pages/practice-mistakes";
+import PracticeMarked from "@/pages/practice-marked";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -22,6 +23,7 @@ function Router() {
       <Route path="/state-selection" component={StateSelection} />
       <Route path="/practice" component={Practice} />
       <Route path="/practice-mistakes" component={PracticeMistakes} />
+      <Route path="/practice-marked" component={PracticeMarked} />
       <Route component={NotFound} />
     </Switch>
   );
