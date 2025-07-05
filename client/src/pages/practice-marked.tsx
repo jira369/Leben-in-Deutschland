@@ -99,7 +99,7 @@ export default function PracticeMarked() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Flag className="w-5 h-5" />
-                  Markierte Fragen - Statistik
+                  Statistik
                 </CardTitle>
                 <CardDescription>
                   Übersicht über deine markierten Fragen
