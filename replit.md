@@ -117,7 +117,7 @@ Basierend auf dem originalen Excel-Sheet (Zeilen 302-461):
 | Saarland | 412-421 | 411-420 | 10 | 2 (Frage 1+8) | ✅ Vollständig mit Bildern |
 | Sachsen | 422-431 | 421-430 | 10 | 2 (Frage 1+8) | ✅ Vollständig mit Bildern |
 | Sachsen-Anhalt | 432-441 | 431-440 | 10 | 2 (Frage 1+8) | ✅ Vollständig mit Bildern |
-| Schleswig-Holstein | 442-451 | 441-450 | 10 | 2 (Frage 1+8) | ✅ Vollständig |
+| Schleswig-Holstein | 442-451 | 441-450 | 10 | 2 (Frage 1+8) | ✅ Vollständig mit Bildern |
 | Thüringen | 452-461 | 451-460 | 10 | 2 (Frage 1+8) | ✅ Vollständig |
 
 **Gesamt:** 160 Bundesländer-Fragen (16 Bundesländer × 10 Fragen)
@@ -171,6 +171,7 @@ Changelog:
 - July 5, 2025. Saarland-Bilderfragen hinzugefügt: Wappen-Frage (ID 411) und Karten-Frage (ID 418) mit offiziellen Bildern verknüpft.
 - July 5, 2025. Sachsen-Bilderfragen hinzugefügt: Wappen-Frage (ID 421) und Karten-Frage (ID 428) mit offiziellen Bildern verknüpft.
 - July 5, 2025. Sachsen-Anhalt-Bilderfragen hinzugefügt: Wappen-Frage (ID 431) und Karten-Frage (ID 438) mit offiziellen Bildern verknüpft.
+- July 5, 2025. Schleswig-Holstein-Bilderfragen hinzugefügt: Wappen-Frage (ID 441) und Karten-Frage (ID 448) mit offiziellen Bildern verknüpft.
 
 ## User Preferences
 
