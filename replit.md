@@ -112,7 +112,7 @@ Basierend auf dem originalen Excel-Sheet (Zeilen 302-461):
 | Hessen | 362-371 | 361-370 | 10 | 2 (Frage 1+8) | ✅ Vollständig mit Bildern |
 | Mecklenburg-Vorpommern | 372-381 | 371-380 | 10 | 2 (Frage 1+8) | ✅ Vollständig mit Bildern |
 | Niedersachsen | 382-391 | 381-390 | 10 | 2 (Frage 1+8) | ✅ Vollständig mit Bildern |
-| Nordrhein-Westfalen | 392-401 | 391-400 | 10 | 2 (Frage 1+8) | ✅ Vollständig |
+| Nordrhein-Westfalen | 392-401 | 391-400 | 10 | 2 (Frage 1+8) | ✅ Vollständig mit Bildern |
 | Rheinland-Pfalz | 402-411 | 401-410 | 10 | 2 (Frage 1+8) | ✅ Vollständig |
 | Saarland | 412-421 | 411-420 | 10 | 2 (Frage 1+8) | ✅ Vollständig |
 | Sachsen | 422-431 | 421-430 | 10 | 2 (Frage 1+8) | ✅ Vollständig |
@@ -166,6 +166,7 @@ Changelog:
 - July 5, 2025. Hessen-Bilderfragen hinzugefügt: Wappen-Frage (ID 361) und Karten-Frage (ID 368) mit offiziellen Bildern verknüpft.
 - July 5, 2025. Mecklenburg-Vorpommern-Bilderfragen hinzugefügt: Wappen-Frage (ID 371) und Karten-Frage (ID 378) mit offiziellen Bildern verknüpft.
 - July 5, 2025. Niedersachsen-Bilderfragen hinzugefügt: Wappen-Frage (ID 381) und Karten-Frage (ID 388) mit offiziellen Bildern verknüpft.
+- July 5, 2025. Nordrhein-Westfalen-Bilderfragen hinzugefügt: Wappen-Frage (ID 391) und Karten-Frage (ID 398) mit offiziellen Bildern verknüpft.
 
 ## User Preferences
 
