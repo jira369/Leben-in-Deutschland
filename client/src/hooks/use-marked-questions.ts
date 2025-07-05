@@ -1,18 +1,33 @@
 import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { Question } from "@shared/schema";
+import { Question, UserSettings } from "@shared/schema";
 import { apiRequest } from "@/lib/queryClient";
 
 export function useMarkedQuestions() {
   const queryClient = useQueryClient();
   const [markedQuestions, setMarkedQuestions] = useState<Set<number>>(new Set());
 
-  // Fetch marked questions
-  const { data: markedQuestionsData = [] } = useQuery<Question[]>({
-    queryKey: ['/api/marked-questions'],
+  // Get user settings to know selected state
+  const { data: userSettings } = useQuery<UserSettings>({
+    queryKey: ['/api/settings'],
   });
 
-  // Fetch marked questions count
+  // Fetch marked questions with state filtering
+  const { data: markedQuestionsData = [] } = useQuery<Question[]>({
+    queryKey: ['/api/marked-questions', userSettings?.selectedState],
+    queryFn: async () => {
+      const params = new URLSearchParams();
+      if (userSettings?.selectedState) {
+        params.append('state', userSettings.selectedState);
+      }
+      const response = await fetch(`/api/marked-questions?${params}`);
+      if (!response.ok) throw new Error('Failed to fetch marked questions');
+      return response.json();
+    },
+    enabled: !!userSettings,
+  });
+
+  // Fetch marked questions count (total count, not state-specific)
   const { data: markedQuestionsCount } = useQuery<{ count: number }>({
     queryKey: ['/api/marked-questions/count'],
   });

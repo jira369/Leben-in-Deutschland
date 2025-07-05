@@ -180,6 +180,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Clear state-specific data when state changes
+  app.post("/api/clear-state-data", async (req, res) => {
+    try {
+      const { newState } = req.body;
+      // For now, we'll just return success since we handle state filtering at query time
+      res.json({ success: true, message: "State data cleared successfully" });
+    } catch (error) {
+      res.status(500).json({ error: "Failed to clear state data" });
+    }
+  });
+
   // Load questions from Excel data
   app.post("/api/questions/load-from-excel", async (req, res) => {
     try {
@@ -320,7 +331,20 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Get incorrect questions for practice
   app.get("/api/incorrect-questions", async (req, res) => {
     try {
-      const questions = await storage.getIncorrectQuestions();
+      const selectedState = req.query.state as string;
+      const allIncorrectQuestions = await storage.getIncorrectQuestions();
+      
+      // Filter by state if specified
+      let questions = allIncorrectQuestions;
+      if (selectedState && selectedState !== "Bundesweit") {
+        questions = allIncorrectQuestions.filter(q => 
+          q.category === "Bundesweit" || q.category === selectedState
+        );
+      } else {
+        // If no state selected or "Bundesweit", only show federal questions
+        questions = allIncorrectQuestions.filter(q => q.category === "Bundesweit");
+      }
+      
       res.json(questions);
     } catch (error) {
       res.status(500).json({ error: "Failed to fetch incorrect questions" });
@@ -372,7 +396,20 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Get marked questions for practice
   app.get("/api/marked-questions", async (req, res) => {
     try {
-      const questions = await storage.getMarkedQuestions();
+      const selectedState = req.query.state as string;
+      const allMarkedQuestions = await storage.getMarkedQuestions();
+      
+      // Filter by state if specified
+      let questions = allMarkedQuestions;
+      if (selectedState && selectedState !== "Bundesweit") {
+        questions = allMarkedQuestions.filter(q => 
+          q.category === "Bundesweit" || q.category === selectedState
+        );
+      } else {
+        // If no state selected or "Bundesweit", only show federal questions
+        questions = allMarkedQuestions.filter(q => q.category === "Bundesweit");
+      }
+      
       res.json(questions);
     } catch (error) {
       res.status(500).json({ error: "Failed to fetch marked questions" });

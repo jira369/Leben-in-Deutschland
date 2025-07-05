@@ -97,7 +97,11 @@ export function getQuizTypeQuestions(questions: Question[], type: 'full' | 'prac
 export async function fetchQuestionsForQuiz(count: number, selectedState?: string, mode?: string, category?: string, chronological?: boolean): Promise<Question[]> {
   // Special case: fetch incorrect questions for mistakes practice
   if (mode === "mistakes") {
-    const response = await fetch("/api/incorrect-questions");
+    const params = new URLSearchParams();
+    if (selectedState) {
+      params.append('state', selectedState);
+    }
+    const response = await fetch(`/api/incorrect-questions?${params}`);
     if (!response.ok) {
       throw new Error("Failed to fetch incorrect questions");
     }
@@ -107,7 +111,11 @@ export async function fetchQuestionsForQuiz(count: number, selectedState?: strin
 
   // Special case: fetch marked questions for marked practice
   if (mode === "marked") {
-    const response = await fetch("/api/marked-questions");
+    const params = new URLSearchParams();
+    if (selectedState) {
+      params.append('state', selectedState);
+    }
+    const response = await fetch(`/api/marked-questions?${params}`);
     if (!response.ok) {
       throw new Error("Failed to fetch marked questions");
     }
