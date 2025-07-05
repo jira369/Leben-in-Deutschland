@@ -118,43 +118,44 @@ export default function Quiz() {
                 variant="outline"
                 onClick={previousQuestion}
                 disabled={!canGoPrevious}
-                className="px-6 py-3"
+                className="px-4 py-2 sm:px-6 sm:py-3"
               >
                 <ChevronLeft className="mr-2 h-4 w-4" />
-                Zurück
+                <span className="hidden sm:inline">Zurück</span>
               </Button>
               
               <div className="flex items-center space-x-3">
                 <Button 
                   variant="ghost" 
-                  className="px-4 py-2"
+                  className="px-2 py-2 sm:px-4"
                   onClick={() => currentQuestion && toggleMark(currentQuestion.id)}
                 >
-                  <Flag className={`mr-2 h-4 w-4 ${
+                  <Flag className={`h-4 w-4 ${
                     currentQuestion && isQuestionMarked(currentQuestion.id) 
                       ? 'fill-yellow-500 text-yellow-500' 
                       : ''
-                  }`} />
-                  Markieren
+                  } sm:mr-2`} />
+                  <span className="hidden sm:inline">Markieren</span>
                 </Button>
               </div>
 
               {isLastQuestion ? (
                 <Button
                   onClick={handleFinishQuiz}
-                  className="px-6 py-3"
+                  className="px-3 py-2 sm:px-6 sm:py-3 text-sm sm:text-base"
                   disabled={!hasSelectedCurrentAnswer}
                 >
-                  Test beenden
+                  <span className="hidden sm:inline">Test beenden</span>
+                  <span className="sm:hidden">Beenden</span>
                 </Button>
               ) : (
                 <Button
                   onClick={nextQuestion}
                   disabled={quizType === 'full' ? !hasSelectedCurrentAnswer : !canGoNext}
-                  className="px-6 py-3"
+                  className="px-4 py-2 sm:px-6 sm:py-3"
                 >
-                  Weiter
-                  <ChevronRight className="ml-2 h-4 w-4" />
+                  <span className="hidden sm:inline">Weiter</span>
+                  <ChevronRight className="h-4 w-4 sm:ml-2" />
                 </Button>
               )}
             </div>
