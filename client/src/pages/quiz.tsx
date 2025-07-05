@@ -98,56 +98,60 @@ export default function Quiz() {
           onExit={handleExitQuiz}
         />
 
-        <QuestionCard
-          question={currentQuestion}
-          questionNumber={quizState.currentQuestionIndex + 1}
-          selectedAnswer={selectedAnswer}
-          showFeedback={hasSelectedCurrentAnswer}
-          immediateFeedback={settings?.immediateFeedback}
-          onAnswerSelect={selectAnswer}
-        />
+        <div className="space-y-6">
+          <QuestionCard
+            question={currentQuestion}
+            questionNumber={quizState.currentQuestionIndex + 1}
+            selectedAnswer={selectedAnswer}
+            showFeedback={hasSelectedCurrentAnswer}
+            immediateFeedback={settings?.immediateFeedback || false}
+            onAnswerSelect={selectAnswer}
+          />
 
-        {/* Navigation */}
-        <div className="flex justify-between items-center">
-          <Button
-            variant="outline"
-            onClick={previousQuestion}
-            disabled={!canGoPrevious}
-            className="px-6 py-3"
-          >
-            <ChevronLeft className="mr-2 h-4 w-4" />
-            Zurück
-          </Button>
-          
-          <div className="flex items-center space-x-3">
-            <Button variant="ghost" className="px-4 py-2">
-              <Flag className="mr-2 h-4 w-4" />
-              Markieren
-            </Button>
-            <Button variant="ghost" className="px-4 py-2">
-              <SkipForward className="mr-2 h-4 w-4" />
-              Überspringen
-            </Button>
+          {/* Navigation - Aligned with question content */}
+          <div className="bg-white rounded-lg shadow-sm border p-6">
+            <div className="flex justify-between items-center">
+              <Button
+                variant="outline"
+                onClick={previousQuestion}
+                disabled={!canGoPrevious}
+                className="px-6 py-3"
+              >
+                <ChevronLeft className="mr-2 h-4 w-4" />
+                Zurück
+              </Button>
+              
+              <div className="flex items-center space-x-3">
+                <Button variant="ghost" className="px-4 py-2">
+                  <Flag className="mr-2 h-4 w-4" />
+                  Markieren
+                </Button>
+                <Button variant="ghost" className="px-4 py-2">
+                  <SkipForward className="mr-2 h-4 w-4" />
+                  Überspringen
+                </Button>
+              </div>
+
+              {isLastQuestion ? (
+                <Button
+                  onClick={handleFinishQuiz}
+                  className="px-6 py-3"
+                  disabled={!hasSelectedCurrentAnswer}
+                >
+                  Test beenden
+                </Button>
+              ) : (
+                <Button
+                  onClick={nextQuestion}
+                  disabled={!canGoNext}
+                  className="px-6 py-3"
+                >
+                  Weiter
+                  <ChevronRight className="ml-2 h-4 w-4" />
+                </Button>
+              )}
+            </div>
           </div>
-
-          {isLastQuestion ? (
-            <Button
-              onClick={handleFinishQuiz}
-              className="px-6 py-3"
-              disabled={!hasSelectedCurrentAnswer}
-            >
-              Test beenden
-            </Button>
-          ) : (
-            <Button
-              onClick={nextQuestion}
-              disabled={!canGoNext}
-              className="px-6 py-3"
-            >
-              Weiter
-              <ChevronRight className="ml-2 h-4 w-4" />
-            </Button>
-          )}
         </div>
       </main>
     </div>

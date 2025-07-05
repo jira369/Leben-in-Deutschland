@@ -107,9 +107,10 @@ export default function Home() {
 
             <div className="space-y-4">
               <Link href="/quiz?type=full">
-                <Button className="w-full py-4 text-lg" size="lg">
+                <Button className="w-full py-4" size="lg">
                   <Play className="mr-3 h-5 w-5" />
-                  Vollständigen Test starten (33 Fragen)
+                  <span className="hidden sm:inline">Vollständigen Test starten (33 Fragen)</span>
+                  <span className="sm:hidden">Testsimulation starten</span>
                 </Button>
               </Link>
               <div className="grid md:grid-cols-2 gap-4">
