@@ -50,7 +50,10 @@ export default function Results() {
           <CardContent className="pt-6 text-center">
             <p className="text-gray-600">Keine Ergebnisse gefunden.</p>
             <Link href="/">
-              <Button className="mt-4">Zurück zur Startseite</Button>
+              <Button className="mt-4">
+                <span className="sm:hidden">Zurück</span>
+                <span className="hidden sm:inline">Zurück zur Startseite</span>
+              </Button>
             </Link>
           </CardContent>
         </Card>
@@ -235,7 +238,8 @@ export default function Results() {
         <div className="mt-8 text-center">
           <Link href="/">
             <Button variant="outline" size="lg">
-              Zurück zur Startseite
+              <span className="sm:hidden">Zurück</span>
+              <span className="hidden sm:inline">Zurück zur Startseite</span>
             </Button>
           </Link>
         </div>
