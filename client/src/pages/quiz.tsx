@@ -130,12 +130,11 @@ export default function Quiz() {
                   className="px-2 py-2"
                   onClick={() => currentQuestion && toggleMark(currentQuestion.id)}
                 >
-                  <Flag className={`mr-2 h-4 w-4 ${
+                  <Flag className={`h-4 w-4 ${
                     currentQuestion && isQuestionMarked(currentQuestion.id) 
                       ? 'fill-yellow-500 text-yellow-500' 
                       : ''
                   }`} />
-                  <span className="sm:inline">Markieren</span>
                 </Button>
               </div>
 
