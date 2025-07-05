@@ -110,7 +110,7 @@ Basierend auf dem originalen Excel-Sheet (Zeilen 302-461):
 | Bremen | 342-351 | 341-350 | 10 | 2 (Frage 1+8) | ✅ Vollständig mit Bildern |
 | Hamburg | 352-361 | 351-360 | 10 | 2 (Frage 1+8) | ✅ Vollständig mit Bildern |
 | Hessen | 362-371 | 361-370 | 10 | 2 (Frage 1+8) | ✅ Vollständig mit Bildern |
-| Mecklenburg-Vorpommern | 372-381 | 371-380 | 10 | 2 (Frage 1+8) | ✅ Vollständig |
+| Mecklenburg-Vorpommern | 372-381 | 371-380 | 10 | 2 (Frage 1+8) | ✅ Vollständig mit Bildern |
 | Niedersachsen | 382-391 | 381-390 | 10 | 2 (Frage 1+8) | ✅ Vollständig |
 | Nordrhein-Westfalen | 392-401 | 391-400 | 10 | 2 (Frage 1+8) | ✅ Vollständig |
 | Rheinland-Pfalz | 402-411 | 401-410 | 10 | 2 (Frage 1+8) | ✅ Vollständig |
@@ -164,6 +164,7 @@ Changelog:
 - June 29, 2025. **ERGEBNISANZEIGE-KORREKTUR:** Results-Seite zeigt jetzt korrekt Quiz-Ergebnisse an nach Abschluss oder vorzeitigem Beenden. Implementiert localStorage-Fallback für zuverlässige Datenübertragung zwischen Quiz- und Results-Seiten.
 - July 5, 2025. Hamburg-Bilderfragen hinzugefügt: Wappen-Frage (ID 351) und Karten-Frage (ID 358) mit offiziellen Bildern verknüpft.
 - July 5, 2025. Hessen-Bilderfragen hinzugefügt: Wappen-Frage (ID 361) und Karten-Frage (ID 368) mit offiziellen Bildern verknüpft.
+- July 5, 2025. Mecklenburg-Vorpommern-Bilderfragen hinzugefügt: Wappen-Frage (ID 371) und Karten-Frage (ID 378) mit offiziellen Bildern verknüpft.
 
 ## User Preferences
 
