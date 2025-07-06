@@ -174,6 +174,7 @@ Entwicklungshistorie:
 - 5. Juli 2025. Schleswig-Holstein-Bilderfragen hinzugefügt: Wappen-Frage (ID 441) und Karten-Frage (ID 448) mit offiziellen Bildern verknüpft.
 - 5. Juli 2025. Thüringen-Bilderfragen hinzugefügt: Wappen-Frage (ID 451) und Karten-Frage (ID 458) mit offiziellen Bildern verknüpft.
 - 5. Juli 2025. **DOKUMENTATION VOLLSTÄNDIG DEUTSCH:** Komplette Übersetzung der technischen Dokumentation ins Deutsche - alle Abschnitte von Systemarchitektur bis Deployment-Strategie jetzt auf Deutsch verfügbar.
+- 6. Juli 2025. **PWA-IMPLEMENTIERUNG:** Vollständige Umwandlung zur Progressive Web App - Manifest erstellt, Service Worker für Offline-Funktionalität hinzugefügt, App-Icons generiert, Meta-Tags für mobile Installation integriert, automatisches Install-Prompt implementiert. App ist jetzt installierbar auf mobilen Geräten und Desktop.
 
 ## Benutzerpräferenzen
 
