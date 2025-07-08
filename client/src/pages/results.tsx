@@ -194,7 +194,7 @@ export default function Results() {
                     Neuen Test starten
                   </Button>
                 </Link>
-                <Link href="/quiz?type=practice">
+                <Link href="/practice-mistakes">
                   <Button variant="outline" className="w-full">
                     <BookOpen className="mr-2 h-4 w-4" />
                     Fehler üben

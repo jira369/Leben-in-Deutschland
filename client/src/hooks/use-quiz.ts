@@ -7,6 +7,7 @@ import { apiRequest } from "@/lib/queryClient";
 export function useQuiz() {
   const [quizState, setQuizState] = useState<QuizState | null>(null);
   const [timeRemaining, setTimeRemaining] = useState<number | null>(null);
+  const [currentQuizType, setCurrentQuizType] = useState<'full' | 'practice' | null>(null);
   const queryClient = useQueryClient();
 
   // Fetch all questions
@@ -56,27 +57,29 @@ export function useQuiz() {
 
   // Timer effect
   useEffect(() => {
-    if (timeRemaining === null) return;
+    if (timeRemaining === null || timeRemaining === undefined) return;
 
     const interval = setInterval(() => {
       setTimeRemaining(prev => {
-        if (prev === null) return null;
+        if (prev === null || prev === undefined) return null;
         
-        // For practice mode with "all questions", count up (negative values indicate count up)
-        if (prev < 0) {
-          return prev - 1; // Count up by going more negative
+        if (currentQuizType === 'practice') {
+          // Practice mode: count up from 0
+          return prev + 1;
+        } else if (currentQuizType === 'full') {
+          // Full test mode: count down from 45 minutes
+          if (prev <= 1) {
+            return 0; // Timer finished
+          }
+          return prev - 1; // Count down
         }
         
-        // For timed quizzes, count down
-        if (prev <= 1) {
-          return 0;
-        }
-        return prev - 1;
+        return prev;
       });
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [timeRemaining]);
+  }, [timeRemaining, currentQuizType]);
 
   // Initialize questions if empty
   useEffect(() => {
@@ -125,13 +128,13 @@ export function useQuiz() {
         setTimeRemaining(45 * 60); // 45 minutes for full test (countdown)
         newQuizState.timeRemaining = 45 * 60;
       } else if (settings?.timerEnabled && type === 'practice') {
-        // Count up for all practice modes (use negative values to indicate count up)
-        setTimeRemaining(-1); // Start at 1 second (negative means count up)
-        newQuizState.timeRemaining = -1;
+        setTimeRemaining(0); // Start at 0 for practice mode (will count up)
+        newQuizState.timeRemaining = 0;
       } else {
         setTimeRemaining(null);
       }
 
+      setCurrentQuizType(type);
       setQuizState(newQuizState);
     } catch (error) {
       console.error('Failed to start quiz:', error);
@@ -202,6 +205,7 @@ export function useQuiz() {
   const resetQuiz = useCallback(() => {
     setQuizState(null);
     setTimeRemaining(null);
+    setCurrentQuizType(null);
   }, []);
 
   return {
