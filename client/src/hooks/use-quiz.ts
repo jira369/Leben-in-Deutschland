@@ -125,8 +125,8 @@ export function useQuiz() {
 
       // Set timer if enabled
       if (settings?.timerEnabled && type === 'full') {
-        setTimeRemaining(45 * 60); // 45 minutes for full test (countdown)
-        newQuizState.timeRemaining = 45 * 60;
+        setTimeRemaining(60 * 60); // 60 minutes for full test (countdown)
+        newQuizState.timeRemaining = 60 * 60;
       } else if (settings?.timerEnabled && type === 'practice') {
         setTimeRemaining(0); // Start at 0 for practice mode (will count up)
         newQuizState.timeRemaining = 0;

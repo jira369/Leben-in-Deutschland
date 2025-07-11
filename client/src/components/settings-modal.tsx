@@ -155,7 +155,7 @@ export function SettingsModal({ open, onOpenChange }: SettingsModalProps) {
                   Timer aktivieren
                 </Label>
                 <p className="text-xs text-muted-foreground mt-1">
-                  Zeigt die verbleibende Zeit für den Test an
+                  Zeigt die verbleibende Zeit für den Test an (60 Minuten)
                 </p>
               </div>
               <Switch
