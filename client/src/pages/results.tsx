@@ -186,7 +186,7 @@ export default function Results() {
           <Card className="bg-card rounded-2xl shadow-lg p-6">
             <CardContent className="p-0">
               <h4 className="text-lg font-semibold text-foreground mb-4">Nächste Schritte</h4>
-              <div className="space-y-3">
+              <div className="space-y-4">
                 <Link href={`/quiz?type=${quizType}`}>
                   <Button className="w-full">
                     <RotateCcw className="mr-2 h-4 w-4" />
