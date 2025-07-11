@@ -165,13 +165,23 @@ export default function Practice() {
                 </div>
               </div>
               <div className="flex flex-col gap-2 w-full sm:w-auto">
-                <Link href="/practice-mistakes" className="w-full sm:w-40">
+                <Link href="/practice-mistakes">
                   <Button 
+                    size="lg"
                     variant="outline" 
                     className="w-full h-10 border-red-600 text-red-700 hover:bg-red-100 dark:border-red-400 dark:text-red-400 dark:hover:bg-red-900/20"
                   >
                     <RotateCcw className="h-4 w-4 mr-2" />
-                    Fehler ansehen
+                    Fehler üben
+                  </Button>
+                </Link>
+                <Link href="/practice-mistakes">
+                  <Button 
+                    size="lg"
+                    variant="secondary"
+                    className="w-full h-10"
+                  >
+                    Alle Fehler ansehen
                   </Button>
                 </Link>
               </div>
@@ -195,13 +205,23 @@ export default function Practice() {
                 </div>
               </div>
               <div className="flex flex-col gap-2 w-full sm:w-auto">
-                <Link href="/practice-marked" className="w-full sm:w-40">
+                <Link href="/practice-marked">
                   <Button 
+                    size="lg"
                     variant="outline" 
                     className="w-full h-10 border-yellow-600 text-yellow-700 hover:bg-yellow-100 dark:border-yellow-400 dark:text-yellow-400 dark:hover:bg-yellow-900/20"
                   >
                     <Flag className="h-4 w-4 mr-2" />
-                    Markierte ansehen
+                    Markierte üben
+                  </Button>
+                </Link>
+                <Link href="/practice-marked">
+                  <Button 
+                    size="lg"
+                    variant="secondary"
+                    className="w-full h-10"
+                  >
+                    Alle markierten ansehen
                   </Button>
                 </Link>
               </div>
