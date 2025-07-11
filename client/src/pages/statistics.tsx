@@ -307,7 +307,9 @@ export default function Statistics() {
               {(stats?.totalTests || 0) > 0 && (
                 <div className="pt-4">
                   <p className="text-sm text-muted-foreground text-center">
-                    {(stats?.testsPassedPercentage || 0) >= 50 
+                    {(stats?.testsPassedPercentage || 0) < 20 
+                      ? "Da ist noch Potenzial! Setzen Sie das regelmäßige Üben fort."
+                      : (stats?.testsPassedPercentage || 0) >= 50
                       ? "Gute Leistung! Setzen Sie das regelmäßige Üben fort."
                       : "Üben Sie weiter, um Ihre Erfolgschancen zu verbessern."
                     }
