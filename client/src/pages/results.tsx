@@ -60,6 +60,7 @@ export default function Results() {
     );
   }
 
+  const isFullTest = quizType === 'full' && results.total === 33;
   const passedTest = results.passed;
   // German citizenship test requires 17 out of 33 questions correct
   const requiredScore = results.total === 33 ? 17 : Math.ceil(results.total * 0.51);
@@ -73,9 +74,14 @@ export default function Results() {
             <div className="w-24 h-24 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-6">
               <Trophy className="text-green-500 text-3xl h-12 w-12" />
             </div>
-            <h2 className="text-3xl font-bold text-foreground mb-2">Test abgeschlossen!</h2>
+            <h2 className="text-3xl font-bold text-foreground mb-2">
+              {isFullTest ? 'Test abgeschlossen!' : 'Übung abgeschlossen!'}
+            </h2>
             <p className="text-lg text-muted-foreground mb-6">
-              {passedTest ? 'Herzlichen Glückwunsch zu Ihrem Ergebnis' : 'Üben Sie weiter für bessere Ergebnisse'}
+              {isFullTest 
+                ? (passedTest ? 'Herzlichen Glückwunsch zu Ihrem Ergebnis' : 'Üben Sie weiter für bessere Ergebnisse')
+                : 'Herzlichen Glückwunsch zu Ihrem Übungsergebnis'
+              }
             </p>
             
             <div className="grid md:grid-cols-3 gap-6 max-w-2xl mx-auto mb-8">
@@ -93,35 +99,45 @@ export default function Results() {
               </div>
             </div>
 
-            <div className={`p-6 rounded-xl border ${
-              passedTest 
-                ? 'bg-green-50 dark:bg-green-950/20 border-green-200 dark:border-green-800' 
-                : 'bg-red-50 dark:bg-red-950/20 border-red-200 dark:border-red-800'
-            }`}>
-              <div className="flex items-center justify-center space-x-3 mb-2">
-                {passedTest ? (
-                  <CheckCircle className="text-green-500 dark:text-green-400 text-xl h-6 w-6" />
-                ) : (
-                  <XCircle className="text-red-500 dark:text-red-400 text-xl h-6 w-6" />
-                )}
-                <span className={`text-xl font-semibold ${
-                  passedTest ? 'text-green-800 dark:text-green-200' : 'text-red-800 dark:text-red-200'
-                }`}>
-                  {passedTest ? 'Bestanden!' : 'Nicht bestanden'}
-                </span>
-              </div>
-              <p className={passedTest ? 'text-green-700 dark:text-green-300' : 'text-red-700 dark:text-red-300'}>
-                {passedTest 
-                  ? `Sie haben den Einbürgerungstest erfolgreich bestanden! Für das Bestehen sind mindestens ${requiredScore} von ${results.total} Fragen richtig zu beantworten.`
-                  : `Sie haben den Test nicht bestanden. Sie benötigen mindestens ${requiredScore} richtige Antworten von ${results.total} Fragen. Üben Sie weiter und versuchen Sie es erneut.`
-                }
-              </p>
-              {results.timeSpent > 0 && (
-                <p className={`text-sm mt-2 ${passedTest ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>
-                  Benötigte Zeit: {formatTime(results.timeSpent)}
+            {isFullTest && (
+              <div className={`p-6 rounded-xl border ${
+                passedTest 
+                  ? 'bg-green-50 dark:bg-green-950/20 border-green-200 dark:border-green-800' 
+                  : 'bg-red-50 dark:bg-red-950/20 border-red-200 dark:border-red-800'
+              }`}>
+                <div className="flex items-center justify-center space-x-3 mb-2">
+                  {passedTest ? (
+                    <CheckCircle className="text-green-500 dark:text-green-400 text-xl h-6 w-6" />
+                  ) : (
+                    <XCircle className="text-red-500 dark:text-red-400 text-xl h-6 w-6" />
+                  )}
+                  <span className={`text-xl font-semibold ${
+                    passedTest ? 'text-green-800 dark:text-green-200' : 'text-red-800 dark:text-red-200'
+                  }`}>
+                    {passedTest ? 'Einbürgerungstest bestanden!' : 'Einbürgerungstest nicht bestanden'}
+                  </span>
+                </div>
+                <p className={passedTest ? 'text-green-700 dark:text-green-300' : 'text-red-700 dark:text-red-300'}>
+                  {passedTest 
+                    ? `Sie haben den Einbürgerungstest erfolgreich bestanden! Für das Bestehen sind mindestens ${requiredScore} von ${results.total} Fragen richtig zu beantworten.`
+                    : `Sie haben den Einbürgerungstest nicht bestanden. Sie benötigen mindestens ${requiredScore} richtige Antworten von ${results.total} Fragen. Üben Sie weiter und versuchen Sie es erneut.`
+                  }
                 </p>
-              )}
-            </div>
+                {results.timeSpent > 0 && (
+                  <p className={`text-sm mt-2 ${passedTest ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>
+                    Benötigte Zeit: {formatTime(results.timeSpent)}
+                  </p>
+                )}
+              </div>
+            )}
+            
+            {!isFullTest && results.timeSpent > 0 && (
+              <div className="p-4 bg-primary/5 dark:bg-primary/10 rounded-xl border border-primary/20">
+                <p className="text-sm text-primary text-center">
+                  Übungszeit: {formatTime(results.timeSpent)}
+                </p>
+              </div>
+            )}
           </CardContent>
         </Card>
 
@@ -190,7 +206,7 @@ export default function Results() {
                 <Link href={`/quiz?type=${quizType}`}>
                   <Button className="w-full">
                     <RotateCcw className="mr-2 h-4 w-4" />
-                    Neuen Test starten
+                    {isFullTest ? 'Neuen Test starten' : 'Neue Übung starten'}
                   </Button>
                 </Link>
                 <Link href="/practice-mistakes">
