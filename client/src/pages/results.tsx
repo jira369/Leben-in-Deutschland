@@ -204,7 +204,7 @@ export default function Results() {
               <h4 className="text-lg font-semibold text-foreground mb-4">Nächste Schritte</h4>
               <div className="space-y-4">
                 <Link href={`/quiz?type=${quizType}`}>
-                  <Button className="w-full">
+                  <Button className="w-full mb-1">
                     <RotateCcw className="mr-2 h-4 w-4" />
                     {isFullTest ? 'Neuen Test starten' : 'Neue Übung starten'}
                   </Button>
