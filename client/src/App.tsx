@@ -4,6 +4,7 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { InstallPrompt } from "@/components/install-prompt";
+import { ThemeProvider } from "@/components/theme-provider";
 import Home from "@/pages/home";
 import Quiz from "@/pages/quiz";
 import Results from "@/pages/results";
@@ -33,11 +34,13 @@ function Router() {
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <Toaster />
-        <Router />
-        <InstallPrompt />
-      </TooltipProvider>
+      <ThemeProvider defaultTheme="light" storageKey="quiz-app-theme">
+        <TooltipProvider>
+          <Toaster />
+          <Router />
+          <InstallPrompt />
+        </TooltipProvider>
+      </ThemeProvider>
     </QueryClientProvider>
   );
 }

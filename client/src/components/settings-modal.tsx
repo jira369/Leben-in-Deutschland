@@ -8,7 +8,6 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Switch } from "@/components/ui/switch";
 import {
   Select,
@@ -20,6 +19,7 @@ import {
 import { UserSettings } from "@shared/schema";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
+import { useTheme } from "@/components/theme-provider";
 
 const GERMAN_STATES = [
   { code: "Baden-Württemberg", name: "Baden-Württemberg" },
@@ -48,6 +48,7 @@ interface SettingsModalProps {
 export function SettingsModal({ open, onOpenChange }: SettingsModalProps) {
   const { toast } = useToast();
   const queryClient = useQueryClient();
+  const { theme, setTheme } = useTheme();
   
   const { data: settings } = useQuery<UserSettings>({
     queryKey: ['/api/settings'],
@@ -104,7 +105,7 @@ export function SettingsModal({ open, onOpenChange }: SettingsModalProps) {
         
         <div className="space-y-6">
           <div>
-            <Label className="text-sm font-medium text-gray-700 mb-3 block">
+            <Label className="text-sm font-medium mb-3 block">
               Bundesland
             </Label>
             <Select
@@ -124,40 +125,36 @@ export function SettingsModal({ open, onOpenChange }: SettingsModalProps) {
                 ))}
               </SelectContent>
             </Select>
-            <p className="text-xs text-gray-500 mt-1">
+            <p className="text-xs text-muted-foreground mt-1">
               Wählen Sie Ihr Bundesland für spezifische Fragen
             </p>
-          </div>
-
-          <div>
-            <Label className="text-sm font-medium text-gray-700 mb-3 block">
-              Test-Modus
-            </Label>
-            <RadioGroup
-              value={currentSettings.testMode || 'full'}
-              onValueChange={(value) => 
-                setLocalSettings(prev => ({ ...prev, testMode: value as 'full' | 'practice' }))
-              }
-              className="space-y-2"
-            >
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="full" id="full" />
-                <Label htmlFor="full">Vollständiger Test (33 Fragen)</Label>
-              </div>
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="practice" id="practice" />
-                <Label htmlFor="practice">Übungsmodus (10 Fragen)</Label>
-              </div>
-            </RadioGroup>
           </div>
 
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <div>
-                <Label htmlFor="timer" className="text-sm font-medium text-gray-700">
+                <Label htmlFor="darkmode" className="text-sm font-medium">
+                  Dark Mode
+                </Label>
+                <p className="text-xs text-muted-foreground mt-1">
+                  Dunkles Design für die App aktivieren
+                </p>
+              </div>
+              <Switch
+                id="darkmode"
+                checked={theme === "dark"}
+                onCheckedChange={(checked) => setTheme(checked ? "dark" : "light")}
+              />
+            </div>
+          </div>
+
+          <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <Label htmlFor="timer" className="text-sm font-medium">
                   Timer aktivieren
                 </Label>
-                <p className="text-xs text-gray-500 mt-1">
+                <p className="text-xs text-muted-foreground mt-1">
                   Zeigt die verbleibende Zeit für den Test an
                 </p>
               </div>
@@ -172,7 +169,7 @@ export function SettingsModal({ open, onOpenChange }: SettingsModalProps) {
           </div>
         </div>
 
-        <div className="mt-8 pt-6 border-t border-gray-200">
+        <div className="mt-8 pt-6 border-t">
           <Button 
             onClick={handleSave}
             disabled={updateSettings.isPending}
