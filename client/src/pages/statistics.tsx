@@ -327,17 +327,14 @@ export default function Statistics() {
                         session.passed ? 'bg-green-500' : 'bg-red-500'
                       }`}></div>
                       <div>
-                        <p className="font-medium text-sm text-foreground">
-                          {session.type === 'full' 
-                            ? 'Volltest' 
-                            : session.practiceType 
-                              ? `Übungstest ${session.practiceType}`
-                              : 'Übungstest'
-                          }
-                        </p>
-                        <div className="space-y-1">
-                          <p className="text-xs text-muted-foreground">
-                            {new Date(session.createdAt).toLocaleDateString('de-DE')}
+                        <div className="flex items-center gap-2">
+                          <p className="font-medium text-sm text-foreground">
+                            {session.type === 'full' 
+                              ? 'Volltest' 
+                              : session.practiceType 
+                                ? `Übungstest ${session.practiceType}`
+                                : 'Übungstest'
+                            }
                           </p>
                           {session.timeSpent && (
                             <div className="flex items-center text-xs text-muted-foreground">
@@ -346,6 +343,9 @@ export default function Statistics() {
                             </div>
                           )}
                         </div>
+                        <p className="text-xs text-muted-foreground">
+                          {new Date(session.createdAt).toLocaleDateString('de-DE')}
+                        </p>
                       </div>
                     </div>
                     <div className="text-right">

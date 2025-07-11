@@ -166,25 +166,25 @@ export default function Home() {
                         )}
                       </div>
                       <div>
-                        <p className="font-medium text-foreground">
-                          {session.type === 'full' 
-                            ? 'Vollständiger Test' 
-                            : session.practiceType 
-                              ? `Übung: ${session.practiceType}`
-                              : 'Übungsmodus'
-                          }
-                        </p>
-                        <div className="space-y-1">
-                          <p className="text-sm text-muted-foreground">
-                            {session.createdAt ? new Date(session.createdAt).toLocaleDateString('de-DE') : 'Heute'}
+                        <div className="flex items-center gap-2">
+                          <p className="font-medium text-foreground">
+                            {session.type === 'full' 
+                              ? 'Vollständiger Test' 
+                              : session.practiceType 
+                                ? `Übung: ${session.practiceType}`
+                                : 'Übungsmodus'
+                            }
                           </p>
                           {session.timeSpent && (
-                            <div className="flex items-center text-xs text-muted-foreground">
+                            <div className="flex items-center text-sm text-muted-foreground">
                               <Clock className="h-3 w-3 mr-1" />
                               {formatDuration(session.timeSpent)}
                             </div>
                           )}
                         </div>
+                        <p className="text-sm text-muted-foreground">
+                          {session.createdAt ? new Date(session.createdAt).toLocaleDateString('de-DE') : 'Heute'}
+                        </p>
                       </div>
                     </div>
                     <div className="text-right">
