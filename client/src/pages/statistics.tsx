@@ -379,7 +379,6 @@ export default function Statistics() {
         <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
           <Link href="/quiz?type=full">
             <Button size="lg" className="w-full sm:w-auto">
-              <Target className="mr-2 h-4 w-4" />
               Neuen Test starten
             </Button>
           </Link>
