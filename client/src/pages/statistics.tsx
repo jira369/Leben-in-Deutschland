@@ -383,7 +383,7 @@ export default function Statistics() {
               Neuen Test starten
             </Button>
           </Link>
-          <Link href="/quiz?type=practice">
+          <Link href="/practice">
             <Button variant="outline" size="lg" className="w-full sm:w-auto">
               <BookOpen className="mr-2 h-4 w-4" />
               Üben

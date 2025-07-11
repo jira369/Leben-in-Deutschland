@@ -181,6 +181,7 @@ Entwicklungshistorie:
 - 11. Juli 2025. **STARTSEITE FILTER:** "Ihre letzten Ergebnisse" zeigt nur Volltest-Ergebnisse, Übungsergebnisse werden ausgeblendet. Fokus auf offizielle Test-Performance für bessere Übersicht.
 - 11. Juli 2025. **ÜBUNGSTYP-DETAILS:** Quiz-Sessions erfassen jetzt detaillierte practiceType-Information (z.B. "bundeslandspezifische Fragen", "Geschichte"). Statistiken zeigen spezifische Übungsarten in "Letzte Aktivitäten" an.
 - 11. Juli 2025. **ZEITANZEIGE ERWEITERT:** "Ihre letzten Ergebnisse" und "Letzte Aktivitäten" zeigen jetzt die verstrichene Zeit für jeden Test/Übung im Titel an (z.B. "Vollständiger Test ⏱ 8:51"). Neue formatDuration() Funktion für benutzerfreundliche Zeitformatierung.
+- 11. Juli 2025. **STATISTIKEN-UI OPTIMIERT:** Header-Design der Statistiken-Seite an Übungsseite angepasst - sticky Navigation mit Trennlinie, kompaktes Icon-Design, responsive Layout. Button-Navigation korrigiert: "Üben"-Button führt zur Practice-Übersichtsseite.
 
 ## Benutzerpräferenzen
 
