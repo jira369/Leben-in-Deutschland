@@ -98,16 +98,16 @@ export default function Statistics() {
           {/* Questions Answered Correctly */}
           <Card className="bg-green-50 dark:bg-green-950/20 border-green-200 dark:border-green-800">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-green-800 dark:text-green-300">
+              <CardTitle className="text-sm font-medium text-green-800 dark:text-green-200">
                 Fragen richtig beantwortet
               </CardTitle>
-              <CheckCircle className="h-4 w-4 text-green-600 dark:text-green-400" />
+              <CheckCircle className="h-4 w-4 text-green-600 dark:text-green-300" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-green-700 dark:text-green-300">
+              <div className="text-2xl font-bold text-green-700 dark:text-green-200">
                 {stats?.correctAnswers || 0}
               </div>
-              <p className="text-xs text-green-600 dark:text-green-400 mt-1">
+              <p className="text-xs text-green-600 dark:text-green-300 mt-1">
                 {accuracyPercentage}% Genauigkeit
               </p>
             </CardContent>
@@ -116,16 +116,16 @@ export default function Statistics() {
           {/* Questions Answered Incorrectly */}
           <Card className="bg-red-50 dark:bg-red-950/20 border-red-200 dark:border-red-800">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-red-800 dark:text-red-300">
+              <CardTitle className="text-sm font-medium text-red-800 dark:text-red-200">
                 Fragen falsch beantwortet
               </CardTitle>
-              <XCircle className="h-4 w-4 text-red-600 dark:text-red-400" />
+              <XCircle className="h-4 w-4 text-red-600 dark:text-red-300" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-red-700 dark:text-red-300">
+              <div className="text-2xl font-bold text-red-700 dark:text-red-200">
                 {stats?.incorrectAnswers || 0}
               </div>
-              <p className="text-xs text-red-600 dark:text-red-400 mt-1">
+              <p className="text-xs text-red-600 dark:text-red-300 mt-1">
                 Übungsbedarf identifiziert
               </p>
             </CardContent>
@@ -134,16 +134,16 @@ export default function Statistics() {
           {/* Total Questions Practiced */}
           <Card className="bg-blue-50 dark:bg-blue-950/20 border-blue-200 dark:border-blue-800">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-blue-800 dark:text-blue-300">
+              <CardTitle className="text-sm font-medium text-blue-800 dark:text-blue-200">
                 Fragen geübt
               </CardTitle>
-              <BookOpen className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+              <BookOpen className="h-4 w-4 text-blue-600 dark:text-blue-300" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-blue-700 dark:text-blue-300">
+              <div className="text-2xl font-bold text-blue-700 dark:text-blue-200">
                 {questionsAnswered}
               </div>
-              <p className="text-xs text-blue-600 dark:text-blue-400 mt-1">
+              <p className="text-xs text-blue-600 dark:text-blue-300 mt-1">
                 von {totalAvailableQuestions} verfügbaren Fragen
               </p>
             </CardContent>
@@ -152,16 +152,16 @@ export default function Statistics() {
           {/* Tests Taken */}
           <Card className="bg-purple-50 dark:bg-purple-950/20 border-purple-200 dark:border-purple-800">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-purple-800 dark:text-purple-300">
+              <CardTitle className="text-sm font-medium text-purple-800 dark:text-purple-200">
                 Tests gemacht
               </CardTitle>
-              <Target className="h-4 w-4 text-purple-600 dark:text-purple-400" />
+              <Target className="h-4 w-4 text-purple-600 dark:text-purple-300" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-purple-700 dark:text-purple-300">
+              <div className="text-2xl font-bold text-purple-700 dark:text-purple-200">
                 {stats?.totalTests || 0}
               </div>
-              <p className="text-xs text-purple-600 dark:text-purple-400 mt-1">
+              <p className="text-xs text-purple-600 dark:text-purple-300 mt-1">
                 Vollständige Testdurchläufe
               </p>
             </CardContent>
@@ -170,16 +170,16 @@ export default function Statistics() {
           {/* Tests Passed */}
           <Card className="bg-yellow-50 dark:bg-yellow-950/20 border-yellow-200 dark:border-yellow-800">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-yellow-800 dark:text-yellow-300">
+              <CardTitle className="text-sm font-medium text-yellow-800 dark:text-yellow-200">
                 Tests bestanden
               </CardTitle>
-              <Trophy className="h-4 w-4 text-yellow-600 dark:text-yellow-400" />
+              <Trophy className="h-4 w-4 text-yellow-600 dark:text-yellow-300" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-yellow-700 dark:text-yellow-300">
+              <div className="text-2xl font-bold text-yellow-700 dark:text-yellow-200">
                 {stats?.testsPassedPercentage || 0}%
               </div>
-              <p className="text-xs text-yellow-600 dark:text-yellow-400 mt-1">
+              <p className="text-xs text-yellow-600 dark:text-yellow-300 mt-1">
                 {stats?.testsPassedCount || 0} von {stats?.totalTests || 0} Tests
               </p>
             </CardContent>
@@ -188,20 +188,20 @@ export default function Statistics() {
           {/* Overall Progress */}
           <Card className="bg-indigo-50 dark:bg-indigo-950/20 border-indigo-200 dark:border-indigo-800">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-indigo-800 dark:text-indigo-300">
+              <CardTitle className="text-sm font-medium text-indigo-800 dark:text-indigo-200">
                 Gesamtfortschritt
               </CardTitle>
-              <TrendingUp className="h-4 w-4 text-indigo-600 dark:text-indigo-400" />
+              <TrendingUp className="h-4 w-4 text-indigo-600 dark:text-indigo-300" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-indigo-700 dark:text-indigo-300">
+              <div className="text-2xl font-bold text-indigo-700 dark:text-indigo-200">
                 {Math.round((questionsAnswered / totalAvailableQuestions) * 100)}%
               </div>
               <Progress 
                 value={(questionsAnswered / totalAvailableQuestions) * 100} 
                 className="mt-2 h-2"
               />
-              <p className="text-xs text-indigo-600 dark:text-indigo-400 mt-1">
+              <p className="text-xs text-indigo-600 dark:text-indigo-300 mt-1">
                 aller Fragen bearbeitet
               </p>
             </CardContent>
@@ -221,8 +221,8 @@ export default function Statistics() {
             <CardContent className="space-y-4">
               <div className="space-y-3">
                 <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-600">Richtige Antworten</span>
-                  <span className="font-semibold text-green-600">
+                  <span className="text-sm text-muted-foreground">Richtige Antworten</span>
+                  <span className="font-semibold text-green-600 dark:text-green-400">
                     {stats?.correctAnswers || 0} ({accuracyPercentage}%)
                   </span>
                 </div>
@@ -234,8 +234,8 @@ export default function Statistics() {
 
               <div className="space-y-3">
                 <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-600">Falsche Antworten</span>
-                  <span className="font-semibold text-red-600">
+                  <span className="text-sm text-muted-foreground">Falsche Antworten</span>
+                  <span className="font-semibold text-red-600 dark:text-red-400">
                     {stats?.incorrectAnswers || 0} ({100 - accuracyPercentage}%)
                   </span>
                 </div>
@@ -245,14 +245,14 @@ export default function Statistics() {
                 />
               </div>
 
-              <div className="pt-4 border-t">
+              <div className="pt-4 border-t border-border">
                 <div className="flex justify-between items-center">
-                  <span className="text-sm font-medium text-gray-700">Erfolgsquote</span>
+                  <span className="text-sm font-medium text-foreground">Erfolgsquote</span>
                   <span className="text-lg font-bold text-primary">
                     {accuracyPercentage}%
                   </span>
                 </div>
-                <p className="text-xs text-gray-500 mt-1">
+                <p className="text-xs text-muted-foreground mt-1">
                   Basierend auf {totalAnswersGiven} beantworteten Fragen
                 </p>
               </div>
@@ -272,29 +272,29 @@ export default function Statistics() {
                 <div className="text-4xl font-bold text-primary mb-2">
                   {stats?.testsPassedPercentage || 0}%
                 </div>
-                <p className="text-gray-600 mb-4">bestandene Tests</p>
+                <p className="text-muted-foreground mb-4">bestandene Tests</p>
                 
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between">
-                    <span className="text-green-600">Bestanden:</span>
-                    <span className="font-semibold">{stats?.testsPassedCount || 0}</span>
+                    <span className="text-green-600 dark:text-green-400">Bestanden:</span>
+                    <span className="font-semibold text-foreground">{stats?.testsPassedCount || 0}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-red-600">Nicht bestanden:</span>
-                    <span className="font-semibold">
+                    <span className="text-red-600 dark:text-red-400">Nicht bestanden:</span>
+                    <span className="font-semibold text-foreground">
                       {(stats?.totalTests || 0) - (stats?.testsPassedCount || 0)}
                     </span>
                   </div>
-                  <div className="flex justify-between pt-2 border-t">
-                    <span className="text-gray-600">Gesamt:</span>
-                    <span className="font-semibold">{stats?.totalTests || 0}</span>
+                  <div className="flex justify-between pt-2 border-t border-border">
+                    <span className="text-muted-foreground">Gesamt:</span>
+                    <span className="font-semibold text-foreground">{stats?.totalTests || 0}</span>
                   </div>
                 </div>
               </div>
 
               {(stats?.totalTests || 0) > 0 && (
                 <div className="pt-4">
-                  <p className="text-sm text-gray-600 text-center">
+                  <p className="text-sm text-muted-foreground text-center">
                     {(stats?.testsPassedPercentage || 0) >= 50 
                       ? "Gute Leistung! Setzen Sie das regelmäßige Üben fort."
                       : "Üben Sie weiter, um Ihre Erfolgschancen zu verbessern."
