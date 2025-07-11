@@ -1,5 +1,6 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
+import nodemailer from "nodemailer";
 import { storage } from "./storage";
 import { insertQuestionSchema, insertQuizSessionSchema, insertUserSettingsSchema } from "@shared/schema";
 import { z } from "zod";
@@ -439,6 +440,69 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json({ marked: isMarked });
     } catch (error) {
       res.status(500).json({ error: "Failed to check if question is marked" });
+    }
+  });
+
+  // Bug report endpoint
+  app.post("/api/bug-report", async (req, res) => {
+    try {
+      const bugReportSchema = z.object({
+        description: z.string().min(1, "Bug description is required"),
+        timestamp: z.string(),
+        userAgent: z.string().optional(),
+        url: z.string().optional(),
+      });
+
+      const { description, timestamp, userAgent, url } = bugReportSchema.parse(req.body);
+
+      // Create transporter for sending emails
+      const transporter = nodemailer.createTransporter({
+        service: 'gmail',
+        auth: {
+          user: process.env.GMAIL_USER || 'noreply@example.com',
+          pass: process.env.GMAIL_PASS || 'password'
+        }
+      });
+
+      // Email content
+      const mailOptions = {
+        from: process.env.GMAIL_USER || 'noreply@example.com',
+        to: 'dacvudinh@gmail.com',
+        subject: '🐛 Bug-Report von Einbürgerungstest App',
+        html: `
+          <h2>Neuer Bug-Report</h2>
+          <p><strong>Zeitpunkt:</strong> ${new Date(timestamp).toLocaleString('de-DE')}</p>
+          <p><strong>URL:</strong> ${url || 'Nicht verfügbar'}</p>
+          <p><strong>User Agent:</strong> ${userAgent || 'Nicht verfügbar'}</p>
+          
+          <h3>Bug-Beschreibung:</h3>
+          <div style="background: #f5f5f5; padding: 15px; border-left: 4px solid #007bff; margin: 10px 0;">
+            ${description.replace(/\n/g, '<br>')}
+          </div>
+          
+          <hr>
+          <small>Automatisch gesendet von der Einbürgerungstest App</small>
+        `
+      };
+
+      // Send email
+      await transporter.sendMail(mailOptions);
+
+      res.json({ 
+        success: true, 
+        message: "Bug-Report erfolgreich gesendet" 
+      });
+    } catch (error) {
+      console.error('Failed to send bug report:', error);
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ 
+          error: "Ungültige Bug-Report-Daten", 
+          details: error.errors 
+        });
+      }
+      res.status(500).json({ 
+        error: "Fehler beim Senden des Bug-Reports" 
+      });
     }
   });
 
