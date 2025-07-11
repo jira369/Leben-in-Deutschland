@@ -51,6 +51,10 @@ export function useQuiz() {
       return res.json();
     },
     onSuccess: () => {
+      // Invalidate cache for all quiz session related queries
+      queryClient.invalidateQueries({ queryKey: ['/api/quiz-sessions/recent'] });
+      queryClient.invalidateQueries({ queryKey: ['/api/quiz-sessions/stats'] });
+      queryClient.invalidateQueries({ queryKey: ['/api/quiz-sessions/detailed-stats'] });
       queryClient.invalidateQueries({ queryKey: ['/api/quiz-sessions'] });
     }
   });
