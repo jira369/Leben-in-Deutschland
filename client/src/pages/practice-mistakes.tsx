@@ -39,34 +39,35 @@ export default function PracticeMistakes() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
-          <p className="text-gray-600">Fehler werden geladen...</p>
+          <p className="text-muted-foreground">Fehler werden geladen...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Header */}
-        <div className="mb-8">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-            <div className="flex items-center gap-4">
+    <div className="min-h-screen bg-background">
+      {/* Header */}
+      <header className="bg-card shadow-sm border-b border-border sticky top-0 z-50">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-4">
               <Link href="/practice">
-                <Button variant="outline" size="sm">
-                  <ArrowLeft className="w-4 h-4 mr-2" />
-                  Zurück
+                <Button variant="ghost" size="sm">
+                  <ArrowLeft className="h-4 w-4 mr-2" />
+                  <span className="sm:hidden">Zurück</span>
+                  <span className="hidden sm:inline">Zurück zur Übung</span>
                 </Button>
               </Link>
               <div>
-                <h1 className="text-3xl font-bold text-gray-900">
+                <h1 className="text-2xl font-bold text-foreground">
                   <span className="sm:hidden">Fehler üben</span>
                   <span className="hidden sm:inline">Fehler üben</span>
                 </h1>
-                <p className="text-gray-600 mt-1 hidden sm:block">
+                <p className="text-muted-foreground mt-1 hidden sm:block">
                   Wiederhole Fragen, die du zuvor falsch beantwortet hast
                 </p>
               </div>
@@ -77,7 +78,7 @@ export default function PracticeMistakes() {
                   onClick={handleClearMistakes}
                   variant="outline"
                   size="sm"
-                  className="text-red-600 hover:text-red-700"
+                  className="text-red-600 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300"
                 >
                   <Trash2 className="w-4 h-4 mr-2" />
                   Alle löschen
@@ -86,6 +87,9 @@ export default function PracticeMistakes() {
             </div>
           </div>
         </div>
+      </header>
+
+      <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
         {/* Statistics Card */}
         <Card className="mb-8">
@@ -104,23 +108,23 @@ export default function PracticeMistakes() {
                 <div className="text-3xl font-bold text-red-600 mb-2">
                   {countData?.count || 0}
                 </div>
-                <div className="text-sm text-gray-600">
+                <div className="text-sm text-muted-foreground">
                   Falsche Antworten gesamt
                 </div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-blue-600 mb-2">
+                <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">
                   {incorrectQuestions.length}
                 </div>
-                <div className="text-sm text-gray-600">
+                <div className="text-sm text-muted-foreground">
                   Verschiedene Fragen
                 </div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-green-600 mb-2">
+                <div className="text-3xl font-bold text-green-600 dark:text-green-400 mb-2">
                   {incorrectQuestions.length > 0 ? Math.round((incorrectQuestions.length / 460) * 100) : 0}%
                 </div>
-                <div className="text-sm text-gray-600">
+                <div className="text-sm text-muted-foreground">
                   Anteil aller Fragen
                 </div>
               </div>
@@ -132,11 +136,11 @@ export default function PracticeMistakes() {
         {incorrectQuestions.length === 0 ? (
           <Card>
             <CardContent className="py-12 text-center">
-              <BookOpen className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-              <h2 className="text-xl font-semibold text-gray-900 mb-2">
+              <BookOpen className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
+              <h2 className="text-xl font-semibold text-foreground mb-2">
                 Keine Fehler gefunden
               </h2>
-              <p className="text-gray-600 mb-6">
+              <p className="text-muted-foreground mb-6">
                 Du hast noch keine Fragen falsch beantwortet oder alle Fehler wurden gelöscht.
               </p>
               <Link href="/practice">
@@ -179,7 +183,7 @@ export default function PracticeMistakes() {
                             </Badge>
                           )}
                         </div>
-                        <p className="text-gray-900 mb-4 leading-relaxed">
+                        <p className="text-foreground mb-4 leading-relaxed">
                           {question.text}
                         </p>
                         {question.hasImage && question.imagePath && (

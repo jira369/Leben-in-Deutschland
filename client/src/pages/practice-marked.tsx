@@ -12,9 +12,9 @@ export default function PracticeMarked() {
   const [imageModalOpen, setImageModalOpen] = useState<{ [key: number]: boolean }>({});
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="bg-white border-b shadow-sm">
+      <header className="bg-card shadow-sm border-b border-border sticky top-0 z-50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
@@ -26,11 +26,11 @@ export default function PracticeMarked() {
                 </Button>
               </Link>
               <div>
-                <h1 className="text-2xl font-bold text-gray-900">
+                <h1 className="text-2xl font-bold text-foreground">
                   <span className="sm:hidden">Markierte Fragen</span>
                   <span className="hidden sm:inline">Markierte Fragen</span>
                 </h1>
-                <p className="text-gray-600 mt-1 hidden sm:block">
+                <p className="text-muted-foreground mt-1 hidden sm:block">
                   Übe mit deinen markierten Fragen ({markedQuestionsCount} Fragen)
                 </p>
               </div>
@@ -61,7 +61,7 @@ export default function PracticeMarked() {
         ) : (
           <>
             {/* Practice Options */}
-            <Card className="mb-8 border-2 border-yellow-200 bg-gradient-to-r from-yellow-50 to-amber-50">
+            <Card className="mb-8 border-2 border-yellow-200 dark:border-yellow-800 bg-gradient-to-r from-yellow-50 to-amber-50 dark:from-yellow-950/20 dark:to-amber-950/20">
               <CardHeader>
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                   <div className="flex items-center space-x-3">
@@ -69,10 +69,10 @@ export default function PracticeMarked() {
                       <Flag className="h-6 w-6 text-white" />
                     </div>
                     <div>
-                      <CardTitle className="text-xl text-gray-900">
+                      <CardTitle className="text-xl text-foreground">
                         Markierte Fragen üben
                       </CardTitle>
-                      <p className="text-gray-600 mt-1">
+                      <p className="text-muted-foreground mt-1">
                         {markedQuestionsCount} markierte Fragen verfügbar
                       </p>
                     </div>
@@ -85,7 +85,7 @@ export default function PracticeMarked() {
                       </Button>
                     </Link>
                     <Link href="/quiz?type=practice&mode=marked&chronological=true">
-                      <Button size="lg" variant="outline" className="w-full border-yellow-600 text-yellow-700 hover:bg-yellow-100">
+                      <Button size="lg" variant="outline" className="w-full border-yellow-600 text-yellow-700 hover:bg-yellow-100 dark:border-yellow-400 dark:text-yellow-400 dark:hover:bg-yellow-900/20">
                         Chronologisch üben
                       </Button>
                     </Link>
@@ -111,23 +111,23 @@ export default function PracticeMarked() {
                     <div className="text-3xl font-bold text-yellow-600 mb-2">
                       {markedQuestionsCount}
                     </div>
-                    <div className="text-sm text-gray-600">
+                    <div className="text-sm text-muted-foreground">
                       Markierte Fragen
                     </div>
                   </div>
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-blue-600 mb-2">
+                    <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">
                       {markedQuestionsData.length}
                     </div>
-                    <div className="text-sm text-gray-600">
+                    <div className="text-sm text-muted-foreground">
                       Verschiedene Fragen
                     </div>
                   </div>
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-green-600 mb-2">
+                    <div className="text-3xl font-bold text-green-600 dark:text-green-400 mb-2">
                       {markedQuestionsData.length > 0 ? Math.round((markedQuestionsData.length / 460) * 100) : 0}%
                     </div>
-                    <div className="text-sm text-gray-600">
+                    <div className="text-sm text-muted-foreground">
                       Anteil aller Fragen
                     </div>
                   </div>
@@ -158,7 +158,7 @@ export default function PracticeMarked() {
                           )}
                           <Flag className="h-4 w-4 text-yellow-500 fill-yellow-500 ml-2" />
                         </div>
-                        <p className="text-gray-900 mb-4 leading-relaxed">
+                        <p className="text-foreground mb-4 leading-relaxed">
                           {question.text}
                         </p>
                         {question.hasImage && question.imagePath && (
