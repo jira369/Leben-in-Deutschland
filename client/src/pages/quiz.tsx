@@ -62,8 +62,10 @@ export default function Quiz() {
   };
 
   const handleExitQuiz = async () => {
-    // If quiz is in progress, finish it first to get results
-    if (quizState && Object.keys(quizState.selectedAnswers).length > 0) {
+    const answersGiven = quizState ? Object.keys(quizState.selectedAnswers).length : 0;
+    
+    // For practice mode: show results if more than 1 question answered
+    if (quizType === 'practice' && answersGiven > 1) {
       const results = await finishQuiz(quizType);
       if (results) {
         setQuizResults(results);
@@ -72,6 +74,19 @@ export default function Quiz() {
         return;
       }
     }
+    
+    // For full test: always show results if any questions answered
+    if (quizType === 'full' && answersGiven > 0) {
+      const results = await finishQuiz(quizType);
+      if (results) {
+        setQuizResults(results);
+        localStorage.setItem('quiz-results', JSON.stringify({ results, type: quizType }));
+        setLocation('/results');
+        return;
+      }
+    }
+    
+    // If no questions answered (or only 1 in practice), go back to previous page
     resetQuiz();
     setLocation('/');
   };

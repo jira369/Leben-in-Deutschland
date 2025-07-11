@@ -177,6 +177,7 @@ Entwicklungshistorie:
 - 6. Juli 2025. **PWA-IMPLEMENTIERUNG:** Vollständige Umwandlung zur Progressive Web App - Manifest erstellt, Service Worker für Offline-Funktionalität hinzugefügt, App-Icons generiert, Meta-Tags für mobile Installation integriert, automatisches Install-Prompt implementiert. App ist jetzt installierbar auf mobilen Geräten und Desktop.
 - 11. Juli 2025. **UI-TERMINOLOGIE KONSISTENT:** Vollständige Trennung zwischen "Test" (nur Volltest mit 33 Fragen) und "Übung" (alle anderen Modi). Ergebnis-Seite zeigt nur bei Volltest "Einbürgerungstest bestanden". Quiz-Interface verwendet "Übung beenden" für alle Modi außer Volltest. Timer von 45 auf 60 Minuten erhöht. Dark Mode vollständig für alle Quiz- und Ergebnis-Komponenten implementiert.
 - 11. Juli 2025. **NAVIGATION OPTIMIERT:** Nach Übungen führt "Neue Übung starten" zur Practice-Übersichtsseite. Nach Volltest führt "Neuen Test starten" direkt zu neuem Volltest. Konsistente Benutzerführung zwischen Test- und Übungsmodi implementiert.
+- 11. Juli 2025. **BEENDEN-LOGIK VERFEINERT:** Übungsmodus zeigt Ergebnisse nur bei >1 beantworteten Fragen, sonst zurück zur vorherigen Seite. Volltest zeigt immer Ergebnisse bei >0 beantworteten Fragen. Intelligente Exit-Logik basierend auf Quiz-Typ und Fortschritt.
 
 ## Benutzerpräferenzen
 
