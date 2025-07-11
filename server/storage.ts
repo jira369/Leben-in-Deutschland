@@ -146,9 +146,11 @@ export class MemStorage implements IStorage {
     bestScore: number;
     totalStudyTime: number;
   }> {
-    const sessions = Array.from(this.quizSessions.values());
+    // Only count full tests (type='full'), not practice sessions
+    const fullTestSessions = Array.from(this.quizSessions.values())
+      .filter(session => session.type === 'full');
     
-    if (sessions.length === 0) {
+    if (fullTestSessions.length === 0) {
       return {
         totalTests: 0,
         averageScore: 0,
@@ -157,11 +159,11 @@ export class MemStorage implements IStorage {
       };
     }
 
-    const totalTests = sessions.length;
-    const scores = sessions.map(s => s.percentage);
+    const totalTests = fullTestSessions.length;
+    const scores = fullTestSessions.map(s => s.percentage);
     const averageScore = Math.round(scores.reduce((sum, score) => sum + score, 0) / scores.length);
     const bestScore = Math.max(...scores);
-    const totalStudyTime = sessions.reduce((sum, session) => sum + (session.timeSpent || 0), 0);
+    const totalStudyTime = fullTestSessions.reduce((sum, session) => sum + (session.timeSpent || 0), 0);
 
     return {
       totalTests,
@@ -193,16 +195,18 @@ export class MemStorage implements IStorage {
   }> {
     const totalQuestions = this.questions.size;
     
-    // Calculate stats from quiz sessions
-    const sessions = Array.from(this.quizSessions.values());
-    const totalTests = sessions.length;
-    const testsPassedCount = sessions.filter(s => s.passed).length;
+    // Calculate stats from all quiz sessions (practice and full tests for answers)
+    const allSessions = Array.from(this.quizSessions.values());
+    const correctAnswers = allSessions.reduce((sum, s) => sum + s.correctAnswers, 0);
+    const incorrectAnswers = allSessions.reduce((sum, s) => sum + s.incorrectAnswers, 0);
+    
+    // But only count full tests for test statistics
+    const fullTestSessions = allSessions.filter(s => s.type === 'full');
+    const totalTests = fullTestSessions.length;
+    const testsPassedCount = fullTestSessions.filter(s => s.passed).length;
     const testsPassedPercentage = totalTests > 0 
       ? Math.round((testsPassedCount / totalTests) * 100) 
       : 0;
-    
-    const correctAnswers = sessions.reduce((sum, s) => sum + s.correctAnswers, 0);
-    const incorrectAnswers = sessions.reduce((sum, s) => sum + s.incorrectAnswers, 0);
 
     return {
       totalQuestions,
@@ -356,6 +360,7 @@ export class DatabaseStorage implements IStorage {
     bestScore: number;
     totalStudyTime: number;
   }> {
+    // Only count full tests (type='full'), not practice sessions
     const stats = await db
       .select({
         totalTests: sql<number>`COUNT(*)`,
@@ -363,7 +368,8 @@ export class DatabaseStorage implements IStorage {
         bestScore: sql<number>`COALESCE(MAX(${quizSessions.percentage}), 0)`,
         totalStudyTime: sql<number>`COALESCE(SUM(${quizSessions.timeSpent}), 0)`
       })
-      .from(quizSessions);
+      .from(quizSessions)
+      .where(eq(quizSessions.type, 'full'));
 
     const result = stats[0];
     return {
@@ -450,27 +456,36 @@ export class DatabaseStorage implements IStorage {
     const totalQuestionsResult = await totalQuestionsQuery;
     const totalQuestions = totalQuestionsResult[0]?.count || 0;
 
-    // Get aggregated stats from all quiz sessions
-    const sessionStats = await db
+    // Get correct/incorrect answers from ALL sessions (practice and full tests)
+    const allSessionStats = await db
       .select({
-        totalTests: sql<number>`COUNT(*)`,
         totalCorrectAnswers: sql<number>`COALESCE(SUM(${quizSessions.correctAnswers}), 0)`,
-        totalIncorrectAnswers: sql<number>`COALESCE(SUM(${quizSessions.incorrectAnswers}), 0)`,
-        testsPassedCount: sql<number>`COUNT(CASE WHEN ${quizSessions.passed} = true THEN 1 END)`
+        totalIncorrectAnswers: sql<number>`COALESCE(SUM(${quizSessions.incorrectAnswers}), 0)`
       })
       .from(quizSessions);
 
-    const stats = sessionStats[0];
-    const totalTests = stats?.totalTests || 0;
-    const testsPassedCount = stats?.testsPassedCount || 0;
+    // Get test stats only from FULL TESTS (type='full')
+    const fullTestStats = await db
+      .select({
+        totalTests: sql<number>`COUNT(*)`,
+        testsPassedCount: sql<number>`COUNT(CASE WHEN ${quizSessions.passed} = true THEN 1 END)`
+      })
+      .from(quizSessions)
+      .where(eq(quizSessions.type, 'full'));
+
+    const allStats = allSessionStats[0];
+    const fullStats = fullTestStats[0];
+    
+    const totalTests = fullStats?.totalTests || 0;
+    const testsPassedCount = fullStats?.testsPassedCount || 0;
     const testsPassedPercentage = totalTests > 0 
       ? Math.round((testsPassedCount / totalTests) * 100) 
       : 0;
 
     return {
       totalQuestions,
-      correctAnswers: stats?.totalCorrectAnswers || 0,
-      incorrectAnswers: stats?.totalIncorrectAnswers || 0,
+      correctAnswers: allStats?.totalCorrectAnswers || 0,
+      incorrectAnswers: allStats?.totalIncorrectAnswers || 0,
       totalTests,
       testsPassedCount,
       testsPassedPercentage
