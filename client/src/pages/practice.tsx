@@ -168,7 +168,7 @@ export default function Practice() {
                 <Link href="/practice-mistakes" className="w-full sm:w-40">
                   <Button 
                     variant="outline" 
-                    className="w-full h-10 border-red-600 text-red-700 hover:bg-red-100"
+                    className="w-full h-10 border-red-600 text-red-700 hover:bg-red-100 dark:border-red-400 dark:text-red-400 dark:hover:bg-red-900/20"
                   >
                     <RotateCcw className="h-4 w-4 mr-2" />
                     Fehler ansehen
@@ -180,7 +180,7 @@ export default function Practice() {
         </Card>
 
         {/* Marked Questions Practice Section */}
-        <Card className="mb-8 border-2 border-yellow-200 bg-gradient-to-r from-yellow-50 to-amber-50">
+        <Card className="mb-8 border-2 border-yellow-200 dark:border-yellow-800 bg-gradient-to-r from-yellow-50 to-amber-50 dark:from-yellow-950/20 dark:to-amber-950/20">
           <CardHeader>
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
               <div className="flex items-center space-x-3">
@@ -188,8 +188,8 @@ export default function Practice() {
                   <Flag className="h-6 w-6 text-white" />
                 </div>
                 <div>
-                  <CardTitle className="text-xl text-gray-900">Markierte Fragen</CardTitle>
-                  <p className="text-gray-600 mt-1">
+                  <CardTitle className="text-xl text-foreground">Markierte Fragen</CardTitle>
+                  <p className="text-muted-foreground mt-1">
                     Übe mit deinen {markedQuestionsCount} markierten Fragen
                   </p>
                 </div>
@@ -198,7 +198,7 @@ export default function Practice() {
                 <Link href="/practice-marked" className="w-full sm:w-40">
                   <Button 
                     variant="outline" 
-                    className="w-full h-10 border-yellow-600 text-yellow-700 hover:bg-yellow-100"
+                    className="w-full h-10 border-yellow-600 text-yellow-700 hover:bg-yellow-100 dark:border-yellow-400 dark:text-yellow-400 dark:hover:bg-yellow-900/20"
                   >
                     <Flag className="h-4 w-4 mr-2" />
                     Markierte ansehen
@@ -210,7 +210,7 @@ export default function Practice() {
         </Card>
 
         {/* All Questions Practice */}
-        <Card className="mb-8 border-2 border-blue-200 bg-gradient-to-r from-blue-50 to-indigo-50">
+        <Card className="mb-8 border-2 border-blue-200 dark:border-blue-800 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-950/20 dark:to-indigo-950/20">
           <CardHeader>
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
               <div className="flex items-center space-x-3">
@@ -218,8 +218,8 @@ export default function Practice() {
                   <Play className="h-6 w-6 text-white" />
                 </div>
                 <div>
-                  <CardTitle className="text-xl text-gray-900">Alle Fragen üben</CardTitle>
-                  <p className="text-gray-600 mt-1">
+                  <CardTitle className="text-xl text-foreground">Alle Fragen üben</CardTitle>
+                  <p className="text-muted-foreground mt-1">
                     Bundesweite Fragen ({federalQuestions.length}) + 
                     {userSettings?.selectedState && stateQuestions.length > 0 
                       ? ` ${userSettings.selectedState} (${stateQuestions.length})`
@@ -236,7 +236,7 @@ export default function Practice() {
                   </Button>
                 </Link>
                 <Link href="/quiz?type=practice&mode=all&chronological=true">
-                  <Button size="lg" variant="outline" className="w-full h-10 border-blue-600 text-blue-700 hover:bg-blue-100">
+                  <Button size="lg" variant="outline" className="w-full h-10 border-blue-600 text-blue-700 hover:bg-blue-100 dark:border-blue-400 dark:text-blue-400 dark:hover:bg-blue-900/20">
                     Chronologisch üben
                   </Button>
                 </Link>
@@ -245,24 +245,24 @@ export default function Practice() {
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="text-center p-4 bg-white rounded-lg border">
-                <Globe className="h-8 w-8 text-blue-600 mx-auto mb-2" />
-                <div className="text-2xl font-bold text-gray-900">{federalQuestions.length}</div>
-                <div className="text-sm text-gray-600">Bundesweite Fragen</div>
+              <div className="text-center p-4 bg-card dark:bg-card rounded-lg border border-border">
+                <Globe className="h-8 w-8 text-blue-600 dark:text-blue-400 mx-auto mb-2" />
+                <div className="text-2xl font-bold text-foreground">{federalQuestions.length}</div>
+                <div className="text-sm text-muted-foreground">Bundesweite Fragen</div>
               </div>
               {userSettings?.selectedState && stateQuestions.length > 0 && (
-                <div className="text-center p-4 bg-white rounded-lg border">
-                  <Flag className="h-8 w-8 text-green-600 mx-auto mb-2" />
-                  <div className="text-2xl font-bold text-gray-900">{stateQuestions.length}</div>
-                  <div className="text-sm text-gray-600">{userSettings.selectedState}</div>
+                <div className="text-center p-4 bg-card dark:bg-card rounded-lg border border-border">
+                  <Flag className="h-8 w-8 text-green-600 dark:text-green-400 mx-auto mb-2" />
+                  <div className="text-2xl font-bold text-foreground">{stateQuestions.length}</div>
+                  <div className="text-sm text-muted-foreground">{userSettings.selectedState}</div>
                 </div>
               )}
-              <div className="text-center p-4 bg-white rounded-lg border">
-                <Heart className="h-8 w-8 text-red-600 mx-auto mb-2" />
-                <div className="text-2xl font-bold text-gray-900">
+              <div className="text-center p-4 bg-card dark:bg-card rounded-lg border border-border">
+                <Heart className="h-8 w-8 text-red-600 dark:text-red-400 mx-auto mb-2" />
+                <div className="text-2xl font-bold text-foreground">
                   {federalQuestions.length + stateQuestions.length}
                 </div>
-                <div className="text-sm text-gray-600">Gesamt verfügbar</div>
+                <div className="text-sm text-muted-foreground">Gesamt verfügbar</div>
               </div>
             </div>
           </CardContent>
@@ -270,8 +270,8 @@ export default function Practice() {
 
         {/* Category Practice */}
         <div className="mb-6">
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">Nach Kategorien üben</h2>
-          <p className="text-gray-600">Wählen Sie einen spezifischen Bereich zum gezielten Üben</p>
+          <h2 className="text-2xl font-bold text-foreground mb-2">Nach Kategorien üben</h2>
+          <p className="text-muted-foreground">Wählen Sie einen spezifischen Bereich zum gezielten Üben</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -294,7 +294,7 @@ export default function Practice() {
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-gray-600 text-sm mb-4">{category.description}</p>
+                  <p className="text-muted-foreground text-sm mb-4">{category.description}</p>
                   <div className="flex flex-col gap-2">
                     <Link href={`/quiz?type=practice&category=${category.id}`}>
                       <Button 
@@ -325,7 +325,7 @@ export default function Practice() {
 
         {/* Bundesland Specific */}
         {userSettings?.selectedState && stateQuestions.length > 0 && (
-          <Card className="mt-8 border-green-200 bg-green-50">
+          <Card className="mt-8 border-green-200 dark:border-green-800 bg-green-50 dark:bg-green-950/20">
             <CardHeader>
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div className="flex items-center space-x-3">
@@ -333,7 +333,7 @@ export default function Practice() {
                     <Flag className="h-5 w-5 text-white" />
                   </div>
                   <div>
-                    <CardTitle className="text-lg">
+                    <CardTitle className="text-lg text-foreground">
                       {userSettings.selectedState} - Spezielle Fragen
                     </CardTitle>
                     <Badge variant="secondary">{stateQuestions.length} Fragen</Badge>
@@ -343,7 +343,7 @@ export default function Practice() {
                   <Link href={`/quiz?type=practice&category=${userSettings?.selectedState || 'Bundesweit'}`}>
                     <Button 
                       variant="outline" 
-                      className="w-full h-10 border-green-600 text-green-700 hover:bg-green-100"
+                      className="w-full h-10 border-green-600 text-green-700 hover:bg-green-100 dark:border-green-400 dark:text-green-400 dark:hover:bg-green-900/20"
                     >
                       <Shuffle className="h-4 w-4 mr-2" />
                       Zufällig üben
@@ -352,7 +352,7 @@ export default function Practice() {
                   <Link href={`/quiz?type=practice&category=${userSettings?.selectedState || 'Bundesweit'}&chronological=true`}>
                     <Button 
                       variant="secondary" 
-                      className="w-full h-10 border-green-600 text-green-700 hover:bg-green-100"
+                      className="w-full h-10 border-green-600 text-green-700 hover:bg-green-100 dark:border-green-400 dark:text-green-400 dark:hover:bg-green-900/20"
                     >
                       Chronologisch üben
                     </Button>
@@ -361,7 +361,7 @@ export default function Practice() {
               </div>
             </CardHeader>
             <CardContent>
-              <p className="text-gray-600 text-sm">
+              <p className="text-muted-foreground text-sm">
                 Spezielle Fragen für Ihr Bundesland {userSettings.selectedState}. 
                 Diese Fragen können im echten Test als Teil der 3 bundeslandspezifischen Fragen erscheinen.
               </p>
