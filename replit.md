@@ -175,6 +175,7 @@ Entwicklungshistorie:
 - 5. Juli 2025. Thüringen-Bilderfragen hinzugefügt: Wappen-Frage (ID 451) und Karten-Frage (ID 458) mit offiziellen Bildern verknüpft.
 - 5. Juli 2025. **DOKUMENTATION VOLLSTÄNDIG DEUTSCH:** Komplette Übersetzung der technischen Dokumentation ins Deutsche - alle Abschnitte von Systemarchitektur bis Deployment-Strategie jetzt auf Deutsch verfügbar.
 - 6. Juli 2025. **PWA-IMPLEMENTIERUNG:** Vollständige Umwandlung zur Progressive Web App - Manifest erstellt, Service Worker für Offline-Funktionalität hinzugefügt, App-Icons generiert, Meta-Tags für mobile Installation integriert, automatisches Install-Prompt implementiert. App ist jetzt installierbar auf mobilen Geräten und Desktop.
+- 11. Juli 2025. **UI-TERMINOLOGIE KONSISTENT:** Vollständige Trennung zwischen "Test" (nur Volltest mit 33 Fragen) und "Übung" (alle anderen Modi). Ergebnis-Seite zeigt nur bei Volltest "Einbürgerungstest bestanden". Quiz-Interface verwendet "Übung beenden" für alle Modi außer Volltest. Timer von 45 auf 60 Minuten erhöht. Dark Mode vollständig für alle Quiz- und Ergebnis-Komponenten implementiert.
 
 ## Benutzerpräferenzen
 

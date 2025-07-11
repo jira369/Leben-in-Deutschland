@@ -144,7 +144,7 @@ export default function Quiz() {
                   className="px-4 py-2"
                   disabled={!hasSelectedCurrentAnswer}
                 >
-                  Test beenden
+                  {quizType === 'full' ? 'Test beenden' : 'Übung beenden'}
                 </Button>
               ) : (
                 <Button
