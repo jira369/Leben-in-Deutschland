@@ -125,7 +125,7 @@ export function SettingsModal({ open, onOpenChange }: SettingsModalProps) {
                 ))}
               </SelectContent>
             </Select>
-            <p className="text-xs text-muted-foreground mt-1">
+            <p className="text-xs text-muted-foreground mt-4">
               Wählen Sie Ihr Bundesland für spezifische Fragen
             </p>
           </div>
