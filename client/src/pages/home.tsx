@@ -153,7 +153,7 @@ export default function Home() {
             ) : (
               <div className="space-y-3">
                 {recentSessions.map((session) => (
-                  <div key={session.id} className="flex items-center justify-between p-4 bg-muted/50 dark:bg-muted/20 rounded-lg">
+                  <div key={session.id} className="flex items-center justify-between p-4 bg-muted/50 dark:bg-muted/30 rounded-lg border border-border">
                     <div className="flex items-center space-x-4">
                       <div className={`w-12 h-12 rounded-lg flex items-center justify-center ${
                         session.passed ? 'bg-green-100 dark:bg-green-900/30' : 'bg-orange-100 dark:bg-orange-900/30'

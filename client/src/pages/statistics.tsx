@@ -315,25 +315,25 @@ export default function Statistics() {
             <CardContent>
               <div className="space-y-3">
                 {recentSessions.slice(0, 5).map((session: any, index: number) => (
-                  <div key={session.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                  <div key={session.id} className="flex items-center justify-between p-3 bg-muted/50 dark:bg-muted/30 rounded-lg border border-border">
                     <div className="flex items-center space-x-3">
                       <div className={`w-3 h-3 rounded-full ${
                         session.passed ? 'bg-green-500' : 'bg-red-500'
                       }`}></div>
                       <div>
-                        <p className="font-medium text-sm">
+                        <p className="font-medium text-sm text-foreground">
                           {session.type === 'full' ? 'Volltest' : 'Übungstest'}
                         </p>
-                        <p className="text-xs text-gray-500">
+                        <p className="text-xs text-muted-foreground">
                           {new Date(session.createdAt).toLocaleDateString('de-DE')}
                         </p>
                       </div>
                     </div>
                     <div className="text-right">
-                      <p className="font-semibold text-sm">
+                      <p className="font-semibold text-sm text-foreground">
                         {session.correctAnswers}/{session.totalQuestions}
                       </p>
-                      <p className="text-xs text-gray-500">
+                      <p className="text-xs text-muted-foreground">
                         {session.percentage}%
                       </p>
                     </div>
