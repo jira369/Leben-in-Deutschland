@@ -102,7 +102,7 @@ export function QuestionCard({
               <RadioGroupItem
                 value={index.toString()}
                 disabled={hasSelectedAnswer}
-                className="w-5 h-5 text-primary border-gray-300 focus:ring-primary focus:ring-2"
+                className="w-5 h-5 text-primary border-border focus:ring-primary focus:ring-2"
               />
               <span className={`ml-4 font-medium ${
                 selectedAnswer === index 

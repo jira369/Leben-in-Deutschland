@@ -205,8 +205,8 @@ export default function PracticeMarked() {
                               key={answerIndex}
                               className={`p-3 rounded-md border ${
                                 answerIndex + 1 === question.correctAnswer
-                                  ? "bg-green-50 border-green-200 text-green-800"
-                                  : "bg-gray-50 border-gray-200"
+                                  ? "bg-green-50 dark:bg-green-950/20 border-green-200 dark:border-green-800 text-green-800 dark:text-green-200"
+                                  : "bg-muted border-border text-foreground"
                               }`}
                             >
                               <div className="flex items-center gap-2">
@@ -215,7 +215,7 @@ export default function PracticeMarked() {
                                 </span>
                                 <span>{answer}</span>
                                 {answerIndex + 1 === question.correctAnswer && (
-                                  <Badge className="ml-auto bg-green-600">
+                                  <Badge className="ml-auto bg-green-600 dark:bg-green-700">
                                     Richtig
                                   </Badge>
                                 )}
@@ -224,8 +224,8 @@ export default function PracticeMarked() {
                           ))}
                         </div>
                         {question.explanation && (
-                          <div className="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-md">
-                            <p className="text-sm text-blue-800">
+                          <div className="mt-4 p-3 bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 rounded-md">
+                            <p className="text-sm text-blue-800 dark:text-blue-200">
                               <strong>Erklärung:</strong> {question.explanation}
                             </p>
                           </div>
