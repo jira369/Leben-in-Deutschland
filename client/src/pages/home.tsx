@@ -143,7 +143,7 @@ export default function Home() {
             <h3 className="text-xl font-semibold text-foreground mb-4">
               Ihre letzten Ergebnisse
             </h3>
-            {recentSessions.length === 0 ? (
+            {recentSessions.filter(session => session.type === 'full').length === 0 ? (
               <div className="text-center py-8 text-muted-foreground">
                 <p>Noch keine Tests absolviert.</p>
                 <p className="text-sm mt-1">
@@ -152,7 +152,7 @@ export default function Home() {
               </div>
             ) : (
               <div className="space-y-3">
-                {recentSessions.map((session) => (
+                {recentSessions.filter(session => session.type === 'full').map((session) => (
                   <div key={session.id} className="flex items-center justify-between p-4 bg-muted/50 dark:bg-muted/30 rounded-lg border border-border">
                     <div className="flex items-center space-x-4">
                       <div className={`w-12 h-12 rounded-lg flex items-center justify-center ${
