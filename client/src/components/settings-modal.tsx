@@ -169,42 +169,6 @@ export function SettingsModal({ open, onOpenChange }: SettingsModalProps) {
                 }
               />
             </div>
-
-            <div className="flex items-center justify-between">
-              <div>
-                <Label htmlFor="feedback" className="text-sm font-medium text-gray-700">
-                  Sofortiges Feedback
-                </Label>
-                <p className="text-xs text-gray-500 mt-1">
-                  Zeigt die richtige Antwort sofort nach der Auswahl
-                </p>
-              </div>
-              <Switch
-                id="feedback"
-                checked={currentSettings.immediateFeedback !== false}
-                onCheckedChange={(checked) => 
-                  setLocalSettings(prev => ({ ...prev, immediateFeedback: checked }))
-                }
-              />
-            </div>
-
-            <div className="flex items-center justify-between">
-              <div>
-                <Label htmlFor="shuffle" className="text-sm font-medium text-gray-700">
-                  Fragen mischen
-                </Label>
-                <p className="text-xs text-gray-500 mt-1">
-                  Fragen in zufälliger Reihenfolge anzeigen
-                </p>
-              </div>
-              <Switch
-                id="shuffle"
-                checked={currentSettings.shuffleQuestions !== false}
-                onCheckedChange={(checked) => 
-                  setLocalSettings(prev => ({ ...prev, shuffleQuestions: checked }))
-                }
-              />
-            </div>
           </div>
         </div>
 
