@@ -203,7 +203,7 @@ export default function Results() {
             <CardContent className="p-0">
               <h4 className="text-lg font-semibold text-foreground mb-4">Nächste Schritte</h4>
               <div className="space-y-4">
-                <Link href={`/quiz?type=${quizType}`}>
+                <Link href={isFullTest ? `/quiz?type=full` : '/practice'}>
                   <Button className="w-full mb-1">
                     <RotateCcw className="mr-2 h-4 w-4" />
                     {isFullTest ? 'Neuen Test starten' : 'Neue Übung starten'}
