@@ -60,9 +60,13 @@ export default function Statistics() {
   const questionsAnswered = uniqueQuestionsData?.uniqueQuestionsAnswered || 0;
   
   // Calculate accuracy based on correct answers vs total answers (not unique questions)
-  const totalAnswersGiven = (stats?.correctAnswers || 0) + (stats?.incorrectAnswers || 0);
+  // Convert strings to numbers first to avoid string concatenation
+  const correctAnswersNum = parseInt(stats?.correctAnswers?.toString() || '0', 10);
+  const incorrectAnswersNum = parseInt(stats?.incorrectAnswers?.toString() || '0', 10);
+  const totalAnswersGiven = correctAnswersNum + incorrectAnswersNum;
+  
   const accuracyPercentage = totalAnswersGiven > 0 
-    ? Math.round((stats?.correctAnswers || 0) / totalAnswersGiven * 100) 
+    ? Math.round((correctAnswersNum / totalAnswersGiven) * 100) 
     : 0;
 
   if (isLoading) {
@@ -105,7 +109,7 @@ export default function Statistics() {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold text-green-700 dark:text-green-200">
-                {stats?.correctAnswers || 0}
+                {correctAnswersNum}
               </div>
               <p className="text-xs text-green-600 dark:text-green-300 mt-1">
                 {accuracyPercentage}% Genauigkeit
@@ -123,7 +127,7 @@ export default function Statistics() {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold text-red-700 dark:text-red-200">
-                {stats?.incorrectAnswers || 0}
+                {incorrectAnswersNum}
               </div>
               <p className="text-xs text-red-600 dark:text-red-300 mt-1">
                 Übungsbedarf identifiziert
@@ -223,7 +227,7 @@ export default function Statistics() {
                 <div className="flex justify-between items-center">
                   <span className="text-sm text-muted-foreground">Richtige Antworten</span>
                   <span className="font-semibold text-green-600 dark:text-green-400">
-                    {stats?.correctAnswers || 0} ({accuracyPercentage}%)
+                    {correctAnswersNum} ({accuracyPercentage}%)
                   </span>
                 </div>
                 <Progress 
@@ -236,7 +240,7 @@ export default function Statistics() {
                 <div className="flex justify-between items-center">
                   <span className="text-sm text-muted-foreground">Falsche Antworten</span>
                   <span className="font-semibold text-red-600 dark:text-red-400">
-                    {stats?.incorrectAnswers || 0} ({100 - accuracyPercentage}%)
+                    {incorrectAnswersNum} ({100 - accuracyPercentage}%)
                   </span>
                 </div>
                 <Progress 
