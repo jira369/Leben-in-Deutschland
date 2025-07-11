@@ -73,21 +73,21 @@ export default function Results() {
             <div className="w-24 h-24 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-6">
               <Trophy className="text-green-500 text-3xl h-12 w-12" />
             </div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-2">Test abgeschlossen!</h2>
-            <p className="text-lg text-gray-600 mb-6">
+            <h2 className="text-3xl font-bold text-foreground mb-2">Test abgeschlossen!</h2>
+            <p className="text-lg text-muted-foreground mb-6">
               {passedTest ? 'Herzlichen Glückwunsch zu Ihrem Ergebnis' : 'Üben Sie weiter für bessere Ergebnisse'}
             </p>
             
             <div className="grid md:grid-cols-3 gap-6 max-w-2xl mx-auto mb-8">
-              <div className="bg-green-50 rounded-xl p-6">
-                <div className="text-3xl font-bold text-green-600 mb-2">{results.correct}</div>
-                <p className="text-green-700 font-medium">Richtige Antworten</p>
+              <div className="bg-green-50 dark:bg-green-950/20 rounded-xl p-6">
+                <div className="text-3xl font-bold text-green-600 dark:text-green-400 mb-2">{results.correct}</div>
+                <p className="text-green-700 dark:text-green-300 font-medium">Richtige Antworten</p>
               </div>
-              <div className="bg-red-50 rounded-xl p-6">
-                <div className="text-3xl font-bold text-red-600 mb-2">{results.incorrect}</div>
-                <p className="text-red-700 font-medium">Falsche Antworten</p>
+              <div className="bg-red-50 dark:bg-red-950/20 rounded-xl p-6">
+                <div className="text-3xl font-bold text-red-600 dark:text-red-400 mb-2">{results.incorrect}</div>
+                <p className="text-red-700 dark:text-red-300 font-medium">Falsche Antworten</p>
               </div>
-              <div className="bg-primary/5 rounded-xl p-6">
+              <div className="bg-primary/5 dark:bg-primary/10 rounded-xl p-6">
                 <div className="text-3xl font-bold text-primary mb-2">{results.percentage}%</div>
                 <p className="text-primary font-medium">Erfolgsquote</p>
               </div>
@@ -95,29 +95,29 @@ export default function Results() {
 
             <div className={`p-6 rounded-xl border ${
               passedTest 
-                ? 'bg-green-50 border-green-200' 
-                : 'bg-red-50 border-red-200'
+                ? 'bg-green-50 dark:bg-green-950/20 border-green-200 dark:border-green-800' 
+                : 'bg-red-50 dark:bg-red-950/20 border-red-200 dark:border-red-800'
             }`}>
               <div className="flex items-center justify-center space-x-3 mb-2">
                 {passedTest ? (
-                  <CheckCircle className="text-green-500 text-xl h-6 w-6" />
+                  <CheckCircle className="text-green-500 dark:text-green-400 text-xl h-6 w-6" />
                 ) : (
-                  <XCircle className="text-red-500 text-xl h-6 w-6" />
+                  <XCircle className="text-red-500 dark:text-red-400 text-xl h-6 w-6" />
                 )}
                 <span className={`text-xl font-semibold ${
-                  passedTest ? 'text-green-800' : 'text-red-800'
+                  passedTest ? 'text-green-800 dark:text-green-200' : 'text-red-800 dark:text-red-200'
                 }`}>
                   {passedTest ? 'Bestanden!' : 'Nicht bestanden'}
                 </span>
               </div>
-              <p className={passedTest ? 'text-green-700' : 'text-red-700'}>
+              <p className={passedTest ? 'text-green-700 dark:text-green-300' : 'text-red-700 dark:text-red-300'}>
                 {passedTest 
                   ? `Sie haben den Einbürgerungstest erfolgreich bestanden! Für das Bestehen sind mindestens ${requiredScore} von ${results.total} Fragen richtig zu beantworten.`
                   : `Sie haben den Test nicht bestanden. Sie benötigen mindestens ${requiredScore} richtige Antworten von ${results.total} Fragen. Üben Sie weiter und versuchen Sie es erneut.`
                 }
               </p>
               {results.timeSpent > 0 && (
-                <p className={`text-sm mt-2 ${passedTest ? 'text-green-600' : 'text-red-600'}`}>
+                <p className={`text-sm mt-2 ${passedTest ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>
                   Benötigte Zeit: {formatTime(results.timeSpent)}
                 </p>
               )}
@@ -126,12 +126,12 @@ export default function Results() {
         </Card>
 
         {/* Detailed Results */}
-        <Card className="bg-white rounded-2xl shadow-lg p-6 mb-6">
+        <Card className="bg-card rounded-2xl shadow-lg p-6 mb-6">
           <CardContent className="p-0">
             <Collapsible open={showDetails} onOpenChange={setShowDetails}>
               <CollapsibleTrigger asChild>
                 <div className="flex items-center justify-between mb-6 cursor-pointer">
-                  <h3 className="text-xl font-semibold text-gray-900">Detaillierte Ergebnisse</h3>
+                  <h3 className="text-xl font-semibold text-foreground">Detaillierte Ergebnisse</h3>
                   <Button variant="ghost" size="sm">
                     <ChevronDown className={`mr-1 h-4 w-4 transition-transform ${showDetails ? 'rotate-180' : ''}`} />
                     Details {showDetails ? 'ausblenden' : 'anzeigen'}
@@ -141,34 +141,34 @@ export default function Results() {
               
               <CollapsibleContent className="space-y-3">
                 {results.questionResults.map((result, index) => (
-                  <div key={result.questionId} className="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+                  <div key={result.questionId} className="flex items-center justify-between p-4 border border-border rounded-lg">
                     <div className="flex items-center space-x-4">
                       <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                        result.isCorrect ? 'bg-green-100' : 'bg-red-100'
+                        result.isCorrect ? 'bg-green-100 dark:bg-green-950/30' : 'bg-red-100 dark:bg-red-950/30'
                       }`}>
                         {result.isCorrect ? (
-                          <CheckCircle className="h-4 w-4 text-green-500" />
+                          <CheckCircle className="h-4 w-4 text-green-500 dark:text-green-400" />
                         ) : (
-                          <XCircle className="h-4 w-4 text-red-500" />
+                          <XCircle className="h-4 w-4 text-red-500 dark:text-red-400" />
                         )}
                       </div>
                       <div>
-                        <p className="font-medium text-gray-900">Frage {index + 1}</p>
-                        <p className="text-sm text-gray-500">{result.question.text}</p>
+                        <p className="font-medium text-foreground">Frage {index + 1}</p>
+                        <p className="text-sm text-muted-foreground">{result.question.text}</p>
                       </div>
                     </div>
                     <div className="text-right">
                       <span className={`text-sm font-medium ${
-                        result.isCorrect ? 'text-green-600' : 'text-red-600'
+                        result.isCorrect ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'
                       }`}>
                         {result.isCorrect ? 'Richtig' : 'Falsch'}
                       </span>
                       {!result.isCorrect && (
                         <>
-                          <p className="text-xs text-gray-500">
+                          <p className="text-xs text-muted-foreground">
                             Ihre Antwort: {result.question.answers[result.selectedAnswer]}
                           </p>
-                          <p className="text-xs text-green-600">
+                          <p className="text-xs text-green-600 dark:text-green-400">
                             Richtig: {result.question.answers[result.question.correctAnswer - 1]}
                           </p>
                         </>
@@ -183,9 +183,9 @@ export default function Results() {
 
         {/* Actions and Statistics */}
         <div className="grid md:grid-cols-2 gap-6">
-          <Card className="bg-white rounded-2xl shadow-lg p-6">
+          <Card className="bg-card rounded-2xl shadow-lg p-6">
             <CardContent className="p-0">
-              <h4 className="text-lg font-semibold text-gray-900 mb-4">Nächste Schritte</h4>
+              <h4 className="text-lg font-semibold text-foreground mb-4">Nächste Schritte</h4>
               <div className="space-y-3">
                 <Link href={`/quiz?type=${quizType}`}>
                   <Button className="w-full">
@@ -207,25 +207,25 @@ export default function Results() {
             </CardContent>
           </Card>
 
-          <Card className="bg-white rounded-2xl shadow-lg p-6">
+          <Card className="bg-card rounded-2xl shadow-lg p-6">
             <CardContent className="p-0">
-              <h4 className="text-lg font-semibold text-gray-900 mb-4">Lernstatistiken</h4>
+              <h4 className="text-lg font-semibold text-foreground mb-4">Lernstatistiken</h4>
               <div className="space-y-4">
                 <div className="flex justify-between items-center">
-                  <span className="text-gray-600">Tests absolviert</span>
-                  <span className="font-semibold text-gray-900">{stats?.totalTests || 0}</span>
+                  <span className="text-muted-foreground">Tests absolviert</span>
+                  <span className="font-semibold text-foreground">{stats?.totalTests || 0}</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-gray-600">Durchschnittliche Punktzahl</span>
-                  <span className="font-semibold text-gray-900">{stats?.averageScore || 0}%</span>
+                  <span className="text-muted-foreground">Durchschnittliche Punktzahl</span>
+                  <span className="font-semibold text-foreground">{stats?.averageScore || 0}%</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-gray-600">Beste Punktzahl</span>
-                  <span className="font-semibold text-green-600">{stats?.bestScore || 0}%</span>
+                  <span className="text-muted-foreground">Beste Punktzahl</span>
+                  <span className="font-semibold text-green-600 dark:text-green-400">{stats?.bestScore || 0}%</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-gray-600">Lernzeit gesamt</span>
-                  <span className="font-semibold text-gray-900">
+                  <span className="text-muted-foreground">Lernzeit gesamt</span>
+                  <span className="font-semibold text-foreground">
                     {stats?.totalStudyTime ? formatTime(stats.totalStudyTime) : '0:00'}
                   </span>
                 </div>
