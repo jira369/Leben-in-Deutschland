@@ -45,10 +45,10 @@ export default function Results() {
 
   if (!results) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-background flex items-center justify-center">
         <Card className="w-full max-w-md mx-4">
           <CardContent className="pt-6 text-center">
-            <p className="text-gray-600">Keine Ergebnisse gefunden.</p>
+            <p className="text-muted-foreground">Keine Ergebnisse gefunden.</p>
             <Link href="/">
               <Button className="mt-4">
                 <span className="sm:hidden">Zurück</span>
@@ -66,12 +66,12 @@ export default function Results() {
   const requiredScore = results.total === 33 ? 17 : Math.ceil(results.total * 0.51);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-background">
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Results Header */}
-        <Card className="bg-white rounded-2xl shadow-lg p-8 mb-6 text-center">
+        <Card className="rounded-2xl shadow-lg p-8 mb-6 text-center">
           <CardContent className="p-0">
-            <div className="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+            <div className="w-24 h-24 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-6">
               <Trophy className="text-green-500 text-3xl h-12 w-12" />
             </div>
             <h2 className="text-3xl font-bold text-gray-900 mb-2">Test abgeschlossen!</h2>

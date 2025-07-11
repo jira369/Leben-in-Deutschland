@@ -112,19 +112,19 @@ export default function Practice() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Lade Übungsfragen...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+          <p className="text-muted-foreground">Lade Übungsfragen...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
+      <header className="bg-card shadow-sm border-b border-border sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-4">
@@ -135,12 +135,12 @@ export default function Practice() {
                 </Button>
               </Link>
               <div className="flex items-center space-x-3">
-                <div className="bg-blue-100 p-2 rounded-lg">
-                  <BookOpen className="h-6 w-6 text-blue-600" />
+                <div className="bg-blue-100 dark:bg-blue-900/30 p-2 rounded-lg">
+                  <BookOpen className="h-6 w-6 text-blue-600 dark:text-blue-400" />
                 </div>
                 <div>
-                  <h1 className="text-xl font-bold text-gray-900">Übungsmodus</h1>
-                  <p className="text-sm text-gray-600">Gezielt üben nach Kategorien</p>
+                  <h1 className="text-xl font-bold text-foreground">Übungsmodus</h1>
+                  <p className="text-sm text-muted-foreground">Gezielt üben nach Kategorien</p>
                 </div>
               </div>
             </div>
@@ -150,7 +150,7 @@ export default function Practice() {
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Mistakes Practice Section */}
-        <Card className="mb-8 border-2 border-red-200 bg-gradient-to-r from-red-50 to-pink-50">
+        <Card className="mb-8 border-2 border-red-200 dark:border-red-800 bg-gradient-to-r from-red-50 to-pink-50 dark:from-red-950/20 dark:to-pink-950/20">
           <CardHeader>
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
               <div className="flex items-center space-x-3">
@@ -158,8 +158,8 @@ export default function Practice() {
                   <RotateCcw className="h-6 w-6 text-white" />
                 </div>
                 <div>
-                  <CardTitle className="text-xl text-gray-900">Fehler üben</CardTitle>
-                  <p className="text-gray-600 mt-1">
+                  <CardTitle className="text-xl text-foreground">Fehler üben</CardTitle>
+                  <p className="text-muted-foreground mt-1">
                     Wiederhole Fragen, die du zuvor falsch beantwortet hast
                   </p>
                 </div>

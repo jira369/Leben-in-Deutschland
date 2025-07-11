@@ -78,10 +78,10 @@ export default function Quiz() {
 
   if (!isQuizActive || !quizState || !currentQuestion) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
-          <p className="text-gray-600">Test wird geladen...</p>
+          <p className="text-muted-foreground">Test wird geladen...</p>
         </div>
       </div>
     );
@@ -91,7 +91,7 @@ export default function Quiz() {
   const hasSelectedCurrentAnswer = selectedAnswer !== undefined;
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-background">
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <ProgressBar
           currentQuestion={quizState.currentQuestionIndex + 1}
@@ -112,7 +112,7 @@ export default function Quiz() {
           />
 
           {/* Navigation - Aligned with question content */}
-          <div className="bg-white rounded-lg shadow-sm border p-6">
+          <div className="bg-card rounded-lg shadow-sm border p-6">
             <div className="flex justify-between items-center">
               <Button
                 variant="outline"

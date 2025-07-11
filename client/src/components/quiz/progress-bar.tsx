@@ -21,7 +21,7 @@ export function ProgressBar({
   onExit
 }: ProgressBarProps) {
   return (
-    <div className="bg-white rounded-2xl shadow-lg p-6 mb-6">
+    <div className="bg-card rounded-2xl shadow-lg p-6 mb-6">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center space-x-4">
           {onPause && (
@@ -29,7 +29,7 @@ export function ProgressBar({
               <Pause className="h-4 w-4" />
             </Button>
           )}
-          <div className="text-sm text-gray-500">
+          <div className="text-sm text-muted-foreground">
             <span>Frage </span>
             <span className="font-semibold text-primary">{currentQuestion}</span>
             <span> von </span>
@@ -38,7 +38,7 @@ export function ProgressBar({
         </div>
         <div className="flex items-center space-x-4">
           {timeRemaining !== null && timeRemaining !== undefined && (
-            <div className="text-sm text-gray-500 font-mono flex items-center">
+            <div className="text-sm text-muted-foreground font-mono flex items-center">
               <Clock className="h-4 w-4 mr-1" />
               {formatTime(timeRemaining)}
             </div>

@@ -30,7 +30,7 @@ export function QuestionCard({
   const isCorrect = selectedAnswer !== undefined && selectedAnswer + 1 === question.correctAnswer;
 
   return (
-    <Card className="bg-white rounded-2xl shadow-lg mb-6">
+    <Card className="rounded-2xl shadow-lg mb-6">
       <CardContent className="p-8">
         <div className="mb-6">
           <div className="flex items-start space-x-4 mb-4">
@@ -38,7 +38,7 @@ export function QuestionCard({
               <span className="text-primary font-semibold text-sm">{questionNumber}</span>
             </div>
             <div className="flex-1">
-              <h3 className="text-xl font-semibold text-gray-900 leading-relaxed">
+              <h3 className="text-xl font-semibold text-foreground leading-relaxed">
                 {question.text}
               </h3>
             </div>
@@ -67,7 +67,7 @@ export function QuestionCard({
                     <img 
                       src={`/attached_assets/${question.imagePath}`}
                       alt={`Bild zu Frage ${questionNumber}`}
-                      className="max-w-full max-h-[70vh] object-contain rounded-lg border border-gray-200 shadow-sm"
+                      className="max-w-full max-h-[70vh] object-contain rounded-lg border border-border shadow-sm"
                       onError={(e) => {
                         console.error(`Failed to load image: /attached_assets/${question.imagePath}`);
                         e.currentTarget.src = `data:image/svg+xml;base64,${btoa('<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300"><rect width="400" height="300" fill="#f3f4f6"/><text x="200" y="150" text-anchor="middle" font-family="Arial" font-size="16" fill="#6b7280">Bild nicht verfügbar</text></svg>')}`;
@@ -95,8 +95,8 @@ export function QuestionCard({
                 selectedAnswer === index
                   ? 'border-primary bg-primary/5'
                   : hasSelectedAnswer 
-                    ? 'border-gray-200 bg-gray-50' 
-                    : 'border-gray-200 hover:border-primary/30 hover:bg-primary/5'
+                    ? 'border-border bg-muted/50' 
+                    : 'border-border hover:border-primary/30 hover:bg-primary/5'
               }`}
             >
               <RadioGroupItem
@@ -108,8 +108,8 @@ export function QuestionCard({
                 selectedAnswer === index 
                   ? 'text-primary' 
                   : hasSelectedAnswer 
-                    ? 'text-gray-500' 
-                    : 'text-gray-900 group-hover:text-primary'
+                    ? 'text-muted-foreground' 
+                    : 'text-foreground group-hover:text-primary'
               }`}>
                 {answer}
               </span>
