@@ -84,17 +84,17 @@ export default function Statistics() {
     <div className="min-h-screen bg-background">
       <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
-        <div className="flex items-center justify-between mb-8">
+        <div className="flex items-center gap-4 mb-8">
+          <Link href="/">
+            <Button variant="ghost" size="sm">
+              <ArrowLeft className="h-4 w-4 mr-2" />
+              Zurück
+            </Button>
+          </Link>
           <div>
             <h1 className="text-3xl font-bold text-foreground mb-2">Lernstatistiken</h1>
             <p className="text-muted-foreground">Verfolgen Sie Ihren Fortschritt beim Einbürgerungstest</p>
           </div>
-          <Link href="/">
-            <Button variant="outline">
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Zurück
-            </Button>
-          </Link>
         </div>
 
         {/* Main Statistics Cards */}

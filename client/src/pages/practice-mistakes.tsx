@@ -58,8 +58,7 @@ export default function PracticeMistakes() {
               <Link href="/practice">
                 <Button variant="ghost" size="sm">
                   <ArrowLeft className="h-4 w-4 mr-2" />
-                  <span className="sm:hidden">Zurück</span>
-                  <span className="hidden sm:inline">Zurück zur Übung</span>
+                  Zurück
                 </Button>
               </Link>
               <div>
