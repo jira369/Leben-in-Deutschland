@@ -34,9 +34,6 @@ export const quizSessions = pgTable("quiz_sessions", {
 export const userSettings = pgTable("user_settings", {
   id: serial("id").primaryKey(),
   timerEnabled: boolean("timer_enabled").default(false),
-  immediateFeedback: boolean("immediate_feedback").default(true),
-  shuffleQuestions: boolean("shuffle_questions").default(true),
-  testMode: text("test_mode").default('full'), // 'full' | 'practice'
   selectedState: text("selected_state"),
   hasSelectedState: boolean("has_selected_state").default(false),
 });
