@@ -11,8 +11,10 @@ import {
   Trophy,
   ArrowLeft,
   TrendingUp,
-  Activity
+  Activity,
+  Clock
 } from "lucide-react";
+import { formatDuration } from "@/lib/quiz-logic";
 import { Progress } from "@/components/ui/progress";
 import { UserSettings, QuizSession } from "@shared/schema";
 
@@ -333,9 +335,17 @@ export default function Statistics() {
                               : 'Übungstest'
                           }
                         </p>
-                        <p className="text-xs text-muted-foreground">
-                          {new Date(session.createdAt).toLocaleDateString('de-DE')}
-                        </p>
+                        <div className="space-y-1">
+                          <p className="text-xs text-muted-foreground">
+                            {new Date(session.createdAt).toLocaleDateString('de-DE')}
+                          </p>
+                          {session.timeSpent && (
+                            <div className="flex items-center text-xs text-muted-foreground">
+                              <Clock className="h-3 w-3 mr-1" />
+                              {formatDuration(session.timeSpent)}
+                            </div>
+                          )}
+                        </div>
                       </div>
                     </div>
                     <div className="text-right">

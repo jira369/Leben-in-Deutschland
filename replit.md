@@ -180,6 +180,7 @@ Entwicklungshistorie:
 - 11. Juli 2025. **BEENDEN-LOGIK VERFEINERT:** Übungsmodus zeigt Ergebnisse nur bei >1 beantworteten Fragen, sonst zurück zur vorherigen Seite. Volltest zeigt immer Ergebnisse bei >0 beantworteten Fragen. Intelligente Exit-Logik basierend auf Quiz-Typ und Fortschritt.
 - 11. Juli 2025. **STARTSEITE FILTER:** "Ihre letzten Ergebnisse" zeigt nur Volltest-Ergebnisse, Übungsergebnisse werden ausgeblendet. Fokus auf offizielle Test-Performance für bessere Übersicht.
 - 11. Juli 2025. **ÜBUNGSTYP-DETAILS:** Quiz-Sessions erfassen jetzt detaillierte practiceType-Information (z.B. "bundeslandspezifische Fragen", "Geschichte"). Statistiken zeigen spezifische Übungsarten in "Letzte Aktivitäten" an.
+- 11. Juli 2025. **ZEITANZEIGE ERWEITERT:** "Ihre letzten Ergebnisse" und "Letzte Aktivitäten" zeigen jetzt die verstrichene Zeit für jeden Test/Übung an. Neue formatDuration() Funktion für benutzerfreundliche Zeitformatierung (z.B. "2:45", "1h 23min").
 
 ## Benutzerpräferenzen
 

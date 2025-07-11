@@ -78,6 +78,23 @@ export function formatTime(seconds: number): string {
   return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
 }
 
+export function formatDuration(seconds: number | null): string {
+  if (seconds === null || seconds === undefined) return '-';
+  
+  const minutes = Math.floor(seconds / 60);
+  const remainingSeconds = seconds % 60;
+  
+  if (minutes === 0) {
+    return `${remainingSeconds}s`;
+  } else if (minutes < 60) {
+    return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+  } else {
+    const hours = Math.floor(minutes / 60);
+    const remainingMinutes = minutes % 60;
+    return `${hours}h ${remainingMinutes}min`;
+  }
+}
+
 export function getQuizTypeQuestions(questions: Question[], type: 'full' | 'practice', shuffle: boolean = true): Question[] {
   let selectedQuestions = [...questions];
   

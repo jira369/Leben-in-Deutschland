@@ -3,8 +3,9 @@ import { useQuery } from "@tanstack/react-query";
 import { Link, useLocation } from "wouter";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { GraduationCap, Flag, ListChecks, TrendingUp, Play, Dumbbell, BarChart3, CheckCircle, AlertTriangle, Settings, Bug } from "lucide-react";
+import { GraduationCap, Flag, ListChecks, TrendingUp, Play, Dumbbell, BarChart3, CheckCircle, AlertTriangle, Settings, Bug, Clock } from "lucide-react";
 import { QuizSession, UserSettings } from "@shared/schema";
+import { formatDuration } from "@/lib/quiz-logic";
 import { SettingsModal } from "@/components/settings-modal";
 import { BugReportModal } from "@/components/bug-report-modal";
 
@@ -173,9 +174,17 @@ export default function Home() {
                               : 'Übungsmodus'
                           }
                         </p>
-                        <p className="text-sm text-muted-foreground">
-                          {session.createdAt ? new Date(session.createdAt).toLocaleDateString('de-DE') : 'Heute'}
-                        </p>
+                        <div className="space-y-1">
+                          <p className="text-sm text-muted-foreground">
+                            {session.createdAt ? new Date(session.createdAt).toLocaleDateString('de-DE') : 'Heute'}
+                          </p>
+                          {session.timeSpent && (
+                            <div className="flex items-center text-xs text-muted-foreground">
+                              <Clock className="h-3 w-3 mr-1" />
+                              {formatDuration(session.timeSpent)}
+                            </div>
+                          )}
+                        </div>
                       </div>
                     </div>
                     <div className="text-right">
