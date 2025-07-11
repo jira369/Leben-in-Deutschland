@@ -166,7 +166,12 @@ export default function Home() {
                       </div>
                       <div>
                         <p className="font-medium text-foreground">
-                          {session.type === 'full' ? 'Vollständiger Test' : 'Übungsmodus'}
+                          {session.type === 'full' 
+                            ? 'Vollständiger Test' 
+                            : session.practiceType 
+                              ? `Übung: ${session.practiceType}`
+                              : 'Übungsmodus'
+                          }
                         </p>
                         <p className="text-sm text-muted-foreground">
                           {session.createdAt ? new Date(session.createdAt).toLocaleDateString('de-DE') : 'Heute'}
