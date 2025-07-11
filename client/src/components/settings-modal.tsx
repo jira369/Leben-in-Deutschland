@@ -93,7 +93,11 @@ export function SettingsModal({ open, onOpenChange }: SettingsModalProps) {
   const currentSettings = { ...settings, ...localSettings };
 
   const handleSave = () => {
-    updateSettings.mutate(localSettings);
+    // Filter out dark mode setting as it's handled locally
+    const backendSettings = Object.fromEntries(
+      Object.entries(localSettings).filter(([key]) => key !== 'theme')
+    );
+    updateSettings.mutate(backendSettings);
   };
 
   return (

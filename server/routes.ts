@@ -177,7 +177,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       if (error instanceof z.ZodError) {
         return res.status(400).json({ error: "Invalid settings data", details: error.errors });
       }
-      res.status(500).json({ error: "Failed to update settings" });
+      console.error("Settings update error:", error);
+      res.status(500).json({ error: "Failed to update settings", details: error.message });
     }
   });
 
