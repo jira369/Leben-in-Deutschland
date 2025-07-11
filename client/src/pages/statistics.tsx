@@ -264,13 +264,7 @@ export default function Statistics() {
               </div>
 
               <div className="pt-4 border-t border-border">
-                <div className="flex justify-between items-center">
-                  <span className="text-sm font-medium text-foreground">Erfolgsquote</span>
-                  <span className="text-lg font-bold text-primary">
-                    {accuracyPercentage}%
-                  </span>
-                </div>
-                <p className="text-xs text-muted-foreground mt-1">
+                <p className="text-xs text-muted-foreground">
                   Basierend auf {totalAnswersGiven} beantworteten Fragen
                 </p>
               </div>
