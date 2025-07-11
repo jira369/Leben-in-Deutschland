@@ -179,6 +179,7 @@ Entwicklungshistorie:
 - 11. Juli 2025. **NAVIGATION OPTIMIERT:** Nach Übungen führt "Neue Übung starten" zur Practice-Übersichtsseite. Nach Volltest führt "Neuen Test starten" direkt zu neuem Volltest. Konsistente Benutzerführung zwischen Test- und Übungsmodi implementiert.
 - 11. Juli 2025. **BEENDEN-LOGIK VERFEINERT:** Übungsmodus zeigt Ergebnisse nur bei >1 beantworteten Fragen, sonst zurück zur vorherigen Seite. Volltest zeigt immer Ergebnisse bei >0 beantworteten Fragen. Intelligente Exit-Logik basierend auf Quiz-Typ und Fortschritt.
 - 11. Juli 2025. **STARTSEITE FILTER:** "Ihre letzten Ergebnisse" zeigt nur Volltest-Ergebnisse, Übungsergebnisse werden ausgeblendet. Fokus auf offizielle Test-Performance für bessere Übersicht.
+- 11. Juli 2025. **ÜBUNGSTYP-DETAILS:** Quiz-Sessions erfassen jetzt detaillierte practiceType-Information (z.B. "bundeslandspezifische Fragen", "Geschichte"). Statistiken zeigen spezifische Übungsarten in "Letzte Aktivitäten" an.
 
 ## Benutzerpräferenzen
 

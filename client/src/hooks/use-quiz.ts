@@ -33,9 +33,10 @@ export function useQuiz() {
 
   // Save quiz session
   const saveQuizSession = useMutation({
-    mutationFn: async (results: QuizResults & { type: string }) => {
+    mutationFn: async (results: QuizResults & { type: string; practiceType?: string }) => {
       const res = await apiRequest('POST', '/api/quiz-sessions', {
         type: results.type,
+        practiceType: results.practiceType,
         totalQuestions: results.total,
         correctAnswers: results.correct,
         incorrectAnswers: results.incorrect,
@@ -189,6 +190,30 @@ export function useQuiz() {
 
     const results = calculateResults(quizState);
     
+    // Determine practice type based on URL params
+    let practiceType = undefined;
+    if (type === 'practice') {
+      const searchParams = new URLSearchParams(window.location.search);
+      const mode = searchParams.get('mode');
+      const category = searchParams.get('category');
+      
+      if (mode === 'state') {
+        practiceType = 'bundeslandspezifische Fragen';
+      } else if (mode === 'all') {
+        practiceType = 'alle Fragen';
+      } else if (category) {
+        const categoryNames: Record<string, string> = {
+          'geschichte': 'Geschichte',
+          'verfassung': 'Verfassung und Recht',
+          'mensch-gesellschaft': 'Mensch und Gesellschaft',
+          'staat-buerger': 'Staat und Bürger'
+        };
+        practiceType = categoryNames[category] || category;
+      } else {
+        practiceType = 'gemischte Fragen';
+      }
+    }
+    
     // Track incorrect answers for future practice
     try {
       await trackIncorrectAnswers(results.questionResults);
@@ -198,7 +223,7 @@ export function useQuiz() {
     
     // Save results to backend
     try {
-      await saveQuizSession.mutateAsync({ ...results, type });
+      await saveQuizSession.mutateAsync({ ...results, type, practiceType });
     } catch (error) {
       console.error('Failed to save quiz session:', error);
     }

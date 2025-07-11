@@ -17,6 +17,7 @@ export const questions = pgTable("questions", {
 export const quizSessions = pgTable("quiz_sessions", {
   id: serial("id").primaryKey(),
   type: text("type").notNull(), // 'full' | 'practice'
+  practiceType: text("practice_type"), // e.g., 'state-specific', 'all-questions', 'category-history'
   totalQuestions: integer("total_questions").notNull(),
   correctAnswers: integer("correct_answers").notNull(),
   incorrectAnswers: integer("incorrect_answers").notNull(),

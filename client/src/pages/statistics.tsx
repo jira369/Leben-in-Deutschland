@@ -326,7 +326,12 @@ export default function Statistics() {
                       }`}></div>
                       <div>
                         <p className="font-medium text-sm text-foreground">
-                          {session.type === 'full' ? 'Volltest' : 'Übungstest'}
+                          {session.type === 'full' 
+                            ? 'Volltest' 
+                            : session.practiceType 
+                              ? `Übungstest ${session.practiceType}`
+                              : 'Übungstest'
+                          }
                         </p>
                         <p className="text-xs text-muted-foreground">
                           {new Date(session.createdAt).toLocaleDateString('de-DE')}
