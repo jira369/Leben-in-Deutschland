@@ -101,9 +101,11 @@ export function useQuiz() {
     
     let questionCount = type === 'full' ? 33 : 10;
     
-    // For "all questions" practice mode, don't limit the count
+    // For special modes, use appropriate count
     if (mode === "all") {
       questionCount = 1000; // Large number to get all questions
+    } else if (mode === "mistakes" || mode === "marked") {
+      questionCount = 1000; // Don't limit mistake/marked practice - get all available questions
     }
     
     const selectedState = settings?.selectedState;
