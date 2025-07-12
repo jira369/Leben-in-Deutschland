@@ -28,7 +28,39 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const mode = req.query.mode as string;
       const category = req.query.category as string;
       
-      if (mode === "all") {
+      if (mode === "mistakes") {
+        // Practice mode with incorrect questions only
+        const incorrectQuestions = await storage.getIncorrectQuestions();
+        
+        // Check if chronological order is requested
+        const chronological = req.query.chronological === 'true';
+        
+        if (chronological) {
+          // Sort by ID for chronological order
+          incorrectQuestions.sort((a, b) => a.id - b.id);
+        } else {
+          // Shuffle for random order (keeping duplicates as they represent multiple wrong answers)
+          incorrectQuestions.sort(() => Math.random() - 0.5);
+        }
+        
+        res.json(incorrectQuestions);
+      } else if (mode === "marked") {
+        // Practice mode with marked questions only
+        const markedQuestions = await storage.getMarkedQuestions();
+        
+        // Check if chronological order is requested  
+        const chronological = req.query.chronological === 'true';
+        
+        if (chronological) {
+          // Sort by ID for chronological order
+          markedQuestions.sort((a, b) => a.id - b.id);
+        } else {
+          // Shuffle for random order
+          markedQuestions.sort(() => Math.random() - 0.5);
+        }
+        
+        res.json(markedQuestions);
+      } else if (mode === "all") {
         // Practice mode with all questions (300 federal + 10 state-specific)
         const allQuestions = await storage.getAllQuestions();
         let questionsToReturn = [];
