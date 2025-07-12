@@ -107,7 +107,7 @@ export default function Quiz() {
 
   return (
     <div className="min-h-screen bg-background">
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pb-32">
         <ProgressBar
           currentQuestion={quizState.currentQuestionIndex + 1}
           totalQuestions={quizState.questions.length}
@@ -126,53 +126,58 @@ export default function Quiz() {
             onAnswerSelect={selectAnswer}
           />
 
-          {/* Navigation - Aligned with question content */}
-          <div className="bg-card rounded-lg shadow-sm border p-6">
-            <div className="flex justify-between items-center">
-              <Button
-                variant="outline"
-                onClick={previousQuestion}
-                disabled={!canGoPrevious}
-                className="px-4 py-2"
-              >
-                <ChevronLeft className="mr-2 h-4 w-4" />
-                Zurück
-              </Button>
-              
-              <div className="flex items-center space-x-3">
-                <Button 
-                  variant="ghost" 
-                  className="px-2 py-2"
-                  onClick={() => currentQuestion && toggleMark(currentQuestion.id)}
+          {/* Fixed navigation at bottom of screen */}
+          <div className="fixed bottom-0 left-0 right-0 bg-card border-t border-border shadow-lg z-50">
+            <div className="max-w-4xl mx-auto p-4">
+              <div className="flex justify-between items-center">
+                <Button
+                  variant="outline"
+                  onClick={previousQuestion}
+                  disabled={!canGoPrevious}
+                  className="px-4 py-3 h-12"
                 >
-                  <Flag className={`h-4 w-4 ${
-                    currentQuestion && isQuestionMarked(currentQuestion.id) 
-                      ? 'fill-yellow-500 text-yellow-500' 
-                      : ''
-                  }`} />
+                  <ChevronLeft className="mr-2 h-4 w-4" />
+                  Zurück
                 </Button>
-              </div>
+                
+                <div className="flex items-center space-x-3">
+                  <Button 
+                    variant="ghost" 
+                    className="px-3 py-3 h-12"
+                    onClick={() => currentQuestion && toggleMark(currentQuestion.id)}
+                  >
+                    <Flag className={`h-5 w-5 ${
+                      currentQuestion && isQuestionMarked(currentQuestion.id) 
+                        ? 'fill-yellow-500 text-yellow-500' 
+                        : ''
+                    }`} />
+                  </Button>
+                </div>
 
-              {isLastQuestion ? (
-                <Button
-                  onClick={handleFinishQuiz}
-                  className="px-4 py-2"
-                  disabled={!hasSelectedCurrentAnswer}
-                >
-                  {quizType === 'full' ? 'Test beenden' : 'Übung beenden'}
-                </Button>
-              ) : (
-                <Button
-                  onClick={nextQuestion}
-                  disabled={quizType === 'full' ? !hasSelectedCurrentAnswer : !canGoNext}
-                  className="px-4 py-2"
-                >
-                  Weiter
-                  <ChevronRight className="ml-2 h-4 w-4" />
-                </Button>
-              )}
+                {isLastQuestion ? (
+                  <Button
+                    onClick={handleFinishQuiz}
+                    className="px-4 py-3 h-12"
+                    disabled={!hasSelectedCurrentAnswer}
+                  >
+                    {quizType === 'full' ? 'Test beenden' : 'Übung beenden'}
+                  </Button>
+                ) : (
+                  <Button
+                    onClick={nextQuestion}
+                    disabled={quizType === 'full' ? !hasSelectedCurrentAnswer : !canGoNext}
+                    className="px-4 py-3 h-12"
+                  >
+                    Weiter
+                    <ChevronRight className="ml-2 h-4 w-4" />
+                  </Button>
+                )}
+              </div>
             </div>
           </div>
+
+          {/* Add bottom padding to prevent content overlap */}
+          <div className="h-24"></div>
         </div>
       </main>
     </div>
