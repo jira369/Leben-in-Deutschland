@@ -67,9 +67,9 @@ export default function Results() {
 
   return (
     <div className="min-h-screen bg-background">
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
         {/* Results Header */}
-        <Card className="rounded-2xl shadow-lg p-8 mb-6 text-center">
+        <Card className="rounded-2xl shadow-lg p-4 sm:p-8 mb-6 text-center">
           <CardContent className="p-0">
             <div className="w-24 h-24 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-6">
               <Trophy className="text-green-500 text-3xl h-12 w-12" />
@@ -84,18 +84,18 @@ export default function Results() {
               }
             </p>
             
-            <div className="grid md:grid-cols-3 gap-6 max-w-2xl mx-auto mb-8">
-              <div className="bg-green-50 dark:bg-green-950/20 rounded-xl p-6">
-                <div className="text-3xl font-bold text-green-600 dark:text-green-400 mb-2">{results.correct}</div>
-                <p className="text-green-700 dark:text-green-300 font-medium">Richtige Antworten</p>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl mx-auto mb-8">
+              <div className="bg-green-50 dark:bg-green-950/20 rounded-xl p-4 sm:p-6">
+                <div className="text-2xl sm:text-3xl font-bold text-green-600 dark:text-green-400 mb-2">{results.correct}</div>
+                <p className="text-sm sm:text-base text-green-700 dark:text-green-300 font-medium">Richtige Antworten</p>
               </div>
-              <div className="bg-red-50 dark:bg-red-950/20 rounded-xl p-6">
-                <div className="text-3xl font-bold text-red-600 dark:text-red-400 mb-2">{results.incorrect}</div>
-                <p className="text-red-700 dark:text-red-300 font-medium">Falsche Antworten</p>
+              <div className="bg-red-50 dark:bg-red-950/20 rounded-xl p-4 sm:p-6">
+                <div className="text-2xl sm:text-3xl font-bold text-red-600 dark:text-red-400 mb-2">{results.incorrect}</div>
+                <p className="text-sm sm:text-base text-red-700 dark:text-red-300 font-medium">Falsche Antworten</p>
               </div>
-              <div className="bg-primary/5 dark:bg-primary/10 rounded-xl p-6">
-                <div className="text-3xl font-bold text-primary mb-2">{results.percentage}%</div>
-                <p className="text-primary font-medium">Erfolgsquote</p>
+              <div className="bg-primary/5 dark:bg-primary/10 rounded-xl p-4 sm:p-6">
+                <div className="text-2xl sm:text-3xl font-bold text-primary mb-2">{results.percentage}%</div>
+                <p className="text-sm sm:text-base text-primary font-medium">Erfolgsquote</p>
               </div>
             </div>
 
@@ -105,13 +105,13 @@ export default function Results() {
                   ? 'bg-green-50 dark:bg-green-950/20 border-green-200 dark:border-green-800' 
                   : 'bg-red-50 dark:bg-red-950/20 border-red-200 dark:border-red-800'
               }`}>
-                <div className="flex items-center justify-center space-x-3 mb-2">
+                <div className="flex flex-col sm:flex-row items-center justify-center space-y-2 sm:space-y-0 sm:space-x-3 mb-2">
                   {passedTest ? (
                     <CheckCircle className="text-green-500 dark:text-green-400 text-xl h-6 w-6" />
                   ) : (
                     <XCircle className="text-red-500 dark:text-red-400 text-xl h-6 w-6" />
                   )}
-                  <span className={`text-xl font-semibold ${
+                  <span className={`text-lg sm:text-xl font-semibold text-center ${
                     passedTest ? 'text-green-800 dark:text-green-200' : 'text-red-800 dark:text-red-200'
                   }`}>
                     {passedTest ? 'Einbürgerungstest bestanden!' : 'Einbürgerungstest nicht bestanden'}
@@ -157,9 +157,9 @@ export default function Results() {
               
               <CollapsibleContent className="space-y-3">
                 {results.questionResults.map((result, index) => (
-                  <div key={result.questionId} className="flex items-center justify-between p-4 border border-border rounded-lg">
-                    <div className="flex items-center space-x-4">
-                      <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                  <div key={result.questionId} className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-4 border border-border rounded-lg space-y-3 sm:space-y-0">
+                    <div className="flex items-start space-x-3">
+                      <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
                         result.isCorrect ? 'bg-green-100 dark:bg-green-950/30' : 'bg-red-100 dark:bg-red-950/30'
                       }`}>
                         {result.isCorrect ? (
@@ -168,23 +168,23 @@ export default function Results() {
                           <XCircle className="h-4 w-4 text-red-500 dark:text-red-400" />
                         )}
                       </div>
-                      <div>
+                      <div className="min-w-0 flex-1">
                         <p className="font-medium text-foreground">Frage {index + 1}</p>
-                        <p className="text-sm text-muted-foreground">{result.question.text}</p>
+                        <p className="text-sm text-muted-foreground break-words">{result.question.text}</p>
                       </div>
                     </div>
-                    <div className="text-right">
-                      <span className={`text-sm font-medium ${
+                    <div className="text-left sm:text-right flex-shrink-0">
+                      <span className={`text-sm font-medium block ${
                         result.isCorrect ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'
                       }`}>
                         {result.isCorrect ? 'Richtig' : 'Falsch'}
                       </span>
                       {!result.isCorrect && (
                         <>
-                          <p className="text-xs text-muted-foreground">
+                          <p className="text-xs text-muted-foreground mt-1 break-words">
                             Ihre Antwort: {result.question.answers[result.selectedAnswer]}
                           </p>
-                          <p className="text-xs text-green-600 dark:text-green-400">
+                          <p className="text-xs text-green-600 dark:text-green-400 mt-1 break-words">
                             Richtig: {result.question.answers[result.question.correctAnswer - 1]}
                           </p>
                         </>
@@ -198,24 +198,24 @@ export default function Results() {
         </Card>
 
         {/* Actions and Statistics */}
-        <div className="grid md:grid-cols-2 gap-6">
-          <Card className="bg-card rounded-2xl shadow-lg p-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <Card className="bg-card rounded-2xl shadow-lg p-4 sm:p-6">
             <CardContent className="p-0">
               <h4 className="text-lg font-semibold text-foreground mb-4">Nächste Schritte</h4>
-              <div className="space-y-4">
+              <div className="space-y-3">
                 <Link href={isFullTest ? `/quiz?type=full` : '/practice'}>
-                  <Button className="w-full mb-1">
+                  <Button className="w-full h-12">
                     <RotateCcw className="mr-2 h-4 w-4" />
                     {isFullTest ? 'Neuen Test starten' : 'Neue Übung starten'}
                   </Button>
                 </Link>
                 <Link href="/practice-mistakes">
-                  <Button variant="outline" className="w-full">
+                  <Button variant="outline" className="w-full h-12">
                     <BookOpen className="mr-2 h-4 w-4" />
                     Fehler üben
                   </Button>
                 </Link>
-                <Button variant="outline" className="w-full">
+                <Button variant="outline" className="w-full h-12">
                   <Share className="mr-2 h-4 w-4" />
                   Ergebnis teilen
                 </Button>

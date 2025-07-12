@@ -112,7 +112,7 @@ export default function Statistics() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
         {/* Main Statistics Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-8">
           {/* Questions Answered Correctly */}
           <Card className="bg-green-50 dark:bg-green-950/20 border-green-200 dark:border-green-800">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -227,7 +227,7 @@ export default function Statistics() {
         </div>
 
         {/* Detailed Analysis */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mb-8">
           {/* Performance Overview */}
           <Card>
             <CardHeader>
@@ -329,13 +329,13 @@ export default function Statistics() {
             <CardContent>
               <div className="space-y-3">
                 {recentSessions.slice(0, 5).map((session: any, index: number) => (
-                  <div key={session.id} className="flex items-center justify-between p-3 bg-muted/50 dark:bg-muted/30 rounded-lg border border-border">
+                  <div key={session.id} className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-3 bg-muted/50 dark:bg-muted/30 rounded-lg border border-border space-y-2 sm:space-y-0">
                     <div className="flex items-center space-x-3">
-                      <div className={`w-3 h-3 rounded-full ${
+                      <div className={`w-3 h-3 rounded-full flex-shrink-0 ${
                         session.passed ? 'bg-green-500' : 'bg-red-500'
                       }`}></div>
-                      <div>
-                        <div className="flex items-center gap-2">
+                      <div className="min-w-0 flex-1">
+                        <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
                           <p className="font-medium text-sm text-foreground">
                             {session.type === 'full' 
                               ? 'Volltest' 
@@ -356,7 +356,7 @@ export default function Statistics() {
                         </p>
                       </div>
                     </div>
-                    <div className="text-right">
+                    <div className="text-left sm:text-right flex-shrink-0">
                       <p className="font-semibold text-sm text-foreground">
                         {session.correctAnswers}/{session.totalQuestions}
                       </p>
@@ -372,14 +372,14 @@ export default function Statistics() {
         )}
 
         {/* Action Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
+        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mt-8">
           <Link href="/quiz?type=full">
-            <Button size="lg" className="w-full sm:w-auto">
+            <Button size="lg" className="w-full sm:w-auto h-12">
               Neuen Test starten
             </Button>
           </Link>
           <Link href="/practice">
-            <Button variant="outline" size="lg" className="w-full sm:w-auto">
+            <Button variant="outline" size="lg" className="w-full sm:w-auto h-12">
               <BookOpen className="mr-2 h-4 w-4" />
               Üben
             </Button>
