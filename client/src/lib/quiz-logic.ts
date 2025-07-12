@@ -134,7 +134,8 @@ export async function fetchQuestionsForQuiz(count: number, selectedState?: strin
       throw new Error("Failed to fetch incorrect questions");
     }
     const incorrectQuestions: Question[] = await response.json();
-    return shuffleArray(incorrectQuestions);
+    // Apply sorting: chronological by ID or random shuffle
+    return chronological ? incorrectQuestions.sort((a, b) => a.id - b.id) : shuffleArray(incorrectQuestions);
   }
 
   // Special case: fetch marked questions for marked practice
