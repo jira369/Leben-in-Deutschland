@@ -68,15 +68,15 @@ export function useQuiz() {
       setTimeRemaining(prev => {
         if (prev === null || prev === undefined) return null;
         
-        if (currentQuizType === 'practice') {
-          // Practice mode: count up from 0
-          return prev + 1;
-        } else if (currentQuizType === 'full') {
+        if (currentQuizType === 'full') {
           // Full test mode: count down from 60 minutes
           if (prev <= 1) {
             return 0; // Timer finished
           }
           return prev - 1; // Count down
+        } else {
+          // Practice mode: count up from 0
+          return prev + 1;
         }
         
         return prev;
@@ -221,6 +221,10 @@ export function useQuiz() {
     // Track incorrect answers for future practice
     try {
       await trackIncorrectAnswers(results.questionResults);
+      
+      // Invalidate incorrect questions cache to refresh UI
+      queryClient.invalidateQueries({ queryKey: ['/api/incorrect-questions'] });
+      queryClient.invalidateQueries({ queryKey: ['/api/incorrect-answers/count'] });
     } catch (error) {
       console.error('Failed to track incorrect answers:', error);
     }

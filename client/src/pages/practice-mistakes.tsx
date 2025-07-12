@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { ArrowLeft, Trash2, BookOpen, RotateCcw, Image } from "lucide-react";
 import { Question } from "@shared/schema";
-import { apiRequest } from "@/lib/queryClient";
+import { apiRequest, queryClient } from "@/lib/queryClient";
 
 export default function PracticeMistakes() {
   const [, setLocation] = useLocation();
@@ -19,14 +19,22 @@ export default function PracticeMistakes() {
   });
 
   // Fetch count of incorrect answers
-  const { data: countData } = useQuery<{ count: number }>({
+  const { data: countData, refetch: refetchCount } = useQuery<{ count: number }>({
     queryKey: ["/api/incorrect-answers/count"],
   });
+
+  // Force refresh when component mounts or after navigation
+  useEffect(() => {
+    refetch();
+    refetchCount();
+  }, [refetch, refetchCount]);
 
   const handleClearMistakes = async () => {
     try {
       await apiRequest("DELETE", "/api/incorrect-answers");
-      refetch();
+      // Invalidate both queries to refresh UI
+      queryClient.invalidateQueries({ queryKey: ["/api/incorrect-questions"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/incorrect-answers/count"] });
     } catch (error) {
       console.error("Failed to clear mistakes:", error);
     }
