@@ -60,7 +60,7 @@ export function useQuiz() {
     }
   });
 
-  // Timer effect
+  // Timer effect - completely rewritten for reliability
   useEffect(() => {
     if (timeRemaining === null || timeRemaining === undefined) return;
 
@@ -68,25 +68,23 @@ export function useQuiz() {
       setTimeRemaining(prev => {
         if (prev === null || prev === undefined) return null;
         
-        // Check if this is a countdown timer (full test starts at 3600)
-        // or a count-up timer (practice mode starts at 0)
-        const isFullTest = currentQuizType === 'full';
-        
-        if (isFullTest) {
-          // Full test mode: count down from 60 minutes
+        // Simple logic: If timer was initialized with 3600 (60 minutes), count down
+        // If timer was initialized with 0, count up
+        if (prev >= 3600) {
+          // Countdown mode (full test)
           if (prev <= 1) {
             return 0; // Timer finished
           }
-          return prev - 1; // Count down
+          return prev - 1;
         } else {
-          // Practice mode: count up from 0
+          // Count-up mode (practice)
           return prev + 1;
         }
       });
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [timeRemaining, currentQuizType]);
+  }, [timeRemaining]);
 
   // Initialize questions if empty
   useEffect(() => {
@@ -130,21 +128,25 @@ export function useQuiz() {
         startTime: Date.now(),
       };
 
-      setQuizState(newQuizState);
-      
-      // Set quiz type and timer AFTER setting quiz state
+      // Set quiz type FIRST
       setCurrentQuizType(type);
       
+      // Set timer based on type and settings
       if (settings?.timerEnabled) {
         if (type === 'full') {
-          setTimeRemaining(60 * 60); // 60 minutes for full test (countdown)
+          // Full test: start countdown from 60 minutes
+          setTimeRemaining(60 * 60);
+          newQuizState.timeRemaining = 60 * 60;
         } else {
-          // Practice mode always counts up from 0
+          // Practice mode: start count-up from 0
           setTimeRemaining(0);
+          newQuizState.timeRemaining = 0;
         }
       } else {
         setTimeRemaining(null);
       }
+
+      setQuizState(newQuizState);
     } catch (error) {
       console.error('Failed to start quiz:', error);
     }
