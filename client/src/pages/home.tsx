@@ -124,7 +124,7 @@ export default function Home() {
                 <Link href="/practice">
                   <Button variant="outline" className="w-full py-3" size="lg">
                     <Dumbbell className="mr-2 h-4 w-4" />
-                    Alle Fragen üben
+                    Fragen üben
                   </Button>
                 </Link>
                 <Link href="/statistics">

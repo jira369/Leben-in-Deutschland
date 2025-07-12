@@ -49,6 +49,7 @@ export interface IStorage {
   getIncorrectQuestions(): Promise<Question[]>;
   getIncorrectAnswersCount(): Promise<number>;
   clearIncorrectAnswers(): Promise<void>;
+  removeIncorrectAnswersByQuestionId(questionId: number): Promise<void>;
   
   // Marked Questions Management
   addMarkedQuestion(questionId: number): Promise<MarkedQuestion>;
@@ -233,6 +234,10 @@ export class MemStorage implements IStorage {
   }
 
   async clearIncorrectAnswers(): Promise<void> {
+    // No-op for MemStorage
+  }
+
+  async removeIncorrectAnswersByQuestionId(questionId: number): Promise<void> {
     // No-op for MemStorage
   }
 
@@ -531,6 +536,12 @@ export class DatabaseStorage implements IStorage {
 
   async clearIncorrectAnswers(): Promise<void> {
     await db.delete(incorrectAnswers);
+  }
+
+  async removeIncorrectAnswersByQuestionId(questionId: number): Promise<void> {
+    await db
+      .delete(incorrectAnswers)
+      .where(eq(incorrectAnswers.questionId, questionId));
   }
 
   async getUniqueQuestionsAnswered(): Promise<number> {

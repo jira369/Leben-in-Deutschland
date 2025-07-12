@@ -57,8 +57,19 @@ export function calculateResults(quizState: QuizState): QuizResults {
 }
 
 export async function trackIncorrectAnswers(questionResults: QuizResults['questionResults']): Promise<void> {
-  const incorrectAnswers = questionResults.filter(result => !result.isCorrect);
+  // Process correct answers first - remove from incorrect list if they exist
+  const correctAnswers = questionResults.filter(result => result.isCorrect);
+  for (const result of correctAnswers) {
+    try {
+      await apiRequest("DELETE", `/api/incorrect-answers/question/${result.questionId}`);
+    } catch (error) {
+      // Ignore if question wasn't in incorrect list
+      console.log("Question not in incorrect list or already removed:", result.questionId);
+    }
+  }
   
+  // Then add new incorrect answers
+  const incorrectAnswers = questionResults.filter(result => !result.isCorrect);
   for (const result of incorrectAnswers) {
     try {
       await apiRequest("POST", "/api/incorrect-answers", {

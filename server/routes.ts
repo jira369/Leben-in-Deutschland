@@ -374,6 +374,22 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Remove incorrect answer for specific question (when answered correctly)
+  app.delete("/api/incorrect-answers/question/:questionId", async (req, res) => {
+    try {
+      const questionId = parseInt(req.params.questionId);
+      if (isNaN(questionId)) {
+        return res.status(400).json({ error: "Invalid question ID" });
+      }
+      
+      // This will be implemented in storage to remove all incorrect answers for this question
+      await storage.removeIncorrectAnswersByQuestionId(questionId);
+      res.json({ message: "Incorrect answers for question removed" });
+    } catch (error) {
+      res.status(500).json({ error: "Failed to remove incorrect answers for question" });
+    }
+  });
+
   // Mark/unmark question
   app.post("/api/marked-questions", async (req, res) => {
     try {
