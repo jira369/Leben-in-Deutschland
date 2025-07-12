@@ -335,22 +335,19 @@ export default function Statistics() {
                         session.passed ? 'bg-green-500' : 'bg-red-500'
                       }`}></div>
                       <div className="min-w-0 flex-1">
-                        <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
-                          <p className="font-medium text-sm text-foreground">
-                            {session.type === 'full' 
-                              ? 'Volltest' 
-                              : session.practiceType 
-                                ? `Übungstest ${session.practiceType}`
-                                : 'Übungstest'
-                            }
-                          </p>
+                        <p className="font-medium text-sm text-foreground">
+                          {session.type === 'full' 
+                            ? 'Volltest' 
+                            : session.practiceType 
+                              ? `Übungstest ${session.practiceType}`
+                              : 'Übungstest'
+                          }
                           {session.timeSpent && (
-                            <div className="flex items-center text-xs text-muted-foreground">
-                              <Clock className="h-3 w-3 mr-1" />
-                              {formatDuration(session.timeSpent)}
-                            </div>
+                            <span className="text-xs text-muted-foreground ml-2">
+                              ⏱ {formatDuration(session.timeSpent)}
+                            </span>
                           )}
-                        </div>
+                        </p>
                         <p className="text-xs text-muted-foreground">
                           {new Date(session.createdAt).toLocaleDateString('de-DE')}
                         </p>

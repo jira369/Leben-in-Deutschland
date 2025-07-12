@@ -166,22 +166,19 @@ export default function Home() {
                         )}
                       </div>
                       <div className="min-w-0 flex-1">
-                        <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
-                          <p className="font-medium text-sm sm:text-base text-foreground">
-                            {session.type === 'full' 
-                              ? 'Vollständiger Test' 
-                              : session.practiceType 
-                                ? `Übung: ${session.practiceType}`
-                                : 'Übungsmodus'
-                            }
-                          </p>
+                        <p className="font-medium text-sm sm:text-base text-foreground">
+                          {session.type === 'full' 
+                            ? 'Vollständiger Test' 
+                            : session.practiceType 
+                              ? `Übung: ${session.practiceType}`
+                              : 'Übungsmodus'
+                          }
                           {session.timeSpent && (
-                            <div className="flex items-center text-xs sm:text-sm text-muted-foreground">
-                              <Clock className="h-3 w-3 mr-1" />
-                              {formatDuration(session.timeSpent)}
-                            </div>
+                            <span className="text-xs sm:text-sm text-muted-foreground ml-2">
+                              ⏱ {formatDuration(session.timeSpent)}
+                            </span>
                           )}
-                        </div>
+                        </p>
                         <p className="text-xs sm:text-sm text-muted-foreground">
                           {session.createdAt ? new Date(session.createdAt).toLocaleDateString('de-DE') : 'Heute'}
                         </p>
