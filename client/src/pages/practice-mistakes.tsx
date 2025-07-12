@@ -18,23 +18,22 @@ export default function PracticeMistakes() {
     queryKey: ["/api/incorrect-questions"],
   });
 
-  // Fetch count of incorrect answers
-  const { data: countData, refetch: refetchCount } = useQuery<{ count: number }>({
-    queryKey: ["/api/incorrect-answers/count"],
+  // Fetch total incorrect answers from quiz sessions (never decreases)
+  const { data: statsData, refetch: refetchStats } = useQuery<{ incorrectAnswers: number }>({
+    queryKey: ["/api/quiz-sessions/detailed-stats"],
   });
 
   // Force refresh when component mounts or after navigation
   useEffect(() => {
     refetch();
-    refetchCount();
-  }, [refetch, refetchCount]);
+    refetchStats();
+  }, [refetch, refetchStats]);
 
   const handleClearMistakes = async () => {
     try {
       await apiRequest("DELETE", "/api/incorrect-answers");
-      // Invalidate both queries to refresh UI
+      // Invalidate queries to refresh UI (but total stats remain unchanged)
       queryClient.invalidateQueries({ queryKey: ["/api/incorrect-questions"] });
-      queryClient.invalidateQueries({ queryKey: ["/api/incorrect-answers/count"] });
     } catch (error) {
       console.error("Failed to clear mistakes:", error);
     }
@@ -113,7 +112,7 @@ export default function PracticeMistakes() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="text-center">
                 <div className="text-3xl font-bold text-red-600 mb-2">
-                  {countData?.count || 0}
+                  {statsData?.incorrectAnswers || 0}
                 </div>
                 <div className="text-sm text-muted-foreground">
                   Falsche Antworten gesamt
