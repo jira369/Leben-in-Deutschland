@@ -154,18 +154,18 @@ export default function Home() {
             ) : (
               <div className="space-y-3">
                 {recentSessions.filter(session => session.type === 'full').map((session) => (
-                  <div key={session.id} className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-4 bg-muted/50 dark:bg-muted/30 rounded-lg border border-border space-y-3 sm:space-y-0">
+                  <div key={session.id} className="flex items-center justify-between p-4 bg-muted/50 dark:bg-muted/30 rounded-lg border border-border">
                     <div className="flex items-center space-x-3">
-                      <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-lg flex items-center justify-center flex-shrink-0 ${
+                      <div className={`w-12 h-12 rounded-lg flex items-center justify-center ${
                         session.passed ? 'bg-green-100 dark:bg-green-900/30' : 'bg-orange-100 dark:bg-orange-900/30'
                       }`}>
                         {session.passed ? (
-                          <CheckCircle className="text-green-500 h-5 w-5 sm:h-6 sm:w-6" />
+                          <CheckCircle className="text-green-500 h-6 w-6" />
                         ) : (
-                          <AlertTriangle className="text-orange-500 h-5 w-5 sm:h-6 sm:w-6" />
+                          <AlertTriangle className="text-orange-500 h-6 w-6" />
                         )}
                       </div>
-                      <div className="min-w-0 flex-1">
+                      <div>
                         <p className="font-medium text-sm text-foreground">
                           {session.type === 'full' 
                             ? 'Vollständiger Test' 
@@ -184,7 +184,7 @@ export default function Home() {
                         </p>
                       </div>
                     </div>
-                    <div className="text-right flex-shrink-0">
+                    <div className="text-right">
                       <p className={`text-lg font-semibold ${
                         session.passed ? 'text-green-600 dark:text-green-400' : 'text-orange-600 dark:text-orange-400'
                       }`}>
