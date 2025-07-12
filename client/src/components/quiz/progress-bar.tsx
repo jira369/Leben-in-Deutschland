@@ -1,13 +1,11 @@
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
-import { Pause, Clock, X } from "lucide-react";
-import { formatTime } from "@/lib/quiz-logic";
+import { Pause, X } from "lucide-react";
 
 interface ProgressBarProps {
   currentQuestion: number;
   totalQuestions: number;
   progress: number;
-  timeRemaining?: number | null;
   onPause?: () => void;
   onExit?: () => void;
 }
@@ -16,7 +14,6 @@ export function ProgressBar({
   currentQuestion,
   totalQuestions,
   progress,
-  timeRemaining,
   onPause,
   onExit
 }: ProgressBarProps) {
@@ -37,12 +34,6 @@ export function ProgressBar({
           </div>
         </div>
         <div className="flex items-center space-x-4">
-          {timeRemaining !== null && timeRemaining !== undefined && (
-            <div className="text-sm text-muted-foreground font-mono flex items-center">
-              <Clock className="h-4 w-4 mr-1" />
-              {formatTime(timeRemaining)}
-            </div>
-          )}
           {onExit && (
             <Button variant="ghost" size="sm" onClick={onExit}>
               Beenden

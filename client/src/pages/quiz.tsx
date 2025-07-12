@@ -15,7 +15,6 @@ export default function Quiz() {
   
   const {
     quizState,
-    timeRemaining,
     settings,
     startQuiz,
     selectAnswer,
@@ -112,7 +111,6 @@ export default function Quiz() {
           currentQuestion={quizState.currentQuestionIndex + 1}
           totalQuestions={quizState.questions.length}
           progress={progress}
-          timeRemaining={timeRemaining}
           onExit={handleExitQuiz}
         />
 

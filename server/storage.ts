@@ -70,10 +70,6 @@ export class MemStorage implements IStorage {
     // Initialize with default settings
     this.userSettings = {
       id: 1,
-      timerEnabled: false,
-      immediateFeedback: true,
-      shuffleQuestions: true,
-      testMode: 'full',
       selectedState: null,
       hasSelectedState: false
     };
@@ -396,10 +392,8 @@ export class DatabaseStorage implements IStorage {
       const [newSettings] = await db
         .insert(userSettings)
         .values({
-          timerEnabled: false,
-          immediateFeedback: true,
-          shuffleQuestions: true,
-          testMode: 'full'
+          selectedState: null,
+          hasSelectedState: false
         })
         .returning();
       return newSettings;
@@ -415,10 +409,8 @@ export class DatabaseStorage implements IStorage {
       const [newSettings] = await db
         .insert(userSettings)
         .values({
-          timerEnabled: settings.timerEnabled ?? false,
-          immediateFeedback: settings.immediateFeedback ?? true,
-          shuffleQuestions: settings.shuffleQuestions ?? true,
-          testMode: settings.testMode ?? 'full'
+          selectedState: settings.selectedState ?? null,
+          hasSelectedState: settings.hasSelectedState ?? false
         })
         .returning();
       return newSettings;

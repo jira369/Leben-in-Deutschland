@@ -5,7 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Trophy, RotateCcw, BookOpen, Share, CheckCircle, XCircle, ChevronDown } from "lucide-react";
 import { QuizResults } from "@shared/schema";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { formatTime } from "@/lib/quiz-logic";
+import { formatDuration } from "@/lib/quiz-logic";
 import { useQuery } from "@tanstack/react-query";
 
 export default function Results() {
@@ -125,7 +125,7 @@ export default function Results() {
                 </p>
                 {results.timeSpent > 0 && (
                   <p className={`text-sm mt-2 ${passedTest ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>
-                    Benötigte Zeit: {formatTime(results.timeSpent)}
+                    Benötigte Zeit: {formatDuration(results.timeSpent)}
                   </p>
                 )}
               </div>
@@ -134,7 +134,7 @@ export default function Results() {
             {!isFullTest && results.timeSpent > 0 && (
               <div className="p-4 bg-primary/5 dark:bg-primary/10 rounded-xl border border-primary/20">
                 <p className="text-sm text-primary text-center">
-                  Übungszeit: {formatTime(results.timeSpent)}
+                  Übungszeit: {formatDuration(results.timeSpent)}
                 </p>
               </div>
             )}
@@ -242,7 +242,7 @@ export default function Results() {
                 <div className="flex justify-between items-center">
                   <span className="text-muted-foreground">Lernzeit gesamt</span>
                   <span className="font-semibold text-foreground">
-                    {stats?.totalStudyTime ? formatTime(stats.totalStudyTime) : '0:00'}
+                    {stats?.totalStudyTime ? formatDuration(stats.totalStudyTime) : '0:00'}
                   </span>
                 </div>
               </div>

@@ -34,7 +34,6 @@ export const quizSessions = pgTable("quiz_sessions", {
 
 export const userSettings = pgTable("user_settings", {
   id: serial("id").primaryKey(),
-  timerEnabled: boolean("timer_enabled").default(false),
   selectedState: text("selected_state"),
   hasSelectedState: boolean("has_selected_state").default(false),
 });
@@ -92,7 +91,6 @@ export type QuizState = {
   questions: Question[];
   currentQuestionIndex: number;
   selectedAnswers: Record<number, number>;
-  timeRemaining?: number;
   startTime: number;
 };
 

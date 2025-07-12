@@ -6,7 +6,6 @@ import { apiRequest } from "@/lib/queryClient";
 
 export function useQuiz() {
   const [quizState, setQuizState] = useState<QuizState | null>(null);
-  const [timeRemaining, setTimeRemaining] = useState<number | null>(null);
   const [currentQuizType, setCurrentQuizType] = useState<'full' | 'practice' | null>(null);
   const queryClient = useQueryClient();
 
@@ -60,31 +59,7 @@ export function useQuiz() {
     }
   });
 
-  // Timer effect - completely rewritten for reliability
-  useEffect(() => {
-    if (timeRemaining === null || timeRemaining === undefined) return;
 
-    const interval = setInterval(() => {
-      setTimeRemaining(prev => {
-        if (prev === null || prev === undefined) return null;
-        
-        // Simple logic: If we're in countdown range (near 3600), count down
-        // Otherwise count up from 0
-        if (prev > 3000) {
-          // Countdown mode (full test) - count down from 60 minutes
-          if (prev <= 1) {
-            return 0; // Timer finished
-          }
-          return prev - 1;
-        } else {
-          // Count-up mode (practice) - count up from 0
-          return prev + 1;
-        }
-      });
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, [timeRemaining]);
 
   // Initialize questions if empty
   useEffect(() => {
@@ -133,21 +108,6 @@ export function useQuiz() {
       // Set quiz type FIRST
       setCurrentQuizType(type);
       
-      // Set timer based on type and settings
-      if (settings?.timerEnabled) {
-        if (type === 'full') {
-          // Full test: start countdown from 60 minutes
-          setTimeRemaining(60 * 60);
-          newQuizState.timeRemaining = 60 * 60;
-        } else {
-          // Practice mode: start count-up from 0
-          setTimeRemaining(0);
-          newQuizState.timeRemaining = 0;
-        }
-      } else {
-        setTimeRemaining(null);
-      }
-
       setQuizState(newQuizState);
     } catch (error) {
       console.error('Failed to start quiz:', error);
@@ -249,13 +209,11 @@ export function useQuiz() {
 
   const resetQuiz = useCallback(() => {
     setQuizState(null);
-    setTimeRemaining(null);
     setCurrentQuizType(null);
   }, []);
 
   return {
     quizState,
-    timeRemaining,
     questionsLoading,
     settings,
     startQuiz,
