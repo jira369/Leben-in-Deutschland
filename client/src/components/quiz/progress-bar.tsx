@@ -1,5 +1,6 @@
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
+import { Timer } from "./timer";
 import { Pause, X } from "lucide-react";
 
 interface ProgressBarProps {
@@ -8,6 +9,9 @@ interface ProgressBarProps {
   progress: number;
   onPause?: () => void;
   onExit?: () => void;
+  quizType?: 'full' | 'practice';
+  startTime?: number;
+  onTimeUp?: () => void;
 }
 
 export function ProgressBar({
@@ -15,7 +19,10 @@ export function ProgressBar({
   totalQuestions,
   progress,
   onPause,
-  onExit
+  onExit,
+  quizType = 'practice',
+  startTime,
+  onTimeUp
 }: ProgressBarProps) {
   return (
     <div className="bg-card rounded-2xl shadow-lg p-6 mb-6">
@@ -34,6 +41,14 @@ export function ProgressBar({
           </div>
         </div>
         <div className="flex items-center space-x-4">
+          {startTime && (
+            <Timer
+              mode={quizType === 'full' ? 'countdown' : 'countup'}
+              initialSeconds={quizType === 'full' ? 3600 : undefined}
+              startTime={startTime}
+              onTimeUp={onTimeUp}
+            />
+          )}
           {onExit && (
             <Button variant="ghost" size="sm" onClick={onExit}>
               Beenden

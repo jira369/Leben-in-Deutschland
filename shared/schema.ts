@@ -92,6 +92,7 @@ export type QuizState = {
   currentQuestionIndex: number;
   selectedAnswers: Record<number, number>;
   startTime: number;
+  timeRemaining?: number; // For countdown timer in full tests (in seconds)
 };
 
 export type QuizResults = {

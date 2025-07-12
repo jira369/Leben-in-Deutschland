@@ -6,6 +6,7 @@ import { useQuiz } from "@/hooks/use-quiz";
 import { useMarkedQuestions } from "@/hooks/use-marked-questions";
 import { ProgressBar } from "@/components/quiz/progress-bar";
 import { QuestionCard } from "@/components/quiz/question-card";
+import { Timer } from "@/components/quiz/timer";
 import { QuizResults } from "@shared/schema";
 
 export default function Quiz() {
@@ -112,6 +113,9 @@ export default function Quiz() {
           totalQuestions={quizState.questions.length}
           progress={progress}
           onExit={handleExitQuiz}
+          quizType={quizType}
+          startTime={quizState.startTime}
+          onTimeUp={handleFinishQuiz}
         />
 
         <div className="space-y-6">

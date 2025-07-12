@@ -103,6 +103,7 @@ export function useQuiz() {
         currentQuestionIndex: 0,
         selectedAnswers: {},
         startTime: Date.now(),
+        timeRemaining: type === 'full' ? 3600 : undefined, // 60 minutes for full test
       };
 
       // Set quiz type FIRST
