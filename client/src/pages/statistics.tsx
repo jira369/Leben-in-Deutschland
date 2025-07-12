@@ -342,7 +342,7 @@ export default function Statistics() {
                               : 'Übungstest'
                           }
                           {session.timeSpent && (
-                            <span className="text-xs text-muted-foreground ml-2">
+                            <span className="text-sm text-muted-foreground ml-2">
                               ⏱ {formatDuration(session.timeSpent)}
                             </span>
                           )}
