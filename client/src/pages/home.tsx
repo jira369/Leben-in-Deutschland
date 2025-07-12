@@ -166,7 +166,7 @@ export default function Home() {
                         )}
                       </div>
                       <div className="min-w-0 flex-1">
-                        <p className="font-medium text-sm sm:text-base text-foreground">
+                        <p className="font-medium text-sm text-foreground">
                           {session.type === 'full' 
                             ? 'Vollständiger Test' 
                             : session.practiceType 
@@ -174,17 +174,17 @@ export default function Home() {
                               : 'Übungsmodus'
                           }
                           {session.timeSpent && (
-                            <span className="text-xs sm:text-sm text-muted-foreground ml-2">
+                            <span className="text-xs text-muted-foreground ml-2">
                               ⏱ {formatDuration(session.timeSpent)}
                             </span>
                           )}
                         </p>
-                        <p className="text-xs sm:text-sm text-muted-foreground">
+                        <p className="text-xs text-muted-foreground">
                           {session.createdAt ? new Date(session.createdAt).toLocaleDateString('de-DE') : 'Heute'}
                         </p>
                       </div>
                     </div>
-                    <div className="text-left sm:text-right flex-shrink-0">
+                    <div className="text-right flex-shrink-0">
                       <p className={`text-lg font-semibold ${
                         session.passed ? 'text-green-600 dark:text-green-400' : 'text-orange-600 dark:text-orange-400'
                       }`}>

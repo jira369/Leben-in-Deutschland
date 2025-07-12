@@ -183,6 +183,7 @@ Entwicklungshistorie:
 - 11. Juli 2025. **ZEITANZEIGE ERWEITERT:** "Ihre letzten Ergebnisse" und "Letzte Aktivitäten" zeigen jetzt die verstrichene Zeit für jeden Test/Übung im Titel an (z.B. "Vollständiger Test ⏱ 8:51"). Neue formatDuration() Funktion für benutzerfreundliche Zeitformatierung.
 - 11. Juli 2025. **STATISTIKEN-UI OPTIMIERT:** Header-Design der Statistiken-Seite an Übungsseite angepasst - sticky Navigation mit Trennlinie, kompaktes Icon-Design, responsive Layout. Button-Navigation korrigiert: "Üben"-Button führt zur Practice-Übersichtsseite.
 - 12. Juli 2025. **MOBILE RESPONSIVENESS OPTIMIERT:** Ergebnisseite und Statistikseite vollständig für mobile Geräte optimiert - responsive Grids, flexible Button-Layouts, verbesserte Textumbrüche und kompakte Kartendarstellung für kleinere Bildschirme.
+- 12. Juli 2025. **ZEITANZEIGE KOMPAKT:** Verstrichene Zeit wird jetzt direkt im Titel angezeigt (z.B. "Volltest ⏱ 8:51"). Fragenzahl und Prozentzahl rechtsbündig mit einheitlicher Schriftgröße auf Startseite und Statistikseite.
 
 ## Benutzerpräferenzen
 

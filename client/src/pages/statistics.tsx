@@ -353,11 +353,11 @@ export default function Statistics() {
                         </p>
                       </div>
                     </div>
-                    <div className="text-left sm:text-right flex-shrink-0">
-                      <p className="font-semibold text-sm text-foreground">
+                    <div className="text-right flex-shrink-0">
+                      <p className="font-semibold text-lg text-foreground">
                         {session.correctAnswers}/{session.totalQuestions}
                       </p>
-                      <p className="text-xs text-muted-foreground">
+                      <p className="text-sm text-muted-foreground">
                         {session.percentage}%
                       </p>
                     </div>
