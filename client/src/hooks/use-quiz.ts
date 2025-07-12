@@ -201,7 +201,11 @@ export function useQuiz() {
       const mode = searchParams.get('mode');
       const category = searchParams.get('category');
       
-      if (mode === 'state') {
+      if (mode === 'mistakes') {
+        practiceType = 'Fehler üben';
+      } else if (mode === 'marked') {
+        practiceType = 'Markierte üben';
+      } else if (mode === 'state') {
         practiceType = 'bundeslandspezifische Fragen';
       } else if (mode === 'all') {
         practiceType = 'alle Fragen';

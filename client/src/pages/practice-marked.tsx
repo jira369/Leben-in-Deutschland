@@ -80,7 +80,7 @@ export default function PracticeMarked() {
                     <Link href="/quiz?type=practice&mode=marked">
                       <Button size="lg" className="w-full bg-yellow-600 hover:bg-yellow-700">
                         <Shuffle className="h-4 w-4 mr-2" />
-                        Zufällig üben
+                        Zufällig üben ({markedQuestionsCount} Fragen)
                       </Button>
                     </Link>
                     <Link href="/quiz?type=practice&mode=marked&chronological=true">
