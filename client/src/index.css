@@ -74,6 +74,20 @@
 }
 
 @layer utilities {
+  .hyphenate {
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+    hyphens: auto;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphenate-limit-chars: 6 3 3;
+    hyphenate-limit-lines: no-limit;
+    hyphenate-limit-last: always;
+    hyphenate-limit-zone: 8%;
+  }
+}
+
+@layer utilities {
   .animate-fade-in {
     animation: fadeIn 0.3s ease-in-out;
   }

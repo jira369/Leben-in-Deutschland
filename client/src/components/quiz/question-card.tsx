@@ -38,7 +38,7 @@ export function QuestionCard({
               <span className="text-primary font-semibold text-sm">{questionNumber}</span>
             </div>
             <div className="flex-1">
-              <h3 className="text-xl font-semibold text-foreground leading-relaxed">
+              <h3 className="text-xl font-semibold text-foreground leading-relaxed hyphenate">
                 {question.text}
               </h3>
             </div>
@@ -104,7 +104,7 @@ export function QuestionCard({
                 disabled={hasSelectedAnswer}
                 className="w-5 h-5 text-primary border-border focus:ring-primary focus:ring-2"
               />
-              <span className={`ml-4 font-medium ${
+              <span className={`ml-4 font-medium hyphenate ${
                 selectedAnswer === index 
                   ? 'text-primary' 
                   : hasSelectedAnswer 
