@@ -68,7 +68,11 @@ export function useQuiz() {
       setTimeRemaining(prev => {
         if (prev === null || prev === undefined) return null;
         
-        if (currentQuizType === 'full') {
+        // Determine if this is a countdown timer (full test) or count-up timer (practice)
+        // Full test timers start at 3600 (60 minutes), practice timers start at 0
+        const isCountdownTimer = prev >= 3600 || (prev > 0 && prev < 3600 && currentQuizType === 'full');
+        
+        if (isCountdownTimer) {
           // Full test mode: count down from 60 minutes
           if (prev <= 1) {
             return 0; // Timer finished
@@ -78,8 +82,6 @@ export function useQuiz() {
           // Practice mode: count up from 0
           return prev + 1;
         }
-        
-        return prev;
       });
     }, 1000);
 
@@ -128,23 +130,21 @@ export function useQuiz() {
         startTime: Date.now(),
       };
 
-      // Set timer if enabled
-      setCurrentQuizType(type); // Set quiz type BEFORE setting timer
+      setQuizState(newQuizState);
+      
+      // Set quiz type and timer AFTER setting quiz state
+      setCurrentQuizType(type);
       
       if (settings?.timerEnabled) {
         if (type === 'full') {
           setTimeRemaining(60 * 60); // 60 minutes for full test (countdown)
-          newQuizState.timeRemaining = 60 * 60;
         } else {
           // Practice mode always counts up from 0
           setTimeRemaining(0);
-          newQuizState.timeRemaining = 0;
         }
       } else {
         setTimeRemaining(null);
       }
-
-      setQuizState(newQuizState);
     } catch (error) {
       console.error('Failed to start quiz:', error);
     }
