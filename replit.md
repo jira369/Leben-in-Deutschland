@@ -185,6 +185,8 @@ Entwicklungshistorie:
 - 12. Juli 2025. **MOBILE RESPONSIVENESS OPTIMIERT:** Ergebnisseite und Statistikseite vollständig für mobile Geräte optimiert - responsive Grids, flexible Button-Layouts, verbesserte Textumbrüche und kompakte Kartendarstellung für kleinere Bildschirme.
 - 12. Juli 2025. **ZEITANZEIGE KOMPAKT:** Verstrichene Zeit wird jetzt direkt im Titel angezeigt (z.B. "Volltest ⏱ 8:51"). Fragenzahl und Prozentzahl rechtsbündig mit einheitlicher Schriftgröße auf Startseite und Statistikseite.
 - 12. Juli 2025. **TIMER-FUNKTION ENTFERNT:** Timer-Funktion und alle damit verbundenen Komponenten vollständig aus der App entfernt - keine Zeitanzeige mehr während des Quiz, vereinfachte Benutzeroberfläche ohne Timer-Einstellungen, fokussiert auf reine Lernerfahrung ohne Zeitdruck.
+- 12. Juli 2025. **TIMER-REIMPLEMENTIERUNG:** Timer-Funktion komplett neu implementiert mit konfigurierbarer Einstellung - Volltest zeigt 60-Minuten Countdown-Timer, Übungen zeigen Count-up Timer. Timer kann in Einstellungen deaktiviert werden für timerfreie Lernerfahrung.
+- 12. Juli 2025. **FRAGENFEHLER KORRIGIERT:** Korrekte Antwort für Frage 209 "Welches war das Wappen der Deutschen Demokratischen Republik?" von Antwort 1 auf Antwort 4 korrigiert.
 
 ## Benutzerpräferenzen
 
