@@ -121,8 +121,8 @@ export default function Quiz() {
             question={currentQuestion}
             questionNumber={quizState.currentQuestionIndex + 1}
             selectedAnswer={selectedAnswer}
-            showFeedback={hasSelectedCurrentAnswer}
-            immediateFeedback={settings?.immediateFeedback || false}
+            showFeedback={hasSelectedCurrentAnswer && quizType === 'practice'}
+            immediateFeedback={quizType === 'practice'}
             onAnswerSelect={selectAnswer}
           />
 

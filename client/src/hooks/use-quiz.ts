@@ -68,11 +68,11 @@ export function useQuiz() {
       setTimeRemaining(prev => {
         if (prev === null || prev === undefined) return null;
         
-        // Determine if this is a countdown timer (full test) or count-up timer (practice)
-        // Full test timers start at 3600 (60 minutes), practice timers start at 0
-        const isCountdownTimer = prev >= 3600 || (prev > 0 && prev < 3600 && currentQuizType === 'full');
+        // Check if this is a countdown timer (full test starts at 3600)
+        // or a count-up timer (practice mode starts at 0)
+        const isFullTest = currentQuizType === 'full';
         
-        if (isCountdownTimer) {
+        if (isFullTest) {
           // Full test mode: count down from 60 minutes
           if (prev <= 1) {
             return 0; // Timer finished

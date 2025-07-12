@@ -117,7 +117,7 @@ export function QuestionCard({
           ))}
         </RadioGroup>
 
-        {hasSelectedAnswer && immediateFeedback && (
+        {hasSelectedAnswer && immediateFeedback && showFeedback && (
           <AnswerFeedback
             isCorrect={isCorrect}
             correctAnswer={question.answers[question.correctAnswer - 1]}
