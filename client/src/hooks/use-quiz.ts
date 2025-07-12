@@ -68,16 +68,16 @@ export function useQuiz() {
       setTimeRemaining(prev => {
         if (prev === null || prev === undefined) return null;
         
-        // Simple logic: If timer was initialized with 3600 (60 minutes), count down
-        // If timer was initialized with 0, count up
-        if (prev >= 3600) {
-          // Countdown mode (full test)
+        // Simple logic: If we're in countdown range (near 3600), count down
+        // Otherwise count up from 0
+        if (prev > 3000) {
+          // Countdown mode (full test) - count down from 60 minutes
           if (prev <= 1) {
             return 0; // Timer finished
           }
           return prev - 1;
         } else {
-          // Count-up mode (practice)
+          // Count-up mode (practice) - count up from 0
           return prev + 1;
         }
       });

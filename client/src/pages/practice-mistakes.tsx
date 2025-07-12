@@ -41,8 +41,8 @@ export default function PracticeMistakes() {
   };
 
   const startMistakePractice = () => {
-    // Navigate to quiz with special "mistakes" mode
-    setLocation("/quiz?mode=mistakes");
+    // Navigate to quiz with practice type and mistakes mode
+    setLocation("/quiz?type=practice&mode=mistakes");
   };
 
   if (isLoading) {
