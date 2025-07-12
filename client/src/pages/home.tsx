@@ -166,19 +166,21 @@ export default function Home() {
                         )}
                       </div>
                       <div>
-                        <p className="font-medium text-sm text-foreground">
-                          {session.type === 'full' 
-                            ? 'Vollständiger Test' 
-                            : session.practiceType 
-                              ? `Übung: ${session.practiceType}`
-                              : 'Übungsmodus'
-                          }
+                        <div className="flex items-center flex-wrap gap-2">
+                          <p className="font-medium text-sm text-foreground">
+                            {session.type === 'full' 
+                              ? 'Vollständiger Test' 
+                              : session.practiceType 
+                                ? `Übung: ${session.practiceType}`
+                                : 'Übungsmodus'
+                            }
+                          </p>
                           {session.timeSpent && (
-                            <span className="text-sm text-muted-foreground ml-2">
+                            <span className="text-sm text-muted-foreground">
                               ⏱ {formatDuration(session.timeSpent)}
                             </span>
                           )}
-                        </p>
+                        </div>
                         <p className="text-xs text-muted-foreground">
                           {session.createdAt ? new Date(session.createdAt).toLocaleDateString('de-DE') : 'Heute'}
                         </p>

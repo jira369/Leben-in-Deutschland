@@ -334,19 +334,21 @@ export default function Statistics() {
                         session.passed ? 'bg-green-500' : 'bg-red-500'
                       }`}></div>
                       <div>
-                        <p className="font-medium text-sm text-foreground">
-                          {session.type === 'full' 
-                            ? 'Volltest' 
-                            : session.practiceType 
-                              ? `Übungstest ${session.practiceType}`
-                              : 'Übungstest'
-                          }
+                        <div className="flex items-center flex-wrap gap-2">
+                          <p className="font-medium text-sm text-foreground">
+                            {session.type === 'full' 
+                              ? 'Volltest' 
+                              : session.practiceType 
+                                ? `Übungstest ${session.practiceType}`
+                                : 'Übungstest'
+                            }
+                          </p>
                           {session.timeSpent && (
-                            <span className="text-sm text-muted-foreground ml-2">
+                            <span className="text-sm text-muted-foreground">
                               ⏱ {formatDuration(session.timeSpent)}
                             </span>
                           )}
-                        </p>
+                        </div>
                         <p className="text-xs text-muted-foreground">
                           {new Date(session.createdAt).toLocaleDateString('de-DE')}
                         </p>
