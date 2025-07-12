@@ -173,7 +173,11 @@ export default function Home() {
                               ? `Übung: ${session.practiceType}`
                               : 'Übungsmodus'
                           }
-                          {session.timeSpent && ` ⏱ ${formatDuration(session.timeSpent)}`}
+                        </p>
+                        <p className="text-sm text-muted-foreground">
+                          {session.timeSpent && (
+                            <>⏱ {formatDuration(session.timeSpent)}</>
+                          )}
                         </p>
                         <p className="text-sm text-muted-foreground">
                           {session.createdAt ? new Date(session.createdAt).toLocaleDateString('de-DE') : 'Heute'}

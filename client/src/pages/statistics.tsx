@@ -341,7 +341,11 @@ export default function Statistics() {
                               ? `Übungstest ${session.practiceType}`
                               : 'Übungstest'
                           }
-                          {session.timeSpent && ` ⏱ ${formatDuration(session.timeSpent)}`}
+                        </p>
+                        <p className="text-xs text-muted-foreground">
+                          {session.timeSpent && (
+                            <>⏱ {formatDuration(session.timeSpent)}</>
+                          )}
                         </p>
                         <p className="text-xs text-muted-foreground">
                           {new Date(session.createdAt).toLocaleDateString('de-DE')}
