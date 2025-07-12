@@ -36,6 +36,7 @@ export const userSettings = pgTable("user_settings", {
   id: serial("id").primaryKey(),
   selectedState: text("selected_state"),
   hasSelectedState: boolean("has_selected_state").default(false),
+  timerEnabled: boolean("timer_enabled").default(true).notNull(),
 });
 
 export const incorrectAnswers = pgTable("incorrect_answers", {

@@ -116,6 +116,7 @@ export default function Quiz() {
           quizType={quizType}
           startTime={quizState.startTime}
           onTimeUp={handleFinishQuiz}
+          timerEnabled={settings?.timerEnabled ?? true}
         />
 
         <div className="space-y-6">

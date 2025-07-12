@@ -150,6 +150,24 @@ export function SettingsModal({ open, onOpenChange }: SettingsModalProps) {
                 onCheckedChange={(checked) => setTheme(checked ? "dark" : "light")}
               />
             </div>
+            
+            <div className="flex items-center justify-between">
+              <div>
+                <Label htmlFor="timer" className="text-sm font-medium">
+                  Timer aktivieren
+                </Label>
+                <p className="text-xs text-muted-foreground mt-1">
+                  Zeigt die verbleibende Zeit für den Test an (60 Minuten)
+                </p>
+              </div>
+              <Switch
+                id="timer"
+                checked={currentSettings.timerEnabled ?? true}
+                onCheckedChange={(checked) => 
+                  setLocalSettings(prev => ({ ...prev, timerEnabled: checked }))
+                }
+              />
+            </div>
           </div>
 
 
