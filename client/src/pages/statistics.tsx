@@ -338,8 +338,8 @@ export default function Statistics() {
                           {session.type === 'full' 
                             ? 'Volltest' 
                             : session.practiceType 
-                              ? `Übungstest ${session.practiceType}`
-                              : 'Übungstest'
+                              ? `${session.practiceType} (Übung)`
+                              : 'Gemischte Fragen (Übung)'
                           }
                         </p>
                         <p className="text-xs text-muted-foreground">

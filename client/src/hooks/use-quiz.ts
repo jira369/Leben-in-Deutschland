@@ -171,9 +171,9 @@ export function useQuiz() {
       } else if (mode === 'marked') {
         practiceType = 'Markierte üben';
       } else if (mode === 'state') {
-        practiceType = 'bundeslandspezifische Fragen';
+        practiceType = 'Bundeslandspezifische Fragen';
       } else if (mode === 'all') {
-        practiceType = 'alle Fragen';
+        practiceType = 'Alle Fragen';
       } else if (category) {
         const categoryNames: Record<string, string> = {
           'geschichte': 'Geschichte',
@@ -183,7 +183,7 @@ export function useQuiz() {
         };
         practiceType = categoryNames[category] || category;
       } else {
-        practiceType = 'gemischte Fragen';
+        practiceType = 'Gemischte Fragen';
       }
     }
     

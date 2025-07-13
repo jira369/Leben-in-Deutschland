@@ -170,8 +170,8 @@ export default function Home() {
                           {session.type === 'full' 
                             ? 'Vollständiger Test' 
                             : session.practiceType 
-                              ? `Übung: ${session.practiceType}`
-                              : 'Übungsmodus'
+                              ? `${session.practiceType} (Übung)`
+                              : 'Gemischte Fragen (Übung)'
                           }
                         </p>
                         <p className="text-sm text-muted-foreground">
