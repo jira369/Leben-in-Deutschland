@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Link, useLocation } from "wouter";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { GraduationCap, Flag, ListChecks, TrendingUp, Play, Dumbbell, BarChart3, CheckCircle, AlertTriangle, Settings, Bug, Clock } from "lucide-react";
+import { GraduationCap, ListChecks, TrendingUp, Play, Dumbbell, BarChart3, CheckCircle, AlertTriangle, Settings, Bug, Clock } from "lucide-react";
 import { QuizSession, UserSettings } from "@shared/schema";
 import { formatDuration } from "@/lib/quiz-logic";
 import { SettingsModal } from "@/components/settings-modal";
@@ -74,39 +74,36 @@ export default function Home() {
       </header>
 
       {/* Main Content */}
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="max-w-none mx-auto px-3 sm:px-4 lg:px-6 py-4 sm:py-6">
         {/* Welcome Card */}
-        <Card className="rounded-2xl shadow-lg p-4 sm:p-8 mb-8">
+        <Card className="rounded-xl sm:rounded-2xl shadow-lg p-4 sm:p-6 lg:p-8 mb-6 sm:mb-8 mx-auto max-w-4xl">
           <CardContent className="p-0">
-            <div className="text-center mb-8">
-              <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Flag className="text-primary text-2xl h-8 w-8" />
-              </div>
-              <h2 className="text-3xl font-bold text-foreground mb-2">
+            <div className="text-center mb-6 sm:mb-8">
+              <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-3 sm:mb-2">
                 Willkommen zum Einbürgerungstest
               </h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-2">
                 Bereiten Sie sich optimal auf den deutschen Einbürgerungstest vor. 
                 Üben Sie mit den offiziellen Fragen und erhalten Sie sofortiges Feedback.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-8">
-              <div className="bg-primary/5 dark:bg-primary/10 rounded-xl p-6">
-                <div className="flex items-center mb-3">
-                  <ListChecks className="text-primary text-xl mr-3 h-6 w-6" />
-                  <h3 className="text-lg font-semibold text-foreground">310 Fragen</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 lg:gap-6 mb-6 sm:mb-8">
+              <div className="bg-primary/5 dark:bg-primary/10 rounded-lg sm:rounded-xl p-4 sm:p-6">
+                <div className="flex items-center mb-2 sm:mb-3">
+                  <ListChecks className="text-primary text-lg sm:text-xl mr-2 sm:mr-3 h-5 w-5 sm:h-6 sm:w-6" />
+                  <h3 className="text-base sm:text-lg font-semibold text-foreground">310 Fragen</h3>
                 </div>
-                <p className="text-muted-foreground">
+                <p className="text-sm sm:text-base text-muted-foreground">
                   Alle offiziellen Fragen des Bundesamts für Migration und Flüchtlinge
                 </p>
               </div>
-              <div className="bg-green-50 dark:bg-green-950/20 rounded-xl p-6">
-                <div className="flex items-center mb-3">
-                  <TrendingUp className="text-green-500 text-xl mr-3 h-6 w-6" />
-                  <h3 className="text-lg font-semibold text-foreground">Fortschritt verfolgen</h3>
+              <div className="bg-green-50 dark:bg-green-950/20 rounded-lg sm:rounded-xl p-4 sm:p-6">
+                <div className="flex items-center mb-2 sm:mb-3">
+                  <TrendingUp className="text-green-500 text-lg sm:text-xl mr-2 sm:mr-3 h-5 w-5 sm:h-6 sm:w-6" />
+                  <h3 className="text-base sm:text-lg font-semibold text-foreground">Fortschritt verfolgen</h3>
                 </div>
-                <p className="text-muted-foreground">
+                <p className="text-sm sm:text-base text-muted-foreground">
                   Behalten Sie Ihre Lernfortschritte und Ergebnisse im Blick
                 </p>
               </div>
@@ -139,9 +136,9 @@ export default function Home() {
         </Card>
 
         {/* Recent Progress */}
-        <Card className="rounded-2xl shadow-lg p-4 sm:p-6">
+        <Card className="rounded-xl sm:rounded-2xl shadow-lg p-4 sm:p-6 mx-auto max-w-4xl">
           <CardContent className="p-0">
-            <h3 className="text-xl font-semibold text-foreground mb-4">
+            <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-3 sm:mb-4">
               Ihre letzten Ergebnisse
             </h3>
             {recentSessions.filter(session => session.type === 'full' && session.totalQuestions === 33).length === 0 ? (
