@@ -172,16 +172,6 @@ export function SettingsModal({ open, onOpenChange }: SettingsModalProps) {
 
 
         </div>
-
-        <div className="mt-8 pt-6 border-t">
-          <Button 
-            onClick={handleSave}
-            disabled={updateSettings.isPending}
-            className="w-full"
-          >
-            {updateSettings.isPending ? "Speichern..." : "Einstellungen speichern"}
-          </Button>
-        </div>
       </DialogContent>
     </Dialog>
   );
