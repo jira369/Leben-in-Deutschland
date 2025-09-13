@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Link, useLocation } from "wouter";
+import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { GraduationCap, ListChecks, TrendingUp, Play, Dumbbell, BarChart3, CheckCircle, AlertTriangle, Settings, Bug, Clock } from "lucide-react";
@@ -37,23 +38,47 @@ export default function Home() {
   }, [userSettings, navigate]);
 
   return (
-    <div className="min-h-screen bg-background">
+    <motion.div 
+      className="min-h-screen bg-background"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
       {/* Header */}
-      <header className="bg-card shadow-sm border-b border-border sticky top-0 z-50">
+      <motion.header 
+        className="bg-card shadow-sm border-b border-border sticky top-0 z-50"
+        initial={{ y: -50, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.6, delay: 0.1 }}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-4">
               <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+                <motion.div 
+                  className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center"
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ duration: 0.5, delay: 0.3, type: "spring", stiffness: 200 }}
+                >
                   <GraduationCap className="text-white text-lg" />
-                </div>
-                <div>
+                </motion.div>
+                <motion.div
+                  initial={{ x: -20, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ duration: 0.5, delay: 0.4 }}
+                >
                   <h1 className="text-xl font-semibold text-foreground">Einbürgerungstest</h1>
                   <p className="text-sm text-muted-foreground">Übungs-App</p>
-                </div>
+                </motion.div>
               </div>
             </div>
-            <div className="flex items-center space-x-4">
+            <motion.div 
+              className="flex items-center space-x-4"
+              initial={{ x: 20, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.5 }}
+            >
               <Button
                 variant="ghost"
                 size="icon"
@@ -68,28 +93,46 @@ export default function Home() {
               >
                 <Bug className="h-5 w-5" />
               </Button>
-            </div>
+            </motion.div>
           </div>
         </div>
-      </header>
+      </motion.header>
 
       {/* Main Content */}
       <main className="max-w-none mx-auto px-3 sm:px-4 lg:px-6 py-4 sm:py-6">
         {/* Welcome Card */}
-        <Card className="rounded-xl sm:rounded-2xl shadow-lg p-4 sm:p-6 lg:p-8 mb-6 sm:mb-8 mx-auto max-w-4xl">
-          <CardContent className="p-0">
-            <div className="text-center mb-6 sm:mb-8">
-              <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-3 sm:mb-2">
-                Willkommen zum Einbürgerungstest
-              </h2>
-              <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-2">
-                Bereiten Sie sich optimal auf den deutschen Einbürgerungstest vor. 
-                Üben Sie mit den offiziellen Fragen und erhalten Sie sofortiges Feedback.
-              </p>
-            </div>
+        <motion.div
+          initial={{ y: 30, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+        >
+          <Card className="rounded-xl sm:rounded-2xl shadow-lg p-4 sm:p-6 lg:p-8 mb-6 sm:mb-8 mx-auto max-w-4xl">
+            <CardContent className="p-0">
+              <motion.div 
+                className="text-center mb-6 sm:mb-8"
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.5, delay: 0.8 }}
+              >
+                <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-3 sm:mb-2">
+                  Willkommen zum Einbürgerungstest
+                </h2>
+                <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-2">
+                  Bereiten Sie sich optimal auf den deutschen Einbürgerungstest vor. 
+                  Üben Sie mit den offiziellen Fragen und erhalten Sie sofortiges Feedback.
+                </p>
+              </motion.div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 lg:gap-6 mb-6 sm:mb-8">
-              <div className="bg-primary/5 dark:bg-primary/10 rounded-lg sm:rounded-xl p-4 sm:p-6">
+            <motion.div 
+              className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 lg:gap-6 mb-6 sm:mb-8"
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.5, delay: 1.0 }}
+            >
+              <motion.div 
+                className="bg-primary/5 dark:bg-primary/10 rounded-lg sm:rounded-xl p-4 sm:p-6"
+                whileHover={{ y: -2, transition: { duration: 0.2 } }}
+              >
                 <div className="flex items-center mb-2 sm:mb-3">
                   <ListChecks className="text-primary text-lg sm:text-xl mr-2 sm:mr-3 h-5 w-5 sm:h-6 sm:w-6" />
                   <h3 className="text-base sm:text-lg font-semibold text-foreground">310 Fragen</h3>
@@ -97,8 +140,11 @@ export default function Home() {
                 <p className="text-sm sm:text-base text-muted-foreground">
                   Alle offiziellen Fragen des Bundesamts für Migration und Flüchtlinge
                 </p>
-              </div>
-              <div className="bg-green-50 dark:bg-green-950/20 rounded-lg sm:rounded-xl p-4 sm:p-6">
+              </motion.div>
+              <motion.div 
+                className="bg-green-50 dark:bg-green-950/20 rounded-lg sm:rounded-xl p-4 sm:p-6"
+                whileHover={{ y: -2, transition: { duration: 0.2 } }}
+              >
                 <div className="flex items-center mb-2 sm:mb-3">
                   <TrendingUp className="text-green-500 text-lg sm:text-xl mr-2 sm:mr-3 h-5 w-5 sm:h-6 sm:w-6" />
                   <h3 className="text-base sm:text-lg font-semibold text-foreground">Fortschritt verfolgen</h3>
@@ -106,38 +152,55 @@ export default function Home() {
                 <p className="text-sm sm:text-base text-muted-foreground">
                   Behalten Sie Ihre Lernfortschritte und Ergebnisse im Blick
                 </p>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
 
-            <div className="space-y-4">
+            <motion.div 
+              className="space-y-4"
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.5, delay: 1.2 }}
+            >
               <Link href="/quiz?type=full">
-                <Button className="w-full py-4" size="lg">
-                  <Play className="mr-3 h-5 w-5" />
-                  <span className="hidden sm:inline">Vollständigen Test starten (33 Fragen)</span>
-                  <span className="sm:hidden">Testsimulation starten</span>
-                </Button>
+                <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                  <Button className="w-full py-4" size="lg">
+                    <Play className="mr-3 h-5 w-5" />
+                    <span className="hidden sm:inline">Vollständigen Test starten (33 Fragen)</span>
+                    <span className="sm:hidden">Testsimulation starten</span>
+                  </Button>
+                </motion.div>
               </Link>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <Link href="/practice">
-                  <Button variant="outline" className="w-full py-3" size="lg">
-                    <Dumbbell className="mr-2 h-4 w-4" />
-                    Fragen üben
-                  </Button>
+                  <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                    <Button variant="outline" className="w-full py-3" size="lg">
+                      <Dumbbell className="mr-2 h-4 w-4" />
+                      Fragen üben
+                    </Button>
+                  </motion.div>
                 </Link>
                 <Link href="/statistics">
-                  <Button variant="outline" className="w-full py-3" size="lg">
-                    <BarChart3 className="mr-2 h-4 w-4" />
-                    Statistiken
-                  </Button>
+                  <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                    <Button variant="outline" className="w-full py-3" size="lg">
+                      <BarChart3 className="mr-2 h-4 w-4" />
+                      Statistiken
+                    </Button>
+                  </motion.div>
                 </Link>
               </div>
-            </div>
+            </motion.div>
           </CardContent>
         </Card>
+        </motion.div>
 
         {/* Recent Progress */}
-        <Card className="rounded-xl sm:rounded-2xl shadow-lg p-4 sm:p-6 mx-auto max-w-4xl">
-          <CardContent className="p-0">
+        <motion.div
+          initial={{ y: 30, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.6, delay: 1.4 }}
+        >
+          <Card className="rounded-xl sm:rounded-2xl shadow-lg p-4 sm:p-6 mx-auto max-w-4xl">
+            <CardContent className="p-0">
             <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-3 sm:mb-4">
               Ihre letzten Ergebnisse
             </h3>
@@ -197,6 +260,7 @@ export default function Home() {
             )}
           </CardContent>
         </Card>
+        </motion.div>
       </main>
 
       <SettingsModal 
@@ -208,6 +272,6 @@ export default function Home() {
         open={bugReportOpen} 
         onOpenChange={setBugReportOpen} 
       />
-    </div>
+    </motion.div>
   );
 }

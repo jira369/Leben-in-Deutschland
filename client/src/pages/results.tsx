@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation, Link } from "wouter";
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Trophy, RotateCcw, BookOpen, Share, CheckCircle, XCircle, ChevronDown } from "lucide-react";
@@ -66,16 +67,36 @@ export default function Results() {
   const requiredScore = results.total === 33 ? 17 : Math.ceil(results.total * 0.51);
 
   return (
-    <div className="min-h-screen bg-background">
+    <motion.div 
+      className="min-h-screen bg-background"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6 }}
+    >
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
         {/* Results Header */}
-        <Card className="rounded-2xl shadow-lg p-4 sm:p-8 mb-6 text-center">
-          <CardContent className="p-0">
-            <div className="w-24 h-24 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-6">
-              <Trophy className="text-green-500 text-3xl h-12 w-12" />
-            </div>
-            <h2 className="text-3xl font-bold text-foreground mb-2">
-              {isFullTest ? 'Test abgeschlossen!' : 'Übung abgeschlossen!'}
+        <motion.div
+          initial={{ y: 30, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          <Card className="rounded-2xl shadow-lg p-4 sm:p-8 mb-6 text-center">
+            <CardContent className="p-0">
+              <motion.div 
+                className="w-24 h-24 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-6"
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ duration: 0.5, delay: 0.4, type: "spring", stiffness: 200 }}
+              >
+                <Trophy className="text-green-500 text-3xl h-12 w-12" />
+              </motion.div>
+              <motion.h2 
+                className="text-3xl font-bold text-foreground mb-2"
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.5, delay: 0.6 }}
+              >
+                {isFullTest ? 'Test abgeschlossen!' : 'Übung abgeschlossen!'}
             </h2>
             <p className="text-lg text-muted-foreground mb-6">
               {isFullTest 
@@ -250,14 +271,21 @@ export default function Results() {
           </Card>
         </div>
 
-        <div className="mt-8 text-center">
+        <motion.div 
+          className="mt-8 text-center"
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.5, delay: 1.2 }}
+        >
           <Link href="/">
-            <Button variant="outline" size="lg">
-              Zurück
-            </Button>
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <Button variant="outline" size="lg">
+                Zurück
+              </Button>
+            </motion.div>
           </Link>
-        </div>
+        </motion.div>
       </main>
-    </div>
+    </motion.div>
   );
 }

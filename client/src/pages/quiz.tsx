@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight, Flag } from "lucide-react";
 import { useQuiz } from "@/hooks/use-quiz";
@@ -13,6 +14,7 @@ export default function Quiz() {
   const [, setLocation] = useLocation();
   const [quizResults, setQuizResults] = useState<QuizResults | null>(null);
   const [quizType, setQuizType] = useState<'full' | 'practice'>('full');
+  const [isExiting, setIsExiting] = useState(false);
   
   const {
     quizState,
@@ -52,43 +54,51 @@ export default function Quiz() {
   }, [isQuizActive, quizResults, quizType, startQuiz]);
 
   const handleFinishQuiz = async () => {
-    const results = await finishQuiz(quizType);
-    if (results) {
-      setQuizResults(results);
-      // Store results in localStorage for reliable access
-      localStorage.setItem('quiz-results', JSON.stringify({ results, type: quizType }));
-      setLocation('/results');
-    }
+    setIsExiting(true);
+    // Small delay to show exit animation
+    setTimeout(async () => {
+      const results = await finishQuiz(quizType);
+      if (results) {
+        setQuizResults(results);
+        // Store results in localStorage for reliable access
+        localStorage.setItem('quiz-results', JSON.stringify({ results, type: quizType }));
+        setLocation('/results');
+      }
+    }, 500); // 500ms delay for animation
   };
 
   const handleExitQuiz = async () => {
     const answersGiven = quizState ? Object.keys(quizState.selectedAnswers).length : 0;
     
-    // For practice mode: show results if more than 1 question answered
-    if (quizType === 'practice' && answersGiven > 1) {
-      const results = await finishQuiz(quizType);
-      if (results) {
-        setQuizResults(results);
-        localStorage.setItem('quiz-results', JSON.stringify({ results, type: quizType }));
-        setLocation('/results');
-        return;
+    setIsExiting(true);
+    // Small delay to show exit animation
+    setTimeout(async () => {
+      // For practice mode: show results if more than 1 question answered
+      if (quizType === 'practice' && answersGiven > 1) {
+        const results = await finishQuiz(quizType);
+        if (results) {
+          setQuizResults(results);
+          localStorage.setItem('quiz-results', JSON.stringify({ results, type: quizType }));
+          setLocation('/results');
+          return;
+        }
       }
-    }
-    
-    // For full test: always show results if any questions answered
-    if (quizType === 'full' && answersGiven > 0) {
-      const results = await finishQuiz(quizType);
-      if (results) {
-        setQuizResults(results);
-        localStorage.setItem('quiz-results', JSON.stringify({ results, type: quizType }));
-        setLocation('/results');
-        return;
+      
+      // For full test: always show results if any questions answered
+      if (quizType === 'full' && answersGiven > 0) {
+        const results = await finishQuiz(quizType);
+        if (results) {
+          setQuizResults(results);
+          localStorage.setItem('quiz-results', JSON.stringify({ results, type: quizType }));
+          setLocation('/results');
+          return;
+        }
       }
-    }
-    
-    // If no questions answered (or only 1 in practice), go back to previous page
-    resetQuiz();
-    setLocation('/');
+      
+      // If no questions answered (or only 1 in practice), go back to previous page
+      resetQuiz();
+      setLocation('/');
+    }, 500); // 500ms delay for animation
   };
 
   if (!isQuizActive || !quizState || !currentQuestion) {
@@ -106,20 +116,42 @@ export default function Quiz() {
   const hasSelectedCurrentAnswer = selectedAnswer !== undefined;
 
   return (
-    <div className="min-h-screen bg-background">
+    <motion.div 
+      className="min-h-screen bg-background"
+      initial={{ opacity: 1 }}
+      animate={{ 
+        opacity: isExiting ? 0 : 1,
+        scale: isExiting ? 0.95 : 1
+      }}
+      transition={{ 
+        duration: 0.5,
+        ease: "easeInOut"
+      }}
+    >
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pb-32">
-        <ProgressBar
-          currentQuestion={quizState.currentQuestionIndex + 1}
-          totalQuestions={quizState.questions.length}
-          progress={progress}
-          onExit={handleExitQuiz}
-          quizType={quizType}
-          startTime={quizState.startTime}
-          onTimeUp={handleFinishQuiz}
-          timerEnabled={settings?.timerEnabled ?? true}
-        />
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <ProgressBar
+            currentQuestion={quizState.currentQuestionIndex + 1}
+            totalQuestions={quizState.questions.length}
+            progress={progress}
+            onExit={handleExitQuiz}
+            quizType={quizType}
+            startTime={quizState.startTime}
+            onTimeUp={handleFinishQuiz}
+            timerEnabled={settings?.timerEnabled ?? true}
+          />
+        </motion.div>
 
-        <div className="space-y-6">
+        <motion.div 
+          className="space-y-6"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
           <QuestionCard
             question={currentQuestion}
             questionNumber={quizState.currentQuestionIndex + 1}
@@ -129,25 +161,36 @@ export default function Quiz() {
             onAnswerSelect={selectAnswer}
           />
 
-          {/* Fixed navigation at bottom of screen */}
-          <div className="fixed bottom-0 left-0 right-0 bg-card border-t border-border shadow-lg z-50">
-            <div className="max-w-4xl mx-auto p-4">
-              <div className="flex justify-between items-center">
+        </motion.div>
+
+        {/* Fixed navigation at bottom of screen */}
+        <motion.div 
+          className="fixed bottom-0 left-0 right-0 bg-card border-t border-border shadow-lg z-50"
+          initial={{ y: 100, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+        >
+          <div className="max-w-4xl mx-auto p-4">
+            <div className="flex justify-between items-center">
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 <Button
                   variant="outline"
                   onClick={previousQuestion}
-                  disabled={!canGoPrevious}
+                  disabled={!canGoPrevious || isExiting}
                   className="px-4 py-3 h-12"
                 >
                   <ChevronLeft className="mr-2 h-4 w-4" />
                   Zurück
                 </Button>
-                
-                <div className="flex items-center space-x-3">
+              </motion.div>
+              
+              <div className="flex items-center space-x-3">
+                <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
                   <Button 
                     variant="ghost" 
                     className="px-3 py-3 h-12"
                     onClick={() => currentQuestion && toggleMark(currentQuestion.id)}
+                    disabled={isExiting}
                   >
                     <Flag className={`h-5 w-5 ${
                       currentQuestion && isQuestionMarked(currentQuestion.id) 
@@ -155,34 +198,38 @@ export default function Quiz() {
                         : ''
                     }`} />
                   </Button>
-                </div>
+                </motion.div>
+              </div>
 
-                {isLastQuestion ? (
+              {isLastQuestion ? (
+                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                   <Button
                     onClick={handleFinishQuiz}
                     className="px-4 py-3 h-12"
-                    disabled={!hasSelectedCurrentAnswer}
+                    disabled={!hasSelectedCurrentAnswer || isExiting}
                   >
-                    {quizType === 'full' ? 'Test beenden' : 'Übung beenden'}
+                    {isExiting 
+                      ? 'Wird beendet...' 
+                      : (quizType === 'full' ? 'Test beenden' : 'Übung beenden')
+                    }
                   </Button>
-                ) : (
+                </motion.div>
+              ) : (
+                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                   <Button
                     onClick={nextQuestion}
-                    disabled={quizType === 'full' ? !hasSelectedCurrentAnswer : !canGoNext}
+                    disabled={(quizType === 'full' ? !hasSelectedCurrentAnswer : !canGoNext) || isExiting}
                     className="px-4 py-3 h-12"
                   >
                     Weiter
                     <ChevronRight className="ml-2 h-4 w-4" />
                   </Button>
-                )}
-              </div>
+                </motion.div>
+              )}
             </div>
           </div>
-
-          {/* Add bottom padding to prevent content overlap */}
-          <div className="h-24"></div>
-        </div>
+        </motion.div>
       </main>
-    </div>
+    </motion.div>
   );
 }
