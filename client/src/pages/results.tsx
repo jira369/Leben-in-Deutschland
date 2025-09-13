@@ -97,7 +97,7 @@ export default function Results() {
                 transition={{ duration: 0.5, delay: 0.6 }}
               >
                 {isFullTest ? 'Test abgeschlossen!' : 'Übung abgeschlossen!'}
-            </h2>
+              </motion.h2>
             <p className="text-lg text-muted-foreground mb-6">
               {isFullTest 
                 ? (passedTest ? 'Herzlichen Glückwunsch zu Ihrem Ergebnis' : 'Üben Sie weiter für bessere Ergebnisse')
@@ -161,6 +161,7 @@ export default function Results() {
             )}
           </CardContent>
         </Card>
+        </motion.div>
 
         {/* Detailed Results */}
         <Card className="bg-card rounded-2xl shadow-lg p-6 mb-6">
@@ -219,7 +220,12 @@ export default function Results() {
         </Card>
 
         {/* Actions and Statistics */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <motion.div 
+          className="grid grid-cols-1 lg:grid-cols-2 gap-6"
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.6, delay: 1.0 }}
+        >
           <Card className="bg-card rounded-2xl shadow-lg p-4 sm:p-6">
             <CardContent className="p-0">
               <h4 className="text-lg font-semibold text-foreground mb-4">Nächste Schritte</h4>
@@ -269,7 +275,7 @@ export default function Results() {
               </div>
             </CardContent>
           </Card>
-        </div>
+        </motion.div>
 
         <motion.div 
           className="mt-8 text-center"
