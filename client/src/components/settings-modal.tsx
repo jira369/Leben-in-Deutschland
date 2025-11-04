@@ -271,9 +271,6 @@ export function SettingsModal({ open, onOpenChange }: SettingsModalProps) {
               <RefreshCw className="mr-2 h-4 w-4" />
               Cache leeren & App aktualisieren
             </Button>
-            <p className="text-xs text-muted-foreground text-center">
-              Nutzen Sie dies, wenn Sie die neueste Version der App sehen möchten
-            </p>
             
             <Button
               type="button"
@@ -284,9 +281,6 @@ export function SettingsModal({ open, onOpenChange }: SettingsModalProps) {
               <Trash2 className="mr-2 h-4 w-4" />
               Statistiken zurücksetzen
             </Button>
-            <p className="text-xs text-muted-foreground text-center">
-              Löscht alle Testergebnisse, markierte Fragen und Fehlerhistorie
-            </p>
           </div>
         </div>
 
