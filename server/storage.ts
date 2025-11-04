@@ -57,6 +57,10 @@ export interface IStorage {
   getMarkedQuestions(): Promise<Question[]>;
   getMarkedQuestionsCount(): Promise<number>;
   isQuestionMarked(questionId: number): Promise<boolean>;
+  
+  // Reset Statistics
+  clearAllQuizSessions(): Promise<void>;
+  clearAllMarkedQuestions(): Promise<void>;
 }
 
 export class MemStorage implements IStorage {
@@ -271,6 +275,14 @@ export class MemStorage implements IStorage {
 
   async isQuestionMarked(questionId: number): Promise<boolean> {
     return false;
+  }
+
+  async clearAllQuizSessions(): Promise<void> {
+    this.quizSessions.clear();
+  }
+
+  async clearAllMarkedQuestions(): Promise<void> {
+    // No-op for MemStorage (doesn't support marked questions)
   }
 
   private shuffleArray<T>(array: T[]): T[] {
@@ -609,6 +621,14 @@ export class DatabaseStorage implements IStorage {
       .where(eq(markedQuestions.questionId, questionId));
     
     return (result[0]?.count || 0) > 0;
+  }
+
+  async clearAllQuizSessions(): Promise<void> {
+    await db.delete(quizSessions);
+  }
+
+  async clearAllMarkedQuestions(): Promise<void> {
+    await db.delete(markedQuestions);
   }
 }
 

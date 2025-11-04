@@ -6,6 +6,16 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
@@ -20,7 +30,7 @@ import { UserSettings } from "@shared/schema";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { useTheme } from "@/components/theme-provider";
-import { RefreshCw } from "lucide-react";
+import { RefreshCw, Trash2 } from "lucide-react";
 
 const GERMAN_STATES = [
   { code: "Baden-Württemberg", name: "Baden-Württemberg" },
@@ -50,6 +60,7 @@ export function SettingsModal({ open, onOpenChange }: SettingsModalProps) {
   const { toast } = useToast();
   const queryClient = useQueryClient();
   const { theme, setTheme } = useTheme();
+  const [showResetConfirm, setShowResetConfirm] = useState(false);
   
   const { data: settings } = useQuery<UserSettings>({
     queryKey: ['/api/settings'],
@@ -100,6 +111,31 @@ export function SettingsModal({ open, onOpenChange }: SettingsModalProps) {
     );
     updateSettings.mutate(backendSettings);
   };
+
+  const resetStatistics = useMutation({
+    mutationFn: async () => {
+      const res = await apiRequest('POST', '/api/reset-statistics', {});
+      return res.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['/api/quiz-sessions'] });
+      queryClient.invalidateQueries({ queryKey: ['/api/marked-questions'] });
+      queryClient.invalidateQueries({ queryKey: ['/api/incorrect-answers'] });
+      queryClient.invalidateQueries({ queryKey: ['/api/statistics'] });
+      toast({
+        title: "Statistiken zurückgesetzt",
+        description: "Alle Ihre Lerndaten wurden erfolgreich gelöscht.",
+      });
+      setShowResetConfirm(false);
+    },
+    onError: () => {
+      toast({
+        title: "Fehler",
+        description: "Die Statistiken konnten nicht zurückgesetzt werden.",
+        variant: "destructive",
+      });
+    }
+  });
 
   const handleClearCache = async () => {
     try {
@@ -225,7 +261,7 @@ export function SettingsModal({ open, onOpenChange }: SettingsModalProps) {
             </div>
           </div>
 
-          <div className="border-t pt-6">
+          <div className="border-t pt-6 space-y-3">
             <Button
               type="button"
               variant="outline"
@@ -235,8 +271,21 @@ export function SettingsModal({ open, onOpenChange }: SettingsModalProps) {
               <RefreshCw className="mr-2 h-4 w-4" />
               Cache leeren & App aktualisieren
             </Button>
-            <p className="text-xs text-muted-foreground mt-2 text-center">
+            <p className="text-xs text-muted-foreground text-center">
               Nutzen Sie dies, wenn Sie die neueste Version der App sehen möchten
+            </p>
+            
+            <Button
+              type="button"
+              variant="destructive"
+              onClick={() => setShowResetConfirm(true)}
+              className="w-full"
+            >
+              <Trash2 className="mr-2 h-4 w-4" />
+              Statistiken zurücksetzen
+            </Button>
+            <p className="text-xs text-muted-foreground text-center">
+              Löscht alle Testergebnisse, markierte Fragen und Fehlerhistorie
             </p>
           </div>
         </div>
@@ -250,6 +299,28 @@ export function SettingsModal({ open, onOpenChange }: SettingsModalProps) {
           </Button>
         </div>
       </DialogContent>
+      
+      <AlertDialog open={showResetConfirm} onOpenChange={setShowResetConfirm}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Statistiken wirklich zurücksetzen?</AlertDialogTitle>
+            <AlertDialogDescription>
+              Diese Aktion kann nicht rückgängig gemacht werden. Alle Ihre Testergebnisse, 
+              markierten Fragen und die Fehlerhistorie werden permanent gelöscht.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Abbrechen</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={() => resetStatistics.mutate()}
+              disabled={resetStatistics.isPending}
+              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+            >
+              {resetStatistics.isPending ? "Wird zurückgesetzt..." : "Ja, zurücksetzen"}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </Dialog>
   );
 }

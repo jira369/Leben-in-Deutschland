@@ -492,6 +492,30 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Reset all statistics
+  app.post("/api/reset-statistics", async (req, res) => {
+    try {
+      // Clear all quiz sessions
+      await storage.clearAllQuizSessions();
+      
+      // Clear all incorrect answers
+      await storage.clearIncorrectAnswers();
+      
+      // Clear all marked questions
+      await storage.clearAllMarkedQuestions();
+      
+      res.json({ 
+        success: true, 
+        message: "Alle Statistiken wurden erfolgreich zurückgesetzt" 
+      });
+    } catch (error) {
+      console.error('Failed to reset statistics:', error);
+      res.status(500).json({ 
+        error: "Fehler beim Zurücksetzen der Statistiken" 
+      });
+    }
+  });
+
   // Bug report endpoint
   app.post("/api/bug-report", async (req, res) => {
     try {
