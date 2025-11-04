@@ -31,17 +31,12 @@ export function QuestionCard({
 
   return (
     <Card className="rounded-2xl shadow-lg mb-6">
-      <CardContent className="p-8">
-        <div className="mb-6">
-          <div className="flex items-start space-x-4 mb-4">
-            <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-              <span className="text-primary font-semibold text-sm">{questionNumber}</span>
-            </div>
-            <div className="flex-1">
-              <h3 className="text-xl font-semibold text-foreground leading-relaxed hyphenate">
-                {question.text}
-              </h3>
-            </div>
+      <CardContent className="p-6 sm:p-8">
+        <div className="mb-6 sm:mb-8">
+          <div className="mb-6">
+            <h3 className="text-lg sm:text-xl font-semibold text-foreground leading-tight hyphenate">
+              {question.text}
+            </h3>
           </div>
           
           {question.hasImage && question.imagePath && (
@@ -84,12 +79,12 @@ export function QuestionCard({
           key={question.id}
           value={selectedAnswer?.toString() || ""}
           onValueChange={hasSelectedAnswer ? undefined : (value) => onAnswerSelect(parseInt(value))}
-          className="space-y-3"
+          className="space-y-4 sm:space-y-5"
         >
           {question.answers.map((answer, index) => (
             <Label
               key={index}
-              className={`flex items-center p-4 rounded-xl border-2 transition-all duration-200 group ${
+              className={`flex items-center p-4 sm:p-5 rounded-xl border-2 transition-all duration-200 group ${
                 hasSelectedAnswer ? 'cursor-default' : 'cursor-pointer'
               } ${
                 selectedAnswer === index
@@ -104,7 +99,7 @@ export function QuestionCard({
                 disabled={hasSelectedAnswer}
                 className="w-5 h-5 text-primary border-border focus:ring-primary focus:ring-2"
               />
-              <span className={`ml-4 font-medium hyphenate ${
+              <span className={`ml-4 font-medium leading-relaxed hyphenate ${
                 selectedAnswer === index 
                   ? 'text-primary' 
                   : hasSelectedAnswer 
