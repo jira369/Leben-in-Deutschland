@@ -142,9 +142,9 @@ export function SettingsModal({ open, onOpenChange }: SettingsModalProps) {
         description: "Die App wird neu geladen, um die neueste Version zu erhalten.",
       });
       
-      // Reload after a short delay
+      // Force HARD reload with cache-busting
       setTimeout(() => {
-        window.location.reload();
+        window.location.href = window.location.href.split('?')[0] + '?v=3.1.0&t=' + Date.now();
       }, 1000);
     } catch (error) {
       toast({

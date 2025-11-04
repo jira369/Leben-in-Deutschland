@@ -74,13 +74,29 @@ async function checkAndClearCache() {
     
     console.log('All caches and localStorage cleared for new version');
     
-    // Force reload to get fresh content
-    window.location.reload();
+    // Force HARD reload to bypass all caches
+    window.location.href = window.location.href.split('?')[0] + '?v=' + APP_VERSION + '&t=' + Date.now();
+  }
+}
+
+// Unregister all old service workers on version mismatch
+async function unregisterOldServiceWorkers() {
+  if ('serviceWorker' in navigator) {
+    const registrations = await navigator.serviceWorker.getRegistrations();
+    for (const registration of registrations) {
+      await registration.unregister();
+      console.log('Old service worker unregistered');
+    }
   }
 }
 
 // Check version and clear cache if needed
 checkAndClearCache().catch(err => console.error('Cache check failed:', err));
+
+// In development, always unregister service workers to avoid caching issues
+if (import.meta.env.DEV) {
+  unregisterOldServiceWorkers().catch(err => console.error('SW unregister failed:', err));
+}
 
 // Register Service Worker for PWA
 if ('serviceWorker' in navigator && import.meta.env.PROD) {
