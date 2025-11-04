@@ -8,13 +8,38 @@ const VERSION_KEY = "app-version";
 
 // Force clear all caches on version mismatch
 async function clearAllCaches() {
+  // Clear Service Worker caches
   if ('caches' in window) {
     const cacheNames = await caches.keys();
     await Promise.all(
       cacheNames.map(cacheName => caches.delete(cacheName))
     );
-    console.log('All caches cleared');
+    console.log('Service Worker caches cleared');
   }
+  
+  // Clear IndexedDB (React Query persistence)
+  if ('indexedDB' in window) {
+    try {
+      const dbs = await window.indexedDB.databases();
+      await Promise.all(
+        dbs.map(db => {
+          if (db.name) {
+            return new Promise((resolve) => {
+              const deleteRequest = window.indexedDB.deleteDatabase(db.name!);
+              deleteRequest.onsuccess = () => resolve(undefined);
+              deleteRequest.onerror = () => resolve(undefined);
+            });
+          }
+          return Promise.resolve();
+        })
+      );
+      console.log('IndexedDB cleared');
+    } catch (error) {
+      console.log('IndexedDB clear failed (non-critical):', error);
+    }
+  }
+  
+  console.log('All caches cleared');
 }
 
 // Clear localStorage if app version has changed
