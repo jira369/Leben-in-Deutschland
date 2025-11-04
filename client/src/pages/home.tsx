@@ -56,12 +56,13 @@ export default function Home() {
             <div className="flex items-center space-x-4">
               <div className="flex items-center space-x-3">
                 <motion.div 
-                  className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center"
+                  className="w-10 h-10 bg-gradient-to-b from-black via-red-600 to-yellow-400 rounded-lg flex items-center justify-center text-2xl font-bold"
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
                   transition={{ duration: 0.5, delay: 0.3, type: "spring", stiffness: 200 }}
+                  title="Deutschland"
                 >
-                  <GraduationCap className="text-white text-lg" />
+                  🇩🇪
                 </motion.div>
                 <motion.div
                   initial={{ x: -20, opacity: 0 }}
