@@ -66,40 +66,50 @@ export function BugReportModal({ open, onOpenChange }: BugReportModalProps) {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-md">
-        <DialogHeader>
-          <DialogTitle className="flex items-center gap-2">
-            <Bug className="h-5 w-5 text-red-500" />
+      <DialogContent className="sm:max-w-lg max-w-[95vw]">
+        <DialogHeader className="text-left space-y-3">
+          <DialogTitle className="flex items-center gap-2 text-xl sm:text-2xl">
+            <Bug className="h-5 w-5 sm:h-6 sm:w-6 text-red-500 flex-shrink-0" />
             Bug melden
           </DialogTitle>
-          <DialogDescription>
+          <DialogDescription className="text-left text-sm sm:text-base leading-relaxed">
             Beschreiben Sie den Bug, den Sie gefunden haben. Ihr Feedback hilft uns, die App zu verbessern.
           </DialogDescription>
         </DialogHeader>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="space-y-2">
-            <Label htmlFor="bug-description">Bug-Beschreibung</Label>
+        <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6 mt-2">
+          <div className="space-y-3">
+            <Label 
+              htmlFor="bug-description" 
+              className="text-sm sm:text-base font-semibold text-foreground"
+            >
+              Bug-Beschreibung
+            </Label>
             <Textarea
               id="bug-description"
               placeholder="Beschreiben Sie hier den Bug, den Sie gefunden haben..."
               value={bugDescription}
               onChange={(e) => setBugDescription(e.target.value)}
-              rows={5}
-              className="resize-none"
+              rows={6}
+              className="resize-none text-sm sm:text-base leading-relaxed min-h-[120px] sm:min-h-[150px]"
             />
           </div>
 
-          <div className="flex justify-end space-x-2">
+          <div className="flex flex-col-reverse sm:flex-row justify-end gap-3 sm:gap-2 pt-2">
             <Button
               type="button"
               variant="outline"
               onClick={() => onOpenChange(false)}
               disabled={isSubmitting}
+              className="w-full sm:w-auto h-11 sm:h-10 text-sm sm:text-base"
             >
               Abbrechen
             </Button>
-            <Button type="submit" disabled={isSubmitting || !bugDescription.trim()}>
+            <Button 
+              type="submit" 
+              disabled={isSubmitting || !bugDescription.trim()}
+              className="w-full sm:w-auto h-11 sm:h-10 text-sm sm:text-base"
+            >
               {isSubmitting ? (
                 <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2" />
               ) : (
