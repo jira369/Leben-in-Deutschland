@@ -56,7 +56,67 @@ Bevorzugter Kommunikationsstil: Einfache, alltägliche Sprache.
 
 ## Recent Changes
 
-### November 4, 2025 - Version 3.1.0 (UMFASSENDES CACHE-FIX UPDATE)
+### November 4, 2025 - Version 3.2.0 (KOMPLETTE SERVICE WORKER NEUSCHREIBUNG)
+
+**🔥 KRITISCHER FIX - ROOT CAUSE BEHOBEN:**
+
+**Das Problem:**
+- Service Worker v4 versuchte nicht-existierende Dateien zu cachen (`/static/js/bundle.js` - alte CRA-Pfade)
+- Installation schlug FEHL → Alter Service Worker blieb aktiv
+- API-Responses wurden cache-first gecacht → 286 Fragen blieben im Cache
+- Neue Cache-Clear-Logik in v3.1.0 wurde NIE ausgeführt (alte JS-Bundles aktiv)
+
+**Die Lösung (Architect-Empfehlung):**
+
+**1. Service Worker v5 - Komplette Neuschreibung:**
+- ✅ Network-First Strategie (statt cache-first)
+- ✅ KEINE API-Response-Caching mehr
+- ✅ Nur echte Assets precachen (/, /manifest.json)
+- ✅ `skipWaiting()` + `clients.claim()` für sofortige Kontrolle
+- ✅ Promise.allSettled statt addAll (kein Installation-Fail)
+- ✅ Versionierter Cache-Name: `einbuergerungstest-v5-20251104`
+
+**2. Frontend-Änderungen:**
+- ✅ SW-Registrierung versioniert: `/sw.js?v=20251104`
+- ✅ Unregister-Logik jetzt auch in PRODUCTION aktiv
+- ✅ App-Version auf 3.2.0 erhöht
+- ✅ Settings-Button updated
+
+**Technische Details:**
+```javascript
+// NEU: Network-First (KEINE API-Caching)
+if (url.pathname.startsWith('/api/')) {
+  event.respondWith(fetch(request)); // Immer frisch!
+  return;
+}
+
+// NEU: skipWaiting + clients.claim
+self.skipWaiting();
+self.clients.claim();
+```
+
+**WAS NUTZER TUN MÜSSEN:**
+
+**Desktop:**
+1. **App öffnen** → Auto-Update auf v3.2.0 startet
+2. **Wenn nötig:** Strg+Shift+R (Windows) / Cmd+Shift+R (Mac)
+
+**Mobile (iOS/Android):**
+1. **App komplett schließen** (aus App-Switcher entfernen)
+2. **5 Sekunden warten**
+3. **App neu öffnen** → Auto-Update läuft
+
+**ODER:**
+- Einstellungen → "Cache leeren & App aktualisieren" Button
+
+**Erwartetes Ergebnis:**
+- ✅ 310 Fragen (nicht 286!)
+- ✅ Korrekte Antwortvalidierung
+- ✅ Alle Features funktionieren
+
+---
+
+### November 4, 2025 - Version 3.1.0 (CACHE-FIX - TEILWEISE ERFOLGREICH)
 
 **🔥 KRITISCHE BUG-FIXES:**
 

@@ -3,7 +3,7 @@ import App from "./App";
 import "./index.css";
 
 // App version for cache management
-const APP_VERSION = "3.1.0";
+const APP_VERSION = "3.2.0";
 const VERSION_KEY = "app-version";
 
 // Force clear all caches on version mismatch
@@ -93,15 +93,15 @@ async function unregisterOldServiceWorkers() {
 // Check version and clear cache if needed
 checkAndClearCache().catch(err => console.error('Cache check failed:', err));
 
-// In development, always unregister service workers to avoid caching issues
-if (import.meta.env.DEV) {
-  unregisterOldServiceWorkers().catch(err => console.error('SW unregister failed:', err));
-}
+// CRITICAL: Always unregister old service workers to force update
+// This ensures stuck users on old versions can update
+unregisterOldServiceWorkers().catch(err => console.error('SW unregister failed:', err));
 
-// Register Service Worker for PWA
+// Register Service Worker for PWA with versioned URL
 if ('serviceWorker' in navigator && import.meta.env.PROD) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js')
+    // Add version parameter to force reload of SW script
+    navigator.serviceWorker.register('/sw.js?v=20251104')
       .then((registration) => {
         console.log('SW registered: ', registration);
         

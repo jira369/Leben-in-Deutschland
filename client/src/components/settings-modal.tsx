@@ -144,7 +144,7 @@ export function SettingsModal({ open, onOpenChange }: SettingsModalProps) {
       
       // Force HARD reload with cache-busting
       setTimeout(() => {
-        window.location.href = window.location.href.split('?')[0] + '?v=3.1.0&t=' + Date.now();
+        window.location.href = window.location.href.split('?')[0] + '?v=3.2.0&t=' + Date.now();
       }, 1000);
     } catch (error) {
       toast({
