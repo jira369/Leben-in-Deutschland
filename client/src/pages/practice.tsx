@@ -140,7 +140,6 @@ export default function Practice() {
                 </div>
                 <div>
                   <h1 className="text-xl font-bold text-foreground">Übungsmodus</h1>
-                  <p className="text-sm text-muted-foreground">Gezielt üben nach Kategorien</p>
                 </div>
               </div>
             </div>
