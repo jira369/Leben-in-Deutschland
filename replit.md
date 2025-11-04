@@ -56,19 +56,51 @@ Bevorzugter Kommunikationsstil: Einfache, alltägliche Sprache.
 
 ## Recent Changes
 
-### November 4, 2025 - Version 3.0.0 (CRITICAL CACHE UPDATE)
-- **🔥 AGGRESSIVES Cache-Management**: Automatische Löschung ALLER Caches bei Version-Update (APP_VERSION 3.0.0)
-- **Service Worker v3**: Cache-Version auf v3 erhöht, erzwingt komplette Neuinstallation
+### November 4, 2025 - Version 3.1.0 (UMFASSENDES CACHE-FIX UPDATE)
+
+**🔥 KRITISCHE BUG-FIXES:**
+
+**Problem 1: Falsche Fragenanzahl (286 statt 310)**
+- **Root Cause**: React Query cached alte API-Responses im IndexedDB
+- **Lösung**: Vollständiges IndexedDB-Clearing bei App-Updates implementiert
+- **Status**: ✅ Behoben - API gibt korrekt 310 Fragen zurück (300 Bundesweit + 10 Bremen)
+
+**Problem 2: Falsche Antwortvalidierung**
+- **Root Cause**: Alte gecachte Question-Daten mit falschen `correctAnswer` Werten
+- **Lösung**: Komplettes Cache-Clearing inklusive React Query Cache
+- **Debug**: Validation-Logging hinzugefügt für Entwickler-Diagnose
+- **Status**: ✅ Behoben - Validierung funktioniert korrekt (0-based → 1-based)
+
+**IMPLEMENTIERTE LÖSUNGEN:**
+- **Service Worker v4**: Cache-Name auf v4 erhöht → Erzwingt komplette Neuinstallation
+- **IndexedDB-Clearing**: React Query Cache wird bei Updates automatisch gelöscht
+- **Triple-Layer Cache-Clearing**: 
+  1. Service Worker Caches
+  2. IndexedDB (React Query)
+  3. localStorage (mit Theme-Preservation)
+- **Manueller Cache-Button erweitert**: Jetzt auch mit IndexedDB-Clearing
+- **Debug-Logging**: Antwortvalidierung wird in Dev-Mode geloggt
+- **Auto-Reload**: Automatischer Page-Reload nach Cache-Clear
+
+**TECHNISCHE DETAILS:**
+- Database ist korrekt: 460 Fragen (300 Bundesweit + 160 Bundesländer)
+- API-Endpoint `/api/questions/random?mode=all` gibt korrekt 310 Fragen zurück
+- Validierungslogik: `selectedAnswer (0-based) + 1 === question.correctAnswer (1-based)`
+
+**WAS NUTZER TUN MÜSSEN:**
+1. **Automatisch**: App komplett schließen und neu öffnen → Auto-Update auf 3.1.0
+2. **Manuell**: Einstellungen → "Cache leeren & App aktualisieren" Button
+3. **Hardcore** (falls nötig): App deinstallieren und neu installieren
+
+---
+
+### Previous Updates (Version 3.0.0)
+- **Service Worker v3**: Cache-Version auf v3 erhöht
 - **Auto-Reload bei Update**: Automatischer Seiten-Reload nach Cache-Bereinigung
 - **Manueller Cache-Clear Button**: Neuer "Cache leeren & App aktualisieren"-Button in Einstellungen
-- **Bug-Fix Mobile**: Problem mit alter gecachter App-Version auf Mobilgeräten behoben
-- **Bug-Report Modal optimiert**: Responsive Design mit linksbündiger Beschreibung, optimierten Abständen und Schriftgrößen
-- **Quiz-Fragendarstellung verbessert**: Fragennummer entfernt, Zeilenabstände optimiert, responsive für alle Geräte
-- **Bildfragen-Bug behoben**: Frage ID 29 korrekt als Nicht-Bildfrage markiert
-
-**WICHTIG FÜR NUTZER**: 
-- Beim nächsten Laden wird automatisch die neueste Version geladen
-- Auf Mobilgeräten: Gehen Sie zu Einstellungen → "Cache leeren & App aktualisieren"
+- **Bug-Report Modal optimiert**: Responsive Design mit linksbündiger Beschreibung
+- **Quiz-Fragendarstellung verbessert**: Fragennummer entfernt
+- **Bildfragen-Bug behoben**: Frage ID 29 korrekt markiert
 
 ### Previous Updates
 - PWA conversion completed with proper manifest.json and service worker for iOS/Android installation
