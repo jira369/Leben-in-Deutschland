@@ -3,7 +3,7 @@ import App from "./App";
 import "./index.css";
 
 // App version for cache management
-const APP_VERSION = "3.0.0";
+const APP_VERSION = "3.1.0";
 const VERSION_KEY = "app-version";
 
 // Force clear all caches on version mismatch
