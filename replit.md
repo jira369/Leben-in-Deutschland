@@ -56,12 +56,19 @@ Bevorzugter Kommunikationsstil: Einfache, alltägliche Sprache.
 
 ## Recent Changes
 
-### November 4, 2025
-- **Cache-Management implementiert**: Automatische localStorage-Bereinigung bei App-Updates via Versionskontrolle (APP_VERSION 2.0.0)
-- **Service Worker Cache aktualisiert**: Cache-Version auf v2 erhöht für automatische Bereinigung alter Caches
+### November 4, 2025 - Version 3.0.0 (CRITICAL CACHE UPDATE)
+- **🔥 AGGRESSIVES Cache-Management**: Automatische Löschung ALLER Caches bei Version-Update (APP_VERSION 3.0.0)
+- **Service Worker v3**: Cache-Version auf v3 erhöht, erzwingt komplette Neuinstallation
+- **Auto-Reload bei Update**: Automatischer Seiten-Reload nach Cache-Bereinigung
+- **Manueller Cache-Clear Button**: Neuer "Cache leeren & App aktualisieren"-Button in Einstellungen
+- **Bug-Fix Mobile**: Problem mit alter gecachter App-Version auf Mobilgeräten behoben
 - **Bug-Report Modal optimiert**: Responsive Design mit linksbündiger Beschreibung, optimierten Abständen und Schriftgrößen
 - **Quiz-Fragendarstellung verbessert**: Fragennummer entfernt, Zeilenabstände optimiert, responsive für alle Geräte
 - **Bildfragen-Bug behoben**: Frage ID 29 korrekt als Nicht-Bildfrage markiert
+
+**WICHTIG FÜR NUTZER**: 
+- Beim nächsten Laden wird automatisch die neueste Version geladen
+- Auf Mobilgeräten: Gehen Sie zu Einstellungen → "Cache leeren & App aktualisieren"
 
 ### Previous Updates
 - PWA conversion completed with proper manifest.json and service worker for iOS/Android installation

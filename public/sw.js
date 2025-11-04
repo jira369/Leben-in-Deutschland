@@ -1,4 +1,4 @@
-const CACHE_NAME = 'einbuergerungstest-v2';
+const CACHE_NAME = 'einbuergerungstest-v3';
 const urlsToCache = [
   '/',
   '/static/js/bundle.js',

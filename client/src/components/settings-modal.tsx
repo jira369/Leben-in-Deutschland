@@ -20,6 +20,7 @@ import { UserSettings } from "@shared/schema";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { useTheme } from "@/components/theme-provider";
+import { RefreshCw } from "lucide-react";
 
 const GERMAN_STATES = [
   { code: "Baden-Württemberg", name: "Baden-Württemberg" },
@@ -100,6 +101,39 @@ export function SettingsModal({ open, onOpenChange }: SettingsModalProps) {
     updateSettings.mutate(backendSettings);
   };
 
+  const handleClearCache = async () => {
+    try {
+      // Clear all caches
+      if ('caches' in window) {
+        const cacheNames = await caches.keys();
+        await Promise.all(
+          cacheNames.map(cacheName => caches.delete(cacheName))
+        );
+      }
+      
+      // Clear localStorage (preserving theme)
+      const theme = localStorage.getItem('theme');
+      localStorage.clear();
+      if (theme) localStorage.setItem('theme', theme);
+      
+      toast({
+        title: "Cache geleert",
+        description: "Die App wird neu geladen, um die neueste Version zu erhalten.",
+      });
+      
+      // Reload after a short delay
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+    } catch (error) {
+      toast({
+        title: "Fehler",
+        description: "Cache konnte nicht geleert werden.",
+        variant: "destructive",
+      });
+    }
+  };
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-md">
@@ -170,7 +204,29 @@ export function SettingsModal({ open, onOpenChange }: SettingsModalProps) {
             </div>
           </div>
 
+          <div className="border-t pt-6">
+            <Button
+              type="button"
+              variant="outline"
+              onClick={handleClearCache}
+              className="w-full"
+            >
+              <RefreshCw className="mr-2 h-4 w-4" />
+              Cache leeren & App aktualisieren
+            </Button>
+            <p className="text-xs text-muted-foreground mt-2 text-center">
+              Nutzen Sie dies, wenn Sie die neueste Version der App sehen möchten
+            </p>
+          </div>
+        </div>
 
+        <div className="flex justify-end space-x-2 mt-6">
+          <Button variant="outline" onClick={() => onOpenChange(false)}>
+            Abbrechen
+          </Button>
+          <Button onClick={handleSave} disabled={updateSettings.isPending}>
+            {updateSettings.isPending ? "Speichern..." : "Speichern"}
+          </Button>
         </div>
       </DialogContent>
     </Dialog>
