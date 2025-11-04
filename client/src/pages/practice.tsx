@@ -263,29 +263,6 @@ export default function Practice() {
               </div>
             </div>
           </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="text-center p-4 bg-card dark:bg-card rounded-lg border border-border">
-                <Globe className="h-8 w-8 text-blue-600 dark:text-blue-400 mx-auto mb-2" />
-                <div className="text-2xl font-bold text-foreground">{federalQuestions.length}</div>
-                <div className="text-sm text-muted-foreground">Bundesweite Fragen</div>
-              </div>
-              {userSettings?.selectedState && stateQuestions.length > 0 && (
-                <div className="text-center p-4 bg-card dark:bg-card rounded-lg border border-border">
-                  <Flag className="h-8 w-8 text-green-600 dark:text-green-400 mx-auto mb-2" />
-                  <div className="text-2xl font-bold text-foreground">{stateQuestions.length}</div>
-                  <div className="text-sm text-muted-foreground">{userSettings.selectedState}</div>
-                </div>
-              )}
-              <div className="text-center p-4 bg-card dark:bg-card rounded-lg border border-border">
-                <Heart className="h-8 w-8 text-red-600 dark:text-red-400 mx-auto mb-2" />
-                <div className="text-2xl font-bold text-foreground">
-                  {federalQuestions.length + stateQuestions.length}
-                </div>
-                <div className="text-sm text-muted-foreground">Gesamt verfügbar</div>
-              </div>
-            </div>
-          </CardContent>
         </Card>
 
         {/* Category Practice */}
