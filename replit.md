@@ -53,3 +53,17 @@ Bevorzugter Kommunikationsstil: Einfache, alltägliche Sprache.
 - **clsx**: Bedingte Klassenname-Utility.
 - **vite**: Build-Tool und Entwicklungsserver.
 - **typescript**: Typprüfung und Kompilierung.
+
+## Recent Changes
+
+### November 4, 2025
+- **Cache-Management implementiert**: Automatische localStorage-Bereinigung bei App-Updates via Versionskontrolle (APP_VERSION 2.0.0)
+- **Service Worker Cache aktualisiert**: Cache-Version auf v2 erhöht für automatische Bereinigung alter Caches
+- **Bug-Report Modal optimiert**: Responsive Design mit linksbündiger Beschreibung, optimierten Abständen und Schriftgrößen
+- **Quiz-Fragendarstellung verbessert**: Fragennummer entfernt, Zeilenabstände optimiert, responsive für alle Geräte
+- **Bildfragen-Bug behoben**: Frage ID 29 korrekt als Nicht-Bildfrage markiert
+
+### Previous Updates
+- PWA conversion completed with proper manifest.json and service worker for iOS/Android installation
+- Comprehensive smooth animations implemented using framer-motion across all pages
+- Complete user flow tested and confirmed working
