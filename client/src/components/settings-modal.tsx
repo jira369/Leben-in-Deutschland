@@ -118,10 +118,18 @@ export function SettingsModal({ open, onOpenChange }: SettingsModalProps) {
       return res.json();
     },
     onSuccess: () => {
+      // Invalidate ALL statistics-related queries
       queryClient.invalidateQueries({ queryKey: ['/api/quiz-sessions'] });
+      queryClient.invalidateQueries({ queryKey: ['/api/quiz-sessions/recent'] });
+      queryClient.invalidateQueries({ queryKey: ['/api/quiz-sessions/stats'] });
+      queryClient.invalidateQueries({ queryKey: ['/api/quiz-sessions/detailed-stats'] });
+      queryClient.invalidateQueries({ queryKey: ['/api/quiz-sessions/unique-questions'] });
       queryClient.invalidateQueries({ queryKey: ['/api/marked-questions'] });
+      queryClient.invalidateQueries({ queryKey: ['/api/marked-questions/count'] });
       queryClient.invalidateQueries({ queryKey: ['/api/incorrect-answers'] });
+      queryClient.invalidateQueries({ queryKey: ['/api/incorrect-answers/count'] });
       queryClient.invalidateQueries({ queryKey: ['/api/statistics'] });
+      
       toast({
         title: "Statistiken zurückgesetzt",
         description: "Alle Ihre Lerndaten wurden erfolgreich gelöscht.",
