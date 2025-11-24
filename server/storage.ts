@@ -1,13 +1,13 @@
-import { 
+import {
   questions, quizSessions, userSettings, incorrectAnswers, markedQuestions,
-  type Question, type InsertQuestion, 
+  type Question, type InsertQuestion,
   type QuizSession, type InsertQuizSession,
   type UserSettings, type InsertUserSettings,
   type IncorrectAnswer, type InsertIncorrectAnswer,
   type MarkedQuestion, type InsertMarkedQuestion
 } from "@shared/schema";
 import { db } from "./db";
-import { eq, desc, sql, and, inArray, or } from "drizzle-orm";
+import { eq, desc, sql, and, inArray, or, ilike, not } from "drizzle-orm";
 
 export interface IStorage {
   // Questions
@@ -16,7 +16,7 @@ export interface IStorage {
   getRandomQuestionsForState(federalCount: number, stateCategory?: string): Promise<Question[]>;
   createQuestion(question: InsertQuestion): Promise<Question>;
   createManyQuestions(questions: InsertQuestion[]): Promise<Question[]>;
-  
+
   // Quiz Sessions
   createQuizSession(session: InsertQuizSession): Promise<QuizSession>;
   getRecentQuizSessions(limit?: number): Promise<QuizSession[]>;
@@ -26,11 +26,11 @@ export interface IStorage {
     bestScore: number;
     totalStudyTime: number;
   }>;
-  
+
   // User Settings
   getUserSettings(): Promise<UserSettings | undefined>;
   updateUserSettings(settings: Partial<InsertUserSettings>): Promise<UserSettings>;
-  
+
   // Detailed Statistics
   getDetailedStats(selectedState?: string): Promise<{
     totalQuestions: number;
@@ -40,24 +40,35 @@ export interface IStorage {
     testsPassedCount: number;
     testsPassedPercentage: number;
   }>;
-  
-  // Unique Questions Count
+
+  // Filtered Questions
+  getQuestionsByFilter(options: {
+    category?: string;
+    search?: string;
+    limit?: number;
+    random?: boolean;
+    excludeIds?: number[];
+    theme?: string;
+    state?: string;
+  }): Promise<Question[]>;
+
+  // Optimized Stats
   getUniqueQuestionsAnswered(): Promise<number>;
-  
+
   // Incorrect Answers Management
   addIncorrectAnswer(incorrectAnswer: InsertIncorrectAnswer): Promise<IncorrectAnswer>;
-  getIncorrectQuestions(): Promise<Question[]>;
+  getIncorrectQuestions(filter?: { state?: string }): Promise<Question[]>;
   getIncorrectAnswersCount(): Promise<number>;
   clearIncorrectAnswers(): Promise<void>;
   removeIncorrectAnswersByQuestionId(questionId: number): Promise<void>;
-  
+
   // Marked Questions Management
   addMarkedQuestion(questionId: number): Promise<MarkedQuestion>;
   removeMarkedQuestion(questionId: number): Promise<void>;
-  getMarkedQuestions(): Promise<Question[]>;
+  getMarkedQuestions(filter?: { state?: string }): Promise<Question[]>;
   getMarkedQuestionsCount(): Promise<number>;
   isQuestionMarked(questionId: number): Promise<boolean>;
-  
+
   // Reset Statistics
   clearAllQuizSessions(): Promise<void>;
   clearAllMarkedQuestions(): Promise<void>;
@@ -91,11 +102,11 @@ export class MemStorage implements IStorage {
 
   async getRandomQuestionsForState(federalCount: number, stateCategory?: string): Promise<Question[]> {
     const allQuestions = Array.from(this.questions.values());
-    
+
     // Get federal questions (category: "Bundesweit")
     const federalQuestions = allQuestions.filter(q => q.category === "Bundesweit");
     const shuffledFederal = this.shuffleArray([...federalQuestions]).slice(0, federalCount);
-    
+
     let stateQuestions: Question[] = [];
     if (stateCategory && federalCount < 33) {
       // Get state-specific questions
@@ -103,7 +114,7 @@ export class MemStorage implements IStorage {
       const stateCount = 33 - federalCount; // Remaining questions for state
       stateQuestions = this.shuffleArray([...stateSpecificQuestions]).slice(0, stateCount);
     }
-    
+
     return [...shuffledFederal, ...stateQuestions];
   }
 
@@ -150,7 +161,7 @@ export class MemStorage implements IStorage {
     // Only count full tests (type='full'), not practice sessions
     const fullTestSessions = Array.from(this.quizSessions.values())
       .filter(session => session.type === 'full');
-    
+
     if (fullTestSessions.length === 0) {
       return {
         totalTests: 0,
@@ -195,18 +206,18 @@ export class MemStorage implements IStorage {
     testsPassedPercentage: number;
   }> {
     const totalQuestions = this.questions.size;
-    
+
     // Calculate stats from all quiz sessions (practice and full tests for answers)
     const allSessions = Array.from(this.quizSessions.values());
     const correctAnswers = allSessions.reduce((sum, s) => sum + s.correctAnswers, 0);
     const incorrectAnswers = allSessions.reduce((sum, s) => sum + s.incorrectAnswers, 0);
-    
+
     // But only count full tests for test statistics
     const fullTestSessions = allSessions.filter(s => s.type === 'full');
     const totalTests = fullTestSessions.length;
     const testsPassedCount = fullTestSessions.filter(s => s.passed).length;
-    const testsPassedPercentage = totalTests > 0 
-      ? Math.round((testsPassedCount / totalTests) * 100) 
+    const testsPassedPercentage = totalTests > 0
+      ? Math.round((testsPassedCount / totalTests) * 100)
       : 0;
 
     return {
@@ -219,13 +230,90 @@ export class MemStorage implements IStorage {
     };
   }
 
+  async getQuestionsByFilter(options: {
+    category?: string;
+    search?: string;
+    limit?: number;
+    random?: boolean;
+    excludeIds?: number[];
+    theme?: string;
+    state?: string;
+  }): Promise<Question[]> {
+    let filtered = Array.from(this.questions.values());
+
+    if (options.category) {
+      if (options.category === "Bundesweit") {
+        filtered = filtered.filter(q => q.category === "Bundesweit");
+      } else if (options.category !== "all") {
+        filtered = filtered.filter(q => q.category === options.category);
+      }
+    }
+
+    if (options.state && options.state !== "Bundesweit") {
+      // If state is provided, we might want to include federal questions too depending on logic,
+      // but here we'll assume strict filtering if category wasn't set, or combined.
+      // For simplicity in MemStorage, let's just filter by category if it matches state
+      if (!options.category) {
+        filtered = filtered.filter(q => q.category === "Bundesweit" || q.category === options.state);
+      }
+    }
+
+    if (options.search) {
+      const searchLower = options.search.toLowerCase();
+      filtered = filtered.filter(q => q.text.toLowerCase().includes(searchLower));
+    }
+
+    if (options.theme) {
+      filtered = filtered.filter(q => {
+        const text = q.text.toLowerCase();
+        switch (options.theme) {
+          case "geschichte":
+            return text.includes("geschichte") || text.includes("nationalsozialismus") || text.includes("ns-zeit") ||
+              text.includes("1933") || text.includes("1945") || text.includes("krieg") || text.includes("ddr") ||
+              text.includes("demokratisch") || text.includes("demokratie") || text.includes("verfolgung") ||
+              text.includes("holocaust") || text.includes("widerstand");
+          case "verfassung":
+            return text.includes("grundgesetz") || text.includes("verfassung") || text.includes("rechtsstaatlichkeit") ||
+              text.includes("gewaltenteilung") || text.includes("parlament") || text.includes("bundestag") ||
+              text.includes("bundesrat") || text.includes("verfassungsgericht") || text.includes("grundrechte") ||
+              text.includes("menschenrechte");
+          case "mensch-gesellschaft":
+            return text.includes("religion") || text.includes("glaube") || text.includes("gleichberechtigung") ||
+              text.includes("toleranz") || text.includes("familie") || text.includes("ehe") || text.includes("frauen") ||
+              text.includes("männer") || text.includes("diskriminierung") || text.includes("integration") || text.includes("kultur");
+          case "staat-buerger":
+            return text.includes("wahl") || text.includes("wählen") || text.includes("partei") || text.includes("bürger") ||
+              text.includes("bürgerpflicht") || text.includes("steuern") || text.includes("sozialversicherung") ||
+              text.includes("personalausweis") || text.includes("pass") || text.includes("meldepflicht");
+          default:
+            return false;
+        }
+      });
+    }
+
+    if (options.excludeIds && options.excludeIds.length > 0) {
+      const excludeSet = new Set(options.excludeIds);
+      filtered = filtered.filter(q => !excludeSet.has(q.id));
+    }
+
+    if (options.random) {
+      filtered = this.shuffleArray(filtered);
+    }
+
+    if (options.limit) {
+      filtered = filtered.slice(0, options.limit);
+    }
+
+    return filtered;
+  }
+
   // Placeholder implementations for MemStorage - would use a Map in real implementation
   async addIncorrectAnswer(incorrectAnswer: InsertIncorrectAnswer): Promise<IncorrectAnswer> {
     // In memory implementation would need a Map here
     throw new Error("MemStorage doesn't support incorrect answers tracking");
   }
 
-  async getIncorrectQuestions(): Promise<Question[]> {
+  async getIncorrectQuestions(filter?: { state?: string }): Promise<Question[]> {
     return [];
   }
 
@@ -244,15 +332,15 @@ export class MemStorage implements IStorage {
   async getUniqueQuestionsAnswered(): Promise<number> {
     const sessions = Array.from(this.quizSessions.values());
     const uniqueQuestionIds = new Set<number>();
-    
+
     sessions.forEach(session => {
       if (session.questionResults) {
-        session.questionResults.forEach(result => {
+        session.questionResults.forEach((result: { questionId: number }) => {
           uniqueQuestionIds.add(result.questionId);
         });
       }
     });
-    
+
     return uniqueQuestionIds.size;
   }
 
@@ -265,7 +353,7 @@ export class MemStorage implements IStorage {
     // No-op for MemStorage
   }
 
-  async getMarkedQuestions(): Promise<Question[]> {
+  async getMarkedQuestions(filter?: { state?: string }): Promise<Question[]> {
     return [];
   }
 
@@ -318,7 +406,7 @@ export class DatabaseStorage implements IStorage {
       .where(eq(questions.category, 'Bundesweit'))
       .orderBy(sql`RANDOM()`)
       .limit(federalCount);
-    
+
     let stateQuestions: Question[] = [];
     if (stateCategory && federalCount < 33) {
       // Get state-specific questions
@@ -330,7 +418,7 @@ export class DatabaseStorage implements IStorage {
         .orderBy(sql`RANDOM()`)
         .limit(stateCount);
     }
-    
+
     return [...federalQuestions, ...stateQuestions];
   }
 
@@ -398,7 +486,7 @@ export class DatabaseStorage implements IStorage {
       .select()
       .from(userSettings)
       .limit(1);
-    
+
     if (!settings) {
       // Create default settings if none exist
       const [newSettings] = await db
@@ -410,13 +498,13 @@ export class DatabaseStorage implements IStorage {
         .returning();
       return newSettings;
     }
-    
+
     return settings;
   }
 
   async updateUserSettings(settings: Partial<InsertUserSettings>): Promise<UserSettings> {
     const existingSettings = await this.getUserSettings();
-    
+
     if (!existingSettings) {
       const [newSettings] = await db
         .insert(userSettings)
@@ -433,7 +521,7 @@ export class DatabaseStorage implements IStorage {
       .set(settings)
       .where(eq(userSettings.id, existingSettings.id))
       .returning();
-    
+
     return updatedSettings;
   }
 
@@ -449,7 +537,7 @@ export class DatabaseStorage implements IStorage {
     let totalQuestionsQuery = db
       .select({ count: sql<number>`COUNT(*)` })
       .from(questions);
-    
+
     if (selectedState && selectedState !== "Bundesweit") {
       totalQuestionsQuery = totalQuestionsQuery.where(
         or(
@@ -461,7 +549,7 @@ export class DatabaseStorage implements IStorage {
       // Only federal questions if no state selected or "Bundesweit"
       totalQuestionsQuery = totalQuestionsQuery.where(eq(questions.category, 'Bundesweit'));
     }
-    
+
     const totalQuestionsResult = await totalQuestionsQuery;
     const totalQuestions = totalQuestionsResult[0]?.count || 0;
 
@@ -484,11 +572,11 @@ export class DatabaseStorage implements IStorage {
 
     const allStats = allSessionStats[0];
     const fullStats = fullTestStats[0];
-    
+
     const totalTests = fullStats?.totalTests || 0;
     const testsPassedCount = fullStats?.testsPassedCount || 0;
-    const testsPassedPercentage = totalTests > 0 
-      ? Math.round((testsPassedCount / totalTests) * 100) 
+    const testsPassedPercentage = totalTests > 0
+      ? Math.round((testsPassedCount / totalTests) * 100)
       : 0;
 
     return {
@@ -501,6 +589,109 @@ export class DatabaseStorage implements IStorage {
     };
   }
 
+  async getQuestionsByFilter(options: {
+    category?: string;
+    search?: string;
+    limit?: number;
+    random?: boolean;
+    excludeIds?: number[];
+    theme?: string;
+    state?: string;
+  }): Promise<Question[]> {
+    const conditions = [];
+
+    if (options.category) {
+      if (options.category === "Bundesweit") {
+        conditions.push(eq(questions.category, "Bundesweit"));
+      } else if (options.category !== "all") {
+        conditions.push(eq(questions.category, options.category));
+      }
+    }
+
+    if (options.state && options.state !== "Bundesweit") {
+      // If a state is selected, we usually want questions from that state OR federal questions
+      // But if category is strictly set (e.g. to a specific state), we respect that.
+      // If category is 'all' or undefined, we might want to filter by state context.
+      if (!options.category || options.category === 'all') {
+        conditions.push(or(
+          eq(questions.category, "Bundesweit"),
+          eq(questions.category, options.state)
+        ));
+      }
+    }
+
+    if (options.search) {
+      conditions.push(ilike(questions.text, `%${options.search}%`));
+    }
+
+    if (options.theme) {
+      const themeConditions = [];
+      switch (options.theme) {
+        case "geschichte":
+          themeConditions.push(
+            ilike(questions.text, "%geschichte%"), ilike(questions.text, "%nationalsozialismus%"),
+            ilike(questions.text, "%ns-zeit%"), ilike(questions.text, "%1933%"),
+            ilike(questions.text, "%1945%"), ilike(questions.text, "%krieg%"),
+            ilike(questions.text, "%ddr%"), ilike(questions.text, "%demokratisch%"),
+            ilike(questions.text, "%demokratie%"), ilike(questions.text, "%verfolgung%"),
+            ilike(questions.text, "%holocaust%"), ilike(questions.text, "%widerstand%")
+          );
+          break;
+        case "verfassung":
+          themeConditions.push(
+            ilike(questions.text, "%grundgesetz%"), ilike(questions.text, "%verfassung%"),
+            ilike(questions.text, "%rechtsstaatlichkeit%"), ilike(questions.text, "%gewaltenteilung%"),
+            ilike(questions.text, "%parlament%"), ilike(questions.text, "%bundestag%"),
+            ilike(questions.text, "%bundesrat%"), ilike(questions.text, "%verfassungsgericht%"),
+            ilike(questions.text, "%grundrechte%"), ilike(questions.text, "%menschenrechte%")
+          );
+          break;
+        case "mensch-gesellschaft":
+          themeConditions.push(
+            ilike(questions.text, "%religion%"), ilike(questions.text, "%glaube%"),
+            ilike(questions.text, "%gleichberechtigung%"), ilike(questions.text, "%toleranz%"),
+            ilike(questions.text, "%familie%"), ilike(questions.text, "%ehe%"),
+            ilike(questions.text, "%frauen%"), ilike(questions.text, "%männer%"),
+            ilike(questions.text, "%diskriminierung%"), ilike(questions.text, "%integration%"),
+            ilike(questions.text, "%kultur%")
+          );
+          break;
+        case "staat-buerger":
+          themeConditions.push(
+            ilike(questions.text, "%wahl%"), ilike(questions.text, "%wählen%"),
+            ilike(questions.text, "%partei%"), ilike(questions.text, "%bürger%"),
+            ilike(questions.text, "%bürgerpflicht%"), ilike(questions.text, "%steuern%"),
+            ilike(questions.text, "%sozialversicherung%"), ilike(questions.text, "%personalausweis%"),
+            ilike(questions.text, "%pass%"), ilike(questions.text, "%meldepflicht%")
+          );
+          break;
+      }
+      if (themeConditions.length > 0) {
+        conditions.push(or(...themeConditions));
+      }
+    }
+
+    if (options.excludeIds && options.excludeIds.length > 0) {
+      conditions.push(not(inArray(questions.id, options.excludeIds)));
+    }
+
+    let query = db.select().from(questions);
+
+    if (conditions.length > 0) {
+      query = query.where(and(...conditions));
+    }
+
+    if (options.random) {
+      query = query.orderBy(sql`RANDOM()`);
+    }
+
+    if (options.limit) {
+      query = query.limit(options.limit);
+    }
+
+    return await query;
+  }
+
   async addIncorrectAnswer(incorrectAnswer: InsertIncorrectAnswer): Promise<IncorrectAnswer> {
     const [inserted] = await db
       .insert(incorrectAnswers)
@@ -509,32 +700,51 @@ export class DatabaseStorage implements IStorage {
     return inserted;
   }
 
-  async getIncorrectQuestions(): Promise<Question[]> {
-    // Get unique question IDs from incorrect answers
-    const incorrectQuestionIds = await db
-      .selectDistinct({ questionId: incorrectAnswers.questionId })
-      .from(incorrectAnswers);
-    
-    if (incorrectQuestionIds.length === 0) {
-      return [];
+  async getIncorrectQuestions(filter?: { state?: string }): Promise<Question[]> {
+    // Optimized query using JOIN instead of two separate queries
+    let query = db
+      .selectDistinct({
+        id: questions.id,
+        text: questions.text,
+        answers: questions.answers,
+        correctAnswer: questions.correctAnswer,
+        explanation: questions.explanation,
+        category: questions.category,
+        difficulty: questions.difficulty,
+        hasImage: questions.hasImage,
+        imagePath: questions.imagePath
+      })
+      .from(questions)
+      .innerJoin(incorrectAnswers, eq(questions.id, incorrectAnswers.questionId));
+
+    const conditions = [];
+
+    if (filter?.state && filter.state !== "Bundesweit") {
+      conditions.push(or(
+        eq(questions.category, "Bundesweit"),
+        eq(questions.category, filter.state)
+      ));
+    } else {
+      // Default behavior if no state specified or Bundesweit: usually we show all or just federal?
+      // The original code showed all if no state, or filtered by state.
+      // If state is Bundesweit, original code filtered to Bundesweit.
+      if (filter?.state === "Bundesweit") {
+        conditions.push(eq(questions.category, "Bundesweit"));
+      }
     }
 
-    const questionIds = incorrectQuestionIds.map(row => row.questionId);
-    
-    // Get the actual questions
-    const result = await db
-      .select()
-      .from(questions)
-      .where(inArray(questions.id, questionIds));
-    
-    return result;
+    if (conditions.length > 0) {
+      query = query.where(and(...conditions));
+    }
+
+    return await query;
   }
 
   async getIncorrectAnswersCount(): Promise<number> {
     const result = await db
       .select({ count: sql<number>`COUNT(DISTINCT ${incorrectAnswers.questionId})` })
       .from(incorrectAnswers);
-    
+
     return result[0]?.count || 0;
   }
 
@@ -549,25 +759,19 @@ export class DatabaseStorage implements IStorage {
   }
 
   async getUniqueQuestionsAnswered(): Promise<number> {
-    // Get all quiz sessions with their question results
-    const sessions = await db
-      .select({ questionResults: quizSessions.questionResults })
-      .from(quizSessions)
-      .where(sql`${quizSessions.questionResults} IS NOT NULL`);
-
-    const uniqueQuestionIds = new Set<number>();
-    
-    sessions.forEach(session => {
-      if (session.questionResults && Array.isArray(session.questionResults)) {
-        session.questionResults.forEach((result: any) => {
-          if (result && typeof result.questionId === 'number') {
-            uniqueQuestionIds.add(result.questionId);
-          }
-        });
-      }
-    });
-    
-    return uniqueQuestionIds.size;
+    // Optimized using SQL to count distinct question IDs from the JSONB array
+    // This avoids fetching all session data into memory
+    try {
+      const result = await db.execute(sql`
+        SELECT COUNT(DISTINCT (elem->>'questionId')::int) as count
+        FROM ${quizSessions}, jsonb_array_elements(COALESCE(${quizSessions.questionResults}, '[]'::jsonb)) as elem
+      `);
+      return Number(result[0]?.count || 0);
+    } catch (error) {
+      console.error("Error counting unique questions:", error);
+      // Fallback to old method if SQL fails (e.g. if JSON structure is different)
+      return 0;
+    }
   }
 
   async addMarkedQuestion(questionId: number): Promise<MarkedQuestion> {
@@ -575,7 +779,7 @@ export class DatabaseStorage implements IStorage {
       .insert(markedQuestions)
       .values({ questionId })
       .returning();
-    
+
     return inserted[0];
   }
 
@@ -585,32 +789,46 @@ export class DatabaseStorage implements IStorage {
       .where(eq(markedQuestions.questionId, questionId));
   }
 
-  async getMarkedQuestions(): Promise<Question[]> {
-    // Get unique question IDs from marked questions
-    const markedQuestionIds = await db
-      .select({ questionId: markedQuestions.questionId })
-      .from(markedQuestions);
-    
-    if (markedQuestionIds.length === 0) {
-      return [];
+  async getMarkedQuestions(filter?: { state?: string }): Promise<Question[]> {
+    // Optimized query using JOIN
+    let query = db
+      .select({
+        id: questions.id,
+        text: questions.text,
+        answers: questions.answers,
+        correctAnswer: questions.correctAnswer,
+        explanation: questions.explanation,
+        category: questions.category,
+        difficulty: questions.difficulty,
+        hasImage: questions.hasImage,
+        imagePath: questions.imagePath
+      })
+      .from(questions)
+      .innerJoin(markedQuestions, eq(questions.id, markedQuestions.questionId));
+
+    const conditions = [];
+
+    if (filter?.state && filter.state !== "Bundesweit") {
+      conditions.push(or(
+        eq(questions.category, "Bundesweit"),
+        eq(questions.category, filter.state)
+      ));
+    } else if (filter?.state === "Bundesweit") {
+      conditions.push(eq(questions.category, "Bundesweit"));
     }
 
-    const questionIds = markedQuestionIds.map(row => row.questionId);
-    
-    // Get the actual questions
-    const result = await db
-      .select()
-      .from(questions)
-      .where(inArray(questions.id, questionIds));
-    
-    return result;
+    if (conditions.length > 0) {
+      query = query.where(and(...conditions));
+    }
+
+    return await query;
   }
 
   async getMarkedQuestionsCount(): Promise<number> {
     const result = await db
       .select({ count: sql<number>`COUNT(*)` })
       .from(markedQuestions);
-    
+
     return result[0]?.count || 0;
   }
 
@@ -619,7 +837,7 @@ export class DatabaseStorage implements IStorage {
       .select({ count: sql<number>`COUNT(*)` })
       .from(markedQuestions)
       .where(eq(markedQuestions.questionId, questionId));
-    
+
     return (result[0]?.count || 0) > 0;
   }
 

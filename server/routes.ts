@@ -27,130 +27,87 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const state = req.query.state as string;
       const mode = req.query.mode as string;
       const category = req.query.category as string;
-      
+      const chronological = req.query.chronological === 'true';
+
+      let questions = [];
+
       if (mode === "mistakes") {
         // Practice mode with incorrect questions only
-        const incorrectQuestions = await storage.getIncorrectQuestions();
-        
-        // Check if chronological order is requested
-        const chronological = req.query.chronological === 'true';
-        
-        if (chronological) {
-          // Sort by ID for chronological order
-          incorrectQuestions.sort((a, b) => a.id - b.id);
-        } else {
-          // Shuffle for random order (keeping duplicates as they represent multiple wrong answers)
-          incorrectQuestions.sort(() => Math.random() - 0.5);
-        }
-        
-        res.json(incorrectQuestions);
+        questions = await storage.getIncorrectQuestions({ state });
       } else if (mode === "marked") {
         // Practice mode with marked questions only
-        const markedQuestions = await storage.getMarkedQuestions();
-        
-        // Check if chronological order is requested  
-        const chronological = req.query.chronological === 'true';
-        
-        if (chronological) {
-          // Sort by ID for chronological order
-          markedQuestions.sort((a, b) => a.id - b.id);
-        } else {
-          // Shuffle for random order
-          markedQuestions.sort(() => Math.random() - 0.5);
-        }
-        
-        res.json(markedQuestions);
+        questions = await storage.getMarkedQuestions({ state });
       } else if (mode === "all") {
-        // Practice mode with all questions (300 federal + 10 state-specific)
-        const allQuestions = await storage.getAllQuestions();
-        let questionsToReturn = [];
-        
-        // Get federal questions
-        const federalQuestions = allQuestions.filter(q => q.category === "Bundesweit");
-        questionsToReturn.push(...federalQuestions);
-        
-        // Add state-specific questions if state is selected
-        if (state && state !== "Bundesweit") {
-          const stateQuestions = allQuestions.filter(q => q.category === state);
-          questionsToReturn.push(...stateQuestions);
-        }
-        
-        // Check if chronological order is requested
-        const chronological = req.query.chronological === 'true';
-        
-        if (chronological) {
-          // Sort by ID for chronological order
-          questionsToReturn.sort((a, b) => a.id - b.id);
-        } else {
-          // Shuffle for random order
-          questionsToReturn.sort(() => Math.random() - 0.5);
-        }
-        
-        res.json(questionsToReturn);
+        // Practice mode with all questions (filtered by state if provided)
+        questions = await storage.getQuestionsByFilter({
+          state: state,
+          // If state is provided, getQuestionsByFilter handles the logic (Federal + State)
+          // If no state, it returns all federal questions if we set category='Bundesweit' or similar
+          // But 'all' mode usually implies all available questions for the user context.
+          category: state ? undefined : 'Bundesweit'
+        });
       } else if (category) {
         // Category-specific practice with thematic filtering
-        const allQuestions = await storage.getAllQuestions();
-        let categoryQuestions = [];
-        
-        if (category === "bundesweit") {
-          categoryQuestions = allQuestions.filter(q => q.category === "Bundesweit");
-        } else if (["Baden-Württemberg", "Bayern", "Berlin", "Brandenburg", "Bremen", "Hamburg", "Hessen", "Mecklenburg-Vorpommern", "Niedersachsen", "Nordrhein-Westfalen", "Rheinland-Pfalz", "Saarland", "Sachsen", "Sachsen-Anhalt", "Schleswig-Holstein", "Thüringen"].includes(category)) {
+        if (["Baden-Württemberg", "Bayern", "Berlin", "Brandenburg", "Bremen", "Hamburg", "Hessen", "Mecklenburg-Vorpommern", "Niedersachsen", "Nordrhein-Westfalen", "Rheinland-Pfalz", "Saarland", "Sachsen", "Sachsen-Anhalt", "Schleswig-Holstein", "Thüringen"].includes(category)) {
           // State-specific questions
-          categoryQuestions = allQuestions.filter(q => q.category === category);
+          questions = await storage.getQuestionsByFilter({ category });
+        } else if (category === "bundesweit") {
+          questions = await storage.getQuestionsByFilter({ category: "Bundesweit" });
         } else {
-          // Thematic categorization based on keywords
-          const federalQuestions = allQuestions.filter(q => q.category === "Bundesweit");
-          
-          categoryQuestions = federalQuestions.filter(q => {
-            const text = q.text.toLowerCase();
-            switch (category) {
-              case "geschichte":
-                return text.includes("geschichte") || text.includes("nationalsozialismus") || text.includes("ns-zeit") || 
-                       text.includes("1933") || text.includes("1945") || text.includes("krieg") || text.includes("ddr") || 
-                       text.includes("demokratisch") || text.includes("demokratie") || text.includes("verfolgung") || 
-                       text.includes("holocaust") || text.includes("widerstand");
-              case "verfassung":
-                return text.includes("grundgesetz") || text.includes("verfassung") || text.includes("rechtsstaatlichkeit") || 
-                       text.includes("gewaltenteilung") || text.includes("parlament") || text.includes("bundestag") || 
-                       text.includes("bundesrat") || text.includes("verfassungsgericht") || text.includes("grundrechte") || 
-                       text.includes("menschenrechte");
-              case "mensch-gesellschaft":
-                return text.includes("religion") || text.includes("glaube") || text.includes("gleichberechtigung") || 
-                       text.includes("toleranz") || text.includes("familie") || text.includes("ehe") || text.includes("frauen") || 
-                       text.includes("männer") || text.includes("diskriminierung") || text.includes("integration") || text.includes("kultur");
-              case "staat-buerger":
-                return text.includes("wahl") || text.includes("wählen") || text.includes("partei") || text.includes("bürger") || 
-                       text.includes("bürgerpflicht") || text.includes("steuern") || text.includes("sozialversicherung") || 
-                       text.includes("personalausweis") || text.includes("pass") || text.includes("meldepflicht");
-              default:
-                return false;
-            }
-          });
+          // Thematic categorization
+          questions = await storage.getQuestionsByFilter({ theme: category, category: "Bundesweit" });
         }
-        
-        // Check if chronological order is requested
-        const chronological = req.query.chronological === 'true';
-        
-        if (chronological) {
-          // Sort by ID for chronological order
-          categoryQuestions.sort((a, b) => a.id - b.id);
-        } else {
-          // Shuffle for random order
-          categoryQuestions.sort(() => Math.random() - 0.5);
-        }
-        
-        res.json(categoryQuestions);
       } else if (state && state !== "Bundesweit") {
         // Get state-specific quiz (30 federal + 3 state)
-        const questions = await storage.getRandomQuestionsForState(30, state);
-        res.json(questions);
+        // We need to fetch them separately to ensure the ratio 30:3
+        const federalQuestions = await storage.getQuestionsByFilter({
+          category: "Bundesweit",
+          limit: 30,
+          random: true
+        });
+        const stateQuestions = await storage.getQuestionsByFilter({
+          category: state,
+          limit: 3,
+          random: true
+        });
+        questions = [...federalQuestions, ...stateQuestions];
       } else {
-        // Get all federal questions
-        const questions = await storage.getRandomQuestions(count);
-        res.json(questions);
+        // Get all federal questions (random)
+        questions = await storage.getQuestionsByFilter({
+          category: "Bundesweit",
+          limit: count,
+          random: true
+        });
       }
+
+      // Apply sorting
+      if (chronological) {
+        questions.sort((a, b) => a.id - b.id);
+      } else if (!state || state === "Bundesweit") {
+        // If we haven't already randomized (e.g. for specific state quiz we did)
+        // But for 'mistakes', 'marked', 'all', 'category' we fetched without random limit usually
+        // except for the last else block.
+        // Let's just shuffle to be safe if not chronological, unless it was already a random fetch
+        if (mode === "mistakes" || mode === "marked" || mode === "all" || category) {
+          questions.sort(() => Math.random() - 0.5);
+        }
+      }
+
+      // Limit the result if it's not a specific state quiz (which is fixed 33)
+      // and if we fetched more than needed (e.g. mode=all fetches all)
+      // But wait, mode=all usually means "practice all questions", not "get N random questions from all".
+      // The route is /random/:count.
+      // If mode is 'all', 'mistakes', 'marked', usually the user wants to practice ALL of them, 
+      // but the frontend might be requesting a batch.
+      // However, the original code for 'mistakes' returned ALL incorrect questions.
+      // The original code for 'all' returned ALL questions.
+      // The :count parameter seems to be ignored for these modes in the original code!
+      // I will preserve that behavior.
+
+      res.json(questions);
     } catch (error) {
-      res.status(500).json({ error: "Failed to fetch random questions" });
+      console.error("Error fetching questions:", error);
+      res.status(500).json({ error: "Failed to fetch questions" });
     }
   });
 
@@ -236,7 +193,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Load questions from the processed Excel data
       const fs = await import('fs');
       const questionsData = JSON.parse(fs.readFileSync('questions-data.json', 'utf8'));
-      
+
       const processedQuestions = questionsData.map((q: any) => ({
         text: q.text,
         answers: q.answers,
@@ -268,7 +225,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       try {
         const fs = await import('fs');
         const questionsData = JSON.parse(fs.readFileSync('questions-data.json', 'utf8'));
-        
+
         const processedQuestions = questionsData.map((q: any) => ({
           text: q.text,
           answers: q.answers,
@@ -367,19 +324,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/incorrect-questions", async (req, res) => {
     try {
       const selectedState = req.query.state as string;
-      const allIncorrectQuestions = await storage.getIncorrectQuestions();
-      
-      // Filter by state if specified
-      let questions = allIncorrectQuestions;
-      if (selectedState && selectedState !== "Bundesweit") {
-        questions = allIncorrectQuestions.filter(q => 
-          q.category === "Bundesweit" || q.category === selectedState
-        );
-      } else {
-        // If no state selected or "Bundesweit", only show federal questions
-        questions = allIncorrectQuestions.filter(q => q.category === "Bundesweit");
-      }
-      
+      const questions = await storage.getIncorrectQuestions({ state: selectedState });
       res.json(questions);
     } catch (error) {
       res.status(500).json({ error: "Failed to fetch incorrect questions" });
@@ -413,7 +358,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       if (isNaN(questionId)) {
         return res.status(400).json({ error: "Invalid question ID" });
       }
-      
+
       // This will be implemented in storage to remove all incorrect answers for this question
       await storage.removeIncorrectAnswersByQuestionId(questionId);
       res.json({ message: "Incorrect answers for question removed" });
@@ -431,7 +376,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
 
       const isMarked = await storage.isQuestionMarked(questionId);
-      
+
       if (isMarked) {
         await storage.removeMarkedQuestion(questionId);
         res.json({ marked: false });
@@ -448,19 +393,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/marked-questions", async (req, res) => {
     try {
       const selectedState = req.query.state as string;
-      const allMarkedQuestions = await storage.getMarkedQuestions();
-      
-      // Filter by state if specified
-      let questions = allMarkedQuestions;
-      if (selectedState && selectedState !== "Bundesweit") {
-        questions = allMarkedQuestions.filter(q => 
-          q.category === "Bundesweit" || q.category === selectedState
-        );
-      } else {
-        // If no state selected or "Bundesweit", only show federal questions
-        questions = allMarkedQuestions.filter(q => q.category === "Bundesweit");
-      }
-      
+      const questions = await storage.getMarkedQuestions({ state: selectedState });
       res.json(questions);
     } catch (error) {
       res.status(500).json({ error: "Failed to fetch marked questions" });
@@ -497,21 +430,21 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       // Clear all quiz sessions
       await storage.clearAllQuizSessions();
-      
+
       // Clear all incorrect answers
       await storage.clearIncorrectAnswers();
-      
+
       // Clear all marked questions
       await storage.clearAllMarkedQuestions();
-      
-      res.json({ 
-        success: true, 
-        message: "Alle Statistiken wurden erfolgreich zurückgesetzt" 
+
+      res.json({
+        success: true,
+        message: "Alle Statistiken wurden erfolgreich zurückgesetzt"
       });
     } catch (error) {
       console.error('Failed to reset statistics:', error);
-      res.status(500).json({ 
-        error: "Fehler beim Zurücksetzen der Statistiken" 
+      res.status(500).json({
+        error: "Fehler beim Zurücksetzen der Statistiken"
       });
     }
   });
@@ -561,20 +494,20 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Send email
       await transporter.sendMail(mailOptions);
 
-      res.json({ 
-        success: true, 
-        message: "Bug-Report erfolgreich gesendet" 
+      res.json({
+        success: true,
+        message: "Bug-Report erfolgreich gesendet"
       });
     } catch (error) {
       console.error('Failed to send bug report:', error);
       if (error instanceof z.ZodError) {
-        return res.status(400).json({ 
-          error: "Ungültige Bug-Report-Daten", 
-          details: error.errors 
+        return res.status(400).json({
+          error: "Ungültige Bug-Report-Daten",
+          details: error.errors
         });
       }
-      res.status(500).json({ 
-        error: "Fehler beim Senden des Bug-Reports" 
+      res.status(500).json({
+        error: "Fehler beim Senden des Bug-Reports"
       });
     }
   });

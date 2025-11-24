@@ -3,7 +3,7 @@ import App from "./App";
 import "./index.css";
 
 // App version for cache management
-const APP_VERSION = "3.2.0";
+const APP_VERSION = __APP_VERSION__;
 const VERSION_KEY = "app-version";
 
 // Force clear all caches on version mismatch
@@ -16,7 +16,7 @@ async function clearAllCaches() {
     );
     console.log('Service Worker caches cleared');
   }
-  
+
   // Clear IndexedDB (React Query persistence)
   if ('indexedDB' in window) {
     try {
@@ -38,42 +38,42 @@ async function clearAllCaches() {
       console.log('IndexedDB clear failed (non-critical):', error);
     }
   }
-  
+
   console.log('All caches cleared');
 }
 
 // Clear localStorage if app version has changed
 async function checkAndClearCache() {
   const storedVersion = localStorage.getItem(VERSION_KEY);
-  
+
   if (storedVersion !== APP_VERSION) {
     console.log(`App updated from ${storedVersion || 'unknown'} to ${APP_VERSION}`);
-    
+
     // Clear ALL caches (Service Worker, HTTP Cache, etc.)
     await clearAllCaches();
-    
+
     // Clear all localStorage except settings if needed
     const keysToPreserve = ['theme']; // Add any keys you want to preserve
     const preservedData: Record<string, string> = {};
-    
+
     keysToPreserve.forEach(key => {
       const value = localStorage.getItem(key);
       if (value) preservedData[key] = value;
     });
-    
+
     // Clear localStorage
     localStorage.clear();
-    
+
     // Restore preserved data
     Object.entries(preservedData).forEach(([key, value]) => {
       localStorage.setItem(key, value);
     });
-    
+
     // Set new version
     localStorage.setItem(VERSION_KEY, APP_VERSION);
-    
+
     console.log('All caches and localStorage cleared for new version');
-    
+
     // Force HARD reload to bypass all caches
     window.location.href = window.location.href.split('?')[0] + '?v=' + APP_VERSION + '&t=' + Date.now();
   }
@@ -104,7 +104,7 @@ if ('serviceWorker' in navigator && import.meta.env.PROD) {
     navigator.serviceWorker.register('/sw.js?v=20251104')
       .then((registration) => {
         console.log('SW registered: ', registration);
-        
+
         // Check for service worker updates
         registration.addEventListener('updatefound', () => {
           const newWorker = registration.installing;
