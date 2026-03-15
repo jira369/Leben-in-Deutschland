@@ -124,7 +124,7 @@ export default function PracticeMarked() {
                   </div>
                   <div className="text-center">
                     <div className="text-3xl font-bold text-green-600 dark:text-green-400 mb-2">
-                      {markedQuestionsData.length > 0 ? Math.round((markedQuestionsData.length / 376) * 100) : 0}%
+                      {markedQuestionsData.length > 0 ? Math.round((markedQuestionsData.length / 460) * 100) : 0}%
                     </div>
                     <div className="text-sm text-muted-foreground">
                       Anteil aller Fragen

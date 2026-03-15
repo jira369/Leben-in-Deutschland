@@ -128,7 +128,7 @@ export default function PracticeMistakes() {
               </div>
               <div className="text-center">
                 <div className="text-3xl font-bold text-green-600 dark:text-green-400 mb-2">
-                  {incorrectQuestions.length > 0 ? Math.round((incorrectQuestions.length / 376) * 100) : 0}%
+                  {incorrectQuestions.length > 0 ? Math.round((incorrectQuestions.length / 460) * 100) : 0}%
                 </div>
                 <div className="text-sm text-muted-foreground">
                   Anteil aller Fragen

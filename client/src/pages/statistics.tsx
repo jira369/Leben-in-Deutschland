@@ -55,8 +55,8 @@ export default function Statistics() {
   });
 
   // Calculate total available questions based on selected state
-  // 280 federal questions + 6 state-specific questions = 286 total
-  const totalAvailableQuestions = userSettings?.selectedState ? 286 : 280;
+  // 300 federal questions + 10 state-specific questions = 310 total
+  const totalAvailableQuestions = userSettings?.selectedState ? 310 : 300;
   
   // Use the actual count of unique questions answered from the backend
   const questionsAnswered = uniqueQuestionsData?.uniqueQuestionsAnswered || 0;
