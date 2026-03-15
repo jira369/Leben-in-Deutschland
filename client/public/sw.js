@@ -1,7 +1,7 @@
 // Service Worker v5 - Network-First with Smart Caching
 // November 4, 2025 - Complete rewrite to fix update issues
 
-const CACHE_VERSION = 'v5-20251104';
+const CACHE_VERSION = 'v3.2.0-20260315';
 const CACHE_NAME = `einbuergerungstest-${CACHE_VERSION}`;
 
 // Only cache essential static assets that we KNOW exist

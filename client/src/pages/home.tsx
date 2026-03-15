@@ -136,7 +136,7 @@ export default function Home() {
               >
                 <div className="flex items-center mb-2 sm:mb-3">
                   <ListChecks className="text-primary text-lg sm:text-xl mr-2 sm:mr-3 h-5 w-5 sm:h-6 sm:w-6" />
-                  <h3 className="text-base sm:text-lg font-semibold text-foreground">310 Fragen</h3>
+                  <h3 className="text-base sm:text-lg font-semibold text-foreground">376 Fragen</h3>
                 </div>
                 <p className="text-sm sm:text-base text-muted-foreground">
                   Alle offiziellen Fragen des Bundesamts für Migration und Flüchtlinge
