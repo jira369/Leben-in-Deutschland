@@ -27,20 +27,7 @@ export function QuestionCard({
 }: QuestionCardProps) {
   const [isImageModalOpen, setIsImageModalOpen] = useState(false);
   const hasSelectedAnswer = selectedAnswer !== undefined;
-  const isCorrect = selectedAnswer !== undefined && selectedAnswer + 1 === question.correctAnswer;
-  
-  // Debug logging for answer validation
-  if (hasSelectedAnswer && import.meta.env.DEV) {
-    console.log('Answer Validation:', {
-      questionId: question.id,
-      selectedAnswer,
-      selectedAnswerHuman: selectedAnswer + 1,
-      correctAnswer: question.correctAnswer,
-      isCorrect,
-      selectedText: question.answers[selectedAnswer],
-      correctText: question.answers[question.correctAnswer - 1]
-    });
-  }
+  const isCorrect = selectedAnswer !== undefined && selectedAnswer === question.correctAnswer;
 
   return (
     <Card className="rounded-2xl shadow-lg mb-6">
@@ -128,7 +115,7 @@ export function QuestionCard({
         {hasSelectedAnswer && immediateFeedback && showFeedback && (
           <AnswerFeedback
             isCorrect={isCorrect}
-            correctAnswer={question.answers[question.correctAnswer - 1]}
+            correctAnswer={question.answers[question.correctAnswer]}
             explanation={question.explanation || undefined}
           />
         )}

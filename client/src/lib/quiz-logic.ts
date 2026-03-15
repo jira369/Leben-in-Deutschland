@@ -21,7 +21,7 @@ export function calculateResults(quizState: QuizState): QuizResults {
     const selectedAnswer = quizState.selectedAnswers[questionIndex];
     
     if (question && selectedAnswer !== undefined) {
-      const isCorrect = selectedAnswer + 1 === question.correctAnswer;
+      const isCorrect = selectedAnswer === question.correctAnswer;
       
       if (isCorrect) {
         correct++;

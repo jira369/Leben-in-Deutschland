@@ -42,7 +42,7 @@ const GERMAN_STATES = [
   { code: "Hessen", name: "Hessen" },
   { code: "Mecklenburg-Vorpommern", name: "Mecklenburg-Vorpommern" },
   { code: "Niedersachsen", name: "Niedersachsen" },
-  { code: "NRW", name: "Nordrhein-Westfalen" },
+  { code: "Nordrhein-Westfalen", name: "Nordrhein-Westfalen" },
   { code: "Rheinland-Pfalz", name: "Rheinland-Pfalz" },
   { code: "Saarland", name: "Saarland" },
   { code: "Sachsen", name: "Sachsen" },

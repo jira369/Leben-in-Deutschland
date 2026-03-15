@@ -42,11 +42,11 @@ export default function PracticeMarked() {
         {markedQuestionsCount === 0 ? (
           <Card className="text-center py-12">
             <CardContent>
-              <Flag className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">
+              <Flag className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+              <h3 className="text-lg font-semibold text-foreground mb-2">
                 Keine markierten Fragen
               </h3>
-              <p className="text-gray-600 mb-6">
+              <p className="text-muted-foreground mb-6">
                 Du hast noch keine Fragen markiert. Markiere Fragen während der Übung, um sie später zu wiederholen.
               </p>
               <Link href="/practice">
@@ -124,7 +124,7 @@ export default function PracticeMarked() {
                   </div>
                   <div className="text-center">
                     <div className="text-3xl font-bold text-green-600 dark:text-green-400 mb-2">
-                      {markedQuestionsData.length > 0 ? Math.round((markedQuestionsData.length / 460) * 100) : 0}%
+                      {markedQuestionsData.length > 0 ? Math.round((markedQuestionsData.length / 376) * 100) : 0}%
                     </div>
                     <div className="text-sm text-muted-foreground">
                       Anteil aller Fragen
@@ -204,7 +204,7 @@ export default function PracticeMarked() {
                             <div
                               key={answerIndex}
                               className={`p-3 rounded-md border ${
-                                answerIndex + 1 === question.correctAnswer
+                                answerIndex === question.correctAnswer
                                   ? "bg-green-50 dark:bg-green-950/20 border-green-200 dark:border-green-800 text-green-800 dark:text-green-200"
                                   : "bg-muted border-border text-foreground"
                               }`}
@@ -214,7 +214,7 @@ export default function PracticeMarked() {
                                   {String.fromCharCode(65 + answerIndex)}:
                                 </span>
                                 <span>{answer}</span>
-                                {answerIndex + 1 === question.correctAnswer && (
+                                {answerIndex === question.correctAnswer && (
                                   <Badge className="ml-auto bg-green-600 dark:bg-green-700">
                                     Richtig
                                   </Badge>

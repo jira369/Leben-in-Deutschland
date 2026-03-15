@@ -128,7 +128,7 @@ export default function PracticeMistakes() {
               </div>
               <div className="text-center">
                 <div className="text-3xl font-bold text-green-600 dark:text-green-400 mb-2">
-                  {incorrectQuestions.length > 0 ? Math.round((incorrectQuestions.length / 460) * 100) : 0}%
+                  {incorrectQuestions.length > 0 ? Math.round((incorrectQuestions.length / 376) * 100) : 0}%
                 </div>
                 <div className="text-sm text-muted-foreground">
                   Anteil aller Fragen
@@ -236,7 +236,7 @@ export default function PracticeMistakes() {
                             <div
                               key={answerIndex}
                               className={`p-3 rounded-md border ${
-                                answerIndex + 1 === question.correctAnswer
+                                answerIndex === question.correctAnswer
                                   ? "bg-green-50 dark:bg-green-950/20 border-green-200 dark:border-green-800 text-green-800 dark:text-green-200"
                                   : "bg-muted border-border text-foreground"
                               }`}
@@ -246,7 +246,7 @@ export default function PracticeMistakes() {
                                   {String.fromCharCode(65 + answerIndex)}:
                                 </span>
                                 <span>{answer}</span>
-                                {answerIndex + 1 === question.correctAnswer && (
+                                {answerIndex === question.correctAnswer && (
                                   <Badge className="ml-auto bg-green-600 dark:bg-green-700">
                                     Richtig
                                   </Badge>

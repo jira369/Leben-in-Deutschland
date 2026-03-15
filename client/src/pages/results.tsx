@@ -207,7 +207,7 @@ export default function Results() {
                             Ihre Antwort: {result.question.answers[result.selectedAnswer]}
                           </p>
                           <p className="text-xs text-green-600 dark:text-green-400 mt-1 break-words">
-                            Richtig: {result.question.answers[result.question.correctAnswer - 1]}
+                            Richtig: {result.question.answers[result.question.correctAnswer]}
                           </p>
                         </>
                       )}
@@ -242,7 +242,20 @@ export default function Results() {
                     Fehler üben
                   </Button>
                 </Link>
-                <Button variant="outline" className="w-full h-12">
+                <Button
+                  variant="outline"
+                  className="w-full h-12"
+                  onClick={async () => {
+                    const shareText = `Einbürgerungstest: ${results.correct}/${results.total} richtig (${results.percentage}%)${results.passed ? ' - Bestanden!' : ''}`;
+                    if (navigator.share) {
+                      try {
+                        await navigator.share({ title: 'Einbürgerungstest Ergebnis', text: shareText });
+                      } catch {}
+                    } else {
+                      await navigator.clipboard.writeText(shareText);
+                    }
+                  }}
+                >
                   <Share className="mr-2 h-4 w-4" />
                   Ergebnis teilen
                 </Button>

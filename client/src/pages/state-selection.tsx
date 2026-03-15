@@ -17,7 +17,7 @@ const GERMAN_STATES = [
   { code: "Hessen", name: "Hessen", capital: "Wiesbaden" },
   { code: "Mecklenburg-Vorpommern", name: "Mecklenburg-Vorpommern", capital: "Schwerin" },
   { code: "Niedersachsen", name: "Niedersachsen", capital: "Hannover" },
-  { code: "NRW", name: "Nordrhein-Westfalen", capital: "Düsseldorf" },
+  { code: "Nordrhein-Westfalen", name: "Nordrhein-Westfalen", capital: "Düsseldorf" },
   { code: "Rheinland-Pfalz", name: "Rheinland-Pfalz", capital: "Mainz" },
   { code: "Saarland", name: "Saarland", capital: "Saarbrücken" },
   { code: "Sachsen", name: "Sachsen", capital: "Dresden" },
@@ -68,36 +68,36 @@ export default function StateSelection() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-background">
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
         <div className="text-center mb-8">
           <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
             <MapPin className="h-8 w-8 text-primary" />
           </div>
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
+          <h1 className="text-3xl font-bold text-foreground mb-2">
             Bundesland auswählen
           </h1>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Wählen Sie das Bundesland aus, in dem Sie leben. Dies beeinflusst die 
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Wählen Sie das Bundesland aus, in dem Sie leben. Dies beeinflusst die
             Bundesland-spezifischen Fragen in Ihrem Einbürgerungstest.
           </p>
         </div>
 
         {/* Information Card */}
-        <Card className="mb-8 bg-blue-50 border-blue-200">
+        <Card className="mb-8 bg-blue-50 dark:bg-blue-950/20 border-blue-200 dark:border-blue-800">
           <CardContent className="pt-6">
             <div className="flex items-start space-x-3">
               <div className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                 <span className="text-white text-sm font-bold">i</span>
               </div>
               <div>
-                <h3 className="font-semibold text-blue-900 mb-2">
+                <h3 className="font-semibold text-blue-900 dark:text-blue-200 mb-2">
                   Warum ist diese Auswahl wichtig?
                 </h3>
-                <p className="text-blue-800 text-sm leading-relaxed">
-                  Der Einbürgerungstest besteht aus 33 Fragen: 30 bundesweite Fragen zu Geschichte, 
-                  Politik und Gesellschaft Deutschlands sowie 3 spezifische Fragen zu Ihrem Bundesland. 
+                <p className="text-blue-800 dark:text-blue-300 text-sm leading-relaxed">
+                  Der Einbürgerungstest besteht aus 33 Fragen: 30 bundesweite Fragen zu Geschichte,
+                  Politik und Gesellschaft Deutschlands sowie 3 spezifische Fragen zu Ihrem Bundesland.
                   Diese Auswahl stellt sicher, dass Sie die richtigen Fragen für Ihr Bundesland erhalten.
                 </p>
               </div>
@@ -119,17 +119,17 @@ export default function StateSelection() {
                   className={`p-4 text-left border rounded-lg transition-all duration-200 hover:shadow-md ${
                     selectedState === state.code
                       ? "border-primary bg-primary/5 shadow-md"
-                      : "border-gray-200 hover:border-gray-300"
+                      : "border-border hover:border-muted-foreground/30"
                   }`}
                 >
                   <div className="flex items-center justify-between">
                     <div>
                       <h3 className={`font-medium ${
-                        selectedState === state.code ? "text-primary" : "text-gray-900"
+                        selectedState === state.code ? "text-primary" : "text-foreground"
                       }`}>
                         {state.name}
                       </h3>
-                      <p className="text-sm text-gray-500 mt-1">
+                      <p className="text-sm text-muted-foreground mt-1">
                         Hauptstadt: {state.capital}
                       </p>
                     </div>
@@ -169,7 +169,7 @@ export default function StateSelection() {
 
         {/* Legal Notice */}
         <div className="mt-8 text-center">
-          <p className="text-sm text-gray-500">
+          <p className="text-sm text-muted-foreground">
             Diese Auswahl kann später in den Einstellungen geändert werden.
           </p>
         </div>

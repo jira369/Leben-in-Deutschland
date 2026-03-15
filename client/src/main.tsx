@@ -101,7 +101,7 @@ unregisterOldServiceWorkers().catch(err => console.error('SW unregister failed:'
 if ('serviceWorker' in navigator && import.meta.env.PROD) {
   window.addEventListener('load', () => {
     // Add version parameter to force reload of SW script
-    navigator.serviceWorker.register('/sw.js?v=20251104')
+    navigator.serviceWorker.register(`/sw.js?v=${APP_VERSION}`)
       .then((registration) => {
         console.log('SW registered: ', registration);
 
