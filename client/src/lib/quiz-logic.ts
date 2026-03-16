@@ -1,5 +1,5 @@
 import { Question, QuizResults, QuizState } from "@shared/schema";
-import { apiRequest } from "./queryClient";
+import { apiRequest, localFetch } from "./queryClient";
 
 export function shuffleArray<T>(array: T[]): T[] {
   const shuffled = [...array];
@@ -125,7 +125,7 @@ export async function fetchQuestionsForQuiz(count: number, selectedState?: strin
     if (selectedState) {
       params.append('state', selectedState);
     }
-    const response = await fetch(`/api/incorrect-questions?${params}`);
+    const response = await localFetch(`/api/incorrect-questions?${params}`);
     if (!response.ok) {
       throw new Error("Failed to fetch incorrect questions");
     }
@@ -140,7 +140,7 @@ export async function fetchQuestionsForQuiz(count: number, selectedState?: strin
     if (selectedState) {
       params.append('state', selectedState);
     }
-    const response = await fetch(`/api/marked-questions?${params}`);
+    const response = await localFetch(`/api/marked-questions?${params}`);
     if (!response.ok) {
       throw new Error("Failed to fetch marked questions");
     }
@@ -166,7 +166,7 @@ export async function fetchQuestionsForQuiz(count: number, selectedState?: strin
     params.append('state', selectedState);
   }
   
-  const response = await fetch(`/api/questions/random/${count}?${params}`);
+  const response = await localFetch(`/api/questions/random/${count}?${params}`);
   if (!response.ok) {
     throw new Error('Failed to fetch questions');
   }

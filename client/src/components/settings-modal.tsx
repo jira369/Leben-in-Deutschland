@@ -28,6 +28,7 @@ import {
 } from "@/components/ui/select";
 import { UserSettings } from "@shared/schema";
 import { apiRequest } from "@/lib/queryClient";
+import { isNativePlatform } from "@/lib/platform";
 import { useToast } from "@/hooks/use-toast";
 import { useTheme } from "@/components/theme-provider";
 import { RefreshCw, Trash2 } from "lucide-react";
@@ -270,16 +271,18 @@ export function SettingsModal({ open, onOpenChange }: SettingsModalProps) {
           </div>
 
           <div className="border-t pt-6 space-y-3">
-            <Button
-              type="button"
-              variant="outline"
-              onClick={handleClearCache}
-              className="w-full"
-            >
-              <RefreshCw className="mr-2 h-4 w-4" />
-              Cache leeren & App aktualisieren
-            </Button>
-            
+            {!isNativePlatform() && (
+              <Button
+                type="button"
+                variant="outline"
+                onClick={handleClearCache}
+                className="w-full"
+              >
+                <RefreshCw className="mr-2 h-4 w-4" />
+                Cache leeren & App aktualisieren
+              </Button>
+            )}
+
             <Button
               type="button"
               variant="destructive"

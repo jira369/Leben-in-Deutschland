@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Question, UserSettings } from "@shared/schema";
-import { apiRequest } from "@/lib/queryClient";
+import { apiRequest, localFetch } from "@/lib/queryClient";
 
 export function useMarkedQuestions() {
   const queryClient = useQueryClient();
@@ -20,7 +20,7 @@ export function useMarkedQuestions() {
       if (userSettings?.selectedState) {
         params.append('state', userSettings.selectedState);
       }
-      const response = await fetch(`/api/marked-questions?${params}`);
+      const response = await localFetch(`/api/marked-questions?${params}`);
       if (!response.ok) throw new Error('Failed to fetch marked questions');
       return response.json();
     },

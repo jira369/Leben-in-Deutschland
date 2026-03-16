@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { InstallPrompt } from "@/components/install-prompt";
 import { ThemeProvider } from "@/components/theme-provider";
+import { isNativePlatform } from "@/lib/platform";
 import Home from "@/pages/home";
 import Quiz from "@/pages/quiz";
 import Results from "@/pages/results";
@@ -38,7 +39,7 @@ function App() {
         <TooltipProvider>
           <Toaster />
           <Router />
-          <InstallPrompt />
+          {!isNativePlatform() && <InstallPrompt />}
         </TooltipProvider>
       </ThemeProvider>
     </QueryClientProvider>

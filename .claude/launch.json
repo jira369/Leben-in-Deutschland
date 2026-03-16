@@ -9,6 +9,12 @@
       "env": {
         "PORT": "3000"
       }
+    },
+    {
+      "name": "vite",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["vite", "--port", "5173"],
+      "port": 5173
     }
   ]
 }

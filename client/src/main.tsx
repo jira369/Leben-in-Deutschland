@@ -1,4 +1,5 @@
 import { createRoot } from "react-dom/client";
+import { Capacitor } from "@capacitor/core";
 import App from "./App";
 import "./index.css";
 
@@ -52,8 +53,13 @@ async function checkAndClearCache() {
     // Clear ALL caches (Service Worker, HTTP Cache, etc.)
     await clearAllCaches();
 
-    // Clear all localStorage except settings if needed
-    const keysToPreserve = ['theme']; // Add any keys you want to preserve
+    // Clear all localStorage except settings and native app data
+    const keysToPreserve = ['theme'];
+    // In native app, preserve all local storage data (quiz sessions, settings, etc.)
+    if (Capacitor.isNativePlatform()) {
+      const allKeys = Object.keys(localStorage);
+      keysToPreserve.push(...allKeys.filter(k => k.startsWith('lid_')));
+    }
     const preservedData: Record<string, string> = {};
 
     keysToPreserve.forEach(key => {
@@ -97,8 +103,8 @@ checkAndClearCache().catch(err => console.error('Cache check failed:', err));
 // This ensures stuck users on old versions can update
 unregisterOldServiceWorkers().catch(err => console.error('SW unregister failed:', err));
 
-// Register Service Worker for PWA with versioned URL
-if ('serviceWorker' in navigator && import.meta.env.PROD) {
+// Register Service Worker for PWA (skip in native app - not needed)
+if ('serviceWorker' in navigator && import.meta.env.PROD && !Capacitor.isNativePlatform()) {
   window.addEventListener('load', () => {
     // Add version parameter to force reload of SW script
     navigator.serviceWorker.register(`/sw.js?v=${APP_VERSION}`)
