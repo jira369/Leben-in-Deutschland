@@ -36,7 +36,7 @@ vi.mock("../storage", async (importOriginal) => {
     hasImage: false,
     imagePath: null,
   }));
-  const state = Array.from({ length: 10 }, (_, i) => ({
+  const bayern = Array.from({ length: 10 }, (_, i) => ({
     text: `Bayern Q${i + 1}`,
     answers: ["A", "B", "C", "D"],
     correctAnswer: 2,
@@ -46,9 +46,29 @@ vi.mock("../storage", async (importOriginal) => {
     hasImage: false,
     imagePath: null,
   }));
+  const nrw = Array.from({ length: 6 }, (_, i) => ({
+    text: `NRW Q${i + 1}`,
+    answers: ["A", "B", "C", "D"],
+    correctAnswer: 1,
+    explanation: null,
+    category: "NRW",
+    difficulty: "mittel",
+    hasImage: false,
+    imagePath: null,
+  }));
+  const imageQuestions = Array.from({ length: 3 }, (_, i) => ({
+    text: `Image Q${i + 1}`,
+    answers: ["A", "B", "C", "D"],
+    correctAnswer: 1,
+    explanation: null,
+    category: "Bundesweit",
+    difficulty: "mittel",
+    hasImage: true,
+    imagePath: `img${i}.png`,
+  }));
 
   // createManyQuestions is async, we run it as part of the mock setup
-  await mem.createManyQuestions([...federal, ...state]);
+  await mem.createManyQuestions([...federal, ...bayern, ...nrw, ...imageQuestions]);
 
   return {
     ...original,
@@ -129,6 +149,38 @@ describe("API Routes", () => {
       const state = data.filter((q: any) => q.category === "Bayern");
       expect(federal.length).toBe(30);
       expect(state.length).toBe(3);
+    });
+
+    it("returns NRW state questions when category=NRW", async () => {
+      const res = await fetch(
+        `${baseUrl}/api/questions/random/10?category=NRW`,
+      );
+      expect(res.status).toBe(200);
+      const data = await res.json();
+      expect(data.length).toBeGreaterThan(0);
+      expect(data.every((q: any) => q.category === "NRW")).toBe(true);
+    });
+
+    it("returns NRW + federal questions when state=NRW", async () => {
+      const res = await fetch(`${baseUrl}/api/questions/random/33?state=NRW`);
+      expect(res.status).toBe(200);
+      const data = await res.json();
+      const federal = data.filter((q: any) => q.category === "Bundesweit");
+      const nrw = data.filter((q: any) => q.category === "NRW");
+      expect(federal.length).toBe(30);
+      expect(nrw.length).toBe(3);
+    });
+
+    it("includes image questions in federal results", async () => {
+      const res = await fetch(`${baseUrl}/api/questions`);
+      expect(res.status).toBe(200);
+      const data = await res.json();
+      const imageQuestions = data.filter((q: any) => q.hasImage);
+      expect(imageQuestions.length).toBe(3);
+      imageQuestions.forEach((q: any) => {
+        expect(q.imagePath).toBeTruthy();
+        expect(q.category).toBe("Bundesweit");
+      });
     });
 
     it("supports chronological sorting", async () => {

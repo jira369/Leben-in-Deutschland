@@ -48,7 +48,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         });
       } else if (category) {
         // Category-specific practice with thematic filtering
-        if (["Baden-Württemberg", "Bayern", "Berlin", "Brandenburg", "Bremen", "Hamburg", "Hessen", "Mecklenburg-Vorpommern", "Niedersachsen", "Nordrhein-Westfalen", "Rheinland-Pfalz", "Saarland", "Sachsen", "Sachsen-Anhalt", "Schleswig-Holstein", "Thüringen"].includes(category)) {
+        if (["Baden-Württemberg", "Bayern", "Berlin", "Brandenburg", "Bremen", "Hamburg", "Hessen", "Mecklenburg-Vorpommern", "Niedersachsen", "NRW", "Rheinland-Pfalz", "Saarland", "Sachsen", "Sachsen-Anhalt", "Schleswig-Holstein", "Thüringen"].includes(category)) {
           // State-specific questions
           questions = await storage.getQuestionsByFilter({ category });
         } else if (category === "bundesweit") {
