@@ -461,6 +461,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       const { description, timestamp, userAgent, url } = bugReportSchema.parse(req.body);
 
+      // HTML-escape user input to prevent XSS in email clients
+      const escapeHtml = (str: string) =>
+        str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+
       // Create transporter for sending emails
       const transporter = nodemailer.createTransporter({
         service: 'gmail',
@@ -478,12 +482,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
         html: `
           <h2>Neuer Bug-Report</h2>
           <p><strong>Zeitpunkt:</strong> ${new Date(timestamp).toLocaleString('de-DE')}</p>
-          <p><strong>URL:</strong> ${url || 'Nicht verfügbar'}</p>
-          <p><strong>User Agent:</strong> ${userAgent || 'Nicht verfügbar'}</p>
-          
+          <p><strong>URL:</strong> ${escapeHtml(url || 'Nicht verfügbar')}</p>
+          <p><strong>User Agent:</strong> ${escapeHtml(userAgent || 'Nicht verfügbar')}</p>
+
           <h3>Bug-Beschreibung:</h3>
           <div style="background: #f5f5f5; padding: 15px; border-left: 4px solid #007bff; margin: 10px 0;">
-            ${description.replace(/\n/g, '<br>')}
+            ${escapeHtml(description).replace(/\n/g, '<br>')}
           </div>
           
           <hr>
