@@ -67,6 +67,48 @@ function isDateSerial(n) {
   return typeof n === 'number' && n > 10000 && !(n >= 1900 && n <= 2100);
 }
 
+// ---------- Manual corrections for known Excel data errors ----------
+// Key format: "Aufgabe N|Category" → correction object
+const EXCEL_CORRECTIONS = {
+  // "Demmin" was placed in image column instead of being Antwort 1;
+  // answers shifted, causing duplicate "Nordfriesland"
+  'Aufgabe 2|Baden-Württemberg': {
+    answers: ['Demmin', 'Neckar-Odenwald-Kreis', 'Nordfriesland', 'Altötting'],
+    correctAnswer: 'Neckar-Odenwald-Kreis',
+    clearImage: true
+  },
+  // "Europäische Gemeinschaft" duplicated; "Deutsche Wiedervereinigung" missing
+  'Aufgabe 228|Alle': {
+    answers: ['NATO-Osterweiterung', 'EU-Osterweiterung', 'Deutsche Wiedervereinigung', 'Europäische Gemeinschaft'],
+    correctAnswer: 'Deutsche Wiedervereinigung'
+  },
+  // Excel uses "Einwohner / Einwohnerinnen" but option says "Einwohner/innen"
+  'Aufgabe 3|Alle': {
+    correctAnswer: 'Alle Einwohner/innen und der Staat müssen sich an die Gesetze halten.'
+  },
+  // Excel has reversed gender order: "Bürger und Bürgerinnen" vs "Bürgerinnen und Bürger"
+  'Aufgabe 17|Alle': {
+    correctAnswer: 'Ungleichbehandlung der Bürgerinnen und Bürger durch den Staat.'
+  },
+  // Excel has reversed order: "Ministerpräsident / Ministerpräsidentin" vs "Ministerpräsidentin/Ministerpräsident"
+  'Aufgabe 37|Alle': {
+    correctAnswer: 'Ministerpräsidentin/Ministerpräsident'
+  }
+};
+
+/**
+ * Normalize a string for fuzzy comparison: lowercase, collapse whitespace,
+ * strip trailing periods, and normalize gender slash notation.
+ */
+function normalize(s) {
+  return s
+    .toLowerCase()
+    .replace(/\s+/g, ' ')
+    .replace(/\.\s*$/, '')           // strip trailing period
+    .replace(/\s*\/\s*/g, '/')       // normalize spaces around slashes
+    .trim();
+}
+
 // ---------- Process questions ----------
 const questions = jsonData.map((row, index) => {
   // Extract question number from "Aufgabe X" format
@@ -75,8 +117,12 @@ const questions = jsonData.map((row, index) => {
 
   const questionText = row['Frage'] || '';
 
+  // Check for manual corrections
+  const correctionKey = `${row['Nummerierung']}|${row['Bundesland'] || ''}`;
+  const correction = EXCEL_CORRECTIONS[correctionKey];
+
   // Get raw answers — may be strings or numbers
-  const rawAnswers = [
+  let rawAnswers = [
     row['Antwort 1'],
     row['Antwort 2'],
     row['Antwort 3'],
@@ -84,7 +130,7 @@ const questions = jsonData.map((row, index) => {
   ];
 
   // Convert answers to strings, handling date serials specially
-  const answers = rawAnswers
+  let answers = rawAnswers
     .filter(a => a !== undefined && a !== null && a !== '')
     .map(a => {
       if (isDateSerial(a)) return excelSerialToGermanDate(a);
@@ -92,8 +138,14 @@ const questions = jsonData.map((row, index) => {
     })
     .filter(a => a !== '');
 
+  // Apply manual answer corrections if present
+  if (correction && correction.answers) {
+    answers = correction.answers;
+    console.log(`  [CORRECTION] ${row['Nummerierung']} (${row['Bundesland']}): replaced answers`);
+  }
+
   // Find correct answer index
-  const rawCorrect = row['Richtige Antwort'];
+  const rawCorrect = correction?.correctAnswer || row['Richtige Antwort'];
   let correctAnswerIndex = 0;
 
   if (rawCorrect !== undefined && rawCorrect !== null) {
@@ -107,12 +159,23 @@ const questions = jsonData.map((row, index) => {
     if (exactIdx !== -1) {
       correctAnswerIndex = exactIdx;
     } else {
-      // Fallback: partial match
+      // Fallback 1: normalized match (handles periods, gender notation, spacing)
+      const normCorrect = normalize(correctStr);
+      let found = false;
       for (let i = 0; i < answers.length; i++) {
-        if (answers[i].includes(correctStr) || correctStr.includes(answers[i])) {
+        const normAnswer = normalize(answers[i]);
+        if (normAnswer === normCorrect || normAnswer.includes(normCorrect) || normCorrect.includes(normAnswer)) {
           correctAnswerIndex = i;
+          found = true;
           break;
         }
+      }
+
+      if (!found) {
+        // Fallback 2: find best overlap by checking if significant words match
+        console.warn(`  WARNING: Could not match correct answer for ${row['Nummerierung']}`);
+        console.warn(`    Correct: "${correctStr}"`);
+        console.warn(`    Options: ${answers.map(a => `"${a}"`).join(' | ')}`);
       }
     }
   }
@@ -121,7 +184,7 @@ const questions = jsonData.map((row, index) => {
   const category = row['Bundesland'] === 'Alle' ? 'Bundesweit' : row['Bundesland'] || 'Allgemein';
 
   // Image mapping from Excel's "Bild zur Frage" column
-  const excelImageName = row['Bild zur Frage'] || '';
+  const excelImageName = (correction?.clearImage) ? '' : (row['Bild zur Frage'] || '');
   const imageFile = findImageFile(excelImageName);
   const hasImage = !!imageFile;
 

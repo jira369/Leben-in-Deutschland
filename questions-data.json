@@ -72,7 +72,7 @@
       "Die Wählerin/der Wähler darf bei der Wahl weder beeinflusst noch zu einer bestimmten Stimmabgabe gezwungen werden und keine Nachteile durch die Wahl haben.",
       "Alle wahlberechtigten Personen müssen wählen."
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -264,7 +264,7 @@
       "Versammlungsfreiheit der Einwohnerinnen und Einwohner.",
       "Ungleichbehandlung der Bürgerinnen und Bürger durch den Staat."
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -584,7 +584,7 @@
       "Senatorin/Senator",
       "Ministerpräsidentin/Ministerpräsident"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -3637,10 +3637,10 @@
     "answers": [
       "NATO-Osterweiterung",
       "EU-Osterweiterung",
-      "Europäische Gemeinschaft",
+      "Deutsche Wiedervereinigung",
       "Europäische Gemeinschaft"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -4819,12 +4819,12 @@
     "questionNumber": 2,
     "text": "Welches ist ein Landkreis in Baden-Württemberg?",
     "answers": [
+      "Demmin",
       "Neckar-Odenwald-Kreis",
-      "Nordfriesland",
       "Nordfriesland",
       "Altötting"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Baden-Württemberg",
     "difficulty": "mittel",
