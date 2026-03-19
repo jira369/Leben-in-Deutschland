@@ -331,34 +331,46 @@ describe("Image Question Handling", () => {
   });
 
   // ============================================================
-  // Image questions are always Bundesweit
+  // Image questions in federal and state categories
   // ============================================================
 
-  describe("image questions are federal only", () => {
-    it("all image questions have category Bundesweit", async () => {
-      // Replicate the actual data pattern: all 7 image questions are Bundesweit
+  describe("image questions in federal and state categories", () => {
+    it("federal image questions have category Bundesweit", async () => {
       await storage.createManyQuestions([
         sampleQuestion({ hasImage: true, imagePath: "img1.png", category: "Bundesweit" }),
         sampleQuestion({ hasImage: true, imagePath: "img2.png", category: "Bundesweit" }),
         sampleQuestion({ hasImage: false, category: "Bayern" }),
-        sampleQuestion({ hasImage: false, category: "NRW" }),
       ]);
 
       const all = await storage.getAllQuestions();
-      const imageQuestions = all.filter((q) => q.hasImage);
-      expect(imageQuestions.every((q) => q.category === "Bundesweit")).toBe(true);
+      const federalImages = all.filter((q) => q.hasImage && q.category === "Bundesweit");
+      expect(federalImages).toHaveLength(2);
     });
 
-    it("state filtering includes image questions from Bundesweit", async () => {
+    it("state image questions have state category", async () => {
+      // State questions Aufgabe 1 and 8 per state have images (coat of arms, map)
+      await storage.createManyQuestions([
+        sampleQuestion({ hasImage: true, imagePath: "Frage 301 Bayern.png", category: "Bayern" }),
+        sampleQuestion({ hasImage: true, imagePath: "Frage 308 Bayern.png", category: "Bayern" }),
+        sampleQuestion({ hasImage: false, category: "Bayern" }),
+      ]);
+
+      const all = await storage.getAllQuestions();
+      const stateImages = all.filter((q) => q.hasImage && q.category === "Bayern");
+      expect(stateImages).toHaveLength(2);
+    });
+
+    it("state filtering includes image questions from both federal and state", async () => {
       await storage.createManyQuestions([
         sampleQuestion({ hasImage: true, imagePath: "img1.png", category: "Bundesweit" }),
         sampleQuestion({ hasImage: false, category: "Bundesweit" }),
+        sampleQuestion({ hasImage: true, imagePath: "Frage 301 Bayern.png", category: "Bayern" }),
         sampleQuestion({ hasImage: false, category: "Bayern" }),
       ]);
 
       const results = await storage.getQuestionsByFilter({ state: "Bayern" });
       const imageQuestions = results.filter((q) => q.hasImage);
-      expect(imageQuestions).toHaveLength(1); // The federal image question is included
+      expect(imageQuestions).toHaveLength(2); // 1 federal + 1 state
     });
   });
 

@@ -8,7 +8,7 @@
       "die Menschen das Wahlrecht haben.",
       "hier Meinungsfreiheit gilt."
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -24,7 +24,7 @@
       "Politikunterricht teilnimmt.",
       "Sprachunterricht teilnimmt."
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -40,7 +40,7 @@
       "Nur Deutsche müssen die Gesetze befolgen.",
       "Die Gerichte machen die Gesetze."
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -56,7 +56,7 @@
       "Meinungsfreiheit",
       "Selbstjustiz"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -72,7 +72,7 @@
       "Die Wählerin/der Wähler darf bei der Wahl weder beeinflusst noch zu einer bestimmten Stimmabgabe gezwungen werden und keine Nachteile durch die Wahl haben.",
       "Alle wahlberechtigten Personen müssen wählen."
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -88,7 +88,7 @@
       "Deutsches Gesetz",
       "Grundgesetz"
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -104,7 +104,7 @@
       "Arbeit",
       "Wohnung"
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -120,7 +120,7 @@
       "Jeder Mensch darf seine Meinung sagen.",
       "Alle sind vor dem Gesetz gleich."
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -136,7 +136,7 @@
       "Asyl",
       "Meinungsfreiheit"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -152,7 +152,7 @@
       "die Todesstrafe",
       "die Geldstrafe"
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -168,7 +168,7 @@
       "Gesetzbuch",
       "Verfassungsvertrag"
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -184,7 +184,7 @@
       "Nein, denn die Pressefreiheit ist ein Grundrecht. Sie kann nicht abgeschafft werden.",
       "Nein, denn nur der Bundesrat kann die Pressefreiheit abschaffen."
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -200,7 +200,7 @@
       "alle Parteien, die bei der letzten Wahl die 5%-Hürde erreichen konnten.",
       "alle Abgeordneten, die nicht zu der Regierungspartei/den Regierungsparteien gehören."
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -216,7 +216,7 @@
       "Nazi-Symbole tragen darf.",
       "meine Meinung sagen darf, solange ich der Regierung nicht widerspreche."
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -232,7 +232,7 @@
       "freie Berufswahl",
       "Arbeit im Ausland"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -248,7 +248,7 @@
       "bei Diskussionen über Religionen",
       "bei Kritik am Staat"
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -264,7 +264,7 @@
       "Versammlungsfreiheit der Einwohnerinnen und Einwohner.",
       "Ungleichbehandlung der Bürgerinnen und Bürger durch den Staat."
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -280,7 +280,7 @@
       "Religionsfreiheit",
       "Meinungsfreiheit"
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -296,7 +296,7 @@
       "Man darf sich für eine andere Religion entscheiden.",
       "Man darf sich in der Öffentlichkeit nur leicht bekleidet bewegen."
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -312,12 +312,28 @@
       "gesetzestreu.",
       "verfassungswidrig."
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
     "hasImage": false,
     "imagePath": null
+  },
+  {
+    "questionNumber": 21,
+    "text": "Welches ist das Wappen der Bundesrepublik Deutschland?",
+    "answers": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "correctAnswer": 1,
+    "explanation": "",
+    "category": "Bundesweit",
+    "difficulty": "mittel",
+    "hasImage": true,
+    "imagePath": "Frage 21_1751145105597.png"
   },
   {
     "questionNumber": 22,
@@ -328,7 +344,7 @@
       "Republik",
       "Fürstentum"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -343,6 +359,22 @@
       "ehrenamtlich für ein Bundesland tätig.",
       "selbstständig mit einer eigenen Firma tätig.",
       "bei einer Firma oder Behörde beschäftigt."
+    ],
+    "correctAnswer": 4,
+    "explanation": "",
+    "category": "Bundesweit",
+    "difficulty": "mittel",
+    "hasImage": false,
+    "imagePath": null
+  },
+  {
+    "questionNumber": 24,
+    "text": "Wie viele Bundesländer hat die Bundesrepublik Deutschland?",
+    "answers": [
+      "14",
+      "15",
+      "16",
+      "17"
     ],
     "correctAnswer": 3,
     "explanation": "",
@@ -360,7 +392,7 @@
       "Mecklenburg-Vorpommern",
       "Sachsen-Anhalt"
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -376,7 +408,7 @@
       "eine kapitalistische und soziale Monarchie.",
       "ein sozialer und sozialistischer Bundesstaat."
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -392,7 +424,7 @@
       "eine Diktatur.",
       "eine Monarchie."
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -408,7 +440,7 @@
       "das wahlberechtigte Volk",
       "die Verwaltung"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -424,7 +456,7 @@
       "Bär",
       "Pferd"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -440,7 +472,7 @@
       "Meinungsfreiheit",
       "verschiedene Parteien"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -456,7 +488,7 @@
       "Ministerium.",
       "Fraktion."
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -472,7 +504,7 @@
       "Presse",
       "Rechtsprechung"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -488,7 +520,7 @@
       "ist der Staat abhängig von den Religionsgemeinschaften.",
       "bilden Staat und Religionsgemeinschaften eine Einheit."
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -504,7 +536,7 @@
       "eine Monarchie",
       "ein Sozialstaat"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -520,7 +552,7 @@
       "Spendengeldern",
       "Vereinsbeiträgen"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -536,7 +568,7 @@
       "die Gebäudeversicherung",
       "die Haftpflichtversicherung"
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -552,7 +584,7 @@
       "Senatorin/Senator",
       "Ministerpräsidentin/Ministerpräsident"
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -568,7 +600,7 @@
       "Staatenbund",
       "Zentralstaat"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -584,7 +616,7 @@
       "eine eigene Armee",
       "eine eigene Regierung"
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -600,7 +632,7 @@
       "Freude schöner Götterfunken …",
       "Deutschland einig Vaterland …"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -616,7 +648,7 @@
       "um politische Demonstrationen zu verhindern",
       "um wirtschaftlichen Wettbewerb anzuregen"
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -632,7 +664,7 @@
       "die Gerichte",
       "die Polizei"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -648,7 +680,7 @@
       "wenn sie Kritik am Staatsoberhaupt äußert",
       "wenn ihr Programm eine neue Richtung vorschlägt"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -664,7 +696,7 @@
       "Landtagsabgeordnete",
       "Bundestagsabgeordnete"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -680,7 +712,7 @@
       "Hausratversicherung",
       "Haftpflicht- und Feuerversicherung"
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -696,7 +728,7 @@
       "Er versorgt alle Einwohner und Einwohnerinnen kostenlos mit Zeitungen.",
       "Er produziert Autos und Busse."
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -712,7 +744,7 @@
       "Er unterstützt Museen.",
       "Er fördert Sportler und Sportlerinnen."
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -728,7 +760,7 @@
       "die Bürgerversammlung",
       "die Regierung"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -744,7 +776,7 @@
       "das Familienministerium",
       "die Universitäten"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -760,7 +792,7 @@
       "gelenkte Zentralwirtschaft.",
       "Planwirtschaft."
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -776,7 +808,7 @@
       "Menschen von einer Privatpolizei ohne Grund verhaftet werden.",
       "jemand ein Verbrechen begeht und deshalb verhaftet wird."
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -792,7 +824,7 @@
       "preußischen König aus.",
       "Bundesverfassungsgericht aus."
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -808,7 +840,7 @@
       "Die Bürger und Bürgerinnen entscheiden über Gesetze.",
       "Der Staat muss die Gesetze einhalten."
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -822,9 +854,9 @@
       "Legislative",
       "Judikative",
       "Exekutive",
-      "Direktive\r"
+      "Direktive"
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -840,7 +872,7 @@
       "das Bundesratsgebäude in Berlin",
       "das Bundeskanzleramt in Berlin"
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -856,7 +888,7 @@
       "Finanzamt",
       "Auswärtiges Amt"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -872,7 +904,7 @@
       "ein Abgeordneter / eine Abgeordnete der stärksten Fraktion",
       "ein ehemaliger Bundeskanzler / eine ehemalige Bundeskanzlerin"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -888,7 +920,7 @@
       "der Bundesratspräsident / die Bundesratspräsidentin",
       "der Bundestagspräsident / die Bundestagspräsidentin"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -904,7 +936,7 @@
       "CSU und FDP",
       "Bündnis 90/Die Grünen und SPD"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -920,7 +952,7 @@
       "Direktive.",
       "Judikative."
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -933,10 +965,10 @@
     "answers": [
       "Der König / die Königin herrscht über das Volk.",
       "Das Bundesverfassungsgericht steht über der Verfassung.",
-      "Die Interessenverbände üben die Souveränität zusammen mit der Regierung aus.\r",
+      "Die Interessenverbände üben die Souveränität zusammen mit der Regierung aus.",
       "Die Staatsgewalt geht vom Volke aus."
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -952,7 +984,7 @@
       "Europawahl.",
       "Bundestagswahl."
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -968,7 +1000,7 @@
       "das Finanzamt",
       "die Ministerien"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -984,7 +1016,7 @@
       "16 Kantone.",
       "Bund, Länder und Kommunen."
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -1000,7 +1032,7 @@
       "den Bundeskanzler / die Bundeskanzlerin zu wählen.",
       "das Bundeskabinett zu bilden."
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -1016,7 +1048,7 @@
       "Johann Wolfgang von Goethe",
       "Heinrich Hoffmann von Fallersleben"
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -1032,7 +1064,7 @@
       "Wirtschaftspolitik",
       "Schulpolitik"
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -1048,7 +1080,7 @@
       "weil es in den Bundesländern verschiedene Schulen gibt",
       "weil es nach dem Grundgesetz seine Aufgabe ist"
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -1064,7 +1096,7 @@
       "Gemeinden und Kommunen",
       "Bezirksämter"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -1080,7 +1112,7 @@
       "Er / Sie wählt die Minister / Ministerinnen aus.",
       "Er / Sie schlägt den Kanzler / die Kanzlerin zur Wahl vor."
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -1096,7 +1128,7 @@
       "auf Schloss Meseberg, dem Gästehaus der Bundesregierung, um Staatsgäste zu empfangen.",
       "auf Schloss Bellevue, dem Amtssitz des Bundespräsidenten / der Bundespräsidentin, um Staatsgäste zu empfangen."
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -1112,7 +1144,7 @@
       "Klaus Wowereit",
       "Olaf Scholz"
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -1128,7 +1160,7 @@
       "FDP und SPD.",
       "Die Linke und FDP."
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -1144,7 +1176,7 @@
       "Bundestag",
       "Bundesgerichtshof"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -1160,7 +1192,7 @@
       "Wolfgang Thierse",
       "Edmund Stoiber"
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -1176,7 +1208,7 @@
       "Christlicher Deutscher Umweltschutz",
       "Christlich Demokratische Union"
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -1192,7 +1224,7 @@
       "eine deutsche Bürgerinitiative",
       "die deutsche Armee"
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -1208,7 +1240,7 @@
       "Sozialdemokratische Partei Deutschlands",
       "Sozialgerechte Partei Deutschlands"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -1224,7 +1256,7 @@
       "Führende Demokratische Partei",
       "Freie Demokratische Partei"
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -1240,7 +1272,7 @@
       "Bundesverfassungsgericht",
       "Verwaltungsgericht"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -1256,7 +1288,7 @@
       "das Volk",
       "der Bundestag"
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -1272,7 +1304,7 @@
       "der Bundeskanzler / die Bundeskanzlerin",
       "der Bundesratspräsident / die Bundesratspräsidentin"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -1288,7 +1320,7 @@
       "der Bundestag",
       "die Bundesregierung"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -1304,7 +1336,7 @@
       "repräsentiert das Land.",
       "überwacht die Einhaltung der Gesetze."
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -1320,7 +1352,7 @@
       "die Regierungsvertreter der Bundesländer",
       "die Parteimitglieder"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -1336,7 +1368,7 @@
       "das Bundesparlament",
       "das Bundesverfassungsgericht"
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -1352,7 +1384,7 @@
       "der Bundesratspräsident / die Bundesratspräsidentin",
       "der Bundestagspräsident / die Bundestagspräsidentin"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -1368,7 +1400,7 @@
       "bestimmt, wer im Bundesrat sitzt.",
       "schlägt die Regierungschefs / Regierungschefinnen der Länder vor."
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -1384,7 +1416,7 @@
       "Fraktion",
       "Opposition"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -1400,7 +1432,7 @@
       "den Bundestag.",
       "die Bundesregierung."
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -1416,7 +1448,7 @@
       "schwieriger, wenn dadurch die Mehrheit im Bundesrat verändert wird.",
       "leichter, wenn es sich um ein reiches Bundesland handelt."
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -1432,7 +1464,7 @@
       "Christlich Sozialer Unternehmerverband",
       "Christlich Soziale Union"
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -1448,7 +1480,23 @@
       "mehr Direktkandidaten der Partei ziehen ins Parlament ein.",
       "größer ist das Risiko, eine Koalition bilden zu müssen."
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
+    "explanation": "",
+    "category": "Bundesweit",
+    "difficulty": "mittel",
+    "hasImage": false,
+    "imagePath": null
+  },
+  {
+    "questionNumber": 94,
+    "text": "Ab welchem Alter darf man in Deutschland an der Wahl zum Deutschen Bundestag teilnehmen?",
+    "answers": [
+      "16",
+      "18",
+      "21",
+      "23"
+    ],
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -1464,7 +1512,7 @@
       "Schweigepflicht",
       "Religionspflicht"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -1480,7 +1528,7 @@
       "einen Sozialversicherungsausweis",
       "einen Führerschein"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -1496,7 +1544,7 @@
       "Kindergeld",
       "Wohngeld"
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -1512,7 +1560,7 @@
       "muss der Bundespräsident / die Bundespräsidentin zuvor sein / ihr Einverständnis geben.",
       "dürfen die Wähler / Wählerinnen dieser Abgeordneten noch einmal wählen."
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -1528,7 +1576,7 @@
       "alle Staatsangehörigen",
       "nur Arbeitgeber / Arbeitgeberinnen"
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -1544,7 +1592,7 @@
       "die Arbeitslosenversicherung",
       "die Pflegeversicherung"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -1560,7 +1608,7 @@
       "Rentner und Rentnerinnen.",
       "Arbeitgeber und Arbeitgeberinnen."
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -1576,7 +1624,7 @@
       "Vaterländischen Verdienstorden",
       "Ehrentitel „Held der Deutschen Demokratischen Republik“"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -1592,7 +1640,7 @@
       "von CSU, Die LINKE und Bündnis 90/Die Grünen in einer Regierung",
       "der Bundestagsfraktionen von CDU und SPD"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -1608,7 +1656,7 @@
       "Die Frau erledigt private Sachen während der Arbeitszeit.",
       "Die Frau bekommt ein Kind und ihr Chef weiß das."
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -1624,7 +1672,7 @@
       "Sie geben Zwischenergebnisse an die Medien weiter.",
       "Sie zählen die Stimmen nach dem Ende der Wahl."
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -1640,7 +1688,7 @@
       "Sie geben Zwischenergebnisse an Journalisten weiter.",
       "Sie zählen die Stimmen nach dem Ende der Wahl."
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -1656,7 +1704,7 @@
       "6 Jahre",
       "8 Jahre"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -1672,7 +1720,7 @@
       "seit mindestens 3 Jahren in der Bundesrepublik Deutschland lebt.",
       "Bürger / Bürgerin der Bundesrepublik Deutschland ist und mindestens 21 Jahre alt ist."
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -1688,7 +1736,7 @@
       "alle fünf Jahre",
       "alle sechs Jahre"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -1704,7 +1752,7 @@
       "4 Jahre",
       "5 Jahre"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -1720,7 +1768,7 @@
       "Nur Personen mit einem festen Arbeitsplatz dürfen wählen.",
       "Alle Einwohner und Einwohnerinnen in Deutschland müssen wählen."
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -1736,7 +1784,7 @@
       "berufsbezogen.",
       "geschlechtsabhängig."
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -1752,7 +1800,7 @@
       "die meisten Stimmen bei den Arbeitern / Arbeiterinnen bekommen hat.",
       "die meisten Erststimmen für ihren Kanzlerkandidaten / ihre Kanzlerkandidatin erhalten hat."
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -1768,7 +1816,7 @@
       "ein Zwang.",
       "eine Last."
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -1784,7 +1832,7 @@
       "Man kann wählen.",
       "Man muss zur Auszählung der Stimmen gehen."
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -1800,7 +1848,7 @@
       "aktiver Wahlkampf.",
       "aktives Wahlrecht."
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -1816,7 +1864,7 @@
       "5 %",
       "6 %"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -1832,7 +1880,7 @@
       "Wer nicht wählt, verliert das Recht zu wählen.",
       "Wer wählen darf, kann wählen."
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -1848,7 +1896,7 @@
       "Jede Person kann ohne Zwang entscheiden, ob sie wählen möchte und wen sie wählen möchte.",
       "Ich kann frei entscheiden, wo ich wählen gehen möchte."
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -1864,7 +1912,7 @@
       "Mehrheits- und Verhältniswahlrecht.",
       "allgemeines Männerwahlrecht."
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -1880,7 +1928,7 @@
       "Basiswert.",
       "Richtlinie."
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -1896,7 +1944,7 @@
       "geschlossen, gleich, sicher.",
       "sicher, offen, freiwillig."
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -1912,7 +1960,7 @@
       "Mindestanteil an Wählerstimmen, um ins Parlament zu kommen",
       "Anwesenheitskontrolle im Bundesrat für Abstimmungen"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -1928,7 +1976,7 @@
       "des Parlaments für Deutschland.",
       "des Bundespräsidenten / der Bundespräsidentin."
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -1944,7 +1992,7 @@
       "im Land bestehende Gesetze beizubehalten.",
       "den Armen mehr Macht zu geben."
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -1960,7 +2008,7 @@
       "eine Benachrichtigung von der Bundesversammlung",
       "eine Benachrichtigung vom Pfarramt"
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -1976,7 +2024,7 @@
       "viele kleine Parteien die Regierungsbildung erschweren.",
       "die kleinen Parteien nicht so viel Geld haben, um die Politiker und Politikerinnen zu bezahlen."
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -1992,7 +2040,7 @@
       "Botschafter / Botschafterinnen.",
       "Ministerpräsidenten / Ministerpräsidentinnen."
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -2008,12 +2056,28 @@
       "der Bundestag.",
       "der Bundespräsident / die Bundespräsidentin."
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
     "hasImage": false,
     "imagePath": null
+  },
+  {
+    "questionNumber": 130,
+    "text": "Welcher Stimmzettel wäre bei einer Bundestagswahl gültig?",
+    "answers": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "correctAnswer": 1,
+    "explanation": "",
+    "category": "Bundesweit",
+    "difficulty": "mittel",
+    "hasImage": true,
+    "imagePath": "Frage 130_1751145105597.png"
   },
   {
     "questionNumber": 131,
@@ -2024,7 +2088,7 @@
       "das Oberhaupt einer Gemeinde.",
       "der / die Vorsitzende einer Partei."
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -2040,7 +2104,7 @@
       "Sie arbeiten in der Bundesregierung.",
       "Sie arbeiten in einem Krankenhaus und verdienen dabei Geld."
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -2056,7 +2120,7 @@
       "Man kann am Wahltag telefonisch seine Stimme abgeben.",
       "Kinder ab dem Alter von 14 Jahren dürfen wählen."
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -2072,7 +2136,7 @@
       "Ich wende mich an das Finanzamt, weil ich als Steuerzahler / Steuerzahlerin ein Recht auf die Buslinie habe.",
       "Ich schreibe einen Brief an das Forstamt der Gemeinde."
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -2088,7 +2152,7 @@
       "Selbständige",
       "Arbeitnehmer und Arbeitnehmerinnen"
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -2104,7 +2168,7 @@
       "Problemen mit den Nachbarn / Nachbarinnen.",
       "Schwierigkeiten nach einem Verkehrsunfall."
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -2120,7 +2184,7 @@
       "das Arbeitsgericht",
       "das Amtsgericht"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -2136,7 +2200,7 @@
       "Kündigungsschutzklage erheben",
       "den Arbeitgeber / die Arbeitgeberin bei der Polizei anzeigen"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -2152,7 +2216,7 @@
       "eine andere Meinung als die der Regierung vertritt.",
       "sein Auto falsch geparkt hat und es abgeschleppt wird."
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -2168,7 +2232,7 @@
       "stellt Urkunden aus.",
       "verteidigt den Angeklagten / die Angeklagte."
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -2184,7 +2248,7 @@
       "ein Schöffe / eine Schöffin",
       "ein Staatsanwalt / eine Staatsanwältin"
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -2200,7 +2264,7 @@
       "ändert Gesetze.",
       "betreut Jugendliche vor Gericht."
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -2216,7 +2280,7 @@
       "Operative.",
       "Legislative."
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -2232,7 +2296,7 @@
       "planenden Gewalt.",
       "gesetzgebenden Gewalt."
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -2248,7 +2312,7 @@
       "Presse.",
       "Legislative."
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -2264,7 +2328,7 @@
       "Protokoll",
       "Prozess"
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -2280,7 +2344,7 @@
       "Pläne erstellen",
       "Gesetze erlassen"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -2296,7 +2360,7 @@
       "die Gesetze zu beschließen",
       "die Einhaltung von Gesetzen zu überwachen"
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -2312,7 +2376,7 @@
       "alle Personen, die seit mindestens 5 Jahren in Deutschland leben",
       "nur Personen mit einem abgeschlossenen Jurastudium"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -2328,7 +2392,7 @@
       "ein Mitglied eines Gemeinderats.",
       "eine Person, die Jura studiert hat."
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -2344,7 +2408,7 @@
       "die DDR",
       "die USA"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -2360,7 +2424,7 @@
       "1933 bis 1945",
       "1945 bis 1989"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -2376,7 +2440,23 @@
       "Wahl von Konrad Adenauer zum Bundeskanzler",
       "Ende des Zweiten Weltkriegs in Europa"
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
+    "explanation": "",
+    "category": "Bundesweit",
+    "difficulty": "mittel",
+    "hasImage": false,
+    "imagePath": null
+  },
+  {
+    "questionNumber": 154,
+    "text": "Wann war der Zweite Weltkrieg zu Ende?",
+    "answers": [
+      "1933",
+      "1945",
+      "1949",
+      "1961"
+    ],
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -2392,7 +2472,23 @@
       "1933 bis 1945",
       "1949 bis 1963"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
+    "explanation": "",
+    "category": "Bundesweit",
+    "difficulty": "mittel",
+    "hasImage": false,
+    "imagePath": null
+  },
+  {
+    "questionNumber": 156,
+    "text": "In welchem Jahr wurde Hitler Reichskanzler?",
+    "answers": [
+      "1923",
+      "1927",
+      "1933",
+      "1936"
+    ],
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -2408,7 +2504,7 @@
       "eine Monarchie.",
       "ein Fürstentum."
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -2424,7 +2520,7 @@
       "Monarchie.",
       "Räterepublik."
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -2440,7 +2536,7 @@
       "willkürliche Verhaftungen",
       "Verfolgung der Juden"
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -2456,7 +2552,7 @@
       "der Vietnamkrieg",
       "der Golfkrieg"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -2472,7 +2568,7 @@
       "der allgemeinen Religionsfreiheit",
       "der Entwicklung der Demokratie"
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -2487,6 +2583,22 @@
       "den Bau des Reichstagsgebäudes.",
       "den Aufbau der Wehrmacht.",
       "das Attentat auf Hitler am 20. Juli 1944."
+    ],
+    "correctAnswer": 4,
+    "explanation": "",
+    "category": "Bundesweit",
+    "difficulty": "mittel",
+    "hasImage": false,
+    "imagePath": null
+  },
+  {
+    "questionNumber": 163,
+    "text": "In welchem Jahr zerstörten die Nationalsozialisten Synagogen und jüdische Geschäfte in Deutschland?",
+    "answers": [
+      "1925",
+      "1930",
+      "1938",
+      "1945"
     ],
     "correctAnswer": 3,
     "explanation": "",
@@ -2504,7 +2616,7 @@
       "Jüdische Geschäfte und Synagogen werden durch Nationalsozialisten und ihre Anhänger zerstört.",
       "Hitler wird Reichspräsident und lässt alle Parteien verbieten."
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -2520,7 +2632,7 @@
       "Helmut Schmidt",
       "Willy Brandt"
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -2536,7 +2648,7 @@
       "bei den Demonstrationen 1968 in der Bundesrepublik Deutschland",
       "bei den Anti-Atomkraft-Demonstrationen 1985 in der Bundesrepublik Deutschland"
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -2552,7 +2664,7 @@
       "USA, Sowjetunion, Spanien, Portugal",
       "USA, Sowjetunion, Großbritannien, Frankreich"
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -2567,6 +2679,22 @@
       "Sowjetunion",
       "Frankreich",
       "Japan"
+    ],
+    "correctAnswer": 4,
+    "explanation": "",
+    "category": "Bundesweit",
+    "difficulty": "mittel",
+    "hasImage": false,
+    "imagePath": null
+  },
+  {
+    "questionNumber": 169,
+    "text": "Wann wurde die Bundesrepublik Deutschland gegründet?",
+    "answers": [
+      "1939",
+      "1945",
+      "1949",
+      "1951"
     ],
     "correctAnswer": 3,
     "explanation": "",
@@ -2584,7 +2712,7 @@
       "das Verbot von Parteien",
       "den Schutz der Menschenwürde"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -2600,7 +2728,7 @@
       "richtet sich nach der Nachfrage im Ausland.",
       "richtet sich nach Angebot und Nachfrage, aber der Staat sorgt für einen sozialen Ausgleich."
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -2616,7 +2744,7 @@
       "britischen Besatzungszone.",
       "sowjetischen Besatzungszone."
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -2631,6 +2759,38 @@
       "der Vereinten Nationen (VN).",
       "der Europäischen Union (EU).",
       "des Warschauer Pakts."
+    ],
+    "correctAnswer": 3,
+    "explanation": "",
+    "category": "Bundesweit",
+    "difficulty": "mittel",
+    "hasImage": false,
+    "imagePath": null
+  },
+  {
+    "questionNumber": 174,
+    "text": "Wann wurde die DDR gegründet?",
+    "answers": [
+      "1947",
+      "1949",
+      "1953",
+      "1956"
+    ],
+    "correctAnswer": 2,
+    "explanation": "",
+    "category": "Bundesweit",
+    "difficulty": "mittel",
+    "hasImage": false,
+    "imagePath": null
+  },
+  {
+    "questionNumber": 175,
+    "text": "Wie viele Besatzungszonen gab es in Deutschland nach dem Zweiten Weltkrieg?",
+    "answers": [
+      "3",
+      "4",
+      "5",
+      "6"
     ],
     "correctAnswer": 2,
     "explanation": "",
@@ -2648,7 +2808,7 @@
       "1=Großbritannien, 2=Sowjetunion, 3=USA, 4=Frankreich",
       "1=Großbritannien, 2=USA, 3=Sowjetunion, 4=Frankreich"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -2664,7 +2824,7 @@
       "Dresden",
       "Frankfurt/Oder"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -2680,7 +2840,7 @@
       "Für Großbritannien war die Versorgung über die Luftbrücke schneller.",
       "Die Sowjetunion unterbrach den gesamten Verkehr auf dem Landwege."
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -2696,7 +2856,7 @@
       "mit dem Rückzug der Deutschen aus den besetzten Gebieten",
       "durch eine Revolution in Deutschland"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -2712,7 +2872,7 @@
       "Konrad Adenauer.",
       "Gerhard Schröder."
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -2728,7 +2888,7 @@
       "Er zeigte seine Demut vor dem Warschauer Pakt.",
       "Er sprach ein Gebet am Grab des Unbekannten Soldaten."
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -2744,7 +2904,7 @@
       "CDU und FDP",
       "KPD und CSU"
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -2760,7 +2920,7 @@
       "70er Jahre",
       "80er Jahre"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -2776,7 +2936,7 @@
       "Darunter verstand man das Ende des Zweiten Weltkrieges und den Beginn des Wiederaufbaus.",
       "Damit ist die Stunde gemeint, in der die Uhr von der Sommerzeit auf die Winterzeit umgestellt wird."
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -2792,7 +2952,23 @@
       "Nazi-Deutschlands gegen die Alliierten.",
       "Europas gegen die USA."
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
+    "explanation": "",
+    "category": "Bundesweit",
+    "difficulty": "mittel",
+    "hasImage": false,
+    "imagePath": null
+  },
+  {
+    "questionNumber": 186,
+    "text": "Im Jahr 1953 gab es in der DDR einen Aufstand, an den lange Zeit in der Bundesrepublik Deutschland ein Feiertag erinnerte. Wann war das?",
+    "answers": [
+      "1. Mai",
+      "17. Juni",
+      "20. Juli",
+      "9. November"
+    ],
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -2808,12 +2984,44 @@
       "DDR",
       "„Drittes Reich“"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
     "hasImage": true,
     "imagePath": "Frage 187_1751145105597.png"
+  },
+  {
+    "questionNumber": 188,
+    "text": "In welchem Jahr wurde die Mauer in Berlin gebaut?",
+    "answers": [
+      "1953",
+      "1956",
+      "1959",
+      "1961"
+    ],
+    "correctAnswer": 4,
+    "explanation": "",
+    "category": "Bundesweit",
+    "difficulty": "mittel",
+    "hasImage": false,
+    "imagePath": null
+  },
+  {
+    "questionNumber": 189,
+    "text": "Wann baute die DDR die Mauer in Berlin?",
+    "answers": [
+      "1919",
+      "1933",
+      "1961",
+      "1990"
+    ],
+    "correctAnswer": 3,
+    "explanation": "",
+    "category": "Bundesweit",
+    "difficulty": "mittel",
+    "hasImage": false,
+    "imagePath": null
   },
   {
     "questionNumber": 190,
@@ -2824,7 +3032,23 @@
       "Dritte Deutsche Republik",
       "Deutsche Demokratische Republik"
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
+    "explanation": "",
+    "category": "Bundesweit",
+    "difficulty": "mittel",
+    "hasImage": false,
+    "imagePath": null
+  },
+  {
+    "questionNumber": 191,
+    "text": "Wann wurde die Mauer in Berlin für alle geöffnet?",
+    "answers": [
+      "1987",
+      "1989",
+      "1992",
+      "1995"
+    ],
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -2840,7 +3064,7 @@
       "Saarland",
       "Hessen"
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -2856,7 +3080,7 @@
       "durch eine Mauer geteilt.",
       "nur mit dem Flugzeug erreichbar."
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -2872,7 +3096,7 @@
       "Bundesländer.",
       "Städte."
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -2888,7 +3112,7 @@
       "Nordrhein-Westfalen",
       "Saarland"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -2904,7 +3128,7 @@
       "von einer Monarchie zur Sozialdemokratie.",
       "von einem religiösen Staat zu einem kommunistischen Staat."
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -2920,7 +3144,7 @@
       "Bayern",
       "Bremen"
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -2936,7 +3160,7 @@
       "Sachsen",
       "Baden-Württemberg"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -2952,7 +3176,7 @@
       "eine regierende Partei.",
       "das Ministerium für Volksbildung."
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -2968,7 +3192,7 @@
       "Mecklenburg-Vorpommern",
       "Saarland"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -2984,7 +3208,7 @@
       "Bayern, Baden-Württemberg, Rheinland-Pfalz, Thüringen, Sachsen",
       "Sachsen, Thüringen, Hessen, Niedersachsen, Brandenburg"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -3000,7 +3224,7 @@
       "zur NATO",
       "zu den blockfreien Staaten"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -3016,7 +3240,7 @@
       "Angebot und Nachfrage",
       "Kapitalismus"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -3032,7 +3256,7 @@
       "Die westlichen Bundesländer sind der DDR beigetreten.",
       "Die DDR hat die Bundesrepublik Deutschland besetzt."
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -3048,7 +3272,7 @@
       "zur OPEC.",
       "zur Europäischen Verteidigungsgemeinschaft."
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -3064,7 +3288,7 @@
       "Am ersten Montag im Monat trafen sich in der Bundesrepublik Deutschland Demonstranten.",
       "Montags demonstrierte man in der DDR gegen den Westen."
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -3080,7 +3304,7 @@
       "im Warschauer Pakt",
       "im Europabündnis"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -3096,12 +3320,28 @@
       "der Geheimdienst der DDR",
       "ein deutscher Sportverein während des Zweiten Weltkrieges"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
     "hasImage": false,
     "imagePath": null
+  },
+  {
+    "questionNumber": 209,
+    "text": "Welches war das Wappen der Deutschen Demokratischen Republik?",
+    "answers": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "correctAnswer": 1,
+    "explanation": "",
+    "category": "Bundesweit",
+    "difficulty": "mittel",
+    "hasImage": true,
+    "imagePath": "Frage 209_1751145105597.png"
   },
   {
     "questionNumber": 210,
@@ -3112,7 +3352,7 @@
       "der 1. SED-Parteitag",
       "der erste Besuch Fidel Castros"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -3128,7 +3368,7 @@
       "Michail Gorbatschow",
       "Ludwig Erhard"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -3144,7 +3384,7 @@
       "Bundesrepublik Deutschland",
       "Bundesbezirk Deutschland"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -3160,7 +3400,7 @@
       "80 Millionen",
       "90 Millionen"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -3176,7 +3416,7 @@
       "schwarz-rot-grün",
       "schwarz-gelb-rot"
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -3192,7 +3432,7 @@
       "Konrad Adenauer",
       "Helmut Schmidt"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -3208,7 +3448,7 @@
       "der Reichsadler.",
       "die Reichskrone."
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -3223,6 +3463,22 @@
       "1933 bis 1945",
       "1949 bis 1990",
       "1945 bis 1961"
+    ],
+    "correctAnswer": 3,
+    "explanation": "",
+    "category": "Bundesweit",
+    "difficulty": "mittel",
+    "hasImage": false,
+    "imagePath": null
+  },
+  {
+    "questionNumber": 218,
+    "text": "Wie viele Bundesländer kamen bei der Wiedervereinigung 1990 zur Bundesrepublik Deutschland hinzu?",
+    "answers": [
+      "4",
+      "5",
+      "6",
+      "7"
     ],
     "correctAnswer": 2,
     "explanation": "",
@@ -3240,7 +3496,7 @@
       "1971.",
       "1990."
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -3256,7 +3512,7 @@
       "an die Wiedervereinigung Deutschlands",
       "an die Opfer des Nationalsozialismus"
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -3267,12 +3523,12 @@
     "questionNumber": 221,
     "text": "Deutschland ist Mitglied des Schengener Abkommens. Was bedeutet das?",
     "answers": [
-      "Deutsche können in viele Länder Europas ohne Passkontrolle reisen.\r",
+      "Deutsche können in viele Länder Europas ohne Passkontrolle reisen.",
       "Alle Menschen können ohne Personenkontrolle in Deutschland einreisen.",
       "Deutsche können ohne Passkontrolle in jedes Land reisen.",
       "Deutsche können in jedem Land mit dem Euro bezahlen."
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -3288,7 +3544,7 @@
       "Spanien",
       "Schweiz"
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -3304,7 +3560,7 @@
       "Polen",
       "Griechenland"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -3320,7 +3576,7 @@
       "Einheitliche Union",
       "Euro Union"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -3336,7 +3592,23 @@
       "Spanien",
       "Österreich"
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
+    "explanation": "",
+    "category": "Bundesweit",
+    "difficulty": "mittel",
+    "hasImage": false,
+    "imagePath": null
+  },
+  {
+    "questionNumber": 226,
+    "text": "Welche ist die Flagge der Europäischen Union?",
+    "answers": [
+      "2",
+      "1",
+      "4",
+      "3"
+    ],
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -3352,7 +3624,7 @@
       "Norwegen",
       "Schweden"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -3368,7 +3640,7 @@
       "Europäische Gemeinschaft",
       "Europäische Gemeinschaft"
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -3384,7 +3656,7 @@
       "Norwegen",
       "Luxemburg"
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -3400,7 +3672,7 @@
       "7 Jahre.",
       "8 Jahre."
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -3416,7 +3688,7 @@
       "Damit sind europäische Auswanderer in den USA gemeint.",
       "Der Begriff meint den Zusammenschluss europäischer Staaten zur EU."
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -3432,7 +3704,7 @@
       "die europäische Verfassung",
       "die Abgeordneten des Europäischen Parlaments"
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -3448,7 +3720,7 @@
       "Griechenland",
       "Portugal"
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -3464,7 +3736,7 @@
       "Berlin",
       "Straßburg"
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -3480,12 +3752,28 @@
       "Frieden und Sicherheit in den Ländern der EU",
       "einheitliche Feiertage in den Ländern der EU"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
     "hasImage": true,
     "imagePath": "Frage 235_1751145105597.png"
+  },
+  {
+    "questionNumber": 236,
+    "text": "Wie viele Mitgliedstaaten hat die EU heute?",
+    "answers": [
+      "21",
+      "23",
+      "25",
+      "27"
+    ],
+    "correctAnswer": 4,
+    "explanation": "",
+    "category": "Bundesweit",
+    "difficulty": "mittel",
+    "hasImage": false,
+    "imagePath": null
   },
   {
     "questionNumber": 237,
@@ -3496,7 +3784,7 @@
       "Verpflichtung Deutschlands zu Reparationsleistungen",
       "Festlegung der Oder-Neiße-Linie als Ostgrenze"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -3512,7 +3800,7 @@
       "Rom, Bern und Wien",
       "Bonn, Zürich und Mailand"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -3528,7 +3816,23 @@
       "durch die „Pariser Verträge“",
       "durch die „Londoner Verträge“"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
+    "explanation": "",
+    "category": "Bundesweit",
+    "difficulty": "mittel",
+    "hasImage": false,
+    "imagePath": null
+  },
+  {
+    "questionNumber": 240,
+    "text": "Seit wann bezahlt man in Deutschland mit dem Euro in bar?",
+    "answers": [
+      "1995",
+      "1998",
+      "2002",
+      "2005"
+    ],
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -3544,7 +3848,7 @@
       "Sie muss einen Antrag bei der Elterngeldstelle stellen.",
       "Sie muss das Arbeitsamt um Erlaubnis bitten."
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -3560,7 +3864,7 @@
       "die Eltern / die Erziehungsberechtigten",
       "die Schulen"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -3576,7 +3880,7 @@
       "Sie können gar nichts tun, denn Demonstrationen sind in Deutschland grundsätzlich verboten.",
       "Maik und Sybille müssen einen neuen Verein gründen, weil nur Vereine demonstrieren dürfen."
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -3592,7 +3896,7 @@
       "die Prokura",
       "eine Gesellenprüfung"
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -3608,7 +3912,23 @@
       "Sofie (35 Jahre) und Lisa (40 Jahre)",
       "Anne (13 Jahre) und Tim (25 Jahre)"
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
+    "explanation": "",
+    "category": "Bundesweit",
+    "difficulty": "mittel",
+    "hasImage": false,
+    "imagePath": null
+  },
+  {
+    "questionNumber": 246,
+    "text": "Ab welchem Alter ist man in Deutschland volljährig?",
+    "answers": [
+      "16",
+      "18",
+      "19",
+      "21"
+    ],
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -3624,7 +3944,7 @@
       "Mutterschutz",
       "Wochenbett"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -3640,7 +3960,7 @@
       "der Großeltern.",
       "der Schulen."
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -3656,7 +3976,7 @@
       "die Verwandten",
       "die Schulen"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -3672,7 +3992,7 @@
       "eine Frau ist.",
       "Mitglied einer Partei ist."
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -3688,7 +4008,7 @@
       "kann man dafür nicht bestraft werden.",
       "kann man dafür bestraft werden."
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -3704,7 +4024,7 @@
       "darf man nicht wieder heiraten, wenn man einmal verheiratet war.",
       "darf eine Frau nicht wieder heiraten, wenn ihr Mann gestorben ist."
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -3720,7 +4040,7 @@
       "beim Ordnungsamt",
       "beim Gewerbeamt"
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -3736,7 +4056,7 @@
       "Das Besuchsrecht für die Kinder gilt ein Jahr.",
       "Mann und Frau führen mindestens ein Jahr getrennt ihr eigenes Leben. Danach ist die Scheidung möglich."
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -3752,7 +4072,7 @@
       "Jugendamt.",
       "Gesundheitsamt."
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -3768,7 +4088,7 @@
       "eine Genehmigung des Einwohnermeldeamts",
       "eine Gaststättenerlaubnis von der zuständigen Behörde"
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -3784,7 +4104,7 @@
       "einer Hauptschule.",
       "einer Privatuniversität."
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -3800,7 +4120,7 @@
       "Es bezahlt das Kindergeld an die Eltern.",
       "Es kontrolliert, ob das Kind einen Kindergarten besucht."
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -3816,7 +4136,7 @@
       "Steuererklärung.",
       "Krankenversicherung."
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -3832,7 +4152,7 @@
       "Anspruch auf Schulgeld.",
       "Anwesenheitspflicht."
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -3848,7 +4168,7 @@
       "einer Hauptschule",
       "einer Privatuniversität"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -3864,7 +4184,7 @@
       "Niemand darf gegen Personen klagen, wenn sie benachteiligt wurden.",
       "Es ist für alle Gesetz, benachteiligten Gruppen jährlich Geld zu spenden."
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -3880,7 +4200,7 @@
       "teilen die Strafe mit ihren Eltern.",
       "werden nicht bestraft."
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -3896,7 +4216,7 @@
       "beim Oktoberfest",
       "an Pfingsten"
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -3912,7 +4232,7 @@
       "zur Agentur für Arbeit",
       "zum Standesamt"
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -3928,7 +4248,7 @@
       "wenn die Nachbarn schlafen gehen",
       "um 0 Uhr, Mitternacht"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -3944,7 +4264,7 @@
       "Sie können zur Polizei gehen und die Tochter anzeigen.",
       "Sie suchen einen anderen Mann für die Tochter."
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -3960,7 +4280,7 @@
       "Wenn sie kein Deutsch kann, darf sie keinen Führerschein haben.",
       "Sie muss den Führerschein in dem Land machen, in dem man ihre Sprache spricht."
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -3976,7 +4296,7 @@
       "einen Platz in einem Sportverein.",
       "einen Ferienpass."
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -3992,7 +4312,7 @@
       "zur Weiterbildung.",
       "nur für Rentner und Rentnerinnen."
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -4008,7 +4328,7 @@
       "sich mit Masken und Kostümen verkleiden",
       "Kürbisse vor die Tür stellen"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -4019,12 +4339,12 @@
     "questionNumber": 272,
     "text": "Welche Lebensform ist in Deutschland nicht erlaubt?",
     "answers": [
-      "Mann und Frau sind geschieden und leben mit neuen Partnern zusammen.\r",
+      "Mann und Frau sind geschieden und leben mit neuen Partnern zusammen.",
       "Zwei Frauen leben zusammen.",
       "Ein alleinerziehender Vater lebt mit seinen zwei Kindern zusammen.",
       "Ein Mann ist mit zwei Frauen zur selben Zeit verheiratet."
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -4040,7 +4360,7 @@
       "zum Einwohnermeldeamt.",
       "zum Jugendamt."
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -4056,7 +4376,7 @@
       "die Schweigepflicht",
       "die Meinungsfreiheit"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -4072,7 +4392,7 @@
       "die Einwilligung der Kinder",
       "die Unterstützung eines Anwalts / einer Anwältin"
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -4088,7 +4408,7 @@
       "Ich drohe der Person.",
       "Ich kann mich beim Behördenleiter / bei der Behördenleiterin beschweren."
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -4104,7 +4424,7 @@
       "keine Erfahrungen in diesem Beruf hat.",
       "Mutter ist."
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -4120,7 +4440,7 @@
       "zu hohe Gehaltsvorstellungen hat.",
       "kein Englisch spricht."
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -4136,7 +4456,7 @@
       "Regeln, an die sich alle Bewohner und Bewohnerinnen halten müssen.",
       "die Adresse des nächsten Ordnungsamtes."
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -4152,7 +4472,7 @@
       "Einspruch einlegen.",
       "warten, bis ein anderer Bescheid kommt."
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -4168,7 +4488,7 @@
       "Versammlungsfreiheit",
       "Freizügigkeit"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -4184,7 +4504,7 @@
       "Wahlhelfer / Wahlhelferin",
       "Lehrer / Lehrerin"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -4200,7 +4520,7 @@
       "Ich schicke die Rechnung an die Behörde zurück.",
       "Ich gehe mit der Rechnung zum Finanzamt."
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -4216,7 +4536,7 @@
       "Erwachsene müssen auch nach der Ausbildung immer weiter lernen.",
       "Alle müssen früher aufhören zu arbeiten, weil sich alles ändert."
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -4232,7 +4552,7 @@
       "Beiträge zur Arbeitslosenversicherung",
       "Beiträge zur Renten- und Krankenversicherung"
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -4248,7 +4568,7 @@
       "die Betriebsgruppe",
       "das Betriebsmanagement"
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -4264,7 +4584,7 @@
       "die Kündigungsfrist",
       "die Versicherungspflicht"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -4280,7 +4600,7 @@
       "bei der Kommune (Stadt oder Gemeinde)",
       "beim Gesundheitsamt"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -4296,7 +4616,7 @@
       "er eine dunkle Haut hat.",
       "er keine Erfahrungen im Beruf hat."
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -4312,7 +4632,7 @@
       "das Gerät ungefragt austauschen",
       "die Garantie verlängern"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -4328,7 +4648,7 @@
       "man mehr Steuern zahlen muss, wenn man nicht zu einer Kirche gehört.",
       "die Kirche für die Steuererklärung verantwortlich ist."
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -4344,7 +4664,7 @@
       "Jeder kann glauben, was er möchte.",
       "Der Staat entscheidet, an welchen Gott die Menschen glauben."
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -4360,7 +4680,7 @@
       "Eier bemalen",
       "Raketen in die Luft schießen"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -4376,7 +4696,7 @@
       "internationaler Trauertag.",
       "bayerischer Brauch."
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -4389,10 +4709,10 @@
     "answers": [
       "der Hinduismus",
       "das Christentum",
-      "der Buddhismus\r",
+      "der Buddhismus",
       "der Islam"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -4408,7 +4728,7 @@
       "die Adventszeit.",
       "Allerheiligen."
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -4424,7 +4744,7 @@
       "Marokko",
       "Türkei"
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -4440,7 +4760,7 @@
       "Chile, Ungarn, Simbabwe.",
       "Nordkorea, Mexiko, Ägypten."
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -4456,7 +4776,7 @@
       "Zeitarbeiter / Zeitarbeiterinnen",
       "Schichtarbeiter / Schichtarbeiterinnen"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
@@ -4472,12 +4792,28 @@
       "Portugal",
       "Türkei"
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Bundesweit",
     "difficulty": "mittel",
     "hasImage": false,
     "imagePath": null
+  },
+  {
+    "questionNumber": 1,
+    "text": "Welches Wappen gehört zum Bundesland Baden-Württemberg?",
+    "answers": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "correctAnswer": 1,
+    "explanation": "",
+    "category": "Baden-Württemberg",
+    "difficulty": "mittel",
+    "hasImage": true,
+    "imagePath": "Frage 301 BW_1751220630143.png"
   },
   {
     "questionNumber": 2,
@@ -4488,7 +4824,39 @@
       "Nordfriesland",
       "Altötting"
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
+    "explanation": "",
+    "category": "Baden-Württemberg",
+    "difficulty": "mittel",
+    "hasImage": false,
+    "imagePath": null
+  },
+  {
+    "questionNumber": 3,
+    "text": "Für wie viele Jahre wird der Landtag in Baden-Württemberg gewählt?",
+    "answers": [
+      "3",
+      "4",
+      "5",
+      "6"
+    ],
+    "correctAnswer": 3,
+    "explanation": "",
+    "category": "Baden-Württemberg",
+    "difficulty": "mittel",
+    "hasImage": false,
+    "imagePath": null
+  },
+  {
+    "questionNumber": 4,
+    "text": "Ab welchem Alter darf man in Baden-Württemberg bei Kommunalwahlen wählen?",
+    "answers": [
+      "14",
+      "16",
+      "18",
+      "20"
+    ],
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Baden-Württemberg",
     "difficulty": "mittel",
@@ -4504,7 +4872,7 @@
       "weiß-blau",
       "grün-weiß-rot"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Baden-Württemberg",
     "difficulty": "mittel",
@@ -4520,7 +4888,7 @@
       "bei der Landeszentrale für politische Bildung",
       "bei den Kirchen"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Baden-Württemberg",
     "difficulty": "mittel",
@@ -4536,12 +4904,28 @@
       "Karlsruhe.",
       "Mannheim."
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Baden-Württemberg",
     "difficulty": "mittel",
     "hasImage": false,
     "imagePath": null
+  },
+  {
+    "questionNumber": 8,
+    "text": "Welches Bundesland ist Baden-Württemberg?",
+    "answers": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "correctAnswer": 2,
+    "explanation": "",
+    "category": "Baden-Württemberg",
+    "difficulty": "mittel",
+    "hasImage": true,
+    "imagePath": "Frage 308 BW_1751220630143.png"
   },
   {
     "questionNumber": 9,
@@ -4552,7 +4936,7 @@
       "Bürgermeister / Bürgermeisterin",
       "Ministerpräsident / Ministerpräsidentin"
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Baden-Württemberg",
     "difficulty": "mittel",
@@ -4568,12 +4952,28 @@
       "Innenminister / Innenministerin",
       "Außenminister / Außenministerin"
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Baden-Württemberg",
     "difficulty": "mittel",
     "hasImage": false,
     "imagePath": null
+  },
+  {
+    "questionNumber": 1,
+    "text": "Welches Wappen gehört zum Freistaat Bayern?",
+    "answers": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "correctAnswer": 2,
+    "explanation": "",
+    "category": "Bayern",
+    "difficulty": "mittel",
+    "hasImage": true,
+    "imagePath": "Frage 301 Bayern_1751220678919.png"
   },
   {
     "questionNumber": 2,
@@ -4583,6 +4983,38 @@
       "Rhein-Sieg-Kreis",
       "Nordfriesland",
       "Altötting"
+    ],
+    "correctAnswer": 4,
+    "explanation": "",
+    "category": "Bayern",
+    "difficulty": "mittel",
+    "hasImage": false,
+    "imagePath": null
+  },
+  {
+    "questionNumber": 3,
+    "text": "Für wie viele Jahre wird der Landtag in Bayern gewählt?",
+    "answers": [
+      "3",
+      "4",
+      "5",
+      "6"
+    ],
+    "correctAnswer": 3,
+    "explanation": "",
+    "category": "Bayern",
+    "difficulty": "mittel",
+    "hasImage": false,
+    "imagePath": null
+  },
+  {
+    "questionNumber": 4,
+    "text": "Ab welchem Alter darf man in Bayern bei Kommunalwahlen wählen?",
+    "answers": [
+      "14",
+      "16",
+      "18",
+      "20"
     ],
     "correctAnswer": 3,
     "explanation": "",
@@ -4600,7 +5032,7 @@
       "grün-weiß-rot",
       "schwarz-gelb"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bayern",
     "difficulty": "mittel",
@@ -4616,7 +5048,7 @@
       "bei der Verbraucherzentrale",
       "bei den Kirchen"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bayern",
     "difficulty": "mittel",
@@ -4632,12 +5064,28 @@
       "Nürnberg.",
       "München."
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Bayern",
     "difficulty": "mittel",
     "hasImage": false,
     "imagePath": null
+  },
+  {
+    "questionNumber": 8,
+    "text": "Welches Bundesland ist Bayern?",
+    "answers": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "correctAnswer": 4,
+    "explanation": "",
+    "category": "Bayern",
+    "difficulty": "mittel",
+    "hasImage": true,
+    "imagePath": "Frage 308 Bayern_1751220678919.png"
   },
   {
     "questionNumber": 9,
@@ -4648,7 +5096,7 @@
       "Bürgermeister / Bürgermeisterin",
       "Ministerpräsident / Ministerpräsidentin"
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Bayern",
     "difficulty": "mittel",
@@ -4664,12 +5112,28 @@
       "Finanzminister / Finanzministerin",
       "Innenminister / Innenministerin"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bayern",
     "difficulty": "mittel",
     "hasImage": false,
     "imagePath": null
+  },
+  {
+    "questionNumber": 1,
+    "text": "Welches Wappen gehört zum Bundesland Berlin?",
+    "answers": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "correctAnswer": 4,
+    "explanation": "",
+    "category": "Berlin",
+    "difficulty": "mittel",
+    "hasImage": true,
+    "imagePath": "Frage 301 Berlin_1751222092241.png"
   },
   {
     "questionNumber": 2,
@@ -4679,6 +5143,38 @@
       "Prignitz",
       "Pankow",
       "Demmin"
+    ],
+    "correctAnswer": 3,
+    "explanation": "",
+    "category": "Berlin",
+    "difficulty": "mittel",
+    "hasImage": false,
+    "imagePath": null
+  },
+  {
+    "questionNumber": 3,
+    "text": "Für wie viele Jahre wird das Landesparlament in Berlin gewählt?",
+    "answers": [
+      "3",
+      "4",
+      "5",
+      "6"
+    ],
+    "correctAnswer": 3,
+    "explanation": "",
+    "category": "Berlin",
+    "difficulty": "mittel",
+    "hasImage": false,
+    "imagePath": null
+  },
+  {
+    "questionNumber": 4,
+    "text": "Ab welchem Alter darf man in Berlin bei Kommunalwahlen (Wahl der Bezirksverordnetenversammlung) wählen?",
+    "answers": [
+      "14",
+      "16",
+      "18",
+      "20"
     ],
     "correctAnswer": 2,
     "explanation": "",
@@ -4696,7 +5192,7 @@
       "grün-weiß-rot",
       "schwarz-gold"
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Berlin",
     "difficulty": "mittel",
@@ -4712,7 +5208,7 @@
       "bei der Verbraucherzentrale",
       "bei der Landeszentrale für politische Bildung"
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Berlin",
     "difficulty": "mittel",
@@ -4728,12 +5224,28 @@
       "Brandenburg",
       "Hessen"
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Berlin",
     "difficulty": "mittel",
     "hasImage": false,
     "imagePath": null
+  },
+  {
+    "questionNumber": 8,
+    "text": "Welches Bundesland ist Berlin?",
+    "answers": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "correctAnswer": 4,
+    "explanation": "",
+    "category": "Berlin",
+    "difficulty": "mittel",
+    "hasImage": true,
+    "imagePath": "Frage 308 Berlin_1751222092241.png"
   },
   {
     "questionNumber": 9,
@@ -4744,7 +5256,7 @@
       "Präsident / Präsidentin des Senats",
       "Regierender Bürgermeister / Regierende Bürgermeisterin"
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Berlin",
     "difficulty": "mittel",
@@ -4760,12 +5272,28 @@
       "Senator / Senatorin für Außenbeziehungen",
       "Justizsenator / Justizsenatorin"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Berlin",
     "difficulty": "mittel",
     "hasImage": false,
     "imagePath": null
+  },
+  {
+    "questionNumber": 1,
+    "text": "Welches Wappen gehört zum Bundesland Brandenburg?",
+    "answers": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "correctAnswer": 1,
+    "explanation": "",
+    "category": "Brandenburg",
+    "difficulty": "mittel",
+    "hasImage": true,
+    "imagePath": "Frage 301 Brandenburg_1751222152584.png"
   },
   {
     "questionNumber": 2,
@@ -4776,7 +5304,39 @@
       "Vogtlandkreis",
       "Amberg-Sulzbach"
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
+    "explanation": "",
+    "category": "Brandenburg",
+    "difficulty": "mittel",
+    "hasImage": false,
+    "imagePath": null
+  },
+  {
+    "questionNumber": 3,
+    "text": "Für wie viele Jahre wird der Landtag in Brandenburg gewählt?",
+    "answers": [
+      "3",
+      "4",
+      "5",
+      "6"
+    ],
+    "correctAnswer": 3,
+    "explanation": "",
+    "category": "Brandenburg",
+    "difficulty": "mittel",
+    "hasImage": false,
+    "imagePath": null
+  },
+  {
+    "questionNumber": 4,
+    "text": "Ab welchem Alter darf man in Brandenburg bei Kommunalwahlen wählen?",
+    "answers": [
+      "14",
+      "18",
+      "16",
+      "20"
+    ],
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Brandenburg",
     "difficulty": "mittel",
@@ -4792,7 +5352,7 @@
       "grün-weiß-rot",
       "schwarz-gelb"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Brandenburg",
     "difficulty": "mittel",
@@ -4808,7 +5368,7 @@
       "bei der Landeszentrale für politische Bildung",
       "bei der Verbraucherzentrale"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Brandenburg",
     "difficulty": "mittel",
@@ -4824,12 +5384,28 @@
       "Brandenburg.",
       "Frankfurt/Oder."
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Brandenburg",
     "difficulty": "mittel",
     "hasImage": false,
     "imagePath": null
+  },
+  {
+    "questionNumber": 8,
+    "text": "Welches Bundesland ist Brandenburg?",
+    "answers": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "correctAnswer": 4,
+    "explanation": "",
+    "category": "Brandenburg",
+    "difficulty": "mittel",
+    "hasImage": true,
+    "imagePath": "Frage 308 Brandenburg_1751222152584.png"
   },
   {
     "questionNumber": 9,
@@ -4840,7 +5416,7 @@
       "Bürgermeister / Bürgermeisterin",
       "Ministerpräsident / Ministerpräsidentin"
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Brandenburg",
     "difficulty": "mittel",
@@ -4856,12 +5432,28 @@
       "Finanzminister / Finanzministerin",
       "Innenminister / Innenministerin"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Brandenburg",
     "difficulty": "mittel",
     "hasImage": false,
     "imagePath": null
+  },
+  {
+    "questionNumber": 1,
+    "text": "Welches Wappen gehört zur Freien Hansestadt Bremen?",
+    "answers": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "correctAnswer": 3,
+    "explanation": "",
+    "category": "Bremen",
+    "difficulty": "mittel",
+    "hasImage": true,
+    "imagePath": "Frage 301 Bremen_1751222229189.png"
   },
   {
     "questionNumber": 2,
@@ -4872,7 +5464,39 @@
       "Pankow",
       "Babelsberg"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
+    "explanation": "",
+    "category": "Bremen",
+    "difficulty": "mittel",
+    "hasImage": false,
+    "imagePath": null
+  },
+  {
+    "questionNumber": 3,
+    "text": "Für wie viele Jahre wird das Landesparlament in Bremen gewählt?",
+    "answers": [
+      "3",
+      "4",
+      "5",
+      "6"
+    ],
+    "correctAnswer": 2,
+    "explanation": "",
+    "category": "Bremen",
+    "difficulty": "mittel",
+    "hasImage": false,
+    "imagePath": null
+  },
+  {
+    "questionNumber": 4,
+    "text": "Ab welchem Alter darf man in Bremen bei den Wahlen zur Bürgerschaft (Landtag) wählen?",
+    "answers": [
+      "14",
+      "16",
+      "18",
+      "20"
+    ],
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bremen",
     "difficulty": "mittel",
@@ -4888,7 +5512,7 @@
       "grün-weiß-rot",
       "schwarz-gold"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bremen",
     "difficulty": "mittel",
@@ -4904,7 +5528,7 @@
       "bei den Kirchen",
       "bei der Verbraucherzentrale"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bremen",
     "difficulty": "mittel",
@@ -4920,12 +5544,28 @@
       "Frankfurt",
       "Erfurt"
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Bremen",
     "difficulty": "mittel",
     "hasImage": false,
     "imagePath": null
+  },
+  {
+    "questionNumber": 8,
+    "text": "Welches Bundesland ist Bremen?",
+    "answers": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "correctAnswer": 1,
+    "explanation": "",
+    "category": "Bremen",
+    "difficulty": "mittel",
+    "hasImage": true,
+    "imagePath": "Frage 308 Bremen_1751222229189.png"
   },
   {
     "questionNumber": 9,
@@ -4936,7 +5576,7 @@
       "Präsident / Präsidentin des Senats",
       "Regierender Bürgermeister / Regierende Bürgermeisterin"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Bremen",
     "difficulty": "mittel",
@@ -4952,12 +5592,28 @@
       "Justizsenator / Justizsenatorin",
       "Innensenator / Innensenatorin"
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Bremen",
     "difficulty": "mittel",
     "hasImage": false,
     "imagePath": null
+  },
+  {
+    "questionNumber": 1,
+    "text": "Welches Wappen gehört zur Freien und Hansestadt Hamburg?",
+    "answers": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "correctAnswer": 2,
+    "explanation": "",
+    "category": "Hamburg",
+    "difficulty": "mittel",
+    "hasImage": true,
+    "imagePath": "Frage 301 Hamburg_1751714334363.png"
   },
   {
     "questionNumber": 2,
@@ -4968,7 +5624,39 @@
       "Pankow",
       "Demmin"
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
+    "explanation": "",
+    "category": "Hamburg",
+    "difficulty": "mittel",
+    "hasImage": false,
+    "imagePath": null
+  },
+  {
+    "questionNumber": 3,
+    "text": "Für wie viele Jahre wird das Landesparlament in Hamburg gewählt?",
+    "answers": [
+      "3",
+      "4",
+      "5",
+      "6"
+    ],
+    "correctAnswer": 3,
+    "explanation": "",
+    "category": "Hamburg",
+    "difficulty": "mittel",
+    "hasImage": false,
+    "imagePath": null
+  },
+  {
+    "questionNumber": 4,
+    "text": "Ab welchem Alter darf man in Hamburg bei Kommunalwahlen (Wahl der Bezirksversammlungen) wählen?",
+    "answers": [
+      "14",
+      "16",
+      "18",
+      "20"
+    ],
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Hamburg",
     "difficulty": "mittel",
@@ -4984,7 +5672,7 @@
       "grün-weiß-rot",
       "schwarz-gelb"
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Hamburg",
     "difficulty": "mittel",
@@ -5000,7 +5688,7 @@
       "bei den Kirchen",
       "bei der Landeszentrale für politische Bildung"
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Hamburg",
     "difficulty": "mittel",
@@ -5016,12 +5704,28 @@
       "Bayern",
       "Thüringen"
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Hamburg",
     "difficulty": "mittel",
     "hasImage": false,
     "imagePath": null
+  },
+  {
+    "questionNumber": 8,
+    "text": "Welches Bundesland ist Hamburg?",
+    "answers": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "correctAnswer": 3,
+    "explanation": "",
+    "category": "Hamburg",
+    "difficulty": "mittel",
+    "hasImage": true,
+    "imagePath": "Fragen 308 Hamburg_1751714334363.png"
   },
   {
     "questionNumber": 9,
@@ -5032,7 +5736,7 @@
       "Regierender Senator / Regierende Senatorin",
       "Oberbürgermeister / Oberbürgermeisterin"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Hamburg",
     "difficulty": "mittel",
@@ -5048,12 +5752,28 @@
       "Finanzsenator / Finanzsenatorin",
       "Innensenator / Innensenatorin"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Hamburg",
     "difficulty": "mittel",
     "hasImage": false,
     "imagePath": null
+  },
+  {
+    "questionNumber": 1,
+    "text": "Welches Wappen gehört zum Bundesland Hessen?",
+    "answers": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "correctAnswer": 1,
+    "explanation": "",
+    "category": "Hessen",
+    "difficulty": "mittel",
+    "hasImage": true,
+    "imagePath": "Frage 301 Hessen_1751714550040.png"
   },
   {
     "questionNumber": 2,
@@ -5063,6 +5783,38 @@
       "Altötting",
       "Prignitz",
       "Main-Taunus-Kreis"
+    ],
+    "correctAnswer": 4,
+    "explanation": "",
+    "category": "Hessen",
+    "difficulty": "mittel",
+    "hasImage": false,
+    "imagePath": null
+  },
+  {
+    "questionNumber": 3,
+    "text": "Für wie viele Jahre wird der Landtag in Hessen gewählt?",
+    "answers": [
+      "3",
+      "4",
+      "5",
+      "6"
+    ],
+    "correctAnswer": 3,
+    "explanation": "",
+    "category": "Hessen",
+    "difficulty": "mittel",
+    "hasImage": false,
+    "imagePath": null
+  },
+  {
+    "questionNumber": 4,
+    "text": "Ab welchem Alter darf man in Hessen bei Kommunalwahlen wählen?",
+    "answers": [
+      "14",
+      "16",
+      "18",
+      "20"
     ],
     "correctAnswer": 3,
     "explanation": "",
@@ -5080,7 +5832,7 @@
       "schwarz-gold",
       "grün-weiß-rot"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Hessen",
     "difficulty": "mittel",
@@ -5096,7 +5848,7 @@
       "beim Ordnungsamt der Gemeinde",
       "bei den Kirchen"
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Hessen",
     "difficulty": "mittel",
@@ -5112,12 +5864,28 @@
       "Frankfurt.",
       "Wiesbaden."
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Hessen",
     "difficulty": "mittel",
     "hasImage": false,
     "imagePath": null
+  },
+  {
+    "questionNumber": 8,
+    "text": "Welches Bundesland ist Hessen?",
+    "answers": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "correctAnswer": 3,
+    "explanation": "",
+    "category": "Hessen",
+    "difficulty": "mittel",
+    "hasImage": true,
+    "imagePath": "Frage 308 Hessen_1751714550040.png"
   },
   {
     "questionNumber": 9,
@@ -5128,7 +5896,7 @@
       "Bürgermeister / Bürgermeisterin",
       "Ministerpräsident / Ministerpräsidentin"
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Hessen",
     "difficulty": "mittel",
@@ -5144,12 +5912,28 @@
       "Finanzminister / Finanzministerin",
       "Innenminister / Innenministerin"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Hessen",
     "difficulty": "mittel",
     "hasImage": false,
     "imagePath": null
+  },
+  {
+    "questionNumber": 1,
+    "text": "Welches Wappen gehört zum Bundesland Mecklenburg-Vorpommern?",
+    "answers": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "correctAnswer": 3,
+    "explanation": "",
+    "category": "Mecklenburg-Vorpommern",
+    "difficulty": "mittel",
+    "hasImage": true,
+    "imagePath": "Frage 301 MV_1751714641063.png"
   },
   {
     "questionNumber": 2,
@@ -5160,7 +5944,39 @@
       "Vogtlandkreis",
       "Rhein-Sieg-Kreis"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
+    "explanation": "",
+    "category": "Mecklenburg-Vorpommern",
+    "difficulty": "mittel",
+    "hasImage": false,
+    "imagePath": null
+  },
+  {
+    "questionNumber": 3,
+    "text": "Für wie viele Jahre wird der Landtag in Mecklenburg-Vorpommern gewählt?",
+    "answers": [
+      "3",
+      "4",
+      "5",
+      "6"
+    ],
+    "correctAnswer": 3,
+    "explanation": "",
+    "category": "Mecklenburg-Vorpommern",
+    "difficulty": "mittel",
+    "hasImage": false,
+    "imagePath": null
+  },
+  {
+    "questionNumber": 4,
+    "text": "Ab welchem Alter darf man in Mecklenburg-Vorpommern bei Kommunalwahlen wählen?",
+    "answers": [
+      "14",
+      "16",
+      "18",
+      "20"
+    ],
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Mecklenburg-Vorpommern",
     "difficulty": "mittel",
@@ -5176,7 +5992,7 @@
       "grün-weiß-rot",
       "schwarz-gelb"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Mecklenburg-Vorpommern",
     "difficulty": "mittel",
@@ -5192,7 +6008,7 @@
       "beim Ordnungsamt der Gemeinde",
       "bei der Verbraucherzentrale"
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Mecklenburg-Vorpommern",
     "difficulty": "mittel",
@@ -5208,12 +6024,28 @@
       "Rostock.",
       "Wismar."
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Mecklenburg-Vorpommern",
     "difficulty": "mittel",
     "hasImage": false,
     "imagePath": null
+  },
+  {
+    "questionNumber": 8,
+    "text": "Welches Bundesland ist Mecklenburg-Vorpommern?",
+    "answers": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "correctAnswer": 3,
+    "explanation": "",
+    "category": "Mecklenburg-Vorpommern",
+    "difficulty": "mittel",
+    "hasImage": true,
+    "imagePath": "Frage 308 MV_1751714641063.png"
   },
   {
     "questionNumber": 9,
@@ -5224,7 +6056,7 @@
       "Bürgermeister / Bürgermeisterin",
       "Ministerpräsident / Ministerpräsidentin"
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Mecklenburg-Vorpommern",
     "difficulty": "mittel",
@@ -5240,12 +6072,28 @@
       "Finanzminister / Finanzministerin",
       "Innenminister / Innenministerin"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Mecklenburg-Vorpommern",
     "difficulty": "mittel",
     "hasImage": false,
     "imagePath": null
+  },
+  {
+    "questionNumber": 1,
+    "text": "Welches Wappen gehört zum Bundesland Niedersachsen?",
+    "answers": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "correctAnswer": 3,
+    "explanation": "",
+    "category": "Niedersachsen",
+    "difficulty": "mittel",
+    "hasImage": true,
+    "imagePath": "Frage 301 Niedersachsen_1751714720352.png"
   },
   {
     "questionNumber": 2,
@@ -5256,7 +6104,39 @@
       "Nordfriesland",
       "Vogtlandkreis"
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
+    "explanation": "",
+    "category": "Niedersachsen",
+    "difficulty": "mittel",
+    "hasImage": false,
+    "imagePath": null
+  },
+  {
+    "questionNumber": 3,
+    "text": "Für wie viele Jahre wird der Landtag in Niedersachsen gewählt?",
+    "answers": [
+      "3",
+      "4",
+      "5",
+      "6"
+    ],
+    "correctAnswer": 3,
+    "explanation": "",
+    "category": "Niedersachsen",
+    "difficulty": "mittel",
+    "hasImage": false,
+    "imagePath": null
+  },
+  {
+    "questionNumber": 4,
+    "text": "Ab welchem Alter darf man in Niedersachsen bei Kommunalwahlen wählen?",
+    "answers": [
+      "14",
+      "16",
+      "17",
+      "20"
+    ],
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Niedersachsen",
     "difficulty": "mittel",
@@ -5272,7 +6152,7 @@
       "schwarz-gelb",
       "blau-weiß-rot"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Niedersachsen",
     "difficulty": "mittel",
@@ -5288,7 +6168,7 @@
       "bei der Verbraucherzentrale",
       "bei den Kirchen"
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Niedersachsen",
     "difficulty": "mittel",
@@ -5304,12 +6184,28 @@
       "Wolfsburg.",
       "Osnabrück."
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Niedersachsen",
     "difficulty": "mittel",
     "hasImage": false,
     "imagePath": null
+  },
+  {
+    "questionNumber": 8,
+    "text": "Welches Bundesland ist Niedersachsen?",
+    "answers": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "correctAnswer": 1,
+    "explanation": "",
+    "category": "Niedersachsen",
+    "difficulty": "mittel",
+    "hasImage": true,
+    "imagePath": "Frage 308 Niedersachsen_1751714720352.png"
   },
   {
     "questionNumber": 9,
@@ -5320,7 +6216,7 @@
       "Bürgermeister / Bürgermeisterin",
       "Ministerpräsident / Ministerpräsidentin"
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Niedersachsen",
     "difficulty": "mittel",
@@ -5336,12 +6232,28 @@
       "Finanzminister / Finanzministerin",
       "Innenminister / Innenministerin"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Niedersachsen",
     "difficulty": "mittel",
     "hasImage": false,
     "imagePath": null
+  },
+  {
+    "questionNumber": 1,
+    "text": "Welches Wappen gehört zum Bundesland Nordrhein-Westfalen?",
+    "answers": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "correctAnswer": 2,
+    "explanation": "",
+    "category": "NRW",
+    "difficulty": "mittel",
+    "hasImage": true,
+    "imagePath": "Frage 301 NRW_1751714858829.png"
   },
   {
     "questionNumber": 2,
@@ -5352,7 +6264,39 @@
       "Nordfriesland",
       "Vogtlandkreis"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
+    "explanation": "",
+    "category": "NRW",
+    "difficulty": "mittel",
+    "hasImage": false,
+    "imagePath": null
+  },
+  {
+    "questionNumber": 3,
+    "text": "Für wie viele Jahre wird der Landtag in Nordrhein-Westfalen gewählt?",
+    "answers": [
+      "3",
+      "4",
+      "5",
+      "6"
+    ],
+    "correctAnswer": 3,
+    "explanation": "",
+    "category": "NRW",
+    "difficulty": "mittel",
+    "hasImage": false,
+    "imagePath": null
+  },
+  {
+    "questionNumber": 4,
+    "text": "Ab welchem Alter darf man in Nordrhein-Westfalen bei Kommunalwahlen wählen?",
+    "answers": [
+      "14",
+      "16",
+      "18",
+      "20"
+    ],
+    "correctAnswer": 2,
     "explanation": "",
     "category": "NRW",
     "difficulty": "mittel",
@@ -5368,7 +6312,7 @@
       "schwarz-gold",
       "blau-weiß-rot"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "NRW",
     "difficulty": "mittel",
@@ -5384,7 +6328,7 @@
       "bei der Verbraucherzentrale",
       "bei der Landeszentrale für politische Bildung"
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "NRW",
     "difficulty": "mittel",
@@ -5400,12 +6344,28 @@
       "Düsseldorf.",
       "Dortmund."
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "NRW",
     "difficulty": "mittel",
     "hasImage": false,
     "imagePath": null
+  },
+  {
+    "questionNumber": 8,
+    "text": "Welches Bundesland ist Nordrhein-Westfalen?",
+    "answers": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "correctAnswer": 3,
+    "explanation": "",
+    "category": "NRW",
+    "difficulty": "mittel",
+    "hasImage": true,
+    "imagePath": "Frage 308 NRW_1751714858829.png"
   },
   {
     "questionNumber": 9,
@@ -5416,7 +6376,7 @@
       "Bürgermeister / Bürgermeisterin",
       "Ministerpräsident / Ministerpräsidentin"
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "NRW",
     "difficulty": "mittel",
@@ -5432,12 +6392,28 @@
       "Finanzminister / Finanzministerin",
       "Innenminister / Innenministerin"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "NRW",
     "difficulty": "mittel",
     "hasImage": false,
     "imagePath": null
+  },
+  {
+    "questionNumber": 1,
+    "text": "Welches Wappen gehört zum Bundesland Rheinland-Pfalz?",
+    "answers": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "correctAnswer": 1,
+    "explanation": "",
+    "category": "Rheinland-Pfalz",
+    "difficulty": "mittel",
+    "hasImage": true,
+    "imagePath": "Frage 301 Rheinland-Pfalz_1751714958119.png"
   },
   {
     "questionNumber": 2,
@@ -5448,7 +6424,39 @@
       "Emsland",
       "Prignitz"
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
+    "explanation": "",
+    "category": "Rheinland-Pfalz",
+    "difficulty": "mittel",
+    "hasImage": false,
+    "imagePath": null
+  },
+  {
+    "questionNumber": 3,
+    "text": "Für wie viele Jahre wird der Landtag in Rheinland-Pfalz gewählt?",
+    "answers": [
+      "3",
+      "4",
+      "5",
+      "6"
+    ],
+    "correctAnswer": 3,
+    "explanation": "",
+    "category": "Rheinland-Pfalz",
+    "difficulty": "mittel",
+    "hasImage": false,
+    "imagePath": null
+  },
+  {
+    "questionNumber": 4,
+    "text": "Ab welchem Alter darf man in Rheinland-Pfalz bei Kommunalwahlen wählen?",
+    "answers": [
+      "14",
+      "16",
+      "18",
+      "20"
+    ],
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Rheinland-Pfalz",
     "difficulty": "mittel",
@@ -5464,7 +6472,7 @@
       "schwarz-gelb",
       "grün-weiß-rot"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Rheinland-Pfalz",
     "difficulty": "mittel",
@@ -5480,7 +6488,7 @@
       "beim Ordnungsamt der Gemeinde",
       "bei der Landeszentrale für politische Bildung"
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Rheinland-Pfalz",
     "difficulty": "mittel",
@@ -5496,12 +6504,28 @@
       "Ludwigshafen.",
       "Koblenz."
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Rheinland-Pfalz",
     "difficulty": "mittel",
     "hasImage": false,
     "imagePath": null
+  },
+  {
+    "questionNumber": 8,
+    "text": "Welches Bundesland ist Rheinland-Pfalz?",
+    "answers": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "correctAnswer": 1,
+    "explanation": "",
+    "category": "Rheinland-Pfalz",
+    "difficulty": "mittel",
+    "hasImage": true,
+    "imagePath": "Frage 308 Rheinland-Pfalz_1751714958119.png"
   },
   {
     "questionNumber": 9,
@@ -5512,7 +6536,7 @@
       "Bürgermeister / Bürgermeisterin",
       "Ministerpräsident / Ministerpräsidentin"
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Rheinland-Pfalz",
     "difficulty": "mittel",
@@ -5528,12 +6552,28 @@
       "Finanzminister / Finanzministerin",
       "Innenminister / Innenministerin"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Rheinland-Pfalz",
     "difficulty": "mittel",
     "hasImage": false,
     "imagePath": null
+  },
+  {
+    "questionNumber": 1,
+    "text": "Welches Wappen gehört zum Bundesland Saarland?",
+    "answers": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "correctAnswer": 4,
+    "explanation": "",
+    "category": "Saarland",
+    "difficulty": "mittel",
+    "hasImage": true,
+    "imagePath": "Frage 301 Saarland_1751715079921.png"
   },
   {
     "questionNumber": 2,
@@ -5544,7 +6584,39 @@
       "Neunkirchen",
       "Rhein-Sieg-Kreis"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
+    "explanation": "",
+    "category": "Saarland",
+    "difficulty": "mittel",
+    "hasImage": false,
+    "imagePath": null
+  },
+  {
+    "questionNumber": 3,
+    "text": "Für wie viele Jahre wird der Landtag des Saarlandes gewählt?",
+    "answers": [
+      "3",
+      "4",
+      "5",
+      "6"
+    ],
+    "correctAnswer": 3,
+    "explanation": "",
+    "category": "Saarland",
+    "difficulty": "mittel",
+    "hasImage": false,
+    "imagePath": null
+  },
+  {
+    "questionNumber": 4,
+    "text": "Ab welchem Alter darf man im Saarland bei Kommunalwahlen wählen?",
+    "answers": [
+      "14",
+      "16",
+      "18",
+      "20"
+    ],
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Saarland",
     "difficulty": "mittel",
@@ -5560,7 +6632,7 @@
       "schwarz-gelb",
       "grün-weiß-rot"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Saarland",
     "difficulty": "mittel",
@@ -5576,7 +6648,7 @@
       "bei der Verbraucherzentrale",
       "beim Ordnungsamt der Gemeinde"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Saarland",
     "difficulty": "mittel",
@@ -5592,12 +6664,28 @@
       "Saarbrücken.",
       "Völklingen."
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Saarland",
     "difficulty": "mittel",
     "hasImage": false,
     "imagePath": null
+  },
+  {
+    "questionNumber": 8,
+    "text": "Welches Bundesland ist das Saarland?",
+    "answers": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "correctAnswer": 2,
+    "explanation": "",
+    "category": "Saarland",
+    "difficulty": "mittel",
+    "hasImage": true,
+    "imagePath": "Frage 308 Saarland_1751715079921.png"
   },
   {
     "questionNumber": 9,
@@ -5608,7 +6696,7 @@
       "Bürgermeister / Bürgermeisterin",
       "Ministerpräsident / Ministerpräsidentin"
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Saarland",
     "difficulty": "mittel",
@@ -5624,12 +6712,28 @@
       "Finanzminister / Finanzministerin",
       "Innenminister / Innenministerin"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Saarland",
     "difficulty": "mittel",
     "hasImage": false,
     "imagePath": null
+  },
+  {
+    "questionNumber": 1,
+    "text": "Welches Wappen gehört zum Freistaat Sachsen?",
+    "answers": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "correctAnswer": 4,
+    "explanation": "",
+    "category": "Sachsen",
+    "difficulty": "mittel",
+    "hasImage": true,
+    "imagePath": "Frage 301 Sachsen_1751715145575.png"
   },
   {
     "questionNumber": 2,
@@ -5640,7 +6744,39 @@
       "Uckermark",
       "Nordfriesland"
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
+    "explanation": "",
+    "category": "Sachsen",
+    "difficulty": "mittel",
+    "hasImage": false,
+    "imagePath": null
+  },
+  {
+    "questionNumber": 3,
+    "text": "Für wie viele Jahre wird der Landtag in Sachsen gewählt?",
+    "answers": [
+      "3",
+      "4",
+      "5",
+      "6"
+    ],
+    "correctAnswer": 3,
+    "explanation": "",
+    "category": "Sachsen",
+    "difficulty": "mittel",
+    "hasImage": false,
+    "imagePath": null
+  },
+  {
+    "questionNumber": 4,
+    "text": "Ab welchem Alter darf man in Sachsen bei Kommunalwahlen wählen?",
+    "answers": [
+      "14",
+      "16",
+      "18",
+      "20"
+    ],
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Sachsen",
     "difficulty": "mittel",
@@ -5656,7 +6792,7 @@
       "grün-weiß-rot",
       "schwarz-gelb"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Sachsen",
     "difficulty": "mittel",
@@ -5672,7 +6808,7 @@
       "bei den Kirchen",
       "bei der Verbraucherzentrale"
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Sachsen",
     "difficulty": "mittel",
@@ -5688,12 +6824,28 @@
       "Chemnitz.",
       "Zwickau."
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Sachsen",
     "difficulty": "mittel",
     "hasImage": false,
     "imagePath": null
+  },
+  {
+    "questionNumber": 8,
+    "text": "Welches Bundesland ist Sachsen?",
+    "answers": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "correctAnswer": 4,
+    "explanation": "",
+    "category": "Sachsen",
+    "difficulty": "mittel",
+    "hasImage": true,
+    "imagePath": "Frage 308 Sachsen_1751715145575.png"
   },
   {
     "questionNumber": 9,
@@ -5704,7 +6856,7 @@
       "Bürgermeister / Bürgermeisterin",
       "Ministerpräsident / Ministerpräsidentin"
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Sachsen",
     "difficulty": "mittel",
@@ -5720,12 +6872,28 @@
       "Finanzminister / Finanzministerin",
       "Innenminister / Innenministerin"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Sachsen",
     "difficulty": "mittel",
     "hasImage": false,
     "imagePath": null
+  },
+  {
+    "questionNumber": 1,
+    "text": "Welches Wappen gehört zum Bundesland Sachsen-Anhalt?",
+    "answers": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "correctAnswer": 4,
+    "explanation": "",
+    "category": "Sachsen-Anhalt",
+    "difficulty": "mittel",
+    "hasImage": true,
+    "imagePath": "Frage 301 Sachsen-Anhalt_1751715206790.png"
   },
   {
     "questionNumber": 2,
@@ -5736,7 +6904,39 @@
       "Uckermark",
       "Börde"
     ],
+    "correctAnswer": 4,
+    "explanation": "",
+    "category": "Sachsen-Anhalt",
+    "difficulty": "mittel",
+    "hasImage": false,
+    "imagePath": null
+  },
+  {
+    "questionNumber": 3,
+    "text": "Für wie viele Jahre wird der Landtag in Sachsen-Anhalt gewählt?",
+    "answers": [
+      "3",
+      "4",
+      "5",
+      "6"
+    ],
     "correctAnswer": 3,
+    "explanation": "",
+    "category": "Sachsen-Anhalt",
+    "difficulty": "mittel",
+    "hasImage": false,
+    "imagePath": null
+  },
+  {
+    "questionNumber": 4,
+    "text": "Ab welchem Alter darf man in Sachsen-Anhalt bei Kommunalwahlen wählen?",
+    "answers": [
+      "14",
+      "16",
+      "18",
+      "20"
+    ],
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Sachsen-Anhalt",
     "difficulty": "mittel",
@@ -5752,7 +6952,7 @@
       "grün-weiß-rot",
       "weiß-rot"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Sachsen-Anhalt",
     "difficulty": "mittel",
@@ -5768,7 +6968,7 @@
       "beim Ordnungsamt der Gemeinde",
       "bei der Verbraucherzentrale"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Sachsen-Anhalt",
     "difficulty": "mittel",
@@ -5784,12 +6984,28 @@
       "Magdeburg.",
       "Wittenberg."
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Sachsen-Anhalt",
     "difficulty": "mittel",
     "hasImage": false,
     "imagePath": null
+  },
+  {
+    "questionNumber": 8,
+    "text": "Welches Bundesland ist Sachsen-Anhalt?",
+    "answers": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "correctAnswer": 3,
+    "explanation": "",
+    "category": "Sachsen-Anhalt",
+    "difficulty": "mittel",
+    "hasImage": true,
+    "imagePath": "Frage 308 Sachsen-Anhalt_1751715206790.png"
   },
   {
     "questionNumber": 9,
@@ -5800,7 +7016,7 @@
       "Bürgermeister / Bürgermeisterin",
       "Ministerpräsident / Ministerpräsidentin"
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Sachsen-Anhalt",
     "difficulty": "mittel",
@@ -5816,12 +7032,28 @@
       "Finanzminister / Finanzministerin",
       "Innenminister / Innenministerin"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Sachsen-Anhalt",
     "difficulty": "mittel",
     "hasImage": false,
     "imagePath": null
+  },
+  {
+    "questionNumber": 1,
+    "text": "Welches Wappen gehört zum Bundesland Schleswig-Holstein?",
+    "answers": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "correctAnswer": 3,
+    "explanation": "",
+    "category": "Schleswig-Holstein",
+    "difficulty": "mittel",
+    "hasImage": true,
+    "imagePath": "Frage 301 SH_1751715261504.png"
   },
   {
     "questionNumber": 2,
@@ -5831,6 +7063,38 @@
       "Demmin",
       "Nordfriesland",
       "Rhein-Sieg-Kreis"
+    ],
+    "correctAnswer": 3,
+    "explanation": "",
+    "category": "Schleswig-Holstein",
+    "difficulty": "mittel",
+    "hasImage": false,
+    "imagePath": null
+  },
+  {
+    "questionNumber": 3,
+    "text": "Für wie viele Jahre wird der Landtag in Schleswig-Holstein gewählt?",
+    "answers": [
+      "3",
+      "4",
+      "5",
+      "6"
+    ],
+    "correctAnswer": 3,
+    "explanation": "",
+    "category": "Schleswig-Holstein",
+    "difficulty": "mittel",
+    "hasImage": false,
+    "imagePath": null
+  },
+  {
+    "questionNumber": 4,
+    "text": "Ab welchem Alter darf man in Schleswig-Holstein bei Kommunalwahlen wählen?",
+    "answers": [
+      "14",
+      "16",
+      "18",
+      "20"
     ],
     "correctAnswer": 2,
     "explanation": "",
@@ -5848,7 +7112,7 @@
       "weiß-rot",
       "grün-weiß-rot"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Schleswig-Holstein",
     "difficulty": "mittel",
@@ -5864,7 +7128,7 @@
       "bei der Landeszentrale für politische Bildung",
       "bei den Kirchen"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Schleswig-Holstein",
     "difficulty": "mittel",
@@ -5880,12 +7144,28 @@
       "Lübeck.",
       "Kiel."
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Schleswig-Holstein",
     "difficulty": "mittel",
     "hasImage": false,
     "imagePath": null
+  },
+  {
+    "questionNumber": 8,
+    "text": "Welches Bundesland ist Schleswig-Holstein?",
+    "answers": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "correctAnswer": 1,
+    "explanation": "",
+    "category": "Schleswig-Holstein",
+    "difficulty": "mittel",
+    "hasImage": true,
+    "imagePath": "Frage 308 SH_1751715261504.png"
   },
   {
     "questionNumber": 9,
@@ -5896,7 +7176,7 @@
       "Bürgermeister / Bürgermeisterin",
       "Ministerpräsident / Ministerpräsidentin"
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Schleswig-Holstein",
     "difficulty": "mittel",
@@ -5912,12 +7192,28 @@
       "Finanzminister / Finanzministerin",
       "Innenminister / Innenministerin"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Schleswig-Holstein",
     "difficulty": "mittel",
     "hasImage": false,
     "imagePath": null
+  },
+  {
+    "questionNumber": 1,
+    "text": "Welches Wappen gehört zum Freistaat Thüringen?",
+    "answers": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "correctAnswer": 4,
+    "explanation": "",
+    "category": "Thüringen",
+    "difficulty": "mittel",
+    "hasImage": true,
+    "imagePath": "Frage 301 Thüringen_1751715321834.png"
   },
   {
     "questionNumber": 2,
@@ -5927,6 +7223,38 @@
       "Altötting",
       "Nordfriesland",
       "Wartburgkreis"
+    ],
+    "correctAnswer": 4,
+    "explanation": "",
+    "category": "Thüringen",
+    "difficulty": "mittel",
+    "hasImage": false,
+    "imagePath": null
+  },
+  {
+    "questionNumber": 3,
+    "text": "Für wie viele Jahre wird der Landtag in Thüringen gewählt?",
+    "answers": [
+      "3",
+      "4",
+      "5",
+      "6"
+    ],
+    "correctAnswer": 3,
+    "explanation": "",
+    "category": "Thüringen",
+    "difficulty": "mittel",
+    "hasImage": false,
+    "imagePath": null
+  },
+  {
+    "questionNumber": 4,
+    "text": "Ab welchem Alter darf man in Thüringen bei Kommunalwahlen wählen?",
+    "answers": [
+      "14",
+      "18",
+      "16",
+      "20"
     ],
     "correctAnswer": 3,
     "explanation": "",
@@ -5944,7 +7272,7 @@
       "grün-weiß-rot",
       "schwarz-gold"
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Thüringen",
     "difficulty": "mittel",
@@ -5960,7 +7288,7 @@
       "bei der Landeszentrale für politische Bildung",
       "beim Ordnungsamt der Gemeinde"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "explanation": "",
     "category": "Thüringen",
     "difficulty": "mittel",
@@ -5976,12 +7304,28 @@
       "Gera.",
       "Jena."
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Thüringen",
     "difficulty": "mittel",
     "hasImage": false,
     "imagePath": null
+  },
+  {
+    "questionNumber": 8,
+    "text": "Welches Bundesland ist Thüringen?",
+    "answers": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "correctAnswer": 2,
+    "explanation": "",
+    "category": "Thüringen",
+    "difficulty": "mittel",
+    "hasImage": true,
+    "imagePath": "Frage 308 Thüringen_1751715321834.png"
   },
   {
     "questionNumber": 9,
@@ -5992,7 +7336,7 @@
       "Bürgermeister / Bürgermeisterin",
       "Ministerpräsident / Ministerpräsidentin"
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 4,
     "explanation": "",
     "category": "Thüringen",
     "difficulty": "mittel",
@@ -6008,7 +7352,7 @@
       "Finanzminister / Finanzministerin",
       "Innenminister / Innenministerin"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Thüringen",
     "difficulty": "mittel",
