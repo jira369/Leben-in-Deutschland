@@ -48,7 +48,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         });
       } else if (category) {
         // Category-specific practice with thematic filtering
-        if (["Baden-Württemberg", "Bayern", "Berlin", "Brandenburg", "Bremen", "Hamburg", "Hessen", "Mecklenburg-Vorpommern", "Niedersachsen", "Nordrhein-Westfalen", "Rheinland-Pfalz", "Saarland", "Sachsen", "Sachsen-Anhalt", "Schleswig-Holstein", "Thüringen"].includes(category)) {
+        if (["Baden-Württemberg", "Bayern", "Berlin", "Brandenburg", "Bremen", "Hamburg", "Hessen", "Mecklenburg-Vorpommern", "Niedersachsen", "Nordrhein-Westfalen", "NRW", "Rheinland-Pfalz", "Saarland", "Sachsen", "Sachsen-Anhalt", "Schleswig-Holstein", "Thüringen"].includes(category)) {
           // State-specific questions
           questions = await storage.getQuestionsByFilter({ category });
         } else if (category === "bundesweit") {
@@ -462,18 +462,22 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const { description, timestamp, userAgent, url } = bugReportSchema.parse(req.body);
 
       // Create transporter for sending emails
+      if (!process.env.GMAIL_USER || !process.env.GMAIL_PASS) {
+        return res.status(503).json({ error: "Bug reporting is not configured" });
+      }
+
       const transporter = nodemailer.createTransporter({
         service: 'gmail',
         auth: {
-          user: process.env.GMAIL_USER || 'noreply@example.com',
-          pass: process.env.GMAIL_PASS || 'password'
+          user: process.env.GMAIL_USER,
+          pass: process.env.GMAIL_PASS
         }
       });
 
       // Email content
       const mailOptions = {
-        from: process.env.GMAIL_USER || 'noreply@example.com',
-        to: 'dacvudinh@gmail.com',
+        from: process.env.GMAIL_USER,
+        to: process.env.BUG_REPORT_EMAIL || 'dacvudinh@gmail.com',
         subject: '🐛 Bug-Report von Einbürgerungstest App',
         html: `
           <h2>Neuer Bug-Report</h2>
