@@ -1,7 +1,7 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'de.einbuergerungstest.app',
+  appId: 'de.lebenindeutschland.quiz',
   appName: 'Einbürgerungstest Quiz',
   webDir: 'dist/public'
 };
