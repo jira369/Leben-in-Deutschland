@@ -12,3 +12,14 @@ CLAUDE.local.md
 .claude/backups/
 .claude/hooks/__counter
 __NEEDS_ONBOARD
+
+# Android build artifacts
+*.jks
+*.keystore
+*.aab
+*.apk
+android-icons/
+build-tools/
+licenses/
+platforms/
+.knownPackages
