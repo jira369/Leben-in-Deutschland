@@ -167,14 +167,12 @@ export default function Results() {
         <Card className="bg-card rounded-2xl shadow-lg p-6 mb-6">
           <CardContent className="p-0">
             <Collapsible open={showDetails} onOpenChange={setShowDetails}>
+              <h3 className="text-xl font-semibold text-foreground mb-3">Detaillierte Ergebnisse</h3>
               <CollapsibleTrigger asChild>
-                <div className="flex items-center justify-between mb-6 cursor-pointer">
-                  <h3 className="text-xl font-semibold text-foreground">Detaillierte Ergebnisse</h3>
-                  <Button variant="ghost" size="sm">
-                    <ChevronDown className={`mr-1 h-4 w-4 transition-transform ${showDetails ? 'rotate-180' : ''}`} />
-                    Details {showDetails ? 'ausblenden' : 'anzeigen'}
-                  </Button>
-                </div>
+                <Button variant="ghost" size="sm" className="mb-4 w-full justify-center">
+                  <ChevronDown className={`mr-1 h-4 w-4 transition-transform ${showDetails ? 'rotate-180' : ''}`} />
+                  Details {showDetails ? 'ausblenden' : 'anzeigen'}
+                </Button>
               </CollapsibleTrigger>
               
               <CollapsibleContent className="space-y-3">
@@ -229,7 +227,7 @@ export default function Results() {
           <Card className="bg-card rounded-2xl shadow-lg p-4 sm:p-6">
             <CardContent className="p-0">
               <h4 className="text-lg font-semibold text-foreground mb-4">Nächste Schritte</h4>
-              <div className="space-y-3">
+              <div className="flex flex-col gap-3">
                 <Link href={isFullTest ? `/quiz?type=full` : '/practice'}>
                   <Button className="w-full h-12">
                     <RotateCcw className="mr-2 h-4 w-4" />

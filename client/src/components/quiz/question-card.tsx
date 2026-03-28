@@ -84,26 +84,26 @@ export function QuestionCard({
           {question.answers.map((answer, index) => (
             <Label
               key={index}
-              className={`flex items-center p-4 sm:p-5 rounded-xl border-2 transition-all duration-200 group ${
+              className={`flex items-start p-4 sm:p-5 rounded-xl border-2 transition-all duration-200 group min-w-0 ${
                 hasSelectedAnswer ? 'cursor-default' : 'cursor-pointer'
               } ${
                 selectedAnswer === index
                   ? 'border-primary bg-primary/5'
-                  : hasSelectedAnswer 
-                    ? 'border-border bg-muted/50' 
+                  : hasSelectedAnswer
+                    ? 'border-border bg-muted/50'
                     : 'border-border hover:border-primary/30 hover:bg-primary/5'
               }`}
             >
               <RadioGroupItem
                 value={index.toString()}
                 disabled={hasSelectedAnswer}
-                className="w-5 h-5 text-primary border-border focus:ring-primary focus:ring-2"
+                className="w-5 h-5 shrink-0 mt-0.5 text-primary border-border focus:ring-primary focus:ring-2"
               />
-              <span className={`ml-4 font-medium leading-relaxed hyphenate ${
-                selectedAnswer === index 
-                  ? 'text-primary' 
-                  : hasSelectedAnswer 
-                    ? 'text-muted-foreground' 
+              <span className={`ml-4 font-medium leading-relaxed hyphenate break-words min-w-0 ${
+                selectedAnswer === index
+                  ? 'text-primary'
+                  : hasSelectedAnswer
+                    ? 'text-muted-foreground'
                     : 'text-foreground group-hover:text-primary'
               }`}>
                 {answer}

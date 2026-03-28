@@ -5192,7 +5192,7 @@
       "grün-weiß-rot",
       "schwarz-gold"
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Berlin",
     "difficulty": "mittel",
@@ -5512,7 +5512,7 @@
       "grün-weiß-rot",
       "schwarz-gold"
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Bremen",
     "difficulty": "mittel",
@@ -5576,7 +5576,7 @@
       "Präsidentin/Präsident des Senates",
       "Regierende Bürgermeisterin/Regierender Bürgermeister"
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Bremen",
     "difficulty": "mittel",
@@ -5672,7 +5672,7 @@
       "grün-weiß-rot",
       "schwarz-gelb"
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Hamburg",
     "difficulty": "mittel",
@@ -5816,7 +5816,7 @@
       "18",
       "20"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Hessen",
     "difficulty": "mittel",
@@ -6616,7 +6616,7 @@
       "18",
       "20"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "",
     "category": "Saarland",
     "difficulty": "mittel",
@@ -7272,7 +7272,7 @@
       "grün-weiß-rot",
       "schwarz-gold"
     ],
-    "correctAnswer": 0,
+    "correctAnswer": 1,
     "explanation": "",
     "category": "Thüringen",
     "difficulty": "mittel",

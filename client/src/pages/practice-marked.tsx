@@ -209,16 +209,20 @@ export default function PracticeMarked() {
                                   : "bg-muted border-border text-foreground"
                               }`}
                             >
-                              <div className="flex items-center gap-2">
-                                <span className="font-medium">
+                              <div className="flex items-start gap-2 min-w-0">
+                                <span className="font-medium shrink-0">
                                   {String.fromCharCode(65 + answerIndex)}:
                                 </span>
-                                <span>{answer}</span>
-                                {answerIndex === question.correctAnswer && (
-                                  <Badge className="ml-auto bg-green-600 dark:bg-green-700">
-                                    Richtig
-                                  </Badge>
-                                )}
+                                <div className="min-w-0">
+                                  <span className="break-words">{answer}</span>
+                                  {answerIndex === question.correctAnswer && (
+                                    <div className="mt-1">
+                                      <Badge className="bg-green-600 dark:bg-green-700">
+                                        Richtig
+                                      </Badge>
+                                    </div>
+                                  )}
+                                </div>
                               </div>
                             </div>
                           ))}
