@@ -5,21 +5,19 @@ server/public
 vite.config.ts.*
 *.tar.gz
 
-# Claudify — personal & runtime files
-CLAUDE.local.md
-.claude/logs/
-.claude/agent-memory/
-.claude/backups/
-.claude/hooks/__counter
-__NEEDS_ONBOARD
+# Capacitor native projects
+ios/
 
-# Android build artifacts
-*.jks
-*.keystore
+# Android build artifacts (project itself is committed)
+android/app/build/
+android/.gradle/
+android/build/
 *.aab
 *.apk
-android-icons/
-build-tools/
-licenses/
-platforms/
-.knownPackages
+
+# Signing keys
+*.jks
+*.keystore
+
+# Local config
+android/local.properties

@@ -12,6 +12,7 @@ import { Label } from "@/components/ui/label";
 import { Bug, Send } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
+import { isNativePlatform } from "@/lib/platform";
 
 interface BugReportModalProps {
   open: boolean;
@@ -38,12 +39,21 @@ export function BugReportModal({ open, onOpenChange }: BugReportModalProps) {
     setIsSubmitting(true);
 
     try {
-      await apiRequest('POST', '/api/bug-report', {
-        description: bugDescription,
-        timestamp: new Date().toISOString(),
-        userAgent: navigator.userAgent,
-        url: window.location.href,
-      });
+      if (isNativePlatform()) {
+        // In native app, use mailto: link since server is not available
+        const subject = encodeURIComponent('Bug-Report: Einbürgerungstest App');
+        const body = encodeURIComponent(
+          `Bug-Beschreibung:\n${bugDescription}\n\nZeitpunkt: ${new Date().toISOString()}\nPlattform: ${navigator.userAgent}`
+        );
+        window.open(`mailto:dacvudinh@gmail.com?subject=${subject}&body=${body}`);
+      } else {
+        await apiRequest('POST', '/api/bug-report', {
+          description: bugDescription,
+          timestamp: new Date().toISOString(),
+          userAgent: navigator.userAgent,
+          url: window.location.href,
+        });
+      }
 
       toast({
         title: "Bug-Report gesendet",

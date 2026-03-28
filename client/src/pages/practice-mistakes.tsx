@@ -236,7 +236,7 @@ export default function PracticeMistakes() {
                             <div
                               key={answerIndex}
                               className={`p-3 rounded-md border ${
-                                answerIndex + 1 === question.correctAnswer
+                                answerIndex === question.correctAnswer
                                   ? "bg-green-50 dark:bg-green-950/20 border-green-200 dark:border-green-800 text-green-800 dark:text-green-200"
                                   : "bg-muted border-border text-foreground"
                               }`}
@@ -246,7 +246,7 @@ export default function PracticeMistakes() {
                                   {String.fromCharCode(65 + answerIndex)}:
                                 </span>
                                 <span>{answer}</span>
-                                {answerIndex + 1 === question.correctAnswer && (
+                                {answerIndex === question.correctAnswer && (
                                   <Badge className="ml-auto bg-green-600 dark:bg-green-700">
                                     Richtig
                                   </Badge>

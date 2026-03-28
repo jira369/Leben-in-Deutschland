@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { localFetch } from "@/lib/queryClient";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -39,7 +40,7 @@ export default function Statistics() {
       if (userSettings?.selectedState) {
         params.append('state', userSettings.selectedState);
       }
-      const response = await fetch(`/api/quiz-sessions/detailed-stats?${params}`);
+      const response = await localFetch(`/api/quiz-sessions/detailed-stats?${params}`);
       if (!response.ok) throw new Error('Failed to fetch detailed stats');
       return response.json();
     },
@@ -67,9 +68,10 @@ export default function Statistics() {
   const incorrectAnswersNum = parseInt(stats?.incorrectAnswers?.toString() || '0', 10);
   const totalAnswersGiven = correctAnswersNum + incorrectAnswersNum;
   
-  const accuracyPercentage = totalAnswersGiven > 0 
-    ? Math.round((correctAnswersNum / totalAnswersGiven) * 100) 
+  const accuracyPercentage = totalAnswersGiven > 0
+    ? Math.round((correctAnswersNum / totalAnswersGiven) * 100)
     : 0;
+  const incorrectPercentage = totalAnswersGiven > 0 ? 100 - accuracyPercentage : 0;
 
   if (isLoading) {
     return (
@@ -253,11 +255,11 @@ export default function Statistics() {
                 <div className="flex justify-between items-center">
                   <span className="text-sm text-muted-foreground">Falsche Antworten</span>
                   <span className="font-semibold text-red-600 dark:text-red-400">
-                    {incorrectAnswersNum} ({100 - accuracyPercentage}%)
+                    {incorrectAnswersNum} ({incorrectPercentage}%)
                   </span>
                 </div>
                 <Progress 
-                  value={100 - accuracyPercentage} 
+                  value={incorrectPercentage} 
                   className="h-2"
                 />
               </div>
