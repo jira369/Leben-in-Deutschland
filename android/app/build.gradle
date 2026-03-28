@@ -1,5 +1,11 @@
 apply plugin: 'com.android.application'
 
+def keystorePropertiesFile = rootProject.file("keystore.properties")
+def keystoreProperties = new Properties()
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+}
+
 android {
     namespace = "de.lebenindeutschland.quiz"
     compileSdk = rootProject.ext.compileSdkVersion
@@ -18,10 +24,10 @@ android {
     }
     signingConfigs {
         release {
-            storeFile file("../../einbuergerungstest-release.jks")
-            storePassword "einbuergerungstest123"
-            keyAlias "einbuergerungstest"
-            keyPassword "einbuergerungstest123"
+            storeFile file(keystoreProperties['storeFile'] ?: "../../einbuergerungstest-release.jks")
+            storePassword keystoreProperties['storePassword'] ?: ""
+            keyAlias keystoreProperties['keyAlias'] ?: ""
+            keyPassword keystoreProperties['keyPassword'] ?: ""
         }
     }
     buildTypes {
