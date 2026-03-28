@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useLocation, Link } from "wouter";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
@@ -8,12 +8,16 @@ import { QuizResults } from "@shared/schema";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { formatDuration } from "@/lib/quiz-logic";
 import { useQuery } from "@tanstack/react-query";
+import { toPng } from "html-to-image";
+import confetti from "canvas-confetti";
 
 export default function Results() {
   const [, params] = useLocation();
   const [showDetails, setShowDetails] = useState(false);
   const [results, setResults] = useState<QuizResults | null>(null);
   const [quizType, setQuizType] = useState<'full' | 'practice'>('full');
+  const shareCardRef = useRef<HTMLDivElement>(null);
+  const [isSharing, setIsSharing] = useState(false);
 
   // Get quiz statistics
   const { data: stats } = useQuery<{ totalTests: number; averageScore: number; bestScore: number; totalStudyTime: number }>({
@@ -80,7 +84,7 @@ export default function Results() {
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <Card className="rounded-2xl shadow-lg p-4 sm:p-8 mb-6 text-center">
+          <Card ref={shareCardRef} className="rounded-2xl shadow-lg p-4 sm:p-8 mb-6 text-center">
             <CardContent className="p-0">
               <motion.div 
                 className="w-24 h-24 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-6"
@@ -243,19 +247,55 @@ export default function Results() {
                 <Button
                   variant="outline"
                   className="w-full h-12"
+                  disabled={isSharing}
                   onClick={async () => {
-                    const shareText = `Einbürgerungstest: ${results.correct}/${results.total} richtig (${results.percentage}%)${results.passed ? ' - Bestanden!' : ''}`;
-                    if (navigator.share) {
-                      try {
-                        await navigator.share({ title: 'Einbürgerungstest Ergebnis', text: shareText });
-                      } catch {}
-                    } else {
-                      await navigator.clipboard.writeText(shareText);
+                    if (!shareCardRef.current) return;
+                    setIsSharing(true);
+
+                    // Fire confetti
+                    confetti({
+                      particleCount: 150,
+                      spread: 80,
+                      origin: { y: 0.6 },
+                      colors: ['#22c55e', '#3b82f6', '#eab308', '#ef4444', '#a855f7'],
+                    });
+
+                    try {
+                      // Wait a moment for confetti to render
+                      await new Promise(r => setTimeout(r, 300));
+
+                      const dataUrl = await toPng(shareCardRef.current, {
+                        backgroundColor: '#ffffff',
+                        pixelRatio: 2,
+                      });
+
+                      // Convert to blob for sharing
+                      const res = await fetch(dataUrl);
+                      const blob = await res.blob();
+                      const file = new File([blob], 'einbuergerungstest-ergebnis.png', { type: 'image/png' });
+
+                      if (navigator.share && navigator.canShare?.({ files: [file] })) {
+                        await navigator.share({
+                          title: 'Einbürgerungstest Ergebnis',
+                          text: `${results.correct}/${results.total} richtig (${results.percentage}%)`,
+                          files: [file],
+                        });
+                      } else {
+                        // Fallback: download the image
+                        const link = document.createElement('a');
+                        link.download = 'einbuergerungstest-ergebnis.png';
+                        link.href = dataUrl;
+                        link.click();
+                      }
+                    } catch (err) {
+                      console.error('Share failed:', err);
+                    } finally {
+                      setIsSharing(false);
                     }
                   }}
                 >
                   <Share className="mr-2 h-4 w-4" />
-                  Ergebnis teilen
+                  {isSharing ? 'Wird erstellt...' : 'Ergebnis teilen'}
                 </Button>
               </div>
             </CardContent>
