@@ -2,6 +2,6 @@
 <resources>
     <string name="app_name">Einbürgerungstest Quiz</string>
     <string name="title_activity_main">Einbürgerungstest Quiz</string>
-    <string name="package_name">de.einbuergerungstest.app</string>
-    <string name="custom_url_scheme">de.einbuergerungstest.app</string>
+    <string name="package_name">de.lebenindeutschland.quiz</string>
+    <string name="custom_url_scheme">de.lebenindeutschland.quiz</string>
 </resources>

@@ -167,7 +167,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({ error: "Invalid settings data", details: error.errors });
       }
       console.error("Settings update error:", error);
-      res.status(500).json({ error: "Failed to update settings", details: error.message });
+      res.status(500).json({ error: "Failed to update settings", details: error instanceof Error ? error.message : String(error) });
     }
   });
 
@@ -462,7 +462,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const { description, timestamp, userAgent, url } = bugReportSchema.parse(req.body);
 
       // Create transporter for sending emails
-      const transporter = nodemailer.createTransporter({
+      const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
           user: process.env.GMAIL_USER || 'noreply@example.com',

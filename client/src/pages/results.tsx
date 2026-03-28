@@ -16,7 +16,7 @@ export default function Results() {
   const [quizType, setQuizType] = useState<'full' | 'practice'>('full');
 
   // Get quiz statistics
-  const { data: stats } = useQuery({
+  const { data: stats } = useQuery<{ totalTests: number; averageScore: number; bestScore: number; totalStudyTime: number }>({
     queryKey: ['/api/quiz-sessions/stats'],
   });
 

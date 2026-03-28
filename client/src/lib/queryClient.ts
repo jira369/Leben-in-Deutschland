@@ -5,11 +5,30 @@ import { handleLocalRequest } from "./local-api-router";
 export async function localFetch(input: RequestInfo | URL, init?: RequestInit): Promise<Response> {
   const url = typeof input === 'string' ? input : input instanceof URL ? input.toString() : input.url;
 
+  // On native platforms, always use local storage backend
   if (isNativePlatform() && url.startsWith('/api/')) {
     return handleLocalRequest(url, init);
   }
 
-  return fetch(input, init);
+  // On web, try server first, fall back to local storage if server is unreachable
+  try {
+    const res = await fetch(input, init);
+    // If server returns empty questions array, fall back to local data
+    if (url === '/api/questions' && res.ok) {
+      const cloned = res.clone();
+      const data = await cloned.json();
+      if (Array.isArray(data) && data.length === 0) {
+        return handleLocalRequest(url, init);
+      }
+    }
+    return res;
+  } catch {
+    // Network error (server unreachable) — fall back to local storage
+    if (url.startsWith('/api/')) {
+      return handleLocalRequest(url, init);
+    }
+    throw new Error('Network request failed');
+  }
 }
 
 async function throwIfResNotOk(res: Response) {

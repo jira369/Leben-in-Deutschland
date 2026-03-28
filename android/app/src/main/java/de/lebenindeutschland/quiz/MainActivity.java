@@ -1,4 +1,4 @@
-package de.einbuergerungstest.app;
+package de.lebenindeutschland.quiz;
 
 import com.getcapacitor.BridgeActivity;
 
