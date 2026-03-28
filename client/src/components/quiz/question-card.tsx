@@ -106,7 +106,11 @@ export function QuestionCard({
                     ? 'text-muted-foreground'
                     : 'text-foreground group-hover:text-primary'
               }`}>
-                {answer}
+                {answer.includes('/') ? answer.split('/').reduce((acc: React.ReactNode[], part, i, arr) => {
+                  if (i > 0) acc.push(<wbr key={`wbr-${i}`} />);
+                  acc.push(i < arr.length - 1 ? part + '/' : part);
+                  return acc;
+                }, []) : answer}
               </span>
             </Label>
           ))}

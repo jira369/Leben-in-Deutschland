@@ -89,10 +89,14 @@ html {
     hyphens: auto;
     word-wrap: break-word;
     overflow-wrap: break-word;
-    hyphenate-limit-chars: 6 3 3;
-    hyphenate-limit-lines: no-limit;
+    /* Require at least 10 chars total, 6 before hyphen, 4 after */
+    hyphenate-limit-chars: 10 6 4;
+    hyphenate-limit-lines: 2;
     hyphenate-limit-last: always;
-    hyphenate-limit-zone: 8%;
+    /* Only hyphenate when >35% of the line would be empty */
+    hyphenate-limit-zone: 35%;
+    /* Balance line lengths for more even text distribution */
+    text-wrap: pretty;
   }
 }
 
