@@ -160,7 +160,7 @@ export class MemStorage implements IStorage {
   }> {
     // Only count full tests (type='full'), not practice sessions
     const fullTestSessions = Array.from(this.quizSessions.values())
-      .filter(session => session.type === 'full');
+      .filter(session => session.type === 'full' && session.totalQuestions === 33);
 
     if (fullTestSessions.length === 0) {
       return {
@@ -470,7 +470,7 @@ export class DatabaseStorage implements IStorage {
         totalStudyTime: sql<number>`COALESCE(SUM(${quizSessions.timeSpent}), 0)`
       })
       .from(quizSessions)
-      .where(eq(quizSessions.type, 'full'));
+      .where(and(eq(quizSessions.type, 'full'), eq(quizSessions.totalQuestions, 33)));
 
     const result = stats[0];
     return {
@@ -568,7 +568,7 @@ export class DatabaseStorage implements IStorage {
         testsPassedCount: sql<number>`COUNT(CASE WHEN ${quizSessions.passed} = true THEN 1 END)`
       })
       .from(quizSessions)
-      .where(eq(quizSessions.type, 'full'));
+      .where(and(eq(quizSessions.type, 'full'), eq(quizSessions.totalQuestions, 33)));
 
     const allStats = allSessionStats[0];
     const fullStats = fullTestStats[0];

@@ -52,8 +52,8 @@ export function Timer({ mode, initialSeconds = 3600, startTime, onTimeUp }: Time
 
   const getTimerColor = () => {
     if (mode === 'countdown') {
-      if (seconds <= 300) return 'text-red-600 dark:text-red-400'; // Last 5 minutes
-      if (seconds <= 600) return 'text-orange-600 dark:text-orange-400'; // Last 10 minutes
+      if (seconds <= 300) return 'text-red-600'; // Last 5 minutes
+      if (seconds <= 600) return 'text-orange-600'; // Last 10 minutes
       return 'text-muted-foreground';
     }
     return 'text-muted-foreground';

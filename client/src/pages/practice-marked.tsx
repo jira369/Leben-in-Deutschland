@@ -60,7 +60,7 @@ export default function PracticeMarked() {
         ) : (
           <>
             {/* Practice Options */}
-            <Card className="mb-8 border-2 border-yellow-200 dark:border-yellow-800 bg-gradient-to-r from-yellow-50 to-amber-50 dark:from-yellow-950/20 dark:to-amber-950/20">
+            <Card className="mb-8 border-2 border-yellow-200 bg-gradient-to-r from-yellow-50 to-amber-50 dark:from-yellow-950/20 dark:to-amber-950/20">
               <CardHeader>
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                   <div className="flex items-center space-x-3">
@@ -84,7 +84,7 @@ export default function PracticeMarked() {
                       </Button>
                     </Link>
                     <Link href="/quiz?type=practice&mode=marked&chronological=true">
-                      <Button size="lg" variant="outline" className="w-full border-yellow-600 text-yellow-700 hover:bg-yellow-100 dark:border-yellow-400 dark:text-yellow-400 dark:hover:bg-yellow-900/20">
+                      <Button size="lg" variant="outline" className="w-full border-yellow-600 text-yellow-700 hover:bg-yellow-100 dark:hover:bg-yellow-900/20">
                         Chronologisch üben
                       </Button>
                     </Link>
@@ -115,7 +115,7 @@ export default function PracticeMarked() {
                     </div>
                   </div>
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">
+                    <div className="text-3xl font-bold text-blue-600 mb-2">
                       {markedQuestionsData.length}
                     </div>
                     <div className="text-sm text-muted-foreground">
@@ -123,7 +123,7 @@ export default function PracticeMarked() {
                     </div>
                   </div>
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-green-600 dark:text-green-400 mb-2">
+                    <div className="text-3xl font-bold text-green-600 mb-2">
                       {markedQuestionsData.length > 0 ? Math.round((markedQuestionsData.length / 460) * 100) : 0}%
                     </div>
                     <div className="text-sm text-muted-foreground">
@@ -205,7 +205,7 @@ export default function PracticeMarked() {
                               key={answerIndex}
                               className={`p-3 rounded-md border ${
                                 answerIndex === question.correctAnswer
-                                  ? "bg-green-50 dark:bg-green-950/20 border-green-200 dark:border-green-800 text-green-800 dark:text-green-200"
+                                  ? "bg-green-50 border-green-200 text-green-800"
                                   : "bg-muted border-border text-foreground"
                               }`}
                             >
@@ -217,7 +217,7 @@ export default function PracticeMarked() {
                                   <span className="break-words">{answer}</span>
                                   {answerIndex === question.correctAnswer && (
                                     <div className="mt-1">
-                                      <Badge className="bg-green-600 dark:bg-green-700">
+                                      <Badge className="bg-green-600">
                                         Richtig
                                       </Badge>
                                     </div>
@@ -228,8 +228,8 @@ export default function PracticeMarked() {
                           ))}
                         </div>
                         {question.explanation && (
-                          <div className="mt-4 p-3 bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 rounded-md">
-                            <p className="text-sm text-blue-800 dark:text-blue-200">
+                          <div className="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-md">
+                            <p className="text-sm text-blue-800">
                               <strong>Erklärung:</strong> {question.explanation}
                             </p>
                           </div>

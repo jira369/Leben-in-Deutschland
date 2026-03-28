@@ -98,8 +98,8 @@ export default function Statistics() {
                 </Button>
               </Link>
               <div className="flex items-center space-x-3">
-                <div className="bg-blue-100 dark:bg-blue-900/30 p-2 rounded-lg">
-                  <BarChart3 className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+                <div className="bg-blue-100 p-2 rounded-lg">
+                  <BarChart3 className="h-6 w-6 text-blue-600" />
                 </div>
                 <div>
                   <h1 className="text-xl font-bold text-foreground">Lernstatistiken</h1>
@@ -115,112 +115,112 @@ export default function Statistics() {
         {/* Main Statistics Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-8">
           {/* Questions Answered Correctly */}
-          <Card className="bg-green-50 dark:bg-green-950/20 border-green-200 dark:border-green-800">
+          <Card className="bg-green-50 border-green-200">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-green-800 dark:text-green-200">
+              <CardTitle className="text-sm font-medium text-green-800">
                 Fragen richtig beantwortet
               </CardTitle>
-              <CheckCircle className="h-4 w-4 text-green-600 dark:text-green-300" />
+              <CheckCircle className="h-4 w-4 text-green-600" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-green-700 dark:text-green-200">
+              <div className="text-2xl font-bold text-green-700">
                 {correctAnswersNum}
               </div>
-              <p className="text-xs text-green-600 dark:text-green-300 mt-1">
+              <p className="text-xs text-green-600 mt-1">
                 {accuracyPercentage}% Genauigkeit
               </p>
             </CardContent>
           </Card>
 
           {/* Questions Answered Incorrectly */}
-          <Card className="bg-red-50 dark:bg-red-950/20 border-red-200 dark:border-red-800">
+          <Card className="bg-red-50 border-red-200">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-red-800 dark:text-red-200">
+              <CardTitle className="text-sm font-medium text-red-800">
                 Fragen falsch beantwortet
               </CardTitle>
-              <XCircle className="h-4 w-4 text-red-600 dark:text-red-300" />
+              <XCircle className="h-4 w-4 text-red-600" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-red-700 dark:text-red-200">
+              <div className="text-2xl font-bold text-red-700">
                 {incorrectAnswersNum}
               </div>
-              <p className="text-xs text-red-600 dark:text-red-300 mt-1">
+              <p className="text-xs text-red-600 mt-1">
                 Übungsbedarf identifiziert
               </p>
             </CardContent>
           </Card>
 
           {/* Total Questions Practiced */}
-          <Card className="bg-blue-50 dark:bg-blue-950/20 border-blue-200 dark:border-blue-800">
+          <Card className="bg-blue-50 border-blue-200">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-blue-800 dark:text-blue-200">
+              <CardTitle className="text-sm font-medium text-blue-800">
                 Fragen geübt
               </CardTitle>
-              <BookOpen className="h-4 w-4 text-blue-600 dark:text-blue-300" />
+              <BookOpen className="h-4 w-4 text-blue-600" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-blue-700 dark:text-blue-200">
+              <div className="text-2xl font-bold text-blue-700">
                 {questionsAnswered}
               </div>
-              <p className="text-xs text-blue-600 dark:text-blue-300 mt-1">
+              <p className="text-xs text-blue-600 mt-1">
                 von {totalAvailableQuestions} verfügbaren Fragen
               </p>
             </CardContent>
           </Card>
 
           {/* Tests Taken */}
-          <Card className="bg-purple-50 dark:bg-purple-950/20 border-purple-200 dark:border-purple-800">
+          <Card className="bg-purple-50 border-purple-200">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-purple-800 dark:text-purple-200">
+              <CardTitle className="text-sm font-medium text-purple-800">
                 Tests gemacht
               </CardTitle>
-              <Target className="h-4 w-4 text-purple-600 dark:text-purple-300" />
+              <Target className="h-4 w-4 text-purple-600" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-purple-700 dark:text-purple-200">
+              <div className="text-2xl font-bold text-purple-700">
                 {stats?.totalTests || 0}
               </div>
-              <p className="text-xs text-purple-600 dark:text-purple-300 mt-1">
+              <p className="text-xs text-purple-600 mt-1">
                 Vollständige Testdurchläufe
               </p>
             </CardContent>
           </Card>
 
           {/* Tests Passed */}
-          <Card className="bg-yellow-50 dark:bg-yellow-950/20 border-yellow-200 dark:border-yellow-800">
+          <Card className="bg-yellow-50 border-yellow-200">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-yellow-800 dark:text-yellow-200">
+              <CardTitle className="text-sm font-medium text-yellow-800">
                 Tests bestanden
               </CardTitle>
-              <Trophy className="h-4 w-4 text-yellow-600 dark:text-yellow-300" />
+              <Trophy className="h-4 w-4 text-yellow-600" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-yellow-700 dark:text-yellow-200">
+              <div className="text-2xl font-bold text-yellow-700">
                 {stats?.testsPassedPercentage || 0}%
               </div>
-              <p className="text-xs text-yellow-600 dark:text-yellow-300 mt-1">
+              <p className="text-xs text-yellow-600 mt-1">
                 {stats?.testsPassedCount || 0} von {stats?.totalTests || 0} Tests
               </p>
             </CardContent>
           </Card>
 
           {/* Overall Progress */}
-          <Card className="bg-indigo-50 dark:bg-indigo-950/20 border-indigo-200 dark:border-indigo-800">
+          <Card className="bg-indigo-50 border-indigo-200">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-indigo-800 dark:text-indigo-200">
+              <CardTitle className="text-sm font-medium text-indigo-800">
                 Gesamtfortschritt
               </CardTitle>
-              <TrendingUp className="h-4 w-4 text-indigo-600 dark:text-indigo-300" />
+              <TrendingUp className="h-4 w-4 text-indigo-600" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-indigo-700 dark:text-indigo-200">
+              <div className="text-2xl font-bold text-indigo-700">
                 {Math.round((questionsAnswered / totalAvailableQuestions) * 100)}%
               </div>
               <Progress 
                 value={(questionsAnswered / totalAvailableQuestions) * 100} 
                 className="mt-2 h-2"
               />
-              <p className="text-xs text-indigo-600 dark:text-indigo-300 mt-1">
+              <p className="text-xs text-indigo-600 mt-1">
                 aller Fragen bearbeitet
               </p>
             </CardContent>
@@ -241,7 +241,7 @@ export default function Statistics() {
               <div className="space-y-3">
                 <div className="flex justify-between items-center">
                   <span className="text-sm text-muted-foreground">Richtige Antworten</span>
-                  <span className="font-semibold text-green-600 dark:text-green-400">
+                  <span className="font-semibold text-green-600">
                     {correctAnswersNum} ({accuracyPercentage}%)
                   </span>
                 </div>
@@ -254,7 +254,7 @@ export default function Statistics() {
               <div className="space-y-3">
                 <div className="flex justify-between items-center">
                   <span className="text-sm text-muted-foreground">Falsche Antworten</span>
-                  <span className="font-semibold text-red-600 dark:text-red-400">
+                  <span className="font-semibold text-red-600">
                     {incorrectAnswersNum} ({incorrectPercentage}%)
                   </span>
                 </div>
@@ -289,11 +289,11 @@ export default function Statistics() {
                 
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between">
-                    <span className="text-green-600 dark:text-green-400">Bestanden:</span>
+                    <span className="text-green-600">Bestanden:</span>
                     <span className="font-semibold text-foreground">{stats?.testsPassedCount || 0}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-red-600 dark:text-red-400">Nicht bestanden:</span>
+                    <span className="text-red-600">Nicht bestanden:</span>
                     <span className="font-semibold text-foreground">
                       {(stats?.totalTests || 0) - (stats?.testsPassedCount || 0)}
                     </span>

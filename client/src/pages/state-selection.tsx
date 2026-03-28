@@ -85,17 +85,17 @@ export default function StateSelection() {
         </div>
 
         {/* Information Card */}
-        <Card className="mb-8 bg-blue-50 dark:bg-blue-950/20 border-blue-200 dark:border-blue-800">
+        <Card className="mb-8 bg-blue-50 border-blue-200">
           <CardContent className="pt-6">
             <div className="flex items-start space-x-3">
               <div className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                 <span className="text-white text-sm font-bold">i</span>
               </div>
               <div>
-                <h3 className="font-semibold text-blue-900 dark:text-blue-200 mb-2">
+                <h3 className="font-semibold text-blue-900 mb-2">
                   Warum ist diese Auswahl wichtig?
                 </h3>
-                <p className="text-blue-800 dark:text-blue-300 text-sm leading-relaxed">
+                <p className="text-blue-800 text-sm leading-relaxed">
                   Der Einbürgerungstest besteht aus 33 Fragen: 30 bundesweite Fragen zu Geschichte,
                   Politik und Gesellschaft Deutschlands sowie 3 spezifische Fragen zu Ihrem Bundesland.
                   Diese Auswahl stellt sicher, dass Sie die richtigen Fragen für Ihr Bundesland erhalten.

@@ -84,7 +84,7 @@ export default function PracticeMistakes() {
                   onClick={handleClearMistakes}
                   variant="outline"
                   size="sm"
-                  className="text-red-600 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300"
+                  className="text-red-600 hover:text-red-700 dark:hover:text-red-300"
                 >
                   <Trash2 className="w-4 h-4 mr-2" />
                   Alle löschen
@@ -119,7 +119,7 @@ export default function PracticeMistakes() {
                 </div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">
+                <div className="text-3xl font-bold text-blue-600 mb-2">
                   {incorrectQuestions.length}
                 </div>
                 <div className="text-sm text-muted-foreground">
@@ -127,7 +127,7 @@ export default function PracticeMistakes() {
                 </div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-green-600 dark:text-green-400 mb-2">
+                <div className="text-3xl font-bold text-green-600 mb-2">
                   {incorrectQuestions.length > 0 ? Math.round((incorrectQuestions.length / 460) * 100) : 0}%
                 </div>
                 <div className="text-sm text-muted-foreground">
@@ -237,7 +237,7 @@ export default function PracticeMistakes() {
                               key={answerIndex}
                               className={`p-3 rounded-md border ${
                                 answerIndex === question.correctAnswer
-                                  ? "bg-green-50 dark:bg-green-950/20 border-green-200 dark:border-green-800 text-green-800 dark:text-green-200"
+                                  ? "bg-green-50 border-green-200 text-green-800"
                                   : "bg-muted border-border text-foreground"
                               }`}
                             >
@@ -249,7 +249,7 @@ export default function PracticeMistakes() {
                                   <span className="break-words">{answer}</span>
                                   {answerIndex === question.correctAnswer && (
                                     <div className="mt-1">
-                                      <Badge className="bg-green-600 dark:bg-green-700">
+                                      <Badge className="bg-green-600">
                                         Richtig
                                       </Badge>
                                     </div>
@@ -260,8 +260,8 @@ export default function PracticeMistakes() {
                           ))}
                         </div>
                         {question.explanation && (
-                          <div className="mt-4 p-3 bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 rounded-md">
-                            <p className="text-sm text-blue-800 dark:text-blue-200">
+                          <div className="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-md">
+                            <p className="text-sm text-blue-800">
                               <strong>Erklärung:</strong> {question.explanation}
                             </p>
                           </div>

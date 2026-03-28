@@ -135,8 +135,8 @@ export default function Practice() {
                 </Button>
               </Link>
               <div className="flex items-center space-x-3">
-                <div className="bg-blue-100 dark:bg-blue-900/30 p-2 rounded-lg">
-                  <BookOpen className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+                <div className="bg-blue-100 p-2 rounded-lg">
+                  <BookOpen className="h-6 w-6 text-blue-600" />
                 </div>
                 <div>
                   <h1 className="text-xl font-bold text-foreground">Übungsmodus</h1>
@@ -149,7 +149,7 @@ export default function Practice() {
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Mistakes Practice Section */}
-        <Card className="mb-8 border-2 border-red-200 dark:border-red-800 bg-gradient-to-r from-red-50 to-pink-50 dark:from-red-950/20 dark:to-pink-950/20">
+        <Card className="mb-8 border-2 border-red-200 bg-gradient-to-r from-red-50 to-pink-50 dark:from-red-950/20 dark:to-pink-950/20">
           <CardHeader>
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
               <div className="flex items-center space-x-3">
@@ -168,7 +168,7 @@ export default function Practice() {
                   <Button 
                     size="lg"
                     variant="outline" 
-                    className="w-full h-10 border-red-600 text-red-700 hover:bg-red-100 dark:border-red-400 dark:text-red-400 dark:hover:bg-red-900/20"
+                    className="w-full h-10 border-red-600 text-red-700 hover:bg-red-100 dark:hover:bg-red-900/20"
                   >
                     <RotateCcw className="h-4 w-4 mr-2" />
                     Fehler üben
@@ -189,7 +189,7 @@ export default function Practice() {
         </Card>
 
         {/* Marked Questions Practice Section */}
-        <Card className="mb-8 border-2 border-yellow-200 dark:border-yellow-800 bg-gradient-to-r from-yellow-50 to-amber-50 dark:from-yellow-950/20 dark:to-amber-950/20">
+        <Card className="mb-8 border-2 border-yellow-200 bg-gradient-to-r from-yellow-50 to-amber-50 dark:from-yellow-950/20 dark:to-amber-950/20">
           <CardHeader>
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
               <div className="flex items-center space-x-3">
@@ -208,7 +208,7 @@ export default function Practice() {
                   <Button 
                     size="lg"
                     variant="outline" 
-                    className="w-full h-10 border-yellow-600 text-yellow-700 hover:bg-yellow-100 dark:border-yellow-400 dark:text-yellow-400 dark:hover:bg-yellow-900/20"
+                    className="w-full h-10 border-yellow-600 text-yellow-700 hover:bg-yellow-100 dark:hover:bg-yellow-900/20"
                   >
                     <Flag className="h-4 w-4 mr-2" />
                     Markierte üben
@@ -229,7 +229,7 @@ export default function Practice() {
         </Card>
 
         {/* All Questions Practice */}
-        <Card className="mb-8 border-2 border-blue-200 dark:border-blue-800 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-950/20 dark:to-indigo-950/20">
+        <Card className="mb-8 border-2 border-blue-200 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-950/20 dark:to-indigo-950/20">
           <CardHeader>
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
               <div className="flex items-center space-x-3">
@@ -255,7 +255,7 @@ export default function Practice() {
                   </Button>
                 </Link>
                 <Link href="/quiz?type=practice&mode=all&chronological=true">
-                  <Button size="lg" variant="outline" className="w-full h-10 border-blue-600 text-blue-700 hover:bg-blue-100 dark:border-blue-400 dark:text-blue-400 dark:hover:bg-blue-900/20">
+                  <Button size="lg" variant="outline" className="w-full h-10 border-blue-600 text-blue-700 hover:bg-blue-100 dark:hover:bg-blue-900/20">
                     Chronologisch üben
                   </Button>
                 </Link>
@@ -321,7 +321,7 @@ export default function Practice() {
 
         {/* Bundesland Specific */}
         {userSettings?.selectedState && stateQuestions.length > 0 && (
-          <Card className="mt-8 border-green-200 dark:border-green-800 bg-green-50 dark:bg-green-950/20">
+          <Card className="mt-8 border-green-200 bg-green-50">
             <CardHeader>
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div className="flex items-center space-x-3">
@@ -339,7 +339,7 @@ export default function Practice() {
                   <Link href={`/quiz?type=practice&category=${userSettings?.selectedState || 'Bundesweit'}`}>
                     <Button 
                       variant="outline" 
-                      className="w-full h-10 border-green-600 text-green-700 hover:bg-green-100 dark:border-green-400 dark:text-green-400 dark:hover:bg-green-900/20"
+                      className="w-full h-10 border-green-600 text-green-700 hover:bg-green-100 dark:hover:bg-green-900/20"
                     >
                       <Shuffle className="h-4 w-4 mr-2" />
                       Zufällig üben
@@ -348,7 +348,7 @@ export default function Practice() {
                   <Link href={`/quiz?type=practice&category=${userSettings?.selectedState || 'Bundesweit'}&chronological=true`}>
                     <Button 
                       variant="secondary" 
-                      className="w-full h-10 border-green-600 text-green-700 hover:bg-green-100 dark:border-green-400 dark:text-green-400 dark:hover:bg-green-900/20"
+                      className="w-full h-10 border-green-600 text-green-700 hover:bg-green-100 dark:hover:bg-green-900/20"
                     >
                       Chronologisch üben
                     </Button>

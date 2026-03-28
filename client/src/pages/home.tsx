@@ -143,7 +143,7 @@ export default function Home() {
                 </p>
               </motion.div>
               <motion.div 
-                className="bg-green-50 dark:bg-green-950/20 rounded-lg sm:rounded-xl p-4 sm:p-6"
+                className="bg-green-50 rounded-lg sm:rounded-xl p-4 sm:p-6"
                 whileHover={{ y: -2, transition: { duration: 0.2 } }}
               >
                 <div className="flex items-center mb-2 sm:mb-3">
@@ -218,7 +218,7 @@ export default function Home() {
                   <div key={session.id} className="flex items-center justify-between p-4 bg-muted/50 dark:bg-muted/30 rounded-lg border border-border">
                     <div className="flex items-center space-x-3">
                       <div className={`w-12 h-12 rounded-lg flex items-center justify-center ${
-                        session.passed ? 'bg-green-100 dark:bg-green-900/30' : 'bg-orange-100 dark:bg-orange-900/30'
+                        session.passed ? 'bg-green-100' : 'bg-orange-100'
                       }`}>
                         {session.passed ? (
                           <CheckCircle className="text-green-500 h-6 w-6" />
@@ -247,7 +247,7 @@ export default function Home() {
                     </div>
                     <div className="text-right">
                       <p className={`text-lg font-semibold ${
-                        session.passed ? 'text-green-600 dark:text-green-400' : 'text-orange-600 dark:text-orange-400'
+                        session.passed ? 'text-green-600' : 'text-orange-600'
                       }`}>
                         {session.correctAnswers}/{session.totalQuestions}
                       </p>

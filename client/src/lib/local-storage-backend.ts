@@ -234,7 +234,7 @@ export class LocalStorageBackend {
     totalStudyTime: number;
   }> {
     const sessions = getItem<StoredQuizSession[]>(KEYS.SESSIONS, []);
-    const fullTests = sessions.filter(s => s.type === 'full');
+    const fullTests = sessions.filter(s => s.type === 'full' && s.totalQuestions === 33);
 
     if (fullTests.length === 0) {
       return { totalTests: 0, averageScore: 0, bestScore: 0, totalStudyTime: 0 };
@@ -296,7 +296,7 @@ export class LocalStorageBackend {
     const correctAnswers = sessions.reduce((sum, s) => sum + s.correctAnswers, 0);
     const incorrectAnswers = sessions.reduce((sum, s) => sum + s.incorrectAnswers, 0);
 
-    const fullTests = sessions.filter(s => s.type === 'full');
+    const fullTests = sessions.filter(s => s.type === 'full' && s.totalQuestions === 33);
     const totalTests = fullTests.length;
     const testsPassedCount = fullTests.filter(s => s.passed).length;
     const testsPassedPercentage = totalTests > 0
