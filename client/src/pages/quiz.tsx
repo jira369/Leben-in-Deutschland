@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { useLocation } from "wouter";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
@@ -17,7 +17,17 @@ export default function Quiz() {
   const [quizType, setQuizType] = useState<'full' | 'practice'>('full');
   const [isExiting, setIsExiting] = useState(false);
   const [showExitConfirm, setShowExitConfirm] = useState(false);
-  
+  const isMounted = useRef(true);
+  const exitTimerRef = useRef<ReturnType<typeof setTimeout>>();
+
+  useEffect(() => {
+    isMounted.current = true;
+    return () => {
+      isMounted.current = false;
+      if (exitTimerRef.current) clearTimeout(exitTimerRef.current);
+    };
+  }, []);
+
   const {
     quizState,
     settings,
@@ -37,76 +47,65 @@ export default function Quiz() {
 
   const { isQuestionMarked, toggleMark } = useMarkedQuestions();
 
-  // Get quiz type from URL params
+  // Parse URL params and start quiz in a single effect to avoid race condition
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search);
     const type = searchParams.get('type') as 'full' | 'practice' | null;
-    const mode = searchParams.get('mode'); // 'all' for practice all questions
-    
-    if (type && (type === 'full' || type === 'practice')) {
-      setQuizType(type);
+    const resolvedType = (type === 'full' || type === 'practice') ? type : 'full';
+
+    setQuizType(resolvedType);
+    if (!isQuizActive && !quizResults) {
+      startQuiz(resolvedType);
     }
+    // Only run on mount
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Start quiz when component mounts
-  useEffect(() => {
-    if (!isQuizActive && !quizResults) {
-      startQuiz(quizType);
-    }
-  }, [isQuizActive, quizResults, quizType, startQuiz]);
-
-  const handleFinishQuiz = async () => {
+  const handleFinishQuiz = useCallback(async () => {
     setIsExiting(true);
-    // Small delay to show exit animation
-    setTimeout(async () => {
+    exitTimerRef.current = setTimeout(async () => {
+      if (!isMounted.current) return;
       const results = await finishQuiz(quizType);
-      if (results) {
+      if (results && isMounted.current) {
         setQuizResults(results);
-        // Store results in localStorage for reliable access
         localStorage.setItem('quiz-results', JSON.stringify({ results, type: quizType }));
         setLocation('/results');
       }
-    }, 500); // 500ms delay for animation
-  };
+    }, 500);
+  }, [quizType, finishQuiz, setLocation]);
 
   const handleExitRequest = () => {
     setShowExitConfirm(true);
   };
 
-  const handleExitQuiz = async () => {
+  const handleExitQuiz = useCallback(async () => {
     setShowExitConfirm(false);
     const answersGiven = quizState ? Object.keys(quizState.selectedAnswers).length : 0;
 
     setIsExiting(true);
-    // Small delay to show exit animation
-    setTimeout(async () => {
-      // For practice mode: show results if more than 1 question answered
-      if (quizType === 'practice' && answersGiven > 1) {
+    exitTimerRef.current = setTimeout(async () => {
+      if (!isMounted.current) return;
+
+      const shouldShowResults =
+        (quizType === 'practice' && answersGiven > 1) ||
+        (quizType === 'full' && answersGiven > 0);
+
+      if (shouldShowResults) {
         const results = await finishQuiz(quizType);
-        if (results) {
+        if (results && isMounted.current) {
           setQuizResults(results);
           localStorage.setItem('quiz-results', JSON.stringify({ results, type: quizType }));
           setLocation('/results');
           return;
         }
       }
-      
-      // For full test: always show results if any questions answered
-      if (quizType === 'full' && answersGiven > 0) {
-        const results = await finishQuiz(quizType);
-        if (results) {
-          setQuizResults(results);
-          localStorage.setItem('quiz-results', JSON.stringify({ results, type: quizType }));
-          setLocation('/results');
-          return;
-        }
+
+      if (isMounted.current) {
+        resetQuiz();
+        setLocation('/');
       }
-      
-      // If no questions answered (or only 1 in practice), go back to previous page
-      resetQuiz();
-      setLocation('/');
-    }, 500); // 500ms delay for animation
-  };
+    }, 500);
+  }, [quizState, quizType, finishQuiz, resetQuiz, setLocation]);
 
   if (!isQuizActive || !quizState || !currentQuestion) {
     return (

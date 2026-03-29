@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Link, useLocation } from "wouter";
 import { motion } from "framer-motion";
+import { OFFICIAL_TEST_QUESTION_COUNT } from "@shared/constants";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { GraduationCap, ListChecks, TrendingUp, Play, Dumbbell, BarChart3, CheckCircle, AlertTriangle, Settings, Bug, Clock } from "lucide-react";
@@ -218,7 +219,7 @@ export default function Home() {
             <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-3 sm:mb-4">
               Ihre letzten Ergebnisse
             </h3>
-            {recentSessions.filter(session => session.type === 'full' && session.totalQuestions === 33).length === 0 ? (
+            {recentSessions.filter(session => session.type === 'full' && session.totalQuestions === OFFICIAL_TEST_QUESTION_COUNT).length === 0 ? (
               <div className="text-center py-8 text-muted-foreground">
                 <p>Noch keine Tests absolviert.</p>
                 <p className="text-sm mt-1">
@@ -227,7 +228,7 @@ export default function Home() {
               </div>
             ) : (
               <div className="space-y-3">
-                {recentSessions.filter(session => session.type === 'full' && session.totalQuestions === 33).map((session) => (
+                {recentSessions.filter(session => session.type === 'full' && session.totalQuestions === OFFICIAL_TEST_QUESTION_COUNT).map((session) => (
                   <div key={session.id} className="flex items-center justify-between p-4 bg-muted/50 rounded-lg border border-border">
                     <div className="flex items-center space-x-3">
                       <div className={`w-12 h-12 rounded-lg flex items-center justify-center ${

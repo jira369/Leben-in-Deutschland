@@ -1,7 +1,8 @@
+self.__FIREBASE_CONFIG__ = {"apiKey":"AIzaSyDGq9mwerS_T1O1mtJDVVF8DOpyqnfLtA4","authDomain":"einbuergerungstestapp-394b6.firebaseapp.com","projectId":"einbuergerungstestapp-394b6","messagingSenderId":"890002827297","appId":"1:890002827297:web:18bf000152dcf41796db60"};
 // Service Worker v5 - Network-First with Smart Caching
 // November 4, 2025 - Complete rewrite to fix update issues
 
-const CACHE_VERSION = 'v3.4.0-20260329';
+const CACHE_VERSION = 'v3.5.0-20260329';
 const CACHE_NAME = `einbuergerungstest-${CACHE_VERSION}`;
 
 // Only cache essential static assets that we KNOW exist
@@ -108,4 +109,37 @@ self.addEventListener('message', (event) => {
     console.log('[SW v5] Received SKIP_WAITING message');
     self.skipWaiting();
   }
+});
+
+// --- Firebase Cloud Messaging (Push Notifications) ---
+// Firebase config is injected by update-sw.cjs at build time
+if (typeof self.__FIREBASE_CONFIG__ !== 'undefined' && self.__FIREBASE_CONFIG__.apiKey) {
+  importScripts('https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js');
+  importScripts('https://www.gstatic.com/firebasejs/10.12.0/firebase-messaging-compat.js');
+
+  firebase.initializeApp(self.__FIREBASE_CONFIG__);
+  const messaging = firebase.messaging();
+
+  messaging.onBackgroundMessage((payload) => {
+    const { title, body } = payload.notification || {};
+    self.registration.showNotification(title || 'Einbürgerungstest', {
+      body: body || 'Zeit zum Üben!',
+      icon: '/icons/icon-192x192.png',
+      data: { url: '/' },
+    });
+  });
+}
+
+// Notification click handler (works even without Firebase config)
+self.addEventListener('notificationclick', (event) => {
+  event.notification.close();
+  const url = event.notification.data?.url || '/';
+  event.waitUntil(
+    clients.matchAll({ type: 'window', includeUncontrolled: true }).then((clientList) => {
+      for (const client of clientList) {
+        if ('focus' in client) return client.focus();
+      }
+      return clients.openWindow(url);
+    })
+  );
 });

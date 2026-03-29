@@ -3,7 +3,7 @@ import { useLocation } from "wouter";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { MapPin, ChevronRight } from "lucide-react";
+import { MapPin, Check, ChevronRight } from "lucide-react";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 
@@ -59,12 +59,7 @@ export default function StateSelection() {
 
   const handleStateSelect = (stateCode: string) => {
     setSelectedState(stateCode);
-  };
-
-  const handleContinue = () => {
-    if (selectedState) {
-      saveStateMutation.mutate(selectedState);
-    }
+    saveStateMutation.mutate(stateCode);
   };
 
   return (
@@ -135,7 +130,7 @@ export default function StateSelection() {
                     </div>
                     {selectedState === state.code && (
                       <div className="w-6 h-6 bg-primary rounded-full flex items-center justify-center">
-                        <ChevronRight className="h-3 w-3 text-white rotate-90" />
+                        <Check className="h-3 w-3 text-white" />
                       </div>
                     )}
                   </div>
@@ -143,10 +138,9 @@ export default function StateSelection() {
               ))}
             </div>
 
-            {/* Continue Button */}
             <div className="mt-8 flex justify-center">
-              <Button 
-                onClick={handleContinue}
+              <Button
+                onClick={() => selectedState && saveStateMutation.mutate(selectedState)}
                 disabled={!selectedState || saveStateMutation.isPending}
                 size="lg"
                 className="px-8"

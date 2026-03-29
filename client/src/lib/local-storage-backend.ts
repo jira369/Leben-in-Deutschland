@@ -1,5 +1,6 @@
 // Local storage backend for Capacitor native app
 // Implements the same API surface as server/storage.ts but uses localStorage
+import { OFFICIAL_TEST_QUESTION_COUNT, OFFICIAL_PASS_THRESHOLD, shuffleArray } from "@shared/constants";
 
 interface Question {
   id: number;
@@ -62,15 +63,6 @@ function getItem<T>(key: string, defaultValue: T): T {
 
 function setItem(key: string, value: unknown): void {
   localStorage.setItem(key, JSON.stringify(value));
-}
-
-function shuffleArray<T>(array: T[]): T[] {
-  const shuffled = [...array];
-  for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-  }
-  return shuffled;
 }
 
 export class LocalStorageBackend {
@@ -234,7 +226,7 @@ export class LocalStorageBackend {
     totalStudyTime: number;
   }> {
     const sessions = getItem<StoredQuizSession[]>(KEYS.SESSIONS, []);
-    const fullTests = sessions.filter(s => s.type === 'full' && s.totalQuestions === 33);
+    const fullTests = sessions.filter(s => s.type === 'full' && s.totalQuestions === OFFICIAL_TEST_QUESTION_COUNT);
 
     if (fullTests.length === 0) {
       return { totalTests: 0, averageScore: 0, bestScore: 0, totalStudyTime: 0 };
@@ -296,7 +288,7 @@ export class LocalStorageBackend {
     const correctAnswers = sessions.reduce((sum, s) => sum + s.correctAnswers, 0);
     const incorrectAnswers = sessions.reduce((sum, s) => sum + s.incorrectAnswers, 0);
 
-    const fullTests = sessions.filter(s => s.type === 'full' && s.totalQuestions === 33);
+    const fullTests = sessions.filter(s => s.type === 'full' && s.totalQuestions === OFFICIAL_TEST_QUESTION_COUNT);
     const totalTests = fullTests.length;
     const testsPassedCount = fullTests.filter(s => s.passed).length;
     const testsPassedPercentage = totalTests > 0

@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import { useLocation, Link } from "wouter";
 import { motion } from "framer-motion";
+import { OFFICIAL_TEST_QUESTION_COUNT, OFFICIAL_PASS_THRESHOLD } from "@shared/constants";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Trophy, RotateCcw, BookOpen, Share, CheckCircle, XCircle, ChevronDown } from "lucide-react";
@@ -64,10 +65,11 @@ export default function Results() {
     );
   }
 
-  const isFullTest = quizType === 'full' && results.total === 33;
+  const isFullTest = quizType === 'full' && results.total === OFFICIAL_TEST_QUESTION_COUNT;
   const passedTest = results.passed;
-  // German citizenship test requires 17 out of 33 questions correct
-  const requiredScore = results.total === 33 ? 17 : Math.ceil(results.total * 0.51);
+  const requiredScore = results.total === OFFICIAL_TEST_QUESTION_COUNT
+    ? OFFICIAL_PASS_THRESHOLD
+    : Math.ceil(results.total * 0.51);
 
   return (
     <motion.div 

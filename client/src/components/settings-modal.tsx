@@ -30,7 +30,8 @@ import { UserSettings } from "@shared/schema";
 import { apiRequest } from "@/lib/queryClient";
 import { isNativePlatform } from "@/lib/platform";
 import { useToast } from "@/hooks/use-toast";
-import { RefreshCw, Trash2 } from "lucide-react";
+import { RefreshCw, Trash2, Bell } from "lucide-react";
+import { useNotifications } from "@/hooks/use-notifications";
 
 const GERMAN_STATES = [
   { code: "Baden-Württemberg", name: "Baden-Württemberg" },
@@ -60,6 +61,9 @@ export function SettingsModal({ open, onOpenChange }: SettingsModalProps) {
   const { toast } = useToast();
   const queryClient = useQueryClient();
   const [showResetConfirm, setShowResetConfirm] = useState(false);
+  const [reminderEnabled, setReminderEnabled] = useState(() => !!localStorage.getItem('fcm_token'));
+  const [reminderTime, setReminderTime] = useState("09:00");
+  const { enable: enableNotifications, disable: disableNotifications, isRegistering, token } = useNotifications();
   
   const { data: settings } = useQuery<UserSettings>({
     queryKey: ['/api/settings'],
@@ -247,6 +251,61 @@ export function SettingsModal({ open, onOpenChange }: SettingsModalProps) {
                 }
               />
             </div>
+          </div>
+
+          <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <Label htmlFor="reminder" className="text-sm font-medium">
+                  <Bell className="inline h-4 w-4 mr-1" />
+                  Tägliche Erinnerung
+                </Label>
+                <p className="text-xs text-muted-foreground mt-1">
+                  Erinnert Sie ans Üben, wenn Sie heute noch nicht gelernt haben
+                </p>
+              </div>
+              <Switch
+                id="reminder"
+                checked={reminderEnabled}
+                onCheckedChange={async (checked) => {
+                  if (checked) {
+                    const [h, m] = reminderTime.split(':').map(Number);
+                    const success = await enableNotifications(h, m);
+                    setReminderEnabled(success);
+                    if (!success) {
+                      toast({
+                        title: "Benachrichtigungen blockiert",
+                        description: "Bitte erlauben Sie Benachrichtigungen in Ihren Geräteeinstellungen.",
+                        variant: "destructive",
+                      });
+                    }
+                  } else {
+                    await disableNotifications();
+                    setReminderEnabled(false);
+                  }
+                }}
+                disabled={isRegistering}
+              />
+            </div>
+            {reminderEnabled && (
+              <div className="ml-1">
+                <Label htmlFor="reminder-time" className="text-xs text-muted-foreground">
+                  Uhrzeit der Erinnerung
+                </Label>
+                <input
+                  id="reminder-time"
+                  type="time"
+                  value={reminderTime}
+                  onChange={async (e) => {
+                    const newTime = e.target.value;
+                    setReminderTime(newTime);
+                    const [h, m] = newTime.split(':').map(Number);
+                    await enableNotifications(h, m);
+                  }}
+                  className="block mt-1 px-3 py-2 border border-border rounded-md bg-background text-sm w-32"
+                />
+              </div>
+            )}
           </div>
 
           <div className="border-t pt-6 space-y-3">

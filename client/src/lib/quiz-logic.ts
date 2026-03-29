@@ -1,14 +1,8 @@
 import { Question, QuizResults, QuizState } from "@shared/schema";
+import { OFFICIAL_TEST_QUESTION_COUNT, OFFICIAL_PASS_THRESHOLD, shuffleArray } from "@shared/constants";
 import { apiRequest, localFetch } from "./queryClient";
 
-export function shuffleArray<T>(array: T[]): T[] {
-  const shuffled = [...array];
-  for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-  }
-  return shuffled;
-}
+export { shuffleArray } from "@shared/constants";
 
 export function calculateResults(quizState: QuizState): QuizResults {
   let correct = 0;
@@ -41,8 +35,9 @@ export function calculateResults(quizState: QuizState): QuizResults {
   const total = correct + incorrect;
   const percentage = total > 0 ? Math.round((correct / total) * 100) : 0;
   
-  // German citizenship test: Need 17 out of 33 questions correct to pass
-  const passed = total === 33 ? correct >= 17 : correct >= Math.ceil(total * 0.51);
+  const passed = total === OFFICIAL_TEST_QUESTION_COUNT
+    ? correct >= OFFICIAL_PASS_THRESHOLD
+    : correct >= Math.ceil(total * 0.51);
   const timeSpent = Math.floor((Date.now() - quizState.startTime) / 1000);
 
   return {
@@ -110,7 +105,7 @@ export function getQuizTypeQuestions(questions: Question[], type: 'full' | 'prac
   if (type === 'practice') {
     selectedQuestions = selectedQuestions.slice(0, 10);
   } else {
-    selectedQuestions = selectedQuestions.slice(0, 33);
+    selectedQuestions = selectedQuestions.slice(0, OFFICIAL_TEST_QUESTION_COUNT);
   }
   
   return selectedQuestions;

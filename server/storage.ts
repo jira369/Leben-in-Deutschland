@@ -1,11 +1,13 @@
 import {
-  questions, quizSessions, userSettings, incorrectAnswers, markedQuestions,
+  questions, quizSessions, userSettings, incorrectAnswers, markedQuestions, fcmTokens,
   type Question, type InsertQuestion,
   type QuizSession, type InsertQuizSession,
   type UserSettings, type InsertUserSettings,
   type IncorrectAnswer, type InsertIncorrectAnswer,
-  type MarkedQuestion, type InsertMarkedQuestion
+  type MarkedQuestion, type InsertMarkedQuestion,
+  type FcmToken, type InsertFcmToken
 } from "@shared/schema";
+import { OFFICIAL_TEST_QUESTION_COUNT, shuffleArray } from "@shared/constants";
 import { db } from "./db";
 import { eq, desc, sql, and, inArray, or, ilike, not } from "drizzle-orm";
 
@@ -72,6 +74,12 @@ export interface IStorage {
   // Reset Statistics
   clearAllQuizSessions(): Promise<void>;
   clearAllMarkedQuestions(): Promise<void>;
+
+  // FCM Tokens
+  registerFcmToken(data: InsertFcmToken): Promise<FcmToken>;
+  unregisterFcmToken(token: string): Promise<void>;
+  updateLastPracticed(token: string): Promise<void>;
+  getAllFcmTokens(): Promise<FcmToken[]>;
 }
 
 export class MemStorage implements IStorage {
@@ -96,7 +104,7 @@ export class MemStorage implements IStorage {
 
   async getRandomQuestions(count: number): Promise<Question[]> {
     const allQuestions = Array.from(this.questions.values());
-    const shuffled = this.shuffleArray([...allQuestions]);
+    const shuffled = shuffleArray([...allQuestions]);
     return shuffled.slice(0, Math.min(count, shuffled.length));
   }
 
@@ -105,14 +113,14 @@ export class MemStorage implements IStorage {
 
     // Get federal questions (category: "Bundesweit")
     const federalQuestions = allQuestions.filter(q => q.category === "Bundesweit");
-    const shuffledFederal = this.shuffleArray([...federalQuestions]).slice(0, federalCount);
+    const shuffledFederal = shuffleArray([...federalQuestions]).slice(0, federalCount);
 
     let stateQuestions: Question[] = [];
-    if (stateCategory && federalCount < 33) {
+    if (stateCategory && federalCount < OFFICIAL_TEST_QUESTION_COUNT) {
       // Get state-specific questions
       const stateSpecificQuestions = allQuestions.filter(q => q.category === stateCategory);
-      const stateCount = 33 - federalCount; // Remaining questions for state
-      stateQuestions = this.shuffleArray([...stateSpecificQuestions]).slice(0, stateCount);
+      const stateCount = OFFICIAL_TEST_QUESTION_COUNT - federalCount; // Remaining questions for state
+      stateQuestions = shuffleArray([...stateSpecificQuestions]).slice(0, stateCount);
     }
 
     return [...shuffledFederal, ...stateQuestions];
@@ -160,7 +168,7 @@ export class MemStorage implements IStorage {
   }> {
     // Only count full tests (type='full'), not practice sessions
     const fullTestSessions = Array.from(this.quizSessions.values())
-      .filter(session => session.type === 'full' && session.totalQuestions === 33);
+      .filter(session => session.type === 'full' && session.totalQuestions === OFFICIAL_TEST_QUESTION_COUNT);
 
     if (fullTestSessions.length === 0) {
       return {
@@ -297,7 +305,7 @@ export class MemStorage implements IStorage {
     }
 
     if (options.random) {
-      filtered = this.shuffleArray(filtered);
+      filtered = shuffleArray(filtered);
     }
 
     if (options.limit) {
@@ -369,18 +377,14 @@ export class MemStorage implements IStorage {
     this.quizSessions.clear();
   }
 
-  async clearAllMarkedQuestions(): Promise<void> {
-    // No-op for MemStorage (doesn't support marked questions)
-  }
+  async clearAllMarkedQuestions(): Promise<void> {}
 
-  private shuffleArray<T>(array: T[]): T[] {
-    const shuffled = [...array];
-    for (let i = shuffled.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-    }
-    return shuffled;
+  async registerFcmToken(): Promise<FcmToken> {
+    return { id: 0, token: '', platform: '', userTimezone: null, reminderHour: 9, reminderMinute: 0, lastPracticedAt: null, createdAt: new Date(), updatedAt: new Date() };
   }
+  async unregisterFcmToken(): Promise<void> {}
+  async updateLastPracticed(): Promise<void> {}
+  async getAllFcmTokens(): Promise<FcmToken[]> { return []; }
 }
 
 export class DatabaseStorage implements IStorage {
@@ -408,9 +412,9 @@ export class DatabaseStorage implements IStorage {
       .limit(federalCount);
 
     let stateQuestions: Question[] = [];
-    if (stateCategory && federalCount < 33) {
+    if (stateCategory && federalCount < OFFICIAL_TEST_QUESTION_COUNT) {
       // Get state-specific questions
-      const stateCount = 33 - federalCount; // Remaining questions for state
+      const stateCount = OFFICIAL_TEST_QUESTION_COUNT - federalCount; // Remaining questions for state
       stateQuestions = await db
         .select()
         .from(questions)
@@ -470,7 +474,7 @@ export class DatabaseStorage implements IStorage {
         totalStudyTime: sql<number>`COALESCE(SUM(${quizSessions.timeSpent}), 0)`
       })
       .from(quizSessions)
-      .where(and(eq(quizSessions.type, 'full'), eq(quizSessions.totalQuestions, 33)));
+      .where(and(eq(quizSessions.type, 'full'), eq(quizSessions.totalQuestions, OFFICIAL_TEST_QUESTION_COUNT)));
 
     const result = stats[0];
     return {
@@ -568,7 +572,7 @@ export class DatabaseStorage implements IStorage {
         testsPassedCount: sql<number>`COUNT(CASE WHEN ${quizSessions.passed} = true THEN 1 END)`
       })
       .from(quizSessions)
-      .where(and(eq(quizSessions.type, 'full'), eq(quizSessions.totalQuestions, 33)));
+      .where(and(eq(quizSessions.type, 'full'), eq(quizSessions.totalQuestions, OFFICIAL_TEST_QUESTION_COUNT)));
 
     const allStats = allSessionStats[0];
     const fullStats = fullTestStats[0];
@@ -848,6 +852,38 @@ export class DatabaseStorage implements IStorage {
   async clearAllMarkedQuestions(): Promise<void> {
     await db.delete(markedQuestions);
   }
+
+  async registerFcmToken(data: InsertFcmToken): Promise<FcmToken> {
+    const [result] = await db
+      .insert(fcmTokens)
+      .values(data)
+      .onConflictDoUpdate({
+        target: fcmTokens.token,
+        set: {
+          platform: data.platform,
+          userTimezone: data.userTimezone,
+          reminderHour: data.reminderHour,
+          reminderMinute: data.reminderMinute,
+          updatedAt: new Date(),
+        },
+      })
+      .returning();
+    return result;
+  }
+
+  async unregisterFcmToken(token: string): Promise<void> {
+    await db.delete(fcmTokens).where(eq(fcmTokens.token, token));
+  }
+
+  async updateLastPracticed(token: string): Promise<void> {
+    await db.update(fcmTokens).set({ lastPracticedAt: new Date() }).where(eq(fcmTokens.token, token));
+  }
+
+  async getAllFcmTokens(): Promise<FcmToken[]> {
+    return db.select().from(fcmTokens);
+  }
 }
 
-export const storage = new DatabaseStorage();
+export const storage: IStorage = process.env.DATABASE_URL
+  ? new DatabaseStorage()
+  : new MemStorage();

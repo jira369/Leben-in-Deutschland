@@ -19,17 +19,6 @@ export function useQuiz() {
     queryKey: ['/api/settings'],
   });
 
-  // Initialize questions if empty
-  const initializeQuestions = useMutation({
-    mutationFn: async () => {
-      const res = await apiRequest('POST', '/api/questions/initialize');
-      return res.json();
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['/api/questions'] });
-    }
-  });
-
   // Save quiz session
   const saveQuizSession = useMutation({
     mutationFn: async (results: QuizResults & { type: string; practiceType?: string }) => {
@@ -57,18 +46,7 @@ export function useQuiz() {
       queryClient.invalidateQueries({ queryKey: ['/api/quiz-sessions/detailed-stats'] });
       queryClient.invalidateQueries({ queryKey: ['/api/quiz-sessions'] });
     }
-  });
-
-
-
-  // Initialize questions if empty
-  useEffect(() => {
-    if (allQuestions.length === 0 && !questionsLoading) {
-      initializeQuestions.mutate();
-    }
-  }, [allQuestions.length, questionsLoading]);
-
-  const startQuiz = useCallback(async (type: 'full' | 'practice') => {
+  });  const startQuiz = useCallback(async (type: 'full' | 'practice') => {
     // Get URL params to determine practice mode and category
     const searchParams = new URLSearchParams(window.location.search);
     const mode = searchParams.get('mode');

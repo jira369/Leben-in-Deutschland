@@ -461,31 +461,38 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       const { description, timestamp, userAgent, url } = bugReportSchema.parse(req.body);
 
-      // Create transporter for sending emails
+      // Sanitize user input to prevent XSS in emails
+      const escapeHtml = (str: string) =>
+        str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+
+      const gmailUser = process.env.GMAIL_USER;
+      const gmailPass = process.env.GMAIL_PASS;
+      const reportEmail = process.env.REPORT_EMAIL || process.env.GMAIL_USER;
+
+      if (!gmailUser || !gmailPass || !reportEmail) {
+        return res.status(503).json({ error: "E-Mail-Dienst ist nicht konfiguriert" });
+      }
+
       const transporter = nodemailer.createTransport({
         service: 'gmail',
-        auth: {
-          user: process.env.GMAIL_USER || 'noreply@example.com',
-          pass: process.env.GMAIL_PASS || 'password'
-        }
+        auth: { user: gmailUser, pass: gmailPass }
       });
 
-      // Email content
       const mailOptions = {
-        from: process.env.GMAIL_USER || 'noreply@example.com',
-        to: 'dacvudinh@gmail.com',
-        subject: '🐛 Bug-Report von Einbürgerungstest App',
+        from: gmailUser,
+        to: reportEmail,
+        subject: 'Bug-Report von Einbürgerungstest App',
         html: `
           <h2>Neuer Bug-Report</h2>
-          <p><strong>Zeitpunkt:</strong> ${new Date(timestamp).toLocaleString('de-DE')}</p>
-          <p><strong>URL:</strong> ${url || 'Nicht verfügbar'}</p>
-          <p><strong>User Agent:</strong> ${userAgent || 'Nicht verfügbar'}</p>
-          
+          <p><strong>Zeitpunkt:</strong> ${escapeHtml(new Date(timestamp).toLocaleString('de-DE'))}</p>
+          <p><strong>URL:</strong> ${escapeHtml(url || 'Nicht verfügbar')}</p>
+          <p><strong>User Agent:</strong> ${escapeHtml(userAgent || 'Nicht verfügbar')}</p>
+
           <h3>Bug-Beschreibung:</h3>
           <div style="background: #f5f5f5; padding: 15px; border-left: 4px solid #007bff; margin: 10px 0;">
-            ${description.replace(/\n/g, '<br>')}
+            ${escapeHtml(description).replace(/\n/g, '<br>')}
           </div>
-          
+
           <hr>
           <small>Automatisch gesendet von der Einbürgerungstest App</small>
         `
@@ -509,6 +516,48 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.status(500).json({
         error: "Fehler beim Senden des Bug-Reports"
       });
+    }
+  });
+
+  // --- FCM Token Management ---
+
+  app.post("/api/fcm/register", async (req, res) => {
+    try {
+      const data = z.object({
+        token: z.string().min(1),
+        platform: z.enum(['android', 'web']),
+        reminderHour: z.number().int().min(0).max(23),
+        reminderMinute: z.number().int().min(0).max(59),
+        userTimezone: z.string().default('Europe/Berlin'),
+      }).parse(req.body);
+
+      const result = await storage.registerFcmToken(data);
+      res.status(201).json(result);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ error: error.errors });
+      }
+      res.status(500).json({ error: "Failed to register FCM token" });
+    }
+  });
+
+  app.post("/api/fcm/unregister", async (req, res) => {
+    try {
+      const { token } = z.object({ token: z.string() }).parse(req.body);
+      await storage.unregisterFcmToken(token);
+      res.json({ success: true });
+    } catch (error) {
+      res.status(500).json({ error: "Failed to unregister FCM token" });
+    }
+  });
+
+  app.post("/api/fcm/practiced", async (req, res) => {
+    try {
+      const { token } = z.object({ token: z.string() }).parse(req.body);
+      await storage.updateLastPracticed(token);
+      res.json({ success: true });
+    } catch (error) {
+      res.status(500).json({ error: "Failed to update practice status" });
     }
   });
 

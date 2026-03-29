@@ -45,7 +45,7 @@ export function BugReportModal({ open, onOpenChange }: BugReportModalProps) {
         const body = encodeURIComponent(
           `Bug-Beschreibung:\n${bugDescription}\n\nZeitpunkt: ${new Date().toISOString()}\nPlattform: ${navigator.userAgent}`
         );
-        window.open(`mailto:dacvudinh@gmail.com?subject=${subject}&body=${body}`);
+        window.open(`mailto:einbuergerungstest.app@gmail.com?subject=${subject}&body=${body}`);
       } else {
         await apiRequest('POST', '/api/bug-report', {
           description: bugDescription,

@@ -37,6 +37,20 @@ export const userSettings = pgTable("user_settings", {
   selectedState: text("selected_state"),
   hasSelectedState: boolean("has_selected_state").default(false),
   timerEnabled: boolean("timer_enabled").default(true).notNull(),
+  notificationsEnabled: boolean("notifications_enabled").default(false).notNull(),
+  reminderTime: text("reminder_time").default("09:00"),
+});
+
+export const fcmTokens = pgTable("fcm_tokens", {
+  id: serial("id").primaryKey(),
+  token: text("token").notNull().unique(),
+  platform: text("platform").notNull(), // 'android' | 'web'
+  userTimezone: text("user_timezone"),
+  reminderHour: integer("reminder_hour").default(9).notNull(),
+  reminderMinute: integer("reminder_minute").default(0).notNull(),
+  lastPracticedAt: timestamp("last_practiced_at"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });
 
 export const incorrectAnswers = pgTable("incorrect_answers", {
@@ -76,6 +90,12 @@ export const insertMarkedQuestionSchema = createInsertSchema(markedQuestions).om
   createdAt: true,
 });
 
+export const insertFcmTokenSchema = createInsertSchema(fcmTokens).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});
+
 export type Question = typeof questions.$inferSelect;
 export type InsertQuestion = z.infer<typeof insertQuestionSchema>;
 export type QuizSession = typeof quizSessions.$inferSelect;
@@ -86,6 +106,8 @@ export type IncorrectAnswer = typeof incorrectAnswers.$inferSelect;
 export type InsertIncorrectAnswer = z.infer<typeof insertIncorrectAnswerSchema>;
 export type MarkedQuestion = typeof markedQuestions.$inferSelect;
 export type InsertMarkedQuestion = z.infer<typeof insertMarkedQuestionSchema>;
+export type FcmToken = typeof fcmTokens.$inferSelect;
+export type InsertFcmToken = z.infer<typeof insertFcmTokenSchema>;
 
 // Quiz state types
 export type QuizState = {

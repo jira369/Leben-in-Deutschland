@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "890002827297",
+    "project_id": "einbuergerungstestapp-394b6",
+    "storage_bucket": "einbuergerungstestapp-394b6.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:890002827297:android:294911f3ed60a01496db60",
+        "android_client_info": {
+          "package_name": "de.lebenindeutschland.quiz"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAygTNKEIqkU9Pbx6BWzAWP4JKK_Sajf1I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
