@@ -80,14 +80,36 @@ export default function Quiz() {
 
   const handleExitQuiz = useCallback(async () => {
     setShowExitConfirm(false);
+    const answersGiven = quizState ? Object.keys(quizState.selectedAnswers).length : 0;
+
     setIsExiting(true);
-    exitTimerRef.current = setTimeout(() => {
+    exitTimerRef.current = setTimeout(async () => {
       if (!isMounted.current) return;
-      // Discard all data — as if the test never happened
-      resetQuiz();
-      setLocation('/');
+
+      if (quizType === 'full') {
+        // Testsimulation: discard all data — as if the test never happened
+        resetQuiz();
+        setLocation('/');
+        return;
+      }
+
+      // Übungsmodus: save results if questions were answered
+      if (answersGiven > 1) {
+        const results = await finishQuiz(quizType);
+        if (results && isMounted.current) {
+          setQuizResults(results);
+          localStorage.setItem('quiz-results', JSON.stringify({ results, type: quizType }));
+          setLocation('/results');
+          return;
+        }
+      }
+
+      if (isMounted.current) {
+        resetQuiz();
+        setLocation('/');
+      }
     }, 500);
-  }, [resetQuiz, setLocation]);
+  }, [quizState, quizType, finishQuiz, resetQuiz, setLocation]);
 
   if (!isQuizActive || !quizState || !currentQuestion) {
     return (
