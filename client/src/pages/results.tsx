@@ -1,15 +1,14 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { useLocation, Link } from "wouter";
 import { motion } from "framer-motion";
 import { OFFICIAL_TEST_QUESTION_COUNT, OFFICIAL_PASS_THRESHOLD } from "@shared/constants";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Trophy, RotateCcw, BookOpen, Share, CheckCircle, XCircle, ChevronDown } from "lucide-react";
+import { Trophy, RotateCcw, BookOpen, CheckCircle, XCircle, ChevronDown } from "lucide-react";
 import { QuizResults } from "@shared/schema";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { formatDuration } from "@/lib/quiz-logic";
 import { useQuery } from "@tanstack/react-query";
-import { toPng } from "html-to-image";
 import confetti from "canvas-confetti";
 
 export default function Results() {
@@ -17,9 +16,6 @@ export default function Results() {
   const [showDetails, setShowDetails] = useState(false);
   const [results, setResults] = useState<QuizResults | null>(null);
   const [quizType, setQuizType] = useState<'full' | 'practice'>('full');
-  const shareCardRef = useRef<HTMLDivElement>(null);
-  const [isSharing, setIsSharing] = useState(false);
-
   // Get quiz statistics
   const { data: stats } = useQuery<{ totalTests: number; averageScore: number; bestScore: number; totalStudyTime: number }>({
     queryKey: ['/api/quiz-sessions/stats'],
@@ -97,7 +93,7 @@ export default function Results() {
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <Card ref={shareCardRef} className="rounded-2xl shadow-lg p-4 sm:p-8 mb-6 text-center">
+          <Card className="rounded-2xl shadow-lg p-4 sm:p-8 mb-6 text-center">
             <CardContent className="p-0">
               <motion.div 
                 className="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6"
@@ -257,47 +253,6 @@ export default function Results() {
                     Fehler üben
                   </Button>
                 </Link>
-                <Button
-                  variant="outline"
-                  className="w-full h-12"
-                  disabled={isSharing}
-                  onClick={async () => {
-                    if (!shareCardRef.current) return;
-                    setIsSharing(true);
-
-                    try {
-                      const dataUrl = await toPng(shareCardRef.current, {
-                        backgroundColor: '#ffffff',
-                        pixelRatio: 2,
-                      });
-
-                      // Convert to blob for sharing
-                      const res = await fetch(dataUrl);
-                      const blob = await res.blob();
-                      const file = new File([blob], 'einbuergerungstest-ergebnis.png', { type: 'image/png' });
-
-                      if (navigator.share && navigator.canShare?.({ files: [file] })) {
-                        await navigator.share({
-                          title: 'Einbürgerungstest Ergebnis',
-                          text: `${results.correct}/${results.total} richtig (${results.percentage}%)`,
-                          files: [file],
-                        });
-                      } else {
-                        // Fallback: download the image
-                        const link = document.createElement('a');
-                        link.download = 'einbuergerungstest-ergebnis.png';
-                        link.href = dataUrl;
-                        link.click();
-                      }
-                    } catch (err) {
-                    } finally {
-                      setIsSharing(false);
-                    }
-                  }}
-                >
-                  <Share className="mr-2 h-4 w-4" />
-                  {isSharing ? 'Wird erstellt...' : 'Ergebnis teilen'}
-                </Button>
               </div>
             </CardContent>
           </Card>

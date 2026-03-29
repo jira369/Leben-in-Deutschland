@@ -80,32 +80,14 @@ export default function Quiz() {
 
   const handleExitQuiz = useCallback(async () => {
     setShowExitConfirm(false);
-    const answersGiven = quizState ? Object.keys(quizState.selectedAnswers).length : 0;
-
     setIsExiting(true);
-    exitTimerRef.current = setTimeout(async () => {
+    exitTimerRef.current = setTimeout(() => {
       if (!isMounted.current) return;
-
-      const shouldShowResults =
-        (quizType === 'practice' && answersGiven > 1) ||
-        (quizType === 'full' && answersGiven > 0);
-
-      if (shouldShowResults) {
-        const results = await finishQuiz(quizType);
-        if (results && isMounted.current) {
-          setQuizResults(results);
-          localStorage.setItem('quiz-results', JSON.stringify({ results, type: quizType }));
-          setLocation('/results');
-          return;
-        }
-      }
-
-      if (isMounted.current) {
-        resetQuiz();
-        setLocation('/');
-      }
+      // Discard all data — as if the test never happened
+      resetQuiz();
+      setLocation('/');
     }, 500);
-  }, [quizState, quizType, finishQuiz, resetQuiz, setLocation]);
+  }, [resetQuiz, setLocation]);
 
   if (!isQuizActive || !quizState || !currentQuestion) {
     return (
