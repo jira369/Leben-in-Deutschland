@@ -63,7 +63,6 @@ export function BugReportModal({ open, onOpenChange }: BugReportModalProps) {
       setBugDescription("");
       onOpenChange(false);
     } catch (error) {
-      console.error('Failed to submit bug report:', error);
       toast({
         title: "Fehler beim Senden",
         description: "Der Bug-Report konnte nicht gesendet werden. Bitte versuchen Sie es später erneut.",

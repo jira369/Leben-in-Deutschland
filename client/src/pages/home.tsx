@@ -30,6 +30,11 @@ export default function Home() {
     queryKey: ['/api/quiz-sessions/stats'],
   });
 
+  // Fetch unique questions answered
+  const { data: uniqueData } = useQuery<{ uniqueQuestionsAnswered: number }>({
+    queryKey: ['/api/quiz-sessions/unique-questions'],
+  });
+
   // Check if user needs to select their bundesland
   useEffect(() => {
     if (userSettings && !userSettings.hasSelectedState) {
@@ -136,10 +141,18 @@ export default function Home() {
               >
                 <div className="flex items-center mb-2 sm:mb-3">
                   <ListChecks className="text-primary text-lg sm:text-xl mr-2 sm:mr-3 h-5 w-5 sm:h-6 sm:w-6" />
-                  <h3 className="text-base sm:text-lg font-semibold text-foreground">310 Fragen</h3>
+                  <h3 className="text-base sm:text-lg font-semibold text-foreground">
+                    {uniqueData?.uniqueQuestionsAnswered || 0} von {userSettings?.selectedState ? 310 : 300} Fragen geübt
+                  </h3>
+                </div>
+                <div className="w-full bg-primary/10 rounded-full h-2 mb-2">
+                  <div
+                    className="bg-primary h-2 rounded-full transition-all duration-500"
+                    style={{ width: `${Math.min(100, Math.round(((uniqueData?.uniqueQuestionsAnswered || 0) / (userSettings?.selectedState ? 310 : 300)) * 100))}%` }}
+                  />
                 </div>
                 <p className="text-sm sm:text-base text-muted-foreground">
-                  Alle offiziellen Fragen des Bundesamts für Migration und Flüchtlinge
+                  {Math.round(((uniqueData?.uniqueQuestionsAnswered || 0) / (userSettings?.selectedState ? 310 : 300)) * 100)}% der offiziellen BAMF-Fragen bearbeitet
                 </p>
               </motion.div>
               <motion.div 

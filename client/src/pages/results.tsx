@@ -43,7 +43,6 @@ export default function Results() {
         // Clear localStorage after reading
         localStorage.removeItem('quiz-results');
       } catch (error) {
-        console.error('Failed to parse stored quiz results:', error);
       }
     }
   }, []);
@@ -288,7 +287,6 @@ export default function Results() {
                         link.click();
                       }
                     } catch (err) {
-                      console.error('Share failed:', err);
                     } finally {
                       setIsSharing(false);
                     }

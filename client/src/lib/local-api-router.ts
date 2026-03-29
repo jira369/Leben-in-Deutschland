@@ -228,7 +228,6 @@ export async function handleLocalRequest(url: string, init?: RequestInit): Promi
 
     return jsonResponse({ error: `Route not found: ${method} ${pathname}` }, 404);
   } catch (error) {
-    console.error(`Local API error: ${method} ${pathname}`, error);
     return jsonResponse({ error: (error as Error).message }, 500);
   }
 }

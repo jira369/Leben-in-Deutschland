@@ -111,7 +111,6 @@ export function useQuiz() {
       
       setQuizState(newQuizState);
     } catch (error) {
-      console.error('Failed to start quiz:', error);
     }
   }, [settings]);
 
@@ -195,14 +194,12 @@ export function useQuiz() {
       queryClient.invalidateQueries({ queryKey: ['/api/incorrect-questions'] });
       queryClient.invalidateQueries({ queryKey: ['/api/incorrect-answers/count'] });
     } catch (error) {
-      console.error('Failed to track incorrect answers:', error);
     }
     
     // Save results to backend
     try {
       await saveQuizSession.mutateAsync({ ...results, type, practiceType });
     } catch (error) {
-      console.error('Failed to save quiz session:', error);
     }
 
     return results;

@@ -64,7 +64,6 @@ export async function trackIncorrectAnswers(questionResults: QuizResults['questi
       await apiRequest("DELETE", `/api/incorrect-answers/question/${result.questionId}`);
     } catch (error) {
       // Ignore if question wasn't in incorrect list
-      console.log("Question not in incorrect list or already removed:", result.questionId);
     }
   }
   
@@ -78,7 +77,6 @@ export async function trackIncorrectAnswers(questionResults: QuizResults['questi
         correctAnswer: result.question.correctAnswer
       });
     } catch (error) {
-      console.error("Failed to track incorrect answer:", error);
     }
   }
 }
