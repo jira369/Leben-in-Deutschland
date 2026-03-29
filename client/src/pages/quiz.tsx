@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight, Flag } from "lucide-react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { ChevronLeft, ChevronRight, Flag, AlertTriangle } from "lucide-react";
 import { useQuiz } from "@/hooks/use-quiz";
 import { useMarkedQuestions } from "@/hooks/use-marked-questions";
 import { ProgressBar } from "@/components/quiz/progress-bar";
@@ -15,6 +16,7 @@ export default function Quiz() {
   const [quizResults, setQuizResults] = useState<QuizResults | null>(null);
   const [quizType, setQuizType] = useState<'full' | 'practice'>('full');
   const [isExiting, setIsExiting] = useState(false);
+  const [showExitConfirm, setShowExitConfirm] = useState(false);
   
   const {
     quizState,
@@ -67,9 +69,14 @@ export default function Quiz() {
     }, 500); // 500ms delay for animation
   };
 
+  const handleExitRequest = () => {
+    setShowExitConfirm(true);
+  };
+
   const handleExitQuiz = async () => {
+    setShowExitConfirm(false);
     const answersGiven = quizState ? Object.keys(quizState.selectedAnswers).length : 0;
-    
+
     setIsExiting(true);
     // Small delay to show exit animation
     setTimeout(async () => {
@@ -138,7 +145,7 @@ export default function Quiz() {
             currentQuestion={quizState.currentQuestionIndex + 1}
             totalQuestions={quizState.questions.length}
             progress={progress}
-            onExit={handleExitQuiz}
+            onExit={handleExitRequest}
             quizType={quizType}
             startTime={quizState.startTime}
             onTimeUp={handleFinishQuiz}
@@ -230,6 +237,31 @@ export default function Quiz() {
           </div>
         </motion.div>
       </main>
+
+      <Dialog open={showExitConfirm} onOpenChange={setShowExitConfirm}>
+        <DialogContent className="max-w-sm">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <AlertTriangle className="h-5 w-5 text-orange-500" />
+              {quizType === 'full' ? 'Test beenden?' : 'Übung beenden?'}
+            </DialogTitle>
+          </DialogHeader>
+          <p className="text-sm text-muted-foreground">
+            {quizType === 'full'
+              ? `Sie haben ${quizState ? Object.keys(quizState.selectedAnswers).length : 0} von ${quizState?.questions.length || 33} Fragen beantwortet. Unbeantwortete Fragen werden als falsch gewertet.`
+              : 'Möchten Sie die Übung wirklich beenden?'
+            }
+          </p>
+          <div className="flex gap-3 mt-2">
+            <Button variant="outline" className="flex-1" onClick={() => setShowExitConfirm(false)}>
+              Weiter üben
+            </Button>
+            <Button variant="destructive" className="flex-1" onClick={handleExitQuiz}>
+              Beenden
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </motion.div>
   );
 }

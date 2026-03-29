@@ -15,7 +15,6 @@ async function clearAllCaches() {
     await Promise.all(
       cacheNames.map(cacheName => caches.delete(cacheName))
     );
-    console.log('Service Worker caches cleared');
   }
 
   // Clear IndexedDB (React Query persistence)
@@ -34,13 +33,10 @@ async function clearAllCaches() {
           return Promise.resolve();
         })
       );
-      console.log('IndexedDB cleared');
     } catch (error) {
-      console.log('IndexedDB clear failed (non-critical):', error);
     }
   }
 
-  console.log('All caches cleared');
 }
 
 // Clear localStorage if app version has changed
@@ -48,7 +44,6 @@ async function checkAndClearCache() {
   const storedVersion = localStorage.getItem(VERSION_KEY);
 
   if (storedVersion !== APP_VERSION) {
-    console.log(`App updated from ${storedVersion || 'unknown'} to ${APP_VERSION}`);
 
     // Clear ALL caches (Service Worker, HTTP Cache, etc.)
     await clearAllCaches();
@@ -78,7 +73,6 @@ async function checkAndClearCache() {
     // Set new version
     localStorage.setItem(VERSION_KEY, APP_VERSION);
 
-    console.log('All caches and localStorage cleared for new version');
 
     // Force HARD reload to bypass all caches
     window.location.href = window.location.href.split('?')[0] + '?v=' + APP_VERSION + '&t=' + Date.now();
@@ -91,17 +85,14 @@ async function unregisterOldServiceWorkers() {
     const registrations = await navigator.serviceWorker.getRegistrations();
     for (const registration of registrations) {
       await registration.unregister();
-      console.log('Old service worker unregistered');
     }
   }
 }
 
 // Check version and clear cache if needed
-checkAndClearCache().catch(err => console.error('Cache check failed:', err));
 
 // CRITICAL: Always unregister old service workers to force update
 // This ensures stuck users on old versions can update
-unregisterOldServiceWorkers().catch(err => console.error('SW unregister failed:', err));
 
 // Register Service Worker for PWA (skip in native app - not needed)
 if ('serviceWorker' in navigator && import.meta.env.PROD && !Capacitor.isNativePlatform()) {
@@ -109,7 +100,6 @@ if ('serviceWorker' in navigator && import.meta.env.PROD && !Capacitor.isNativeP
     // Add version parameter to force reload of SW script
     navigator.serviceWorker.register(`/sw.js?v=${APP_VERSION}`)
       .then((registration) => {
-        console.log('SW registered: ', registration);
 
         // Check for service worker updates
         registration.addEventListener('updatefound', () => {
@@ -117,7 +107,6 @@ if ('serviceWorker' in navigator && import.meta.env.PROD && !Capacitor.isNativeP
           if (newWorker) {
             newWorker.addEventListener('statechange', () => {
               if (newWorker.state === 'activated') {
-                console.log('New service worker activated, reloading page...');
                 window.location.reload();
               }
             });
@@ -125,7 +114,6 @@ if ('serviceWorker' in navigator && import.meta.env.PROD && !Capacitor.isNativeP
         });
       })
       .catch((registrationError) => {
-        console.log('SW registration failed: ', registrationError);
       });
   });
 }

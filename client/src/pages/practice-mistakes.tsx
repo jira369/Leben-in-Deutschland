@@ -35,7 +35,6 @@ export default function PracticeMistakes() {
       // Invalidate queries to refresh UI (but total stats remain unchanged)
       queryClient.invalidateQueries({ queryKey: ["/api/incorrect-questions"] });
     } catch (error) {
-      console.error("Failed to clear mistakes:", error);
     }
   };
 
@@ -222,7 +221,6 @@ export default function PracticeMistakes() {
                                     alt={`Bild zu Frage ${question.id}`}
                                     className="max-w-full max-h-[70vh] object-contain rounded-lg border border-gray-200 shadow-sm"
                                     onError={(e) => {
-                                      console.error(`Failed to load image: /attached_assets/${question.imagePath}`);
                                       e.currentTarget.src = `data:image/svg+xml;base64,${btoa('<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300"><rect width="400" height="300" fill="#f3f4f6"/><text x="200" y="150" text-anchor="middle" font-family="Arial" font-size="16" fill="#6b7280">Bild nicht verfügbar</text></svg>')}`;
                                     }}
                                   />

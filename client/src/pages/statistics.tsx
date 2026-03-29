@@ -56,8 +56,28 @@ export default function Statistics() {
   });
 
   // Calculate total available questions based on selected state
-  // 300 federal questions + 10 state-specific questions = 310 total
   const totalAvailableQuestions = userSettings?.selectedState ? 310 : 300;
+
+  // Calculate learning streak (consecutive days with activity)
+  const learningStreak = (() => {
+    if (!recentSessions?.length) return 0;
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const activeDays = new Set(
+      recentSessions.map(s => {
+        const d = new Date(s.createdAt);
+        d.setHours(0, 0, 0, 0);
+        return d.getTime();
+      })
+    );
+    let streak = 0;
+    const day = new Date(today);
+    while (activeDays.has(day.getTime())) {
+      streak++;
+      day.setDate(day.getDate() - 1);
+    }
+    return streak;
+  })();
   
   // Use the actual count of unique questions answered from the backend
   const questionsAnswered = uniqueQuestionsData?.uniqueQuestionsAnswered || 0;
@@ -200,6 +220,24 @@ export default function Statistics() {
               </div>
               <p className="text-xs text-yellow-600 mt-1">
                 {stats?.testsPassedCount || 0} von {stats?.totalTests || 0} Tests
+              </p>
+            </CardContent>
+          </Card>
+
+          {/* Learning Streak */}
+          <Card className="bg-orange-50 border-orange-200">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium text-orange-800">
+                Lernstreak
+              </CardTitle>
+              <span className="text-lg">🔥</span>
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold text-orange-700">
+                {learningStreak} {learningStreak === 1 ? 'Tag' : 'Tage'}
+              </div>
+              <p className="text-xs text-orange-600 mt-1">
+                {learningStreak > 0 ? 'in Folge geübt' : 'Heute noch nicht geübt'}
               </p>
             </CardContent>
           </Card>

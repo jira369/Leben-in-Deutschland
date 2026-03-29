@@ -171,14 +171,11 @@ export function SettingsModal({ open, onOpenChange }: SettingsModalProps) {
             })
           );
         } catch (error) {
-          console.log('IndexedDB clear failed (non-critical):', error);
         }
       }
       
-      // Clear localStorage (preserving theme)
-      const theme = localStorage.getItem('theme');
+      // Clear localStorage
       localStorage.clear();
-      if (theme) localStorage.setItem('theme', theme);
       
       toast({
         title: "Cache geleert",
