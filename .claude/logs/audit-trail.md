@@ -1,0 +1,11 @@
+- `2026-03-29 14:21:36` | Write | /Users/dacvu/.claude/plans/shimmering-shimmying-cat.md
+- `2026-03-29 14:21:51` | Edit | /Users/dacvu/.claude/plans/shimmering-shimmying-cat.md
+- `2026-03-29 14:23:12` | Write | CLAUDE.md
+- `2026-03-29 14:26:28` | Edit | CLAUDE.md
+- `2026-03-29 14:28:35` | Edit | /Users/dacvu/Leben-in-Deutschland/.gitignore
+- `2026-03-29 14:32:28` | Edit | server/storage.ts
+- `2026-03-29 14:32:39` | Write | server/db.ts
+- `2026-03-29 14:33:34` | Edit | server/index.ts
+- `2026-03-29 14:33:47` | Edit | .claude/launch.json
+- `2026-03-29 14:34:19` | Write | .claude/launch.json
+- `2026-03-29 14:34:34` | Edit | .claude/launch.json

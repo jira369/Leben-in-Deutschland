@@ -5,9 +5,10 @@
       "name": "dev",
       "runtimeExecutable": "npx",
       "runtimeArgs": ["tsx", "server/index.ts"],
-      "port": 3000,
+      "port": 5000,
+      "autoPort": true,
       "env": {
-        "PORT": "3000"
+        "NODE_ENV": "development"
       }
     },
     {
