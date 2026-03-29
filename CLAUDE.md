@@ -46,6 +46,29 @@ Always read `.claude/memory.md` before taking action.
 5. **MCP Knowledge Graph** — Structured entities and relations (if memory MCP enabled)
 6. **Daily Notes** — Chronological session history and handoff records
 
+## Proaktive Agenten-Nutzung
+
+Claude MUSS die folgenden Agenten automatisch einsetzen, ohne dass der User explizit darum bittet:
+
+### Immer aktiv:
+- **yak-shave-detector**: Vor jeder Aufgabe mit 3+ geplanten Schritten aufrufen. Bei Level 2+ den User warnen.
+- **error-whisperer**: Automatisch aufrufen, wenn ein Fehler, Stack Trace oder Build-Failure auftritt.
+- **unsticker**: Aufrufen, wenn derselbe Fehler 2+ Mal auftritt oder ein Ansatz 2+ Mal fehlschlägt.
+
+### Bei Code-Änderungen:
+- **archaeologist**: Vor dem Ändern von Code, dessen Zweck unklar ist, git blame/history prüfen.
+- **pr-ghostwriter**: Vor jedem Commit eine aussagekräftige Commit-Message generieren. Vor PRs eine vollständige PR-Beschreibung erstellen.
+- **debt-collector**: Bei Refactoring-Tasks zuerst den betroffenen Bereich scannen.
+
+### Bei Entscheidungen:
+- **rubber-duck**: Vor Architektur- oder Design-Entscheidungen den User mit gezielten Fragen durch die Entscheidung leiten.
+
+### Bei Orientierung:
+- **onboarding-sherpa**: Wenn ein neuer/unbekannter Code-Bereich betreten wird, zuerst die Struktur verstehen.
+
+### Qualitätssicherung:
+- **auditor**: Läuft automatisch via Stop-Hook (bereits konfiguriert).
+
 ## Command Awareness
 
 All agents can invoke system commands. Read `.claude/command-index.md` for the full catalog.
