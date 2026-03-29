@@ -46,6 +46,7 @@ export function useQuiz() {
       queryClient.invalidateQueries({ queryKey: ['/api/quiz-sessions/detailed-stats'] });
       queryClient.invalidateQueries({ queryKey: ['/api/quiz-sessions'] });
       queryClient.invalidateQueries({ queryKey: ['/api/quiz-sessions/unique-questions'] });
+      queryClient.invalidateQueries({ queryKey: ['/api/questions/unplayed/count'] });
     }
   });  const startQuiz = useCallback(async (type: 'full' | 'practice') => {
     // Get URL params to determine practice mode and category
