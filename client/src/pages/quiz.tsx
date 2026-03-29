@@ -168,6 +168,7 @@ export default function Quiz() {
             selectedAnswer={selectedAnswer}
             showFeedback={hasSelectedCurrentAnswer && quizType === 'practice'}
             immediateFeedback={quizType === 'practice'}
+            allowAnswerChange={quizType === 'full'}
             onAnswerSelect={selectAnswer}
           />
 

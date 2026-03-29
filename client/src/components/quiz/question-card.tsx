@@ -14,6 +14,7 @@ interface QuestionCardProps {
   selectedAnswer?: number;
   showFeedback?: boolean;
   immediateFeedback?: boolean;
+  allowAnswerChange?: boolean;
   onAnswerSelect: (answerIndex: number) => void;
 }
 
@@ -23,6 +24,7 @@ export function QuestionCard({
   selectedAnswer,
   showFeedback = false,
   immediateFeedback = true,
+  allowAnswerChange = false,
   onAnswerSelect
 }: QuestionCardProps) {
   const [isImageModalOpen, setIsImageModalOpen] = useState(false);
@@ -77,14 +79,14 @@ export function QuestionCard({
         <RadioGroup
           key={question.id}
           value={selectedAnswer?.toString() || ""}
-          onValueChange={hasSelectedAnswer ? undefined : (value) => onAnswerSelect(parseInt(value))}
+          onValueChange={hasSelectedAnswer && !allowAnswerChange ? undefined : (value) => onAnswerSelect(parseInt(value))}
           className="space-y-4 sm:space-y-5"
         >
           {question.answers.map((answer, index) => (
             <Label
               key={index}
               className={`flex items-start p-4 sm:p-5 rounded-xl border-2 transition-all duration-200 group min-w-0 ${
-                hasSelectedAnswer ? 'cursor-default' : 'cursor-pointer'
+                hasSelectedAnswer && !allowAnswerChange ? 'cursor-default' : 'cursor-pointer'
               } ${
                 selectedAnswer === index
                   ? 'border-primary bg-primary/5'
@@ -95,7 +97,7 @@ export function QuestionCard({
             >
               <RadioGroupItem
                 value={index.toString()}
-                disabled={hasSelectedAnswer}
+                disabled={hasSelectedAnswer && !allowAnswerChange}
                 className="w-5 h-5 shrink-0 mt-0.5 text-primary border-border focus:ring-primary focus:ring-2"
               />
               <span className={`ml-4 font-medium leading-relaxed hyphenate break-words min-w-0 ${
