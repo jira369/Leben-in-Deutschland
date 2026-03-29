@@ -131,7 +131,7 @@ export default function Home() {
               transition={{ duration: 0.5, delay: 1.0 }}
             >
               <motion.div 
-                className="bg-primary/5 dark:bg-primary/10 rounded-lg sm:rounded-xl p-4 sm:p-6"
+                className="bg-primary/5 rounded-lg sm:rounded-xl p-4 sm:p-6"
                 whileHover={{ y: -2, transition: { duration: 0.2 } }}
               >
                 <div className="flex items-center mb-2 sm:mb-3">
@@ -215,7 +215,7 @@ export default function Home() {
             ) : (
               <div className="space-y-3">
                 {recentSessions.filter(session => session.type === 'full' && session.totalQuestions === 33).map((session) => (
-                  <div key={session.id} className="flex items-center justify-between p-4 bg-muted/50 dark:bg-muted/30 rounded-lg border border-border">
+                  <div key={session.id} className="flex items-center justify-between p-4 bg-muted/50 rounded-lg border border-border">
                     <div className="flex items-center space-x-3">
                       <div className={`w-12 h-12 rounded-lg flex items-center justify-center ${
                         session.passed ? 'bg-green-100' : 'bg-orange-100'

@@ -118,7 +118,7 @@ export default function Results() {
                 <div className="text-2xl sm:text-3xl font-bold text-red-600 mb-2">{results.incorrect}</div>
                 <p className="text-sm sm:text-base text-red-700 font-medium">Falsche Antworten</p>
               </div>
-              <div className="bg-primary/5 dark:bg-primary/10 rounded-xl p-4 sm:p-6">
+              <div className="bg-primary/5 rounded-xl p-4 sm:p-6">
                 <div className="text-2xl sm:text-3xl font-bold text-primary mb-2">{results.percentage}%</div>
                 <p className="text-sm sm:text-base text-primary font-medium">Erfolgsquote</p>
               </div>
@@ -157,7 +157,7 @@ export default function Results() {
             )}
             
             {!isFullTest && results.timeSpent > 0 && (
-              <div className="p-4 bg-primary/5 dark:bg-primary/10 rounded-xl border border-primary/20">
+              <div className="p-4 bg-primary/5 rounded-xl border border-primary/20">
                 <p className="text-sm text-primary text-center">
                   Übungszeit: {formatDuration(results.timeSpent)}
                 </p>

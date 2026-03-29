@@ -30,7 +30,6 @@ import { UserSettings } from "@shared/schema";
 import { apiRequest } from "@/lib/queryClient";
 import { isNativePlatform } from "@/lib/platform";
 import { useToast } from "@/hooks/use-toast";
-import { useTheme } from "@/components/theme-provider";
 import { RefreshCw, Trash2 } from "lucide-react";
 
 const GERMAN_STATES = [
@@ -60,7 +59,6 @@ interface SettingsModalProps {
 export function SettingsModal({ open, onOpenChange }: SettingsModalProps) {
   const { toast } = useToast();
   const queryClient = useQueryClient();
-  const { theme, setTheme } = useTheme();
   const [showResetConfirm, setShowResetConfirm] = useState(false);
   
   const { data: settings } = useQuery<UserSettings>({
@@ -235,22 +233,6 @@ export function SettingsModal({ open, onOpenChange }: SettingsModalProps) {
           </div>
 
           <div className="space-y-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <Label htmlFor="darkmode" className="text-sm font-medium">
-                  Dark Mode
-                </Label>
-                <p className="text-xs text-muted-foreground mt-1">
-                  Dunkles Design für die App aktivieren
-                </p>
-              </div>
-              <Switch
-                id="darkmode"
-                checked={theme === "dark"}
-                onCheckedChange={(checked) => setTheme(checked ? "dark" : "light")}
-              />
-            </div>
-            
             <div className="flex items-center justify-between">
               <div>
                 <Label htmlFor="timer" className="text-sm font-medium">

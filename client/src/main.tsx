@@ -54,7 +54,7 @@ async function checkAndClearCache() {
     await clearAllCaches();
 
     // Clear all localStorage except settings and native app data
-    const keysToPreserve = ['theme'];
+    const keysToPreserve: string[] = [];
     // In native app, preserve all local storage data (quiz sessions, settings, etc.)
     if (Capacitor.isNativePlatform()) {
       const allKeys = Object.keys(localStorage);
