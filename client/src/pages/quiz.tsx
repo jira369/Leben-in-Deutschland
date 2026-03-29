@@ -93,8 +93,8 @@ export default function Quiz() {
         return;
       }
 
-      // Übungsmodus: save results if questions were answered
-      if (answersGiven > 1) {
+      // Übungsmodus: save results if any question was answered
+      if (answersGiven > 0) {
         const results = await finishQuiz(quizType);
         if (results && isMounted.current) {
           setQuizResults(results);
