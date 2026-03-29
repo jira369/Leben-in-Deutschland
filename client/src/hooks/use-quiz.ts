@@ -45,6 +45,7 @@ export function useQuiz() {
       queryClient.invalidateQueries({ queryKey: ['/api/quiz-sessions/stats'] });
       queryClient.invalidateQueries({ queryKey: ['/api/quiz-sessions/detailed-stats'] });
       queryClient.invalidateQueries({ queryKey: ['/api/quiz-sessions'] });
+      queryClient.invalidateQueries({ queryKey: ['/api/quiz-sessions/unique-questions'] });
     }
   });  const startQuiz = useCallback(async (type: 'full' | 'practice') => {
     // Get URL params to determine practice mode and category
@@ -57,8 +58,8 @@ export function useQuiz() {
     // For special modes, use appropriate count
     if (mode === "all") {
       questionCount = 1000; // Large number to get all questions
-    } else if (mode === "mistakes" || mode === "marked") {
-      questionCount = 1000; // Don't limit mistake/marked practice - get all available questions
+    } else if (mode === "mistakes" || mode === "marked" || mode === "unplayed") {
+      questionCount = 1000;
     }
     
     const selectedState = settings?.selectedState;
@@ -76,17 +77,30 @@ export function useQuiz() {
         chronological
       );
       
+      // Resume progress for chronological practice
+      let resumeIndex = 0;
+      const progressKey = chronological ? `quiz-progress-${mode || category || 'default'}` : null;
+      if (progressKey) {
+        try {
+          const saved = localStorage.getItem(progressKey);
+          if (saved) {
+            const parsed = JSON.parse(saved);
+            if (parsed.questionIndex < questions.length) {
+              resumeIndex = parsed.questionIndex;
+            }
+          }
+        } catch {}
+      }
+
       const newQuizState: QuizState = {
         questions,
-        currentQuestionIndex: 0,
+        currentQuestionIndex: resumeIndex,
         selectedAnswers: {},
         startTime: Date.now(),
-        timeRemaining: type === 'full' ? 3600 : undefined, // 60 minutes for full test
+        timeRemaining: type === 'full' ? 3600 : undefined,
       };
 
-      // Set quiz type FIRST
       setCurrentQuizType(type);
-      
       setQuizState(newQuizState);
     } catch (error) {
     }
@@ -112,10 +126,18 @@ export function useQuiz() {
 
     setQuizState(prev => {
       if (!prev) return prev;
-      return {
-        ...prev,
-        currentQuestionIndex: Math.min(prev.currentQuestionIndex + 1, prev.questions.length - 1)
-      };
+      const newIndex = Math.min(prev.currentQuestionIndex + 1, prev.questions.length - 1);
+
+      // Save progress for chronological modes
+      const searchParams = new URLSearchParams(window.location.search);
+      if (searchParams.get('chronological') === 'true') {
+        const mode = searchParams.get('mode');
+        const category = searchParams.get('category');
+        const key = `quiz-progress-${mode || category || 'default'}`;
+        localStorage.setItem(key, JSON.stringify({ questionIndex: newIndex }));
+      }
+
+      return { ...prev, currentQuestionIndex: newIndex };
     });
   }, [quizState]);
 
@@ -151,6 +173,8 @@ export function useQuiz() {
         practiceType = 'Bundeslandspezifische Fragen';
       } else if (mode === 'all') {
         practiceType = 'Alle Fragen';
+      } else if (mode === 'unplayed') {
+        practiceType = 'Noch nicht geübte Fragen';
       } else if (category) {
         const categoryNames: Record<string, string> = {
           'geschichte': 'Geschichte',
@@ -184,6 +208,13 @@ export function useQuiz() {
   }, [quizState, saveQuizSession]);
 
   const resetQuiz = useCallback(() => {
+    // Clear chronological progress
+    const searchParams = new URLSearchParams(window.location.search);
+    if (searchParams.get('chronological') === 'true') {
+      const mode = searchParams.get('mode');
+      const category = searchParams.get('category');
+      localStorage.removeItem(`quiz-progress-${mode || category || 'default'}`);
+    }
     setQuizState(null);
     setCurrentQuizType(null);
   }, []);

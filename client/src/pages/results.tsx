@@ -48,6 +48,18 @@ export default function Results() {
     }
   }, []);
 
+  // Fire confetti automatically when test is passed
+  useEffect(() => {
+    if (results?.passed) {
+      confetti({
+        particleCount: 150,
+        spread: 80,
+        origin: { y: 0.6 },
+        colors: ['#22c55e', '#3b82f6', '#eab308', '#ef4444', '#a855f7'],
+      });
+    }
+  }, [results?.passed]);
+
   if (!results) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
@@ -253,18 +265,7 @@ export default function Results() {
                     if (!shareCardRef.current) return;
                     setIsSharing(true);
 
-                    // Fire confetti
-                    confetti({
-                      particleCount: 150,
-                      spread: 80,
-                      origin: { y: 0.6 },
-                      colors: ['#22c55e', '#3b82f6', '#eab308', '#ef4444', '#a855f7'],
-                    });
-
                     try {
-                      // Wait a moment for confetti to render
-                      await new Promise(r => setTimeout(r, 300));
-
                       const dataUrl = await toPng(shareCardRef.current, {
                         backgroundColor: '#ffffff',
                         pixelRatio: 2,

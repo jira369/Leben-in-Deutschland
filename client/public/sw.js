@@ -2,7 +2,7 @@ self.__FIREBASE_CONFIG__ = {"apiKey":"AIzaSyDGq9mwerS_T1O1mtJDVVF8DOpyqnfLtA4","
 // Service Worker v5 - Network-First with Smart Caching
 // November 4, 2025 - Complete rewrite to fix update issues
 
-const CACHE_VERSION = 'v3.5.0-20260329';
+const CACHE_VERSION = 'v3.6.0-20260329';
 const CACHE_NAME = `einbuergerungstest-${CACHE_VERSION}`;
 
 // Only cache essential static assets that we KNOW exist

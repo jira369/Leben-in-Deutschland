@@ -3603,17 +3603,17 @@
     "questionNumber": 226,
     "text": "Welche ist die Flagge der Europäischen Union?",
     "answers": [
-      "2",
-      "1",
-      "4",
-      "3"
+      "Bild 2",
+      "Bild 1",
+      "Bild 4",
+      "Bild 3"
     ],
     "correctAnswer": 0,
-    "explanation": "",
+    "explanation": "Die EU-Flagge zeigt einen Kreis aus zwölf goldenen Sternen auf blauem Hintergrund.",
     "category": "Bundesweit",
     "difficulty": "mittel",
-    "hasImage": false,
-    "imagePath": null
+    "hasImage": true,
+    "imagePath": "Frage_226_1752329280226.png"
   },
   {
     "questionNumber": 227,

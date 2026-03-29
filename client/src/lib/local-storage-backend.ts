@@ -306,6 +306,10 @@ export class LocalStorageBackend {
   }
 
   async getUniqueQuestionsAnswered(): Promise<number> {
+    return (await this.getUniqueQuestionIds()).size;
+  }
+
+  async getUniqueQuestionIds(): Promise<Set<number>> {
     const sessions = getItem<StoredQuizSession[]>(KEYS.SESSIONS, []);
     const uniqueIds = new Set<number>();
     for (const session of sessions) {
@@ -315,7 +319,7 @@ export class LocalStorageBackend {
         }
       }
     }
-    return uniqueIds.size;
+    return uniqueIds;
   }
 
   // ===== Incorrect Answers =====

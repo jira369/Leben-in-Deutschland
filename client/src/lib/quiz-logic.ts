@@ -140,6 +140,20 @@ export async function fetchQuestionsForQuiz(count: number, selectedState?: strin
     const markedQuestions: Question[] = await response.json();
     return chronological ? markedQuestions : shuffleArray(markedQuestions);
   }
+
+  // Special case: fetch unplayed questions
+  if (mode === "unplayed") {
+    const params = new URLSearchParams();
+    if (selectedState) {
+      params.append('state', selectedState);
+    }
+    const response = await localFetch(`/api/questions/random/1000?mode=unplayed&${params}${chronological ? '&chronological=true' : ''}`);
+    if (!response.ok) {
+      throw new Error("Failed to fetch unplayed questions");
+    }
+    return response.json();
+  }
+
   const params = new URLSearchParams({ count: count.toString() });
   
   if (mode === "all") {
