@@ -157,12 +157,19 @@ export function useQuiz() {
   const finishQuiz = useCallback(async (type: 'full' | 'practice') => {
     if (!quizState) return null;
 
+    // Clear chronological progress on finish
+    const searchParams = new URLSearchParams(window.location.search);
+    if (searchParams.get('chronological') === 'true') {
+      const mode = searchParams.get('mode');
+      const category = searchParams.get('category');
+      localStorage.removeItem(`quiz-progress-${mode || category || 'default'}`);
+    }
+
     const results = calculateResults(quizState);
-    
+
     // Determine practice type based on URL params
     let practiceType = undefined;
     if (type === 'practice') {
-      const searchParams = new URLSearchParams(window.location.search);
       const mode = searchParams.get('mode');
       const category = searchParams.get('category');
       
