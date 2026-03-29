@@ -26,3 +26,11 @@ android/keystore.properties
 # Environment secrets
 .env
 .env.*
+
+# Claude Code local/ephemeral files
+.claude/backups/
+.claude/logs/
+.claude/worktrees/
+.mcp.json
+CLAUDE.local.md
+__NEEDS_ONBOARD
