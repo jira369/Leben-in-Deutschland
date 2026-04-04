@@ -30,10 +30,8 @@ android/app/google-services.json
 .env
 .env.*
 
-# Claude Code local/ephemeral files
-.claude/backups/
-.claude/logs/
-.claude/worktrees/
+# Claude Code
+.claude/
 .mcp.json
 CLAUDE.local.md
 __NEEDS_ONBOARD
