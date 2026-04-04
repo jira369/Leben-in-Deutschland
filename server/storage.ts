@@ -56,6 +56,7 @@ export interface IStorage {
 
   // Optimized Stats
   getUniqueQuestionsAnswered(): Promise<number>;
+  getUnplayedQuestions(filter?: { state?: string }): Promise<Question[]>;
 
   // Incorrect Answers Management
   addIncorrectAnswer(incorrectAnswer: InsertIncorrectAnswer): Promise<IncorrectAnswer>;
@@ -350,6 +351,20 @@ export class MemStorage implements IStorage {
     });
 
     return uniqueQuestionIds.size;
+  }
+
+  async getUnplayedQuestions(filter?: { state?: string }): Promise<Question[]> {
+    const playedIds = new Set<number>();
+    for (const session of this.quizSessions.values()) {
+      if (session.questionResults) {
+        session.questionResults.forEach((r: { questionId: number }) => playedIds.add(r.questionId));
+      }
+    }
+    let allQ = Array.from(this.questions.values());
+    if (filter?.state && filter.state !== 'Bundesweit') {
+      allQ = allQ.filter(q => q.category === 'Bundesweit' || q.category === filter.state);
+    }
+    return allQ.filter(q => !playedIds.has(q.id));
   }
 
   // Marked questions methods - placeholder implementations for MemStorage
@@ -775,6 +790,34 @@ export class DatabaseStorage implements IStorage {
       console.error("Error counting unique questions:", error);
       // Fallback to old method if SQL fails (e.g. if JSON structure is different)
       return 0;
+    }
+  }
+
+  async getUnplayedQuestions(filter?: { state?: string }): Promise<Question[]> {
+    try {
+      const conditions = [];
+
+      if (filter?.state && filter.state !== 'Bundesweit') {
+        conditions.push(or(eq(questions.category, 'Bundesweit'), eq(questions.category, filter.state)));
+      }
+
+      const playedResult = await db.execute(sql`
+        SELECT DISTINCT (elem->>'questionId')::int as qid
+        FROM ${quizSessions}, jsonb_array_elements(COALESCE(${quizSessions.questionResults}, '[]'::jsonb)) as elem
+      `);
+      const playedIds = (playedResult as any[]).map((r: any) => Number(r.qid)).filter(id => !isNaN(id));
+
+      if (playedIds.length > 0) {
+        conditions.push(not(inArray(questions.id, playedIds)));
+      }
+
+      return await db
+        .select()
+        .from(questions)
+        .where(conditions.length > 0 ? and(...conditions) : undefined);
+    } catch (error) {
+      console.error("Error fetching unplayed questions:", error);
+      return [];
     }
   }
 

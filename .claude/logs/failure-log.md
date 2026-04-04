@@ -1,6 +1,0 @@
-- `2026-03-29 14:25:38` | CRITICAL | OTHER | Bash | Exit code 128
-- `2026-03-29 14:25:44` | ERROR | OTHER | Bash | Exit code 2
-- `2026-03-29 14:26:46` | ERROR | OTHER | Bash | Exit code 1
-- `2026-03-29 14:33:15` | ERROR | OTHER | mcp__Claude_Preview__preview_start | Failed to start server: Failed to start preview server: node:events:486
-- `2026-03-29 14:33:51` | ERROR | API | mcp__Claude_Preview__preview_start | Port 5000 is in use by another process (not a preview server). Run `lsof -i :5000` to identify what's using it. Ask the user: does this server need port 5000 specifically (e.g. for OAuth callbacks, we
-- `2026-03-29 14:43:13` | ERROR | OTHER | Bash | Exit code 1

@@ -23,14 +23,15 @@ android/build/
 android/local.properties
 android/keystore.properties
 
+# Firebase config (contains project metadata)
+android/app/google-services.json
+
 # Environment secrets
 .env
 .env.*
 
-# Claude Code local/ephemeral files
-.claude/backups/
-.claude/logs/
-.claude/worktrees/
+# Claude Code
+.claude/
 .mcp.json
 CLAUDE.local.md
 __NEEDS_ONBOARD
