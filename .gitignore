@@ -23,6 +23,9 @@ android/build/
 android/local.properties
 android/keystore.properties
 
+# Firebase config (contains project metadata)
+android/app/google-services.json
+
 # Environment secrets
 .env
 .env.*
