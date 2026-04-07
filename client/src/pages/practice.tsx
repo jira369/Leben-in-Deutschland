@@ -4,7 +4,7 @@ import { Link } from "wouter";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { BookOpen, Play, ArrowLeft, Users, Building, Flag, Globe, Scale, Heart, RotateCcw, Shuffle } from "lucide-react";
+import { BookOpen, Play, ArrowLeft, Users, Building, Flag, Globe, Scale, Heart, RotateCcw, Shuffle, Sparkles } from "lucide-react";
 import { Question, UserSettings } from "@shared/schema";
 import { useMarkedQuestions } from "@/hooks/use-marked-questions";
 
@@ -90,6 +90,18 @@ export default function Practice() {
 
   // Get marked questions data
   const { markedQuestionsCount } = useMarkedQuestions();
+
+  // Get unplayed questions count
+  const { data: unplayedData } = useQuery<{ count: number }>({
+    queryKey: ['/api/questions/unplayed/count', userSettings?.selectedState],
+    queryFn: async () => {
+      const params = new URLSearchParams();
+      if (userSettings?.selectedState) params.append('state', userSettings.selectedState);
+      const res = await fetch(`/api/questions/unplayed/count?${params}`);
+      return res.json();
+    },
+  });
+  const unplayedCount = unplayedData?.count ?? 0;
 
   // Calculate thematic categories based on all questions
   const thematicCategories = getThematicCategories(allQuestions);
@@ -256,6 +268,47 @@ export default function Practice() {
                 </Link>
                 <Link href="/quiz?type=practice&mode=all&chronological=true">
                   <Button size="lg" variant="outline" className="w-full h-10 border-blue-600 text-blue-700 hover:bg-blue-100">
+                    Chronologisch üben
+                  </Button>
+                </Link>
+              </div>
+            </div>
+          </CardHeader>
+        </Card>
+
+        {/* Unplayed Questions Section */}
+        <Card className="mb-8 border-2 border-teal-200 bg-gradient-to-r from-teal-50 to-cyan-50">
+          <CardHeader>
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+              <div className="flex items-center space-x-3">
+                <div className="bg-teal-500 p-3 rounded-lg">
+                  <Sparkles className="h-6 w-6 text-white" />
+                </div>
+                <div>
+                  <CardTitle className="text-xl text-foreground">Noch nicht geübte Fragen</CardTitle>
+                  <p className="text-muted-foreground mt-1">
+                    Übe mit deinen {unplayedCount} noch nicht geübten Fragen
+                  </p>
+                </div>
+              </div>
+              <div className="flex flex-col gap-2 w-full sm:w-auto">
+                <Link href="/quiz?type=practice&mode=unplayed">
+                  <Button
+                    size="lg"
+                    className="w-full h-10 bg-teal-600 hover:bg-teal-700"
+                    disabled={unplayedCount === 0}
+                  >
+                    <Shuffle className="h-4 w-4 mr-2" />
+                    Zufällig üben
+                  </Button>
+                </Link>
+                <Link href="/quiz?type=practice&mode=unplayed&chronological=true">
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    className="w-full h-10 border-teal-600 text-teal-700 hover:bg-teal-100"
+                    disabled={unplayedCount === 0}
+                  >
                     Chronologisch üben
                   </Button>
                 </Link>

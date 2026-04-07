@@ -2,6 +2,7 @@
 // Routes API calls to LocalStorageBackend instead of the Express server
 
 import { LocalStorageBackend } from './local-storage-backend';
+import { shuffleArray } from '@shared/constants';
 
 let backend: LocalStorageBackend | null = null;
 
@@ -73,6 +74,14 @@ export async function handleLocalRequest(url: string, init?: RequestInit): Promi
           questions = await storage.getIncorrectQuestions({ state });
         } else if (mode === 'marked') {
           questions = await storage.getMarkedQuestions({ state });
+        } else if (mode === 'unplayed') {
+          // Get all questions not yet answered
+          const allQ = await storage.getQuestionsByFilter({
+            state,
+            category: state ? undefined : 'Bundesweit',
+          });
+          const answered = await storage.getUniqueQuestionIds();
+          questions = allQ.filter(q => !answered.has(q.id));
         } else if (mode === 'all') {
           questions = await storage.getQuestionsByFilter({
             state,
@@ -94,16 +103,25 @@ export async function handleLocalRequest(url: string, init?: RequestInit): Promi
           questions = await storage.getQuestionsByFilter({ category: 'Bundesweit', limit: count, random: true });
         }
 
-        // Apply sorting - match server/routes.ts logic exactly
+        // Apply sorting
         if (chronological) {
           questions.sort((a, b) => a.id - b.id);
-        } else if (!state || state === 'Bundesweit') {
-          if (mode === 'mistakes' || mode === 'marked' || mode === 'all' || category) {
-            questions.sort(() => Math.random() - 0.5);
-          }
+        } else if (mode === 'mistakes' || mode === 'marked' || mode === 'all' || mode === 'unplayed' || category) {
+          questions = shuffleArray(questions);
         }
 
         return jsonResponse(questions);
+      }
+
+      if (pathname === '/api/questions/unplayed/count') {
+        const state = searchParams.get('state') || undefined;
+        const allQ = await storage.getQuestionsByFilter({
+          state,
+          category: state ? undefined : 'Bundesweit',
+        });
+        const answered = await storage.getUniqueQuestionIds();
+        const count = allQ.filter(q => !answered.has(q.id)).length;
+        return jsonResponse({ count });
       }
 
       if (pathname === '/api/quiz-sessions/recent') {

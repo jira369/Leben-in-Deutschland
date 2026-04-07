@@ -2,6 +2,7 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import nodemailer from "nodemailer";
 import { storage } from "./storage";
+import { shuffleArray } from "@shared/constants";
 import { insertQuestionSchema, insertQuizSessionSchema, insertUserSettingsSchema } from "@shared/schema";
 import { z } from "zod";
 
@@ -37,13 +38,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
       } else if (mode === "marked") {
         // Practice mode with marked questions only
         questions = await storage.getMarkedQuestions({ state });
+      } else if (mode === "unplayed") {
+        // Practice mode with unplayed questions only
+        questions = await storage.getUnplayedQuestions({ state });
       } else if (mode === "all") {
-        // Practice mode with all questions (filtered by state if provided)
         questions = await storage.getQuestionsByFilter({
           state: state,
-          // If state is provided, getQuestionsByFilter handles the logic (Federal + State)
-          // If no state, it returns all federal questions if we set category='Bundesweit' or similar
-          // But 'all' mode usually implies all available questions for the user context.
           category: state ? undefined : 'Bundesweit'
         });
       } else if (category) {
@@ -83,14 +83,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Apply sorting
       if (chronological) {
         questions.sort((a, b) => a.id - b.id);
-      } else if (!state || state === "Bundesweit") {
-        // If we haven't already randomized (e.g. for specific state quiz we did)
-        // But for 'mistakes', 'marked', 'all', 'category' we fetched without random limit usually
-        // except for the last else block.
-        // Let's just shuffle to be safe if not chronological, unless it was already a random fetch
-        if (mode === "mistakes" || mode === "marked" || mode === "all" || category) {
-          questions.sort(() => Math.random() - 0.5);
-        }
+      } else if (mode === "mistakes" || mode === "marked" || mode === "all" || mode === "unplayed" || category) {
+        questions = shuffleArray(questions);
       }
 
       // Limit the result if it's not a specific state quiz (which is fixed 33)
@@ -108,6 +102,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("Error fetching questions:", error);
       res.status(500).json({ error: "Failed to fetch questions" });
+    }
+  });
+
+  // Get unplayed questions count
+  app.get("/api/questions/unplayed/count", async (req, res) => {
+    try {
+      const state = req.query.state as string;
+      const unplayed = await storage.getUnplayedQuestions({ state });
+      res.json({ count: unplayed.length });
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch unplayed count" });
     }
   });
 

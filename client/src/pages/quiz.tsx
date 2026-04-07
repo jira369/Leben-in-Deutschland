@@ -86,11 +86,15 @@ export default function Quiz() {
     exitTimerRef.current = setTimeout(async () => {
       if (!isMounted.current) return;
 
-      const shouldShowResults =
-        (quizType === 'practice' && answersGiven > 1) ||
-        (quizType === 'full' && answersGiven > 0);
+      if (quizType === 'full') {
+        // Testsimulation: discard all data — as if the test never happened
+        resetQuiz();
+        setLocation('/');
+        return;
+      }
 
-      if (shouldShowResults) {
+      // Übungsmodus: save results if any question was answered
+      if (answersGiven > 0) {
         const results = await finishQuiz(quizType);
         if (results && isMounted.current) {
           setQuizResults(results);
@@ -164,6 +168,7 @@ export default function Quiz() {
             selectedAnswer={selectedAnswer}
             showFeedback={hasSelectedCurrentAnswer && quizType === 'practice'}
             immediateFeedback={quizType === 'practice'}
+            allowAnswerChange={quizType === 'full'}
             onAnswerSelect={selectAnswer}
           />
 
